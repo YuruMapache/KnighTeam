@@ -14,13 +14,6 @@ public class Material implements Serializable {
         this.nombre = nombre;
     }
 
-    public int getCantidad() {
-        return cantidad;
-    }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
-    }
 
-    private int cantidad;
 }
