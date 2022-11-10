@@ -13,13 +13,19 @@
         android:theme="@style/Theme.JustaJuan"
         tools:targetApi="31">
         <activity
+            android:name=".PantallaInicio"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
-            android:screenOrientation="landscape"
             android:label="@string/app_name"
-            android:theme="@style/Theme.JustaJuan.Fullscreen"
-            >
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.JustaJuan.Fullscreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
