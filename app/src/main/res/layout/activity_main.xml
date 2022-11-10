@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/fullscreenBackgroundColor"
+    android:background="@drawable/herrero_Giro"
     android:theme="@style/ThemeOverlay.JustaJuan.FullscreenContainer"
     tools:context=".MainActivity">
 
@@ -22,87 +23,169 @@
 
 
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="10dp">
+            android:layout_width="281dp"
+            android:layout_height="107dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/pergamino"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/TextoProximoTorneo"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_weight="1"
-                android:layout_gravity="top|start"
-                android:text="@string/TiempoHastaTorneo"/>
+                android:gravity="center"
+                android:text="@string/TiempoHastaTorneo"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/TextoSemanas"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_weight="1"
-                android:layout_gravity="top|start"
-                android:text="@string/tiempoTorneo"/>
+                android:text="@string/tiempoTorneo"
+                android:textAlignment="center"
+                android:textStyle="bold" />
 
 
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="402dp"
             android:layout_height="wrap_content"
-            android:layout_gravity="start|bottom"
-            >
+            android:layout_gravity="start|bottom">
 
             <GridView
                 android:id="@+id/materiales_main"
-                android:layout_width="400dp"
+                android:layout_width="387dp"
                 android:layout_height="100dp"
-                android:numColumns="2"
-                android:layout_margin="5dp"/>
+                android:layout_margin="5dp"
+                android:background="@drawable/pergamino"
+                android:numColumns="2" />
 
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="402dp"
+            android:layout_height="200dp"
+            android:background="@drawable/pergamino"
+            android:orientation="vertical"
+            android:layout_gravity="end">
+
+            <TextView
+                android:id="@+id/TextoProgreso"
+                android:layout_width="382dp"
+                android:layout_height="50dp"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:paddingStart="30dp"
+                android:paddingTop="30dp"
+                android:text="@string/progreso"
+                android:textStyle="bold" />
+
+            <GridLayout
+                android:id="@+id/progresoHerramientas"
+                android:layout_width="378dp"
+                android:layout_height="126dp"
+                android:layout_margin="5dp"
+                android:columnCount="2"
+                android:rowCount="2"
+                android:useDefaultMargins="true">
+
+
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="113dp"
+                    android:layout_height="45dp"
+                    android:layout_row="0"
+                    android:layout_column="0"
+                    app:srcCompat="@drawable/espada" />
+
+                <TextView
+                    android:id="@+id/TiempoEspada"
+                    android:layout_width="382dp"
+                    android:layout_height="50dp"
+                    android:layout_row="0"
+                    android:layout_column="1"
+                    android:paddingTop="15dp"
+                    android:text="@string/tiempoEspada"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/TiempoArmadura"
+                    android:layout_width="382dp"
+                    android:layout_height="50dp"
+                    android:layout_row="1"
+                    android:layout_column="1"
+                    android:paddingTop="15dp"
+                    android:text="@string/tiempoArmadura"
+                    android:textStyle="bold" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="108dp"
+                    android:layout_height="38dp"
+                    android:layout_row="1"
+                    android:layout_column="0"
+                    app:srcCompat="@drawable/herradura" />
+            </GridLayout>
 
         </LinearLayout>
 
 
         <GridLayout
-            android:id="@+id/fullscreen_content_controls"
-            style="@style/Widget.Theme.JustaJuan.ButtonBar.Fullscreen"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/botonesAcciones"
+            android:layout_width="299dp"
+            android:layout_height="126dp"
             android:layout_gravity="end|bottom"
-            android:columnCount="2"
-            android:orientation="horizontal"
-            android:rowCount="2"
-            android:useDefaultMargins="true"
             android:layout_margin="5dp"
-            tools:ignore="UselessParent">
+            android:background="@drawable/pergamino"
+            android:columnCount="2"
+            android:rowCount="2"
+            android:useDefaultMargins="true">
 
             <Button
-                android:id="@+id/dummy_button"
+                android:id="@+id/acciones_boton"
                 style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="150dp"
                 android:layout_rowSpan="1"
                 android:layout_columnSpan="1"
-                android:text="@string/dummy_button" />
+                android:paddingTop="15dp"
+                android:text="@string/acciones_boton"
+                android:textColor="#000000"
+                app:iconTint="@color/black" />
 
             <Button
-                android:id="@+id/dummy_button2"
+                android:id="@+id/diario_boton"
                 style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="120dp"
                 android:layout_rowSpan="1"
                 android:layout_columnSpan="1"
-                android:text="@string/dummy_button" />
+                android:backgroundTint="#004CAF50"
+                android:paddingTop="15dp"
+                android:text="@string/diario_boton"
+                android:textColor="@color/black" />
 
             <Button
-                android:id="@+id/dummy_button3"
+                android:id="@+id/inventario_boton"
                 style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="150dp"
                 android:layout_rowSpan="1"
                 android:layout_columnSpan="1"
-                android:text="@string/dummy_button" />
+                android:text="@string/inventario_boton"
+                android:textColor="@color/black" />
 
             <Button
-                android:id="@+id/dummy_button4"
+                android:id="@+id/comprar_boton"
                 style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="120dp"
                 android:layout_rowSpan="1"
                 android:layout_columnSpan="1"
-                android:text="@string/dummy_button" />
+                android:text="@string/comprar_boton"
+                android:textColor="@color/black" />
 
         </GridLayout>
     </FrameLayout>

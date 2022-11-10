@@ -1,8 +1,14 @@
 <resources>
     <string name="app_name">JustaJuan</string>
-    <string name="dummy_button">Dummy Button</string>
+    <string name="acciones_boton">ACCIONES</string>
+    <string name="diario_boton">DIARIO</string>
+    <string name="inventario_boton">INVENTARIO</string>
+    <string name="comprar_boton">COMPRAR</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="tiempoTorneo">xxx Semanas</string>
+    <string name="tiempoTorneo">X Semanas</string>
     <string name="TiempoHastaTorneo">Tiempo hasta el próximo torneo:</string>
     <string name="reparaciones">Reparaciones</string>
+    <string name="progreso">En progreso...</string>
+    <string name="tiempoEspada">Quedan X minutos </string>
+    <string name="tiempoArmadura">Quedan X minutos </string>
 </resources>
