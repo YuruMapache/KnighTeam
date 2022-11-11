@@ -7,31 +7,36 @@
     tools:context=".PantallaInicio">
 
     <ImageView
-        android:id="@+id/tituloPrincipal"
-        android:layout_width="537dp"
-        android:layout_height="222dp"
-        android:layout_gravity="center_horizontal"
-        app:srcCompat="@drawable/justa_juan_titulo" />
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="461dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/fondo_pantalla_inicio" />
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="60dp">
+        android:layout_marginTop="60dp"
+        android:orientation="vertical">
+
 
         <GridLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:columnCount="2"
-            android:rowCount="2">
+            android:rowCount="2"
+            android:layout_marginTop="30dp">
 
             <TextView
                 android:id="@+id/nombreUsuarioEtiqueta"
                 android:layout_width="138dp"
                 android:layout_height="61dp"
                 android:layout_weight="1"
+                android:fontFamily="sans-serif"
                 android:text="Nombre Jugador: "
-                android:visibility="visible" />
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/nombreUsuario"
@@ -44,13 +49,25 @@
                 android:layout_width="138dp"
                 android:layout_height="61dp"
                 android:layout_weight="1"
-                android:text="Número de sala" />
+                android:fontFamily="sans-serif"
+                android:text="Número de sala: "
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/numeroSala"
                 android:layout_width="138dp"
                 android:layout_height="61dp"/>
         </GridLayout>
+
+        <Button
+            android:id="@+id/botonJugar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:backgroundTint="@color/brown"
+            android:text="JUGAR"
+            android:textColor="@color/black" />
 
     </LinearLayout>
 
