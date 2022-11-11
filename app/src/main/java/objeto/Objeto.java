@@ -10,24 +10,15 @@ public class Objeto implements Serializable {
     private String nombre;
     private String clase;
     private String descripcion;
+    private int salud;
     private int ataque;
     private int defensa;
     private int cansancio;
     private int motivacion;
     private String tiempoCreacion;
-    private Map<String, Integer> precio= new HashMap<String,Integer>();
+    private Map<String, Integer> precio= new HashMap<>();
 
-    public Objeto(String nombre, String clase, String descripcion, int ataque, int defensa, int cansancio, int motivacion, String tiempoCreacion, Map<String,Integer> precio) {
-        this.nombre = nombre;
-        this.clase = clase;
-        this.descripcion = descripcion;
-        this.ataque = ataque;
-        this.defensa = defensa;
-        this.cansancio = cansancio;
-        this.motivacion = motivacion;
-        this.tiempoCreacion = tiempoCreacion;
-        this.precio=precio;
-    }
+
 
     public String getNombre() {
         return nombre;
@@ -51,6 +42,14 @@ public class Objeto implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public int getSalud() {
+        return salud;
+    }
+
+    public void setSalud(int salud) {
+        this.salud = salud;
     }
 
     public int getAtaque() {
