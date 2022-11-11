@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "256154830710",
+    "firebase_url": "https://justa-juan-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "justa-juan",
+    "storage_bucket": "justa-juan.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:256154830710:android:3a7d778c26e296e0e39c57",
+        "android_client_info": {
+          "package_name": "com.example.justajuan"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "256154830710-3tpi5al5558qqh9c117me7gim6h5afki.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.justajuan",
+            "certificate_hash": "19c60a616535d0c2c965e36639ac48fa50f1d048"
+          }
+        },
+        {
+          "client_id": "256154830710-op3rlhr7vukjielvkvpikdktili5k8kt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAfGpzWC3nMOtHzy5BO7deo7Qc9YlGKPn4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "256154830710-op3rlhr7vukjielvkvpikdktili5k8kt.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
