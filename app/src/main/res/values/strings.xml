@@ -12,4 +12,6 @@
     <string name="tiempoEspada">Quedan X minutos </string>
     <string name="tiempoArmadura">Quedan X minutos </string>
     <string name="recursosFeudo">Recursos del feudo: </string>
+    <string name="title_activity_demo">demo</string>
+    <string name="dummy_button">Dummy Button</string>
 </resources>

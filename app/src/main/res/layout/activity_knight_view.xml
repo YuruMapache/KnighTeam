@@ -24,55 +24,45 @@
 
         <GridLayout
             android:id="@+id/botonesAcciones"
-            android:layout_width="299dp"
-            android:layout_height="126dp"
+            android:layout_width="235dp"
+            android:layout_height="122dp"
             android:layout_gravity="end|bottom"
             android:layout_margin="5dp"
-            android:background="@drawable/pergamino"
             android:columnCount="2"
             android:rowCount="2"
             android:useDefaultMargins="true">
 
             <Button
-                android:id="@+id/acciones_boton"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="150dp"
-                android:layout_rowSpan="1"
-                android:layout_columnSpan="1"
-                android:paddingTop="15dp"
-                android:text="@string/acciones_boton"
-                android:textColor="#000000"
-                app:iconTint="@color/black" />
+                android:id="@+id/button2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:text="Button" />
 
             <Button
-                android:id="@+id/diario_boton"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="120dp"
-                android:layout_rowSpan="1"
-                android:layout_columnSpan="1"
-                android:backgroundTint="#004CAF50"
-                android:paddingTop="15dp"
-                android:text="@string/diario_boton"
-                android:textColor="@color/black" />
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:text="Button" />
 
             <Button
-                android:id="@+id/inventario_boton"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="150dp"
-                android:layout_rowSpan="1"
-                android:layout_columnSpan="1"
-                android:text="@string/inventario_boton"
-                android:textColor="@color/black" />
+                android:id="@+id/button4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:text="Button" />
 
             <Button
-                android:id="@+id/comprar_boton"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_width="120dp"
-                android:layout_rowSpan="1"
-                android:layout_columnSpan="1"
-                android:text="@string/comprar_boton"
-                android:textColor="@color/black" />
-
+                android:id="@+id/button5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:layout_column="1"
+                android:text="Button" />
         </GridLayout>
 
         <LinearLayout
