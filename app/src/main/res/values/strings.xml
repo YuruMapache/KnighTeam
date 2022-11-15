@@ -1,5 +1,16 @@
 <resources>
     <string name="app_name">JustaJuan</string>
+
+    <!--    Views-->
+    <string name="time_intro">Tiempo para la próxima justa:</string>
+    <string name="action_button">ACCIONES</string>
+    <string name="diary_button">DIARIO</string>
+    <string name="inventory_button">INVENTARIO</string>
+    <string name="shop_button">TIENDA</string>
+    <string name="default_objstate">Estado objeto</string>
+    <string name="feudal_resources">Recursos del feudo</string>
+    <string name="default_time">(TIEMPO RESTANTE)</string>
+
     <string name="acciones_boton">ACCIONES</string>
     <string name="diario_boton">DIARIO</string>
     <string name="inventario_boton">INVENTARIO</string>
