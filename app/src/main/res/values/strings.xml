@@ -19,7 +19,7 @@
     <string name="tiempoTorneo">X Semanas</string>
     <string name="TiempoHastaTorneo">Tiempo hasta el próximo torneo:</string>
     <string name="reparaciones">Reparaciones</string>
-    <string name="progreso">En progreso...</string>
+    <string name="progreso">En progreso…</string>
     <string name="tiempoEspada">Quedan X minutos </string>
     <string name="tiempoArmadura">Quedan X minutos </string>
     <string name="recursosFeudo">Recursos del feudo: </string>
