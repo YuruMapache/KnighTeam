@@ -53,8 +53,7 @@
             android:gravity="center|center_horizontal"
             android:minHeight="48dp"
             android:text="@string/feudal_resources"
-            android:textAlignment="center"
-            android:textColor="@color/black" />
+            android:textAlignment="center" />
 
         <ScrollView
             android:layout_width="match_parent"
@@ -116,8 +115,7 @@
             android:gravity="center_vertical"
             android:importantForAutofill="no"
             android:minHeight="48dp"
-            android:text="@string/time_intro"
-            android:textColor="@color/black" />
+            android:text="@string/time_intro" />
 
         <TextView
             android:id="@+id/textViewTime"
@@ -152,7 +150,6 @@
             android:importantForAutofill="no"
             android:text="@string/diary_button"
             android:textAlignment="center"
-            android:textColor="@color/black"
             android:textStyle="bold" />
     </RelativeLayout>
 
@@ -177,7 +174,6 @@
             android:importantForAutofill="no"
             android:text="@string/action_button"
             android:textAlignment="center"
-            android:textColor="@color/black"
             android:textStyle="bold" />
     </RelativeLayout>
 
@@ -203,7 +199,6 @@
             android:importantForAutofill="no"
             android:text="@string/inventory_button"
             android:textAlignment="center"
-            android:textColor="@color/black"
             android:textStyle="bold" />
     </RelativeLayout>
 
@@ -228,7 +223,6 @@
             android:importantForAutofill="no"
             android:text="@string/shop_button"
             android:textAlignment="center"
-            android:textColor="@color/black"
             android:textStyle="bold" />
     </RelativeLayout>
 
