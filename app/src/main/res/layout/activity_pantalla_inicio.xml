@@ -38,7 +38,7 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <EditText
                 android:id="@+id/nombreUsuario"
                 android:layout_width="138dp"
                 android:layout_height="61dp"
@@ -54,10 +54,11 @@
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
-            <com.google.android.material.textfield.TextInputLayout
+            <EditText
                 android:id="@+id/numeroSala"
                 android:layout_width="138dp"
-                android:layout_height="61dp"/>
+                android:layout_height="61dp"
+                android:text=""/>
         </GridLayout>
 
         <Button
