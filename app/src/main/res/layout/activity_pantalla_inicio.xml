@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".PantallaInicio">
+    tools:context=".PantallaPlantillasActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -24,53 +24,31 @@
         <GridLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:columnCount="2"
-            android:rowCount="2"
+            android:columnCount="1"
+            android:rowCount="1"
             android:layout_marginTop="30dp">
 
-            <TextView
-                android:id="@+id/nombreUsuarioEtiqueta"
-                android:layout_width="138dp"
-                android:layout_height="61dp"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif"
-                android:text="Nombre Jugador: "
-                android:textSize="16sp"
-                android:textStyle="bold" />
+            <Button
+                android:id="@+id/botonCrearPartida"
+                android:text="@string/botonCrearPartida"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/brown"
+                android:textColor="@color/black" />
 
-            <EditText
-                android:id="@+id/nombreUsuario"
-                android:layout_width="138dp"
-                android:layout_height="61dp"
-                android:text="" />
-
-            <TextView
-                android:id="@+id/numeroSalaEtiqueta"
-                android:layout_width="138dp"
-                android:layout_height="61dp"
-                android:layout_weight="1"
-                android:fontFamily="sans-serif"
-                android:text="Número de sala: "
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <EditText
-                android:id="@+id/numeroSala"
-                android:layout_width="138dp"
-                android:layout_height="61dp"
-                android:text=""/>
+            <Button
+                android:id="@+id/botonUnirsePartida"
+                android:text="@string/botonUnirsePartida"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:backgroundTint="@color/brown"
+                android:textColor="@color/black" />
         </GridLayout>
 
-        <Button
-            android:id="@+id/botonJugar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:backgroundTint="@color/brown"
-            android:text="JUGAR"
-            android:textColor="@color/black" />
+
 
     </LinearLayout>
-
 
 </FrameLayout>

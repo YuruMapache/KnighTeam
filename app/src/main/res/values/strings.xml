@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">JustaJuan</string>
+    <string name="app_name">Knighteam</string>
 
     <!--    Views-->
     <string name="time_intro">Tiempo para la próxima justa:</string>
@@ -10,7 +10,6 @@
     <string name="default_objstate">Estado objeto</string>
     <string name="feudal_resources">Recursos del feudo</string>
     <string name="default_time">(TIEMPO RESTANTE)</string>
-
     <string name="acciones_boton">ACCIONES</string>
     <string name="diario_boton">DIARIO</string>
     <string name="inventario_boton">INVENTARIO</string>
@@ -25,4 +24,11 @@
     <string name="recursosFeudo">Recursos del feudo: </string>
     <string name="title_activity_demo">demo</string>
     <string name="dummy_button">Dummy Button</string>
+    <string name="botonCrearPartida"> Crear Partida </string>
+    <string name="botonUnirsePartida"> Unirse a Partida </string>
+    <string name="botonSiguiente"> Siguiente </string>
+    <string name="plantillaSencilla"> Plantilla sencilla </string>
+    <string name="plantillaDificil"> Plantilla dificil </string>
+    <string name="plantillaEmpatia"> Plantilla de empatía </string>
+    <string name="plantillaComunicacion"> Plantilla de comunicación </string>
 </resources>

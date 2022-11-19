@@ -9,7 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-public class PantallaInicio extends AppCompatActivity {
+public class PantallaJugador extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +18,7 @@ public class PantallaInicio extends AppCompatActivity {
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_pantalla_inicio);
+        setContentView(R.layout.activity_pantalla_jugador);
 
         final Button botonJugar = findViewById(R.id.botonJugar);
 
@@ -26,7 +26,7 @@ public class PantallaInicio extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(PantallaInicio.this, Lobby.class));
+                startActivity(new Intent(PantallaJugador.this, Lobby.class));
                 //Pasa a la ventana seleccion de plantilla y personaje.
             }
         });

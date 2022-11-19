@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PantallaPlantillasActivity">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="461dp"
+        android:layout_gravity="center"
+        app:srcCompat="@drawable/fondo_pantalla_inicio" />
+
+    <RadioGroup
+        android:layout_width="298dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="85dp">
+
+        <RadioButton
+            android:id="@+id/plantillaSencilla"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/black"
+            android:checked="false"
+            android:text="@string/plantillaSencilla" />
+
+        <RadioButton
+            android:id="@+id/plantillaDificil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/black"
+            android:clickable="false"
+            android:text="@string/plantillaDificil" />
+
+        <RadioButton
+            android:id="@+id/plantillaEmpatia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/black"
+            android:clickable="false"
+            android:text="@string/plantillaEmpatia" />
+
+        <RadioButton
+            android:id="@+id/plantillaComunicacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:buttonTint="@color/black"
+            android:clickable="false"
+            android:text="@string/plantillaComunicacion" />
+
+
+    </RadioGroup>
+
+    <GridLayout
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="85dp"
+        android:layout_marginEnd="15dp"
+        android:columnCount="1"
+        android:rowCount="1">
+
+        <ImageButton
+            android:id="@+id/botonInfoSencilla"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            app:srcCompat="@drawable/info" />
+
+        <ImageButton
+            android:id="@+id/botonInfoDificil"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            app:srcCompat="@drawable/info" />
+
+        <ImageButton
+            android:id="@+id/botonInfoEmpatia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            app:srcCompat="@drawable/info" />
+
+        <ImageButton
+            android:id="@+id/botonInfoComunicacion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            app:srcCompat="@drawable/info" />
+
+    </GridLayout>
+
+    <Button
+        android:id="@+id/botonSiguiente"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|right"
+        android:layout_marginEnd="5dp"
+        android:backgroundTint="@color/light_blue_600"
+        android:text="@string/botonSiguiente"
+        android:textColor="@color/black" />
+
+</FrameLayout>
