@@ -26,7 +26,7 @@ public class PantallaInicio extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(PantallaInicio.this, MainActivity.class));
+                startActivity(new Intent(PantallaInicio.this, Lobby.class));
                 //Pasa a la ventana seleccion de plantilla y personaje.
             }
         });
