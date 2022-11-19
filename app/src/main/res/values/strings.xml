@@ -10,6 +10,7 @@
     <string name="default_objstate">Estado objeto</string>
     <string name="feudal_resources">Recursos del feudo</string>
     <string name="default_time">(TIEMPO RESTANTE)</string>
+
     <string name="acciones_boton">ACCIONES</string>
     <string name="diario_boton">DIARIO</string>
     <string name="inventario_boton">INVENTARIO</string>
