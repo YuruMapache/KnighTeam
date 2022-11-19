@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".lobby">
+
+    <LinearLayout
+        android:layout_width="332dp"
+        android:layout_height="179dp"
+        android:layout_gravity="center">
+
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:rowCount="2"
+            android:columnCount="2">
+
+            <ToggleButton
+                android:id="@+id/plantillaSimple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="0"
+                android:text="Simple" />
+
+            <ToggleButton
+                android:id="@+id/plantillaDificil"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="0"
+                android:layout_column="1"
+                android:text="ToggleButton"/>
+
+            <ToggleButton
+                android:id="@+id/plantillaEmpatia"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:layout_column="0"
+                android:text="ToggleButton"/>
+
+            <ToggleButton
+                android:id="@+id/plantillaComunicacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_row="1"
+                android:text="ToggleButton" />
+        </GridLayout>
+
+    </LinearLayout>
+
+</FrameLayout>
