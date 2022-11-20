@@ -11,14 +11,14 @@
         android:layout_width="match_parent"
         android:layout_height="461dp"
         android:layout_gravity="center"
-        app:srcCompat="@drawable/fondo_pantalla_inicio" />
+        app:srcCompat="@drawable/fondoinicioapp" />
 
     <RadioGroup
         android:layout_width="298dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginStart="15dp"
-        android:layout_marginTop="85dp">
+        android:layout_marginTop="50dp">
 
         <RadioButton
             android:id="@+id/plantillaSencilla"
@@ -59,7 +59,7 @@
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="85dp"
+        android:layout_marginTop="50dp"
         android:layout_marginEnd="15dp"
         android:columnCount="1"
         android:rowCount="1">
@@ -94,13 +94,13 @@
 
     </GridLayout>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/botonSiguiente"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|right"
-        android:layout_marginEnd="5dp"
-        android:backgroundTint="@color/light_blue_600"
+        android:layout_width="149dp"
+        android:layout_height="65dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="10dp"
+        android:background="@drawable/rock_button"
         android:text="@string/botonSiguiente"
         android:textColor="@color/black" />
 

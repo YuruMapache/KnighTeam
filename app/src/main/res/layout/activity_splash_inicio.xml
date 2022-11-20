@@ -11,6 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="461dp"
         android:layout_gravity="center"
-        app:srcCompat="@drawable/fondo_pantalla_inicio" />
+        app:srcCompat="@drawable/fondoinicioapp" />
 
 </FrameLayout>
