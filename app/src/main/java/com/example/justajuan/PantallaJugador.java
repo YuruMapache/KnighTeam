@@ -31,8 +31,5 @@ public class PantallaJugador extends AppCompatActivity {
                 //Pasa a la ventana seleccion de plantilla y personaje.
             }
         });
-
-
-
     }
 }
