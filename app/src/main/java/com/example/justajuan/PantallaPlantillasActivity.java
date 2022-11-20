@@ -11,7 +11,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.TextView;
 
 public class PantallaPlantillasActivity extends AppCompatActivity {
 
@@ -34,7 +33,7 @@ public class PantallaPlantillasActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(PantallaPlantillasActivity.this, PantallaJugador.class));
+                startActivity(new Intent(PantallaPlantillasActivity.this, Login.class));
                 // Pasa a la ventana de creacion del jugador.
             }
         });

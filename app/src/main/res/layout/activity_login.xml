@@ -38,34 +38,35 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/nombreUsuario"
+                android:id="@+id/nombreJugador"
                 android:layout_width="138dp"
                 android:layout_height="61dp"
                 android:text="" />
 
             <TextView
-                android:id="@+id/numeroSalaEtiqueta"
+                android:id="@+id/emailEtiqueta"
                 android:layout_width="138dp"
                 android:layout_height="61dp"
                 android:fontFamily="sans-serif"
-                android:text="@string/numeroSala"
+                android:text="@string/email_jugador"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/numeroSala"
+                android:id="@+id/emailJugador"
                 android:layout_width="138dp"
                 android:layout_height="61dp"
-                android:text=""/>
+                android:text="" />
+
         </GridLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/botonJugar"
+            android:id="@+id/botonCrearJugador"
             android:layout_width="144dp"
             android:layout_height="47dp"
             android:layout_gravity="center"
             android:background="@drawable/rock_button"
-            android:text="@string/botonJugar"
+            android:text="@string/botonCrearPartida"
             android:textColor="@color/black" />
 
     </LinearLayout>

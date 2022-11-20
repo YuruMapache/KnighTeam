@@ -37,7 +37,7 @@ public class PantallaInicioActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(PantallaInicioActivity.this, PantallaJugador.class));
+                startActivity(new Intent(PantallaInicioActivity.this, Login.class));
                 // Pasa a la ventana seleccion de plantillas.
             }
         });

@@ -32,4 +32,9 @@
     <string name="plantillaDificil"> Plantilla dificil </string>
     <string name="plantillaEmpatia"> Plantilla de empatía </string>
     <string name="plantillaComunicacion"> Plantilla de comunicación </string>
+    <string name="nombre_jugador">Nombre:</string>
+    <string name="numeroSala">Número de sala:</string>
+    <string name="botonJugar">JUGAR</string>
+    <string name="email_jugador">Email:</string>
+    <string name="password_jugador">Contraseña:</string>
 </resources>
