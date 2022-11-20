@@ -22,13 +22,17 @@ public class PantallaJugador extends AppCompatActivity {
 
         final Button botonJugar = findViewById(R.id.botonJugar);
 
+
         botonJugar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(PantallaJugador.this, Lobby.class));
+                startActivity(new Intent(PantallaJugador.this, Knight.class));
                 //Pasa a la ventana seleccion de plantilla y personaje.
             }
         });
+
+
+
     }
 }
