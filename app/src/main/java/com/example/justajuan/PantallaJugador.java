@@ -26,7 +26,7 @@ public class PantallaJugador extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(PantallaJugador.this, Lobby.class));
+                startActivity(new Intent(PantallaJugador.this, MainActivity.class));
                 //Pasa a la ventana seleccion de plantilla y personaje.
             }
         });
