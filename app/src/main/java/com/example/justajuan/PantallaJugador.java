@@ -58,9 +58,9 @@ public class PantallaJugador extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                         if(datasnapshot.hasChild(getNumSala)) {
-                            Clase.put(getNombre," ");
+                            Clase.put("Rol"," ");
 
-                            databaseReference.child("Partida/"+ getNumSala)
+                            databaseReference.child("Partida/"+ getNumSala + "/" + getNombre)
                                     .setValue(Clase);
 
                             Intent i = new Intent(PantallaJugador.this, EsperaLoginActivity.class);

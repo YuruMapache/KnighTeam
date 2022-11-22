@@ -53,9 +53,9 @@ public class Login extends AppCompatActivity {
 
 
                 HashMap<String,String> Clase = new HashMap<>();
-                Clase.put(getNombre," ");
+                Clase.put("Rol"," ");
 
-                databaseReference.child("Partida/"+ token)
+                databaseReference.child("Partida/"+ token + "/" + getNombre)
                         .setValue(Clase);
                 Intent i = new Intent(Login.this, EsperaLoginActivity.class);
                 i.putExtra("codigo",token);
