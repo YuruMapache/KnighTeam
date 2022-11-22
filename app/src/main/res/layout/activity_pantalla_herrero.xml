@@ -5,7 +5,7 @@
 
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/fondoherreropixelconherrero"
+    android:background="@drawable/fondoherrero"
     android:theme="@style/ThemeOverlay.JustaJuan.FullscreenContainer"
     tools:context=".PantallaHerreroActivity">
 
