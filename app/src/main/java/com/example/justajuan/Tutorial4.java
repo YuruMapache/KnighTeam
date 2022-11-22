@@ -37,7 +37,7 @@ public class Tutorial4 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(Tutorial4.this, MainActivity.class));
+                startActivity(new Intent(Tutorial4.this, Blacksmith.class));
                 // Pasa a la ventana seleccion de plantillas.
             }
         });

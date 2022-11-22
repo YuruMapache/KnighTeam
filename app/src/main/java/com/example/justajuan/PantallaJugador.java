@@ -39,8 +39,8 @@ public class PantallaJugador extends AppCompatActivity {
 
         final Button botonJugar = findViewById(R.id.botonJugar);
 
-        nombreJugador.findViewById(R.id.nombreUsuario);
-        numSala.findViewById(R.id.numeroSala);
+        nombreJugador = findViewById(R.id.nombreUsuario);
+        numSala = findViewById(R.id.numeroSala);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
@@ -64,6 +64,7 @@ public class PantallaJugador extends AppCompatActivity {
                                     .setValue(Clase);
 
                             Intent i = new Intent(PantallaJugador.this, EsperaLoginActivity.class);
+                            // Pasa a la ventana seleccion de plantilla y personaje.
                             i.putExtra("codigo",getNumSala);
                             i.putExtra("nombreUsuario", getNombre);
                             startActivity(i);
@@ -78,8 +79,7 @@ public class PantallaJugador extends AppCompatActivity {
                     }
                 });
 
-                startActivity(new Intent(PantallaJugador.this, Knight.class));
-                //Pasa a la ventana seleccion de plantilla y personaje.
+
             }
         });
     }

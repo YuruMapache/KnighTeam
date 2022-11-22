@@ -3,22 +3,17 @@ package com.example.justajuan;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import objeto.Material;
 import objeto.Objeto;
 
-public class MainActivity extends AppCompatActivity {
+public class Blacksmith extends AppCompatActivity {
     private static final String TAG = "MainActivity";
      DatabaseReference database = FirebaseDatabase.getInstance("https://justa-juan-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
     @Override
@@ -30,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_blacksmith);
         final Button botonPrueba= findViewById(R.id.acciones_boton);
 
 

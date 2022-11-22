@@ -54,7 +54,9 @@
         </activity>
         <activity
             android:name=".PantallaJugador"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.JustaJuan.Fullscreen">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -141,7 +143,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".MainActivity"
+            android:name=".Blacksmith"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.JustaJuan.Fullscreen">
