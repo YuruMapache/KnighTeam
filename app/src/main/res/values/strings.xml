@@ -37,4 +37,5 @@
     <string name="botonJugar">JUGAR</string>
     <string name="email_jugador">Email:</string>
     <string name="password_jugador">Contraseña:</string>
+    <string name="esperaJugadores">Esperando jugadores...</string>
 </resources>

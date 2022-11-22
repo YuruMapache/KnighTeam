@@ -51,17 +51,18 @@ public class Login extends AppCompatActivity {
 
                 String getNombre = nombre.getText().toString();
                 String getEmail = email.getText().toString();
-                int aleatorio= (int) ((Math.random()*100000));
+                int aleatorio = (int) ((Math.random()*100000));
                 String token = String.valueOf(aleatorio);
 
 
-                HashMap<String,String>Clase= new HashMap<String,String>();
-                Clase.put("Rol",null);
+                HashMap<String,String> Clase = new HashMap<>();
+                Clase.put(getNombre," ");
 
-                databaseReference.child("Partida/"+token+ getNombre)
+                databaseReference.child("Partida/"+ token)
                         .setValue(Clase);
-                Intent i= new Intent(Login.this, Knight.class);
+                Intent i = new Intent(Login.this, EsperaLoginActivity.class);
                 i.putExtra("codigo",token);
+                i.putExtra("nombreUsuario", getNombre);
                 startActivity(i);
                 //Pasa a la ventana seleccion de plantilla y personaje.
             }

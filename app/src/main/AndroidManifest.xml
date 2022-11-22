@@ -16,6 +16,15 @@
         android:theme="@style/Theme.JustaJuan"
         tools:targetApi="31">
         <activity
+            android:name=".EsperaLoginActivity"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.JustaJuan.Fullscreen">>
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".PantallaJugador"
             android:exported="false">
             <meta-data
@@ -57,7 +66,9 @@
         </activity>
         <activity
             android:name=".Knight"
-            android:exported="false">
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.JustaJuan.Fullscreen">>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
