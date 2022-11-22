@@ -12,9 +12,11 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.justajuan.model.User;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.security.SecureRandom;
 import java.util.HashMap;
 
 
@@ -49,15 +51,19 @@ public class Login extends AppCompatActivity {
 
                 String getNombre = nombre.getText().toString();
                 String getEmail = email.getText().toString();
+                SecureRandom random = new SecureRandom();
+                byte bytes[] = new byte[5];
+                random.nextBytes(bytes);
+                String token = bytes.toString();
 
-                HashMap<String, Object> usuarios = new HashMap<>();
-                usuarios.put("nombre", getNombre);
-                usuarios.put("email", getEmail);
+                User usuarios= new User();
 
-                databaseReference.child("Usuarios")
+                usuarios.setName(getNombre);
+                usuarios.setClase(getEmail);
+
+                databaseReference.child(token)
                         .setValue(usuarios);
-                {
-                }
+
                 startActivity(new Intent(Login.this, Knight.class));
                 //Pasa a la ventana seleccion de plantilla y personaje.
             }

@@ -39,6 +39,7 @@ public class MainActivity extends AppCompatActivity {
         botonPrueba.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                String Nombre="AAAA";
                 Objeto obj= new Objeto();
                 //obj.setNombre("Obsidiana");
                 obj.setClase("Herrero");
@@ -49,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
                 obj.setCansancio(-1);
                 obj.setMotivacion(7);
                 obj.setTiempoCreacion("5 min");
-                database.child("Objeto/Cuero").setValue(obj);
+                String token="Objeto/"+Nombre;
+                database.child(token).setValue(obj);
             }
         });
 
