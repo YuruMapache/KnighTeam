@@ -16,44 +16,7 @@
         android:theme="@style/Theme.JustaJuan"
         tools:targetApi="31">
         <activity
-            android:name=".EsperaLoginActivity"
-            android:exported="false"
-            android:screenOrientation="landscape"
-            android:theme="@style/Theme.JustaJuan.Fullscreen">>
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Tutorial4"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Tutorial3"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Tutorial2"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".Tutorial1"
-            android:exported="false">
-            <meta-data
-                android:name="android.app.lib_name"
-                android:value="" />
-        </activity>
-        <activity
-            android:name=".PantallaJugador"
+            android:name=".PantallaGestorRolesActivity"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.JustaJuan.Fullscreen">
@@ -62,7 +25,62 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".SplashInicioActivity"
+            android:name=".PantallaEsperaLoginActivity"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.JustaJuan.Fullscreen">
+            >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Tutorial4"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.JustaJuan.Fullscreen">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Tutorial3"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.JustaJuan.Fullscreen">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Tutorial2"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.JustaJuan.Fullscreen">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Tutorial1"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.JustaJuan.Fullscreen">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".PantallaUnirsePartida"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.JustaJuan.Fullscreen">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".PantallaSplashInicioActivity"
             android:exported="true"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.JustaJuan.Fullscreen">
@@ -71,7 +89,6 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -95,31 +112,38 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Knight"
+            android:name=".PantallaCaballeroActivity"
             android:exported="false"
             android:screenOrientation="landscape"
-            android:theme="@style/Theme.JustaJuan.Fullscreen">>
+            android:theme="@style/Theme.JustaJuan.Fullscreen">
+            >
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Stablemaster"
-            android:exported="false">
+            android:name=".PantallaMaestroCuadrasActivity"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.JustaJuan.Fullscreen">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Healer"
-            android:exported="false">
+            android:name=".PantallaCuranderoActivity"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.JustaJuan.Fullscreen">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".Druid"
-            android:exported="false">
+            android:name=".PantallaDruidaActivity"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.JustaJuan.Fullscreen">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -134,7 +158,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Login"
+            android:name=".PantallaCreacionPartidaActivity"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.JustaJuan.Fullscreen">
@@ -143,7 +167,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Blacksmith"
+            android:name=".PantallaHerreroActivity"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.JustaJuan.Fullscreen">

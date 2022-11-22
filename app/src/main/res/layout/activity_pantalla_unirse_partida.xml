@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    tools:context=".PantallaCreacionPartidaActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -38,35 +38,34 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/nombreJugador"
+                android:id="@+id/nombreUsuario"
                 android:layout_width="138dp"
                 android:layout_height="61dp"
                 android:text="" />
 
             <TextView
-                android:id="@+id/emailEtiqueta"
+                android:id="@+id/numeroSalaEtiqueta"
                 android:layout_width="138dp"
                 android:layout_height="61dp"
                 android:fontFamily="sans-serif"
-                android:text="@string/email_jugador"
+                android:text="@string/numeroSala"
                 android:textSize="16sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/emailJugador"
+                android:id="@+id/numeroSala"
                 android:layout_width="138dp"
                 android:layout_height="61dp"
-                android:text="" />
-
+                android:text=""/>
         </GridLayout>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/botonCrearJugador"
+            android:id="@+id/botonJugar"
             android:layout_width="144dp"
             android:layout_height="47dp"
             android:layout_gravity="center"
             android:background="@drawable/rock_button"
-            android:text="@string/botonCrearPartida"
+            android:text="@string/botonJugar"
             android:textColor="@color/black" />
 
     </LinearLayout>

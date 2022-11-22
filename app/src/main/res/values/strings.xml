@@ -35,9 +35,16 @@
     <string name="plantillaEmpatia"> Plantilla de empatía </string>
     <string name="plantillaComunicacion"> Plantilla de comunicación </string>
     <string name="nombre_jugador">Nombre:</string>
+    <string name="edad_jugador">Edad:</string>
+    <string name="genero_jugador">Género:</string>
+    <string-array name = "genero">
+        <item>Masculino</item>
+        <item>Femenino</item>
+        <item>Otro</item>
+    </string-array>
     <string name="numeroSala">Número de sala:</string>
     <string name="botonJugar">JUGAR</string>
-    <string name="email_jugador">Email:</string>
     <string name="password_jugador">Contraseña:</string>
-    <string name="esperaJugadores">Esperando jugadores...</string>
+    <string name="crearUsuario">Crea tu usuario</string>
+
 </resources>

@@ -17,7 +17,7 @@
         android:layout_width="298dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="15dp"
+        android:layout_marginStart="5dp"
         android:layout_marginTop="50dp">
 
         <RadioButton
@@ -26,6 +26,7 @@
             android:layout_height="wrap_content"
             android:buttonTint="@color/black"
             android:checked="false"
+            android:textSize="16sp"
             android:text="@string/plantillaSencilla" />
 
         <RadioButton
@@ -34,6 +35,7 @@
             android:layout_height="wrap_content"
             android:buttonTint="@color/black"
             android:clickable="false"
+            android:textSize="16sp"
             android:text="@string/plantillaDificil" />
 
         <RadioButton
@@ -42,6 +44,7 @@
             android:layout_height="wrap_content"
             android:buttonTint="@color/black"
             android:clickable="false"
+            android:textSize="16sp"
             android:text="@string/plantillaEmpatia" />
 
         <RadioButton
@@ -50,8 +53,8 @@
             android:layout_height="wrap_content"
             android:buttonTint="@color/black"
             android:clickable="false"
+            android:textSize="16sp"
             android:text="@string/plantillaComunicacion" />
-
 
     </RadioGroup>
 
@@ -60,7 +63,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
-        android:layout_marginEnd="15dp"
         android:columnCount="1"
         android:rowCount="1">
 
@@ -102,6 +104,7 @@
         android:layout_margin="10dp"
         android:background="@drawable/rock_button"
         android:text="@string/botonSiguiente"
+        android:textSize="17sp"
         android:textColor="@color/black" />
 
 </FrameLayout>

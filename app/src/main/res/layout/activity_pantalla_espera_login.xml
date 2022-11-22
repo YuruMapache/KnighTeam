@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EsperaLoginActivity">
+    tools:context=".PantallaEsperaLoginActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -35,7 +35,6 @@
             android:layout_height="61dp"
             android:gravity="center"
             android:fontFamily="sans-serif"
-            android:text="@string/esperaJugadores"
             android:textSize="20sp"
             android:textStyle="bold" />
 

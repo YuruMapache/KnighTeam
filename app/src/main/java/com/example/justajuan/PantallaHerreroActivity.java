@@ -13,7 +13,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import objeto.Objeto;
 
-public class Blacksmith extends AppCompatActivity {
+public class PantallaHerreroActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
      DatabaseReference database = FirebaseDatabase.getInstance("https://justa-juan-default-rtdb.europe-west1.firebasedatabase.app/").getReference();
     @Override
@@ -25,7 +25,7 @@ public class Blacksmith extends AppCompatActivity {
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_blacksmith);
+        setContentView(R.layout.activity_pantalla_herrero);
         final Button botonPrueba= findViewById(R.id.acciones_boton);
 
 

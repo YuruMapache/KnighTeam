@@ -27,18 +27,16 @@ public class PantallaInicioActivity extends AppCompatActivity {
         botonCrearPartida.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                // Pasa a la ventana de seleccion de plantillas.
                 startActivity(new Intent(PantallaInicioActivity.this, PantallaPlantillasActivity.class));
-                // Pasa a la ventana seleccion de plantillas.
             }
         });
 
         botonUnirsePartida.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                startActivity(new Intent(PantallaInicioActivity.this, PantallaJugador.class));
-                // Pasa a la ventana seleccion de plantillas.
+                // Pasa a la ventana de unirse a la sala creada
+                startActivity(new Intent(PantallaInicioActivity.this, PantallaUnirsePartida.class));
             }
         });
     }

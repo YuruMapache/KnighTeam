@@ -3,10 +3,12 @@ package com.example.justajuan;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -15,7 +17,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 
-public class EsperaLoginActivity extends AppCompatActivity {
+public class PantallaEsperaLoginActivity extends AppCompatActivity {
 
     private TextView creacionSala;
     private TextView jugadoresTotales;
@@ -29,7 +31,7 @@ public class EsperaLoginActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_espera_login);
+        setContentView(R.layout.activity_pantalla_espera_login);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
@@ -46,12 +48,16 @@ public class EsperaLoginActivity extends AppCompatActivity {
                 if(dataSnapshot.exists()) {
                     numJugadores = (int) dataSnapshot.getChildrenCount();
                     jugadoresTotales.setText(String.format("Esperando jugadores... (%s/5)", Integer.toString(numJugadores)));
+
+                    if(numJugadores == 5) {
+                        startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class));
+                    }
                 }
             }
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(getApplicationContext(), "Error al crear la partida", Toast.LENGTH_SHORT).show();
             }
         });
     }

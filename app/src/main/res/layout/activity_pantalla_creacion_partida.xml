@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Login">
+    tools:context=".PantallaCreacionPartidaActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -23,10 +23,9 @@
 
         <GridLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="223dp"
             android:columnCount="2"
-            android:rowCount="2"
-            android:layout_marginTop="30dp">
+            android:rowCount="2">
 
             <TextView
                 android:id="@+id/nombreUsuarioEtiqueta"
@@ -34,41 +33,55 @@
                 android:layout_height="61dp"
                 android:fontFamily="sans-serif"
                 android:text="@string/nombre_jugador"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/nombreUsuario"
+                android:id="@+id/nombreJugador"
                 android:layout_width="138dp"
-                android:layout_height="61dp"
-                android:text="" />
+                android:layout_height="61dp" />
 
             <TextView
-                android:id="@+id/numeroSalaEtiqueta"
+                android:id="@+id/edadEtiqueta"
                 android:layout_width="138dp"
                 android:layout_height="61dp"
                 android:fontFamily="sans-serif"
-                android:text="@string/numeroSala"
-                android:textSize="16sp"
+                android:text="@string/edad_jugador"
+                android:textSize="18sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/numeroSala"
+                android:id="@+id/edadJugador"
+                android:layout_width="138dp"
+                android:layout_height="61dp" />
+
+            <TextView
+                android:id="@+id/generoEtiqueta"
                 android:layout_width="138dp"
                 android:layout_height="61dp"
-                android:text=""/>
+                android:text="@string/genero_jugador"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/eleccionGenero"
+                android:layout_width="138dp"
+                android:layout_height="61dp" />
+
         </GridLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/botonJugar"
-            android:layout_width="144dp"
-            android:layout_height="47dp"
-            android:layout_gravity="center"
-            android:background="@drawable/rock_button"
-            android:text="@string/botonJugar"
-            android:textColor="@color/black" />
-
     </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/botonCrearJugador"
+        android:layout_width="160dp"
+        android:layout_height="65dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="10dp"
+        android:background="@drawable/rock_button"
+        android:text="@string/botonCrearPartida"
+        android:textColor="@color/black"
+        android:textSize="17sp" />
 
 
 </FrameLayout>

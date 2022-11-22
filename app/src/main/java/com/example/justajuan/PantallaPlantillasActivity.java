@@ -32,9 +32,8 @@ public class PantallaPlantillasActivity extends AppCompatActivity {
         botonSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                startActivity(new Intent(PantallaPlantillasActivity.this, Login.class));
-                // Pasa a la ventana de creacion del jugador.
+                // Pasa a la ventana de creacion de la partida
+                startActivity(new Intent(PantallaPlantillasActivity.this, PantallaCreacionPartidaActivity.class));
             }
         });
 

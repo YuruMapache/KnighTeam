@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/fondoherreropixelconherrero"
     android:theme="@style/ThemeOverlay.JustaJuan.FullscreenContainer"
-    tools:context=".Blacksmith">
+    tools:context=".PantallaHerreroActivity">
 
     <!-- The primary full-screen view. This can be replaced with whatever view
          is needed to present your content, e.g. VideoView, SurfaceView,

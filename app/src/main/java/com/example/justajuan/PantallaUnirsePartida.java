@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 
-public class PantallaJugador extends AppCompatActivity {
+public class PantallaUnirsePartida extends AppCompatActivity {
 
     private EditText nombreJugador;
     private EditText numSala;
@@ -35,7 +35,7 @@ public class PantallaJugador extends AppCompatActivity {
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_pantalla_jugador);
+        setContentView(R.layout.activity_pantalla_unirse_partida);
 
         final Button botonJugar = findViewById(R.id.botonJugar);
 
@@ -63,7 +63,7 @@ public class PantallaJugador extends AppCompatActivity {
                             databaseReference.child("Partida/"+ getNumSala + "/" + getNombre)
                                     .setValue(Clase);
 
-                            Intent i = new Intent(PantallaJugador.this, EsperaLoginActivity.class);
+                            Intent i = new Intent(PantallaUnirsePartida.this, PantallaEsperaLoginActivity.class);
                             // Pasa a la ventana seleccion de plantilla y personaje.
                             i.putExtra("codigo",getNumSala);
                             i.putExtra("nombreUsuario", getNombre);

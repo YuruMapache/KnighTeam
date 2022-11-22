@@ -8,7 +8,7 @@ import android.os.Handler;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class SplashInicioActivity extends AppCompatActivity {
+public class PantallaSplashInicioActivity extends AppCompatActivity {
 
     // Duración en milisegundos que se mostrará el splash
     private final int DURACION_SPLASH = 1000; // 1 segundo
@@ -20,12 +20,12 @@ public class SplashInicioActivity extends AppCompatActivity {
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_splash_inicio);
+        setContentView(R.layout.activity_pantalla_splash_inicio);
 
         new Handler().postDelayed(new Runnable(){
             public void run(){
                 // Cuando pasen los 3 segundos, pasamos a la actividad principal de la aplicación
-                Intent intent = new Intent(SplashInicioActivity.this, PantallaInicioActivity.class);
+                Intent intent = new Intent(PantallaSplashInicioActivity.this, PantallaInicioActivity.class);
                 startActivity(intent);
                 finish();
             };
