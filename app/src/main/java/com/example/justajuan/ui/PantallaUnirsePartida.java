@@ -1,4 +1,4 @@
-package com.example.justajuan;
+package com.example.justajuan.ui;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.justajuan.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,7 +24,7 @@ import java.util.HashMap;
 public class PantallaUnirsePartida extends AppCompatActivity {
 
     private EditText nombreJugador;
-    private EditText numSala;
+    private EditText textSala;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference, salaReference;
 
@@ -40,7 +41,7 @@ public class PantallaUnirsePartida extends AppCompatActivity {
         final Button botonJugar = findViewById(R.id.botonJugar);
 
         nombreJugador = findViewById(R.id.nombreUsuario);
-        numSala = findViewById(R.id.numeroSala);
+        textSala = findViewById(R.id.numeroSala);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();
@@ -52,23 +53,27 @@ public class PantallaUnirsePartida extends AppCompatActivity {
             public void onClick(View view) {
 
                 String getNombre = nombreJugador.getText().toString();
-                String getNumSala = numSala.getText().toString();
+                String numSala = textSala.getText().toString();
                 HashMap<String,String> Clase = new HashMap<>();
                 salaReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                        if(datasnapshot.hasChild(getNumSala)) {
+                        if(datasnapshot.hasChild(numSala)) {
+                            if(datasnapshot.child(numSala).getChildrenCount()<5) {
 
                             Clase.put("Rol"," ");
 
-                            databaseReference.child("Partida/"+ getNumSala + "/" + getNombre)
-                                    .setValue(Clase);
+                                databaseReference.child("Partida/" + numSala + "/" + getNombre)
+                                        .setValue(Clase);
 
-                            Intent i = new Intent(PantallaUnirsePartida.this, PantallaEsperaLoginActivity.class);
-                            // Pasa a la ventana seleccion de plantilla y personaje.
-                            i.putExtra("codigo",getNumSala);
-                            i.putExtra("nombreUsuario", getNombre);
-                            startActivity(i);
+                                Intent i = new Intent(PantallaUnirsePartida.this, PantallaEsperaLoginActivity.class);
+                                // Pasa a la ventana seleccion de plantilla y personaje.
+                                i.putExtra("codigo", numSala);
+                                i.putExtra("nombreUsuario", getNombre);
+                                startActivity(i);
+                            }else if(datasnapshot.child(numSala).getChildrenCount()>5){
+                                Toast.makeText(getApplicationContext(), "La sala está llena", Toast.LENGTH_LONG).show();
+                            }
                         } else {
                             Toast.makeText(getApplicationContext(), "Código de sala incorrecto. Intentalo de nuevo", Toast.LENGTH_LONG).show();
                         }

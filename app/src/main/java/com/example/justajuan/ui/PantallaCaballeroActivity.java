@@ -1,4 +1,4 @@
-package com.example.justajuan;
+package com.example.justajuan.ui;
 
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -7,6 +7,7 @@ import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.justajuan.R;
 import com.example.justajuan.model.Time;
 
 public class PantallaCaballeroActivity extends AppCompatActivity {
@@ -24,6 +25,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pantalla_caballero);
         glblTimer = new Time(findViewById(R.id.timerTextView));
         glblTimer.startTimer();
+
     }
 
 }

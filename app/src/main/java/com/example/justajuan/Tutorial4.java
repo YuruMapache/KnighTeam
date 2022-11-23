@@ -9,6 +9,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
+import com.example.justajuan.ui.PantallaHerreroActivity;
+
 public class Tutorial4 extends AppCompatActivity {
 
     @Override

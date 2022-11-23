@@ -16,7 +16,7 @@
         android:theme="@style/Theme.JustaJuan"
         tools:targetApi="31">
         <activity
-            android:name=".PantallaGestorRolesActivity"
+            android:name=".ui.PantallaGestorRolesActivity"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.JustaJuan.Fullscreen">
@@ -25,7 +25,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".PantallaEsperaLoginActivity"
+            android:name=".ui.PantallaEsperaLoginActivity"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.JustaJuan.Fullscreen">
@@ -71,7 +71,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".PantallaUnirsePartida"
+            android:name=".ui.PantallaUnirsePartida"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.JustaJuan.Fullscreen">
@@ -80,7 +80,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".PantallaSplashInicioActivity"
+            android:name=".ui.PantallaSplashInicioActivity"
             android:exported="true"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.JustaJuan.Fullscreen">
@@ -94,7 +94,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".PantallaInicioActivity"
+            android:name=".ui.PantallaInicioActivity"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.JustaJuan.Fullscreen">
@@ -103,7 +103,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".PantallaPlantillasActivity"
+            android:name=".ui.PantallaPlantillasActivity"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.JustaJuan.Fullscreen">
@@ -112,7 +112,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".PantallaCaballeroActivity"
+            android:name=".ui.PantallaCaballeroActivity"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.JustaJuan.Fullscreen">
@@ -122,7 +122,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".PantallaMaestroCuadrasActivity"
+            android:name=".ui.PantallaMaestroCuadrasActivity"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.JustaJuan.Fullscreen">
@@ -131,7 +131,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".PantallaCuranderoActivity"
+            android:name=".ui.PantallaCuranderoActivity"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.JustaJuan.Fullscreen">
@@ -140,7 +140,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".PantallaDruidaActivity"
+            android:name=".ui.PantallaDruidaActivity"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.JustaJuan.Fullscreen">
@@ -158,7 +158,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".PantallaCreacionPartidaActivity"
+            android:name=".ui.PantallaCreacionPartidaActivity"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.JustaJuan.Fullscreen">
@@ -167,7 +167,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".PantallaHerreroActivity"
+            android:name=".ui.PantallaHerreroActivity"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.JustaJuan.Fullscreen">

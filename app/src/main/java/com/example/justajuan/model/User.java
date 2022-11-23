@@ -4,7 +4,14 @@ public class User {
     private String nombre;
     private int edad;
     private String genero;
-    private String rol;
+    private Rol rol;
+
+    public User(String nombre, int edad, String genero, Rol rol) {
+        this.nombre = nombre;
+        this.edad = edad;
+        this.genero = genero;
+        this.rol = rol;
+    }
 
     public String getNombre() {
         return nombre;
@@ -30,11 +37,11 @@ public class User {
         this.genero = genero;
     }
 
-    public String getRol() {
+    public Rol getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
+    public void setRol(Rol rol) {
         this.rol = rol;
     }
 }
