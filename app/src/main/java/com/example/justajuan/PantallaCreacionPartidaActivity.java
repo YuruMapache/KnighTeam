@@ -58,6 +58,10 @@ public class PantallaCreacionPartidaActivity extends AppCompatActivity {
                 String edadARegistrar = edad.getText().toString();
                 String generoARegistrar = genero.getSelectedItem().toString();
 
+                //if(nombreARegistrar.equals(null) ) {
+
+                //}
+
                 int codigoAleatorio = (int) ((Math.random() * 100000));
                 String tokenSala = String.valueOf(codigoAleatorio);
 

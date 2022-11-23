@@ -58,6 +58,7 @@ public class PantallaUnirsePartida extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                         if(datasnapshot.hasChild(getNumSala)) {
+
                             Clase.put("Rol"," ");
 
                             databaseReference.child("Partida/"+ getNumSala + "/" + getNombre)
