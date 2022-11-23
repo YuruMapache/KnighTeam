@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondocurandera"
-    tools:context=".PantallaCuranderoActivity">
+    tools:context=".ui.PantallaCuranderoActivity">
 
     <FrameLayout
         android:id="@+id/frameLayout"

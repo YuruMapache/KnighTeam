@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/stable_background"
-    tools:context=".PantallaMaestroCuadrasActivity">
+    tools:context=".ui.PantallaMaestroCuadrasActivity">
 
     <FrameLayout
         android:id="@+id/frameLayout"
