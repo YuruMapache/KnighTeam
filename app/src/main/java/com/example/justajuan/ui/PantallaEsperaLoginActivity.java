@@ -11,11 +11,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.justajuan.R;
+import com.example.justajuan.model.Rol;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.HashMap;
 
 
 public class PantallaEsperaLoginActivity extends AppCompatActivity {
@@ -42,6 +45,9 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
         jugadoresTotales = findViewById(R.id.esperaJugadores);
 
         creacionSala.setText(String.format("¡Sala creada! El código es %s", getCodigoSala()));
+        int pantallaAleatoria = (int) ((Math.random() * (5 - 1)) + 1);
+        HashMap<String, String> Registro = new HashMap<>();
+
         partidaReference.child(getCodigoSala()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -51,22 +57,56 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
                     jugadoresTotales.setText(String.format("Esperando jugadores... (%s/5)", numJugadores));
 
                     if (numJugadores == 5) {
-                        int n = (int) ((Math.random() * (5 - 1)) + 1);
-                        switch (n) {
+                        switch (pantallaAleatoria) {
                             case 1:
-                                startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaHerreroActivity.class));
+                                Registro.put("Rol", "HERRERO");
+
+                                databaseReference.child("Partida/" + getCodigoSala() + "/" + getNombreUsuario())
+                                        .setValue(Registro);
+                                Intent i1 = new Intent(PantallaEsperaLoginActivity.this, PantallaHerreroActivity.class);
+                                i1.putExtra("rol", Rol.HERRERO);
+                                startActivity(i1);
+                                break;
                             case 2:
-                                startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaCuranderoActivity.class));
+                                Registro.put("Rol", "CURANDERO");
+
+                                databaseReference.child("Partida/" + getCodigoSala() + "/" + getNombreUsuario())
+                                        .setValue(Registro);
+                                Intent i2 = new Intent(PantallaEsperaLoginActivity.this, PantallaCuranderoActivity.class);
+                                i2.putExtra("rol", Rol.CURANDERO);
+                                startActivity(i2);
+                                break;
                             case 3:
-                                startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaDruidaActivity.class));
+                                Registro.put("Rol", "DRUIDA");
+
+                                databaseReference.child("Partida/" + getCodigoSala() + "/" + getNombreUsuario())
+                                        .setValue(Registro);
+                                Intent i3 = new Intent(PantallaEsperaLoginActivity.this, PantallaHerreroActivity.class);
+                                i3.putExtra("rol", Rol.DRUIDA);
+                                startActivity(i3);
+                                break;
                             case 4:
-                                startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaCaballeroActivity.class));
+                                Registro.put("Rol", "CABALLERO");
+
+                                databaseReference.child("Partida/" + getCodigoSala() + "/" + getNombreUsuario())
+                                        .setValue(Registro);
+                                Intent i4 = new Intent(PantallaEsperaLoginActivity.this, PantallaCaballeroActivity.class);
+                                i4.putExtra("rol", Rol.CABALLERO);
+                                startActivity(i4);
+                                break;
                             case 5:
-                                startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaMaestroCuadrasActivity.class));
+                                Registro.put("Rol", "MAESTRO_CUADRAS");
+
+                                databaseReference.child("Partida/" + getCodigoSala() + "/" + getNombreUsuario())
+                                        .setValue(Registro);
+                                Intent i5 = new Intent(PantallaEsperaLoginActivity.this, PantallaMaestroCuadrasActivity.class);
+                                i5.putExtra("rol", Rol.MAESTRO_CUADRAS);
+                                startActivity(i5);
+                                break;
+                            default:
+                                break;
                         }
 
-                        startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaCaballeroActivity.class));
-                        //startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class));
                     }
                 }
             }
@@ -82,6 +122,14 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             return extras.getString("codigo");
+        }
+        return null;
+    }
+
+    public String getNombreUsuario() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            return extras.getString("nombreUsuario");
         }
         return null;
     }
