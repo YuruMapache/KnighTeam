@@ -46,11 +46,25 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int numJugadores;
-                if(dataSnapshot.exists()) {
+                if (dataSnapshot.exists()) {
                     numJugadores = (int) dataSnapshot.getChildrenCount();
-                    jugadoresTotales.setText(String.format("Esperando jugadores... (%s/5)", Integer.toString(numJugadores)));
+                    jugadoresTotales.setText(String.format("Esperando jugadores... (%s/5)", numJugadores));
 
-                    if(numJugadores == 5) {
+                    if (numJugadores == 5) {
+                        int n = (int) ((Math.random() * (5 - 1)) + 1);
+                        switch (n) {
+                            case 1:
+                                startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaHerreroActivity.class));
+                            case 2:
+                                startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaCuranderoActivity.class));
+                            case 3:
+                                startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaDruidaActivity.class));
+                            case 4:
+                                startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaCaballeroActivity.class));
+                            case 5:
+                                startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaMaestroCuadrasActivity.class));
+                        }
+
                         startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaCaballeroActivity.class));
                         //startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class));
                     }
@@ -66,7 +80,7 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
 
     public String getCodigoSala() {
         Bundle extras = getIntent().getExtras();
-        if(extras != null) {
+        if (extras != null) {
             return extras.getString("codigo");
         }
         return null;

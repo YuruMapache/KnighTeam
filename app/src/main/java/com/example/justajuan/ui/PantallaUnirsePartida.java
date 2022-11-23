@@ -54,14 +54,14 @@ public class PantallaUnirsePartida extends AppCompatActivity {
 
                 String getNombre = nombreJugador.getText().toString();
                 String numSala = textSala.getText().toString();
-                HashMap<String,String> Clase = new HashMap<>();
+                HashMap<String, String> Clase = new HashMap<>();
                 salaReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot datasnapshot) {
-                        if(datasnapshot.hasChild(numSala)) {
-                            if(datasnapshot.child(numSala).getChildrenCount()<5) {
+                        if (datasnapshot.hasChild(numSala)) {
+                            if (datasnapshot.child(numSala).getChildrenCount() < 5) {
 
-                            Clase.put("Rol"," ");
+                                Clase.put("Rol", " ");
 
                                 databaseReference.child("Partida/" + numSala + "/" + getNombre)
                                         .setValue(Clase);
@@ -71,7 +71,7 @@ public class PantallaUnirsePartida extends AppCompatActivity {
                                 i.putExtra("codigo", numSala);
                                 i.putExtra("nombreUsuario", getNombre);
                                 startActivity(i);
-                            }else if(datasnapshot.child(numSala).getChildrenCount()>5){
+                            } else if (datasnapshot.child(numSala).getChildrenCount() > 5) {
                                 Toast.makeText(getApplicationContext(), "La sala está llena", Toast.LENGTH_LONG).show();
                             }
                         } else {
