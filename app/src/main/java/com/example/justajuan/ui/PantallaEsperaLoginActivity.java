@@ -51,7 +51,8 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
                     jugadoresTotales.setText(String.format("Esperando jugadores... (%s/5)", Integer.toString(numJugadores)));
 
                     if(numJugadores == 5) {
-                        startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class));
+                        startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaCaballeroActivity.class));
+                        //startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class));
                     }
                 }
             }

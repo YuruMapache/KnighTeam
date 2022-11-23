@@ -7,6 +7,7 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.example.justajuan.R;
+import com.example.justajuan.model.Rol;
 
 public class PantallaGestorRolesActivity extends AppCompatActivity {
 
