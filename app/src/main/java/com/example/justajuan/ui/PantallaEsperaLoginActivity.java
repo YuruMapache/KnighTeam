@@ -42,6 +42,7 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
         jugadoresTotales = findViewById(R.id.esperaJugadores);
 
         creacionSala.setText(String.format("¡Sala creada! El código es %s", getCodigoSala()));
+        int n = (int) ((Math.random() * (5 - 1)) + 1);
         partidaReference.child(getCodigoSala()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -51,21 +52,27 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
                     jugadoresTotales.setText(String.format("Esperando jugadores... (%s/5)", numJugadores));
 
                     if (numJugadores == 5) {
-                        int n = (int) ((Math.random() * (5 - 1)) + 1);
+                        System.out.println(n);
                         switch (n) {
                             case 1:
                                 startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaHerreroActivity.class));
+                                break;
                             case 2:
                                 startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaCuranderoActivity.class));
+                                break;
                             case 3:
                                 startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaDruidaActivity.class));
+                                break;
                             case 4:
                                 startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaCaballeroActivity.class));
+                                break;
                             case 5:
                                 startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaMaestroCuadrasActivity.class));
+                                break;
+                            default:
+                                break;
                         }
 
-                        startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaCaballeroActivity.class));
                         //startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class));
                     }
                 }
