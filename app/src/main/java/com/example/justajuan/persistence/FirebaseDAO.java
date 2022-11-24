@@ -2,6 +2,7 @@ package com.example.justajuan.persistence;
 
 import androidx.annotation.NonNull;
 
+import com.example.justajuan.model.Rol;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.model.User;
 import com.google.firebase.database.DataSnapshot;
@@ -38,6 +39,7 @@ public class FirebaseDAO {
                 while (sesion.getRol() == null) {
                     String tmp = String.valueOf((int) (Math.random()*5+ 1));
                     if (!snapshot.hasChild(tmp)) {
+                        user.setRol(Rol.values()[Integer.parseInt(tmp)-1]);
                         dr.child(tmp).setValue(user);
                         sesion.setRol(Integer.parseInt(tmp) - 1);
                     }
