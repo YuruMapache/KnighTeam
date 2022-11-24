@@ -36,6 +36,11 @@ public class Sesion {
         return usuario.getRol();
     }
 
+    //Del 0 al 4
+    public void setRol(int rol) {
+         usuario.setRol(Rol.values()[rol]);
+    }
+
 }
 
 

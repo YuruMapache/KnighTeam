@@ -15,6 +15,7 @@ import android.widget.Toast;
 import com.example.justajuan.R;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.model.User;
+import com.example.justajuan.persistence.FirebaseDAO;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,6 +56,8 @@ public class PantallaUnirsePartida extends AppCompatActivity {
 
                 String nombreJugadorARegistrar = nombreJugador.getText().toString();
                 String numSala = textSala.getText().toString();
+
+                //Crear usuario
                 User user = new User();
                 user.setNombre(nombreJugadorARegistrar);
                 Sesion.getInstance().setUsuario(user);
@@ -66,10 +69,11 @@ public class PantallaUnirsePartida extends AppCompatActivity {
                         if (datasnapshot.hasChild(numSala)) {
                             if (datasnapshot.child(numSala).getChildrenCount() < 5) {
 
-                                Registro.put("Rol", " ");
+                                //Registro.put("Rol", " ");
 
-                                databaseReference.child("Partida/" + numSala + "/" + nombreJugadorARegistrar)
-                                        .setValue(Registro);
+                                //databaseReference.child("Partida/" + numSala + "/" + nombreJugadorARegistrar).setValue(Registro);
+
+                                FirebaseDAO.setPlayer(Integer.parseInt(numSala),user);
 
                                 Intent i = new Intent(PantallaUnirsePartida.this, PantallaEsperaLoginActivity.class);
                                 i.putExtra("codigo", numSala);
