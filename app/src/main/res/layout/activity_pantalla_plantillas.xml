@@ -25,37 +25,41 @@
             android:id="@+id/plantillaSencilla"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="@color/black"
+            android:buttonTint="?android:buttonTint"
             android:checked="false"
             android:textSize="16sp"
-            android:text="@string/plantillaSencilla" />
+            android:text="@string/plantillaSencilla"
+            android:textColor="?android:textColorPrimary"/>
 
         <RadioButton
             android:id="@+id/plantillaDificil"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="@color/black"
+            android:buttonTint="?android:buttonTint"
             android:clickable="false"
             android:textSize="16sp"
-            android:text="@string/plantillaDificil" />
+            android:text="@string/plantillaDificil"
+            android:textColor="?android:textColorPrimary"/>
 
         <RadioButton
             android:id="@+id/plantillaEmpatia"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="@color/black"
+            android:buttonTint="?android:buttonTint"
             android:clickable="false"
             android:textSize="16sp"
-            android:text="@string/plantillaEmpatia" />
+            android:text="@string/plantillaEmpatia"
+            android:textColor="?android:textColorPrimary"/>
 
         <RadioButton
             android:id="@+id/plantillaComunicacion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:buttonTint="@color/black"
+            android:buttonTint="?android:buttonTint"
             android:clickable="false"
             android:textSize="16sp"
-            android:text="@string/plantillaComunicacion" />
+            android:text="@string/plantillaComunicacion"
+            android:textColor="?android:textColorPrimary"/>
 
     </RadioGroup>
 
@@ -114,6 +118,6 @@
         android:background="@drawable/rock_button"
         android:text="@string/botonSiguiente"
         android:textSize="17sp"
-        android:textColor="@color/black" />
+        android:textColor="?android:textColorPrimary" />
 
 </FrameLayout>

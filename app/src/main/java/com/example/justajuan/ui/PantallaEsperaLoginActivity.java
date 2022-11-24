@@ -103,7 +103,7 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        back();
+        //back();
     }
 
     /**
@@ -112,7 +112,7 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
     public void back() {
         Sesion sesion = Sesion.getInstance();
         FirebaseDAO.deletePlayer(sesion.getNumLobby(), sesion.getUsuario().getNombre());
-        Intent intent = new Intent(PantallaEsperaLoginActivity.this, PantallaUnirsePartida.class);
+        Intent intent = new Intent(PantallaEsperaLoginActivity.this, PantallaInicioActivity.class);
         startActivity(intent);
     }
 

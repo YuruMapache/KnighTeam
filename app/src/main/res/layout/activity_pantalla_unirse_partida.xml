@@ -35,12 +35,16 @@
                 android:fontFamily="sans-serif"
                 android:text="@string/nombre_jugador"
                 android:textSize="16sp"
+                android:textColor="?android:textColorPrimary"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/nombreUsuario"
                 android:layout_width="138dp"
                 android:layout_height="50dp"
+                android:imeOptions="flagNoExtractUi"
+                android:inputType="text"
+                android:textColor="?android:textColorPrimary"
                 android:text="" />
 
             <TextView
@@ -50,12 +54,16 @@
                 android:fontFamily="sans-serif"
                 android:text="@string/edad_jugador"
                 android:textSize="16sp"
+                android:textColor="?android:textColorPrimary"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/edadJugador"
                 android:layout_width="138dp"
                 android:layout_height="50dp"
+                android:imeOptions="flagNoExtractUi"
+                android:inputType="number"
+                android:textColor="?android:textColorPrimary"
                 android:text=""/>
 
             <TextView
@@ -65,12 +73,14 @@
                 android:fontFamily="sans-serif"
                 android:text="@string/genero_jugador"
                 android:textSize="16sp"
+                android:textColor="?android:textColorPrimary"
                 android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/eleccionGenero"
-                android:layout_width="138dp"
-                android:layout_height="50dp" />
+                android:layout_width="150dp"
+                android:layout_height="50dp"
+                android:popupBackground="@color/white"/>
 
             <TextView
                 android:id="@+id/numeroSalaEtiqueta"
@@ -79,12 +89,16 @@
                 android:fontFamily="sans-serif"
                 android:text="@string/numeroSala"
                 android:textSize="16sp"
+                android:textColor="?android:textColorPrimary"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/numeroSala"
                 android:layout_width="138dp"
                 android:layout_height="50dp"
+                android:imeOptions="flagNoExtractUi"
+                android:inputType="number"
+                android:textColor="?android:textColorPrimary"
                 android:text=""/>
         </GridLayout>
 
@@ -100,7 +114,7 @@
         android:layout_margin="15dp"
         android:background="@drawable/rock_button"
         android:text="@string/botonJugar"
-        android:textColor="@color/black" />
+        android:textColor="?android:textColorPrimary" />
 
 
 </FrameLayout>

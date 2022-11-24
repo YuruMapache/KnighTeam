@@ -4,7 +4,7 @@ public class Sesion {
 
     private static Sesion sesion;
     private static User usuario;
-    private static int numlobby;
+    private static String numlobby;
 
     public static Sesion getInstance() {
         if (sesion == null) {
@@ -16,12 +16,12 @@ public class Sesion {
     private Sesion() {
     }
 
-    public static int getNumLobby() {
+    public static String getNumLobby() {
         return numlobby;
     }
 
     public static void setNumLobby(int numlobby) {
-        Sesion.numlobby = numlobby;
+        Sesion.numlobby = String.valueOf(numlobby);
     }
 
     public static User getUsuario() {

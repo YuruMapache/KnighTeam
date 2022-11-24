@@ -27,6 +27,7 @@
         android:gravity="center"
         android:fontFamily="sans-serif"
         android:textSize="20sp"
+        android:textColor="?android:textColorPrimary"
         android:textStyle="bold" />
 
     </LinearLayout>

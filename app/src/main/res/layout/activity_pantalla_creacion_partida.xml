@@ -34,11 +34,15 @@
                 android:fontFamily="sans-serif"
                 android:text="@string/nombre_jugador"
                 android:textSize="18sp"
+                android:textColor="?android:textColorPrimary"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/nombreJugador"
                 android:layout_width="138dp"
+                android:textColor="?android:textColorPrimary"
+                android:imeOptions="flagNoExtractUi"
+                android:inputType="text"
                 android:layout_height="61dp" />
 
             <TextView
@@ -48,11 +52,14 @@
                 android:fontFamily="sans-serif"
                 android:text="@string/edad_jugador"
                 android:textSize="18sp"
+                android:textColor="?android:textColorPrimary"
                 android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/edadJugador"
                 android:layout_width="138dp"
+                android:imeOptions="flagNoExtractUi"
+                android:inputType="number"
                 android:layout_height="61dp" />
 
             <TextView
@@ -61,11 +68,13 @@
                 android:layout_height="61dp"
                 android:text="@string/genero_jugador"
                 android:textSize="18sp"
+                android:textColor="?android:textColorPrimary"
                 android:textStyle="bold" />
 
             <Spinner
                 android:id="@+id/eleccionGenero"
-                android:layout_width="138dp"
+                android:layout_width="150dp"
+                android:popupBackground="@color/white"
                 android:layout_height="61dp" />
 
         </GridLayout>
