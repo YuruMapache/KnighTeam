@@ -29,6 +29,7 @@
     <string name="botonUnirsePartida"> Unirse a Partida </string>
     <string name="botonAtras"> ATRÁS</string>
     <string name="botonTerminar"> Terminar</string>
+    <string name="botonTutorial"> Tutorial</string>
     <string name="botonSiguiente"> Siguiente </string>
     <string name="plantillaSencilla"> Plantilla sencilla </string>
     <string name="plantillaDificil"> Plantilla dificil </string>

@@ -1,4 +1,4 @@
-package com.example.justajuan;
+package com.example.justajuan.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,7 +9,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 
-import com.example.justajuan.ui.PantallaHerreroActivity;
+import com.example.justajuan.R;
 
 public class Tutorial4 extends AppCompatActivity {
 
@@ -39,7 +39,7 @@ public class Tutorial4 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                startActivity(new Intent(Tutorial4.this, PantallaHerreroActivity.class));
+                startActivity(new Intent(Tutorial4.this, PantallaInicioActivity.class));
                 // Pasa a la ventana seleccion de plantillas.
             }
         });

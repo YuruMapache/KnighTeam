@@ -35,7 +35,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Tutorial4"
+            android:name=".ui.Tutorial4"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.JustaJuan.Fullscreen">
@@ -44,7 +44,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Tutorial3"
+            android:name=".ui.Tutorial3"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.JustaJuan.Fullscreen">
@@ -53,7 +53,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Tutorial2"
+            android:name=".ui.Tutorial2"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.JustaJuan.Fullscreen">
@@ -62,7 +62,7 @@
                 android:value="" />
         </activity>
         <activity
-            android:name=".Tutorial1"
+            android:name=".ui.Tutorial1"
             android:exported="false"
             android:screenOrientation="landscape"
             android:theme="@style/Theme.JustaJuan.Fullscreen">

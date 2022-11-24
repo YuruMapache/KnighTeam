@@ -24,6 +24,7 @@ public class PantallaInicioActivity extends AppCompatActivity {
 
         final Button botonCrearPartida = findViewById(R.id.botonCrearPartida);
         final Button botonUnirsePartida = findViewById(R.id.botonUnirsePartida);
+        final Button botonTutorial = findViewById(R.id.botonTutorial);
 
 
         botonCrearPartida.setOnClickListener(new View.OnClickListener() {
@@ -39,6 +40,14 @@ public class PantallaInicioActivity extends AppCompatActivity {
             public void onClick(View view) {
                 // Pasa a la ventana de unirse a la sala creada
                 startActivity(new Intent(PantallaInicioActivity.this, PantallaUnirsePartida.class));
+            }
+        });
+
+        botonTutorial.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Pasa a las ventanas del tutorial
+                startActivity(new Intent(PantallaInicioActivity.this, Tutorial1.class));
             }
         });
     }
