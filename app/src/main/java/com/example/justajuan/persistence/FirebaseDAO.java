@@ -12,7 +12,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class FirebaseDAO {
-    private String sala;
 
     public static void getConsumable(String id) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
