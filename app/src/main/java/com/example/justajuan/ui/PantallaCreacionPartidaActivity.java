@@ -11,6 +11,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.example.justajuan.R;
 import com.google.firebase.database.DatabaseReference;
@@ -50,6 +51,7 @@ public class PantallaCreacionPartidaActivity extends AppCompatActivity {
 
         botonCrearPartida = findViewById(R.id.botonCrearJugador);
 
+
         botonCrearPartida.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -59,9 +61,10 @@ public class PantallaCreacionPartidaActivity extends AppCompatActivity {
                 String edadARegistrar = edad.getText().toString();
                 String generoARegistrar = genero.getSelectedItem().toString();
 
-                //if(nombreARegistrar.equals(null) ) {
-
-                //}
+                if (nombreARegistrar.matches("") || edadARegistrar.matches("")) {
+                    Toast.makeText(getApplicationContext(), "Revise si sus datos son correctos", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 int codigoAleatorio = (int) ((Math.random() * 100000));
                 String tokenSala = String.valueOf(codigoAleatorio);
@@ -69,7 +72,6 @@ public class PantallaCreacionPartidaActivity extends AppCompatActivity {
                 HashMap<String, String> Registro = new HashMap<>();
                 Registro.put("Edad", edadARegistrar);
                 Registro.put("Genero", generoARegistrar);
-                Registro.put("Rol", " ");
 
                 databaseReference.child("Partida/" + tokenSala + "/" + nombreARegistrar)
                         .setValue(Registro);
@@ -77,7 +79,6 @@ public class PantallaCreacionPartidaActivity extends AppCompatActivity {
                 i.putExtra("codigo", tokenSala);
                 i.putExtra("nombreUsuario", nombreARegistrar);
                 startActivity(i);
-                //Pasa a la ventana seleccion de plantilla y personaje.
             }
         });
     }

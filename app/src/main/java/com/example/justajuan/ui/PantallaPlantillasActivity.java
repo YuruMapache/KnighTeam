@@ -11,10 +11,19 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.justajuan.R;
 
 public class PantallaPlantillasActivity extends AppCompatActivity {
+
+    private Button botonSiguiente;
+    private ImageButton botonPlantSencilla;
+    private ImageButton botonPlantDificil;
+    private ImageButton botonPlantEmpatia;
+    private ImageButton botonPlantComunicacion;
+    private RadioGroup plantillas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,15 +34,22 @@ public class PantallaPlantillasActivity extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_pantalla_plantillas);
 
-        final Button botonSiguiente = findViewById(R.id.botonSiguiente);
-        final ImageButton botonPlantSencilla = findViewById(R.id.botonInfoSencilla);
-        final ImageButton botonPlantDificil = findViewById(R.id.botonInfoDificil);
-        final ImageButton botonPlantEmpatia = findViewById(R.id.botonInfoEmpatia);
-        final ImageButton botonPlantComunicacion = findViewById(R.id.botonInfoComunicacion);
+        botonSiguiente = findViewById(R.id.botonSiguiente);
+        botonPlantSencilla = findViewById(R.id.botonInfoSencilla);
+        botonPlantDificil = findViewById(R.id.botonInfoDificil);
+        botonPlantEmpatia = findViewById(R.id.botonInfoEmpatia);
+        botonPlantComunicacion = findViewById(R.id.botonInfoComunicacion);
+        plantillas = findViewById(R.id.radioGroupPlantillas);
 
         botonSiguiente.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(plantillas.getCheckedRadioButtonId() == -1) {
+                    Toast.makeText(getApplicationContext(), "Seleccione una plantilla", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 // Pasa a la ventana de creacion de la partida
                 startActivity(new Intent(PantallaPlantillasActivity.this, PantallaCreacionPartidaActivity.class));
             }
