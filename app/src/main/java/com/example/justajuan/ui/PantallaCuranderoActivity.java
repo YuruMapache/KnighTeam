@@ -16,7 +16,7 @@ import com.example.justajuan.model.Time;
 public class PantallaCuranderoActivity extends AppCompatActivity {
 
     private Time glblTimer;      // Textview del tiempo restante del temporizador
-    private RelativeLayout botonAcciones = findViewById(R.id.relativeLayout3);
+    private Button botonAcciones = findViewById(R.id.relativeLayout3);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

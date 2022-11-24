@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.RelativeLayout;
 
 import com.example.justajuan.R;
@@ -15,7 +16,7 @@ import com.example.justajuan.model.Time;
 public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
 
     private Time glblTimer;      // Textview del tiempo restante del temporizador
-    private RelativeLayout botonAcciones = findViewById(R.id.relativeLayout3);
+    private Button botonAcciones = findViewById(R.id.relativeLayout3);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

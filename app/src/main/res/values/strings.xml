@@ -14,7 +14,7 @@
     <string name="acciones_boton">ACCIONES</string>
     <string name="diario_boton">DIARIO</string>
     <string name="inventario_boton">INVENTARIO</string>
-    <string name="comprar_boton">COMPRAR</string>
+    <string name="comprar_boton">TIENDA</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
     <string name="tiempoTorneo">X Semanas</string>
     <string name="TiempoHastaTorneo">Tiempo hasta el próximo torneo:</string>

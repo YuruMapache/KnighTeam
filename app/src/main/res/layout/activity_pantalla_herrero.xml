@@ -136,7 +136,7 @@
 
     </LinearLayout>
 
-    <RelativeLayout
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/relativeLayout"
         android:layout_width="123dp"
         android:layout_height="55dp"
@@ -146,22 +146,12 @@
         android:gravity="center"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/diario_boton"
+        android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/buttonTextDiary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:ems="10"
-            android:importantForAutofill="no"
-            android:text="@string/diary_button"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-    </RelativeLayout>
 
-    <RelativeLayout
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/relativeLayout3"
         android:layout_width="123dp"
         android:layout_height="55dp"
@@ -171,22 +161,12 @@
         android:gravity="center"
         android:textAlignment="center"
         app:layout_constraintBottom_toTopOf="@+id/relativeLayout4"
-        app:layout_constraintEnd_toStartOf="@+id/relativeLayout">
+        app:layout_constraintEnd_toStartOf="@+id/relativeLayout"
+        android:text="@string/acciones_boton"
+        android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/buttonTextAction"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:ems="10"
-            android:importantForAutofill="no"
-            android:text="@string/action_button"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-    </RelativeLayout>
 
-    <RelativeLayout
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/relativeLayout4"
         android:layout_width="123dp"
         android:layout_height="55dp"
@@ -197,22 +177,12 @@
         android:gravity="center"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/relativeLayout2">
+        app:layout_constraintEnd_toStartOf="@+id/relativeLayout2"
+        android:text="@string/inventario_boton"
+        android:textStyle="bold"/>
 
-        <TextView
-            android:id="@+id/buttonTextInventory"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:ems="10"
-            android:importantForAutofill="no"
-            android:text="@string/inventory_button"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-    </RelativeLayout>
 
-    <RelativeLayout
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/relativeLayout2"
         android:layout_width="123dp"
         android:layout_height="55dp"
@@ -222,19 +192,8 @@
         android:gravity="center"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent">
-
-        <TextView
-            android:id="@+id/buttonTextShop"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:ems="10"
-            android:importantForAutofill="no"
-            android:text="@string/shop_button"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textStyle="bold" />
-    </RelativeLayout>
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/comprar_boton"
+        android:textStyle="bold"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
