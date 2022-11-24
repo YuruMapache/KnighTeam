@@ -89,10 +89,9 @@ public class PantallaUnirsePartida extends AppCompatActivity {
                         if (datasnapshot.hasChild(numSala)) {
                             if (datasnapshot.child(numSala).getChildrenCount() < 5) {
 
-                                FirebaseDAO.setPlayer(Integer.parseInt(numSala), user);
+                                FirebaseDAO.setPlayer(numSala, user);
 
                                 Intent i = new Intent(PantallaUnirsePartida.this, PantallaEsperaLoginActivity.class);
-                                i.putExtra("codigo", numSala);
                                 i.putExtra("nombreUsuario", nombreJugadorARegistrar);
                                 i.putExtra("edad", edadARegistrar);
                                 i.putExtra("genero", generoARegistrar);

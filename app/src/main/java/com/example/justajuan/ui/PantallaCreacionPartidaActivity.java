@@ -79,7 +79,7 @@ public class PantallaCreacionPartidaActivity extends AppCompatActivity {
                 Sesion.getInstance().setUsuario(user);
                 Sesion.getInstance().setNumLobby(Integer.parseInt(tokenSala));
 
-                FirebaseDAO.setPlayer(Integer.parseInt(tokenSala), user);
+                FirebaseDAO.setPlayer(tokenSala, user);
 
                 Intent i = new Intent(PantallaCreacionPartidaActivity.this, PantallaEsperaLoginActivity.class);
                 i.putExtra("codigo", tokenSala);

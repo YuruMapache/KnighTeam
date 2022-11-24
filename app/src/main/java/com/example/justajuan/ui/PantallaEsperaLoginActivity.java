@@ -56,34 +56,40 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
                 if (dataSnapshot.exists()) {
                     numJugadores = (int) dataSnapshot.getChildrenCount();
                     jugadoresTotales.setText(String.format("Esperando jugadores... (%s/5)", numJugadores));
-                    Intent i = new Intent();
+                    Intent i;
 
                     if (numJugadores == 5) {
                         switch (Sesion.getInstance().getRol().toString()) {
                             case "HERRERO":
+                                i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
                                 i.putExtra("codigo", getCodigoSala());
                                 i.putExtra("rol", Rol.HERRERO);
                                 break;
                             case "CURANDERO":
+                                i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
                                 i.putExtra("codigo", getCodigoSala());
                                 i.putExtra("rol", Rol.CURANDERO);
                                 break;
                             case "DRUIDA":
+                                i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
                                 i.putExtra("codigo", getCodigoSala());
                                 i.putExtra("rol", Rol.DRUIDA);
                                 break;
                             case "CABALLERO":
+                                i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
                                 i.putExtra("codigo", getCodigoSala());
                                 i.putExtra("rol", Rol.CABALLERO);
                                 break;
                             case "MAESTRO_CUADRAS":
+                                i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
                                 i.putExtra("codigo", getCodigoSala());
                                 i.putExtra("rol", Rol.MAESTRO_CUADRAS);
                                 break;
                             default:
+                                i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
                                 break;
                         }
-                        startActivity(new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class));
+                        startActivity(i);
                     }
                 }
             }

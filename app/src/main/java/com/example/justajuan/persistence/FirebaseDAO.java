@@ -32,9 +32,9 @@ public class FirebaseDAO {
         mUser.child("password").child(id).setValue(password);
     }
 
-    public static void setPlayer(int nlobby, User user) {
+    public static void setPlayer(String nlobby, User user) {
         FirebaseDatabase fd = FirebaseDatabase.getInstance();
-        DatabaseReference dr = fd.getReference().child("Partida").child(String.valueOf(nlobby));
+        DatabaseReference dr = fd.getReference().child("Partida").child(nlobby);
 
         dr.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
