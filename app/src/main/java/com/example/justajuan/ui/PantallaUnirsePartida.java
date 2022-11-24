@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.justajuan.R;
+import com.example.justajuan.model.Sesion;
+import com.example.justajuan.model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,6 +55,10 @@ public class PantallaUnirsePartida extends AppCompatActivity {
 
                 String nombreJugadorARegistrar = nombreJugador.getText().toString();
                 String numSala = textSala.getText().toString();
+                User user = new User();
+                user.setNombre(nombreJugadorARegistrar);
+                Sesion.getInstance().setUsuario(user);
+                Sesion.getInstance().setNumLobby(Integer.parseInt(numSala));
                 HashMap<String, String> Registro = new HashMap<>();
                 salaReference.addValueEventListener(new ValueEventListener() {
                     @Override

@@ -6,6 +6,8 @@ public class User {
     private String genero;
     private Rol rol;
 
+    public User(){}
+
     public User(String nombre, int edad, String genero, Rol rol) {
         this.nombre = nombre;
         this.edad = edad;
