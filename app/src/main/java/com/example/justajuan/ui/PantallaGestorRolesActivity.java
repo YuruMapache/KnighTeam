@@ -103,6 +103,11 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
         }, DURACION_SPLASH);
     }
 
+    @Override
+    public void onBackPressed() {
+        //back();
+    }
+
     public String getCodigoSala() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {

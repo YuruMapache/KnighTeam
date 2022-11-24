@@ -3,10 +3,6 @@
 
     <!--    Views-->
     <string name="time_intro">Tiempo para la próxima justa:</string>
-    <string name="action_button">ACCIONES</string>
-    <string name="diary_button">DIARIO</string>
-    <string name="inventory_button">INVENTARIO</string>
-    <string name="shop_button">TIENDA</string>
     <string name="default_objstate">Estado objeto</string>
     <string name="feudal_resources">Recursos del feudo</string>
     <string name="default_time">(TIEMPO RESTANTE)</string>
@@ -15,16 +11,11 @@
     <string name="diario_boton">DIARIO</string>
     <string name="inventario_boton">INVENTARIO</string>
     <string name="comprar_boton">TIENDA</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
-    <string name="tiempoTorneo">X Semanas</string>
-    <string name="TiempoHastaTorneo">Tiempo hasta el próximo torneo:</string>
     <string name="reparaciones">Reparaciones</string>
     <string name="progreso">En progreso…</string>
     <string name="tiempoEspada">Quedan X minutos </string>
     <string name="tiempoArmadura">Quedan X minutos </string>
     <string name="recursosFeudo">Recursos del feudo: </string>
-    <string name="title_activity_demo">demo</string>
-    <string name="dummy_button">Dummy Button</string>
     <string name="botonCrearPartida"> Crear Partida </string>
     <string name="botonUnirsePartida"> Unirse a Partida </string>
     <string name="botonAtras"> ATRÁS</string>

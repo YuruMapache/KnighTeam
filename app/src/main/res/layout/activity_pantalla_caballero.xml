@@ -136,7 +136,7 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/relativeLayout"
+        android:id="@+id/botonDiario"
         android:layout_width="123dp"
         android:layout_height="55dp"
         android:layout_margin="10dp"
@@ -144,14 +144,14 @@
         android:clickable="false"
         android:gravity="center"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayout2"
+        app:layout_constraintBottom_toTopOf="@+id/botonTienda"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/diario_boton"
         android:textStyle="bold"/>
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/relativeLayout3"
+        android:id="@+id/botonAcciones"
         android:layout_width="123dp"
         android:layout_height="55dp"
         android:layout_margin="10dp"
@@ -159,14 +159,14 @@
         android:clickable="true"
         android:gravity="center"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/relativeLayout4"
-        app:layout_constraintEnd_toStartOf="@+id/relativeLayout"
+        app:layout_constraintBottom_toTopOf="@+id/botonInventario"
+        app:layout_constraintEnd_toStartOf="@+id/botonDiario"
         android:text="@string/acciones_boton"
         android:textStyle="bold"/>
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/relativeLayout4"
+        android:id="@+id/botonInventario"
         android:layout_width="123dp"
         android:layout_height="55dp"
         android:layout_marginEnd="10dp"
@@ -176,13 +176,13 @@
         android:gravity="center"
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/relativeLayout2"
+        app:layout_constraintEnd_toStartOf="@+id/botonTienda"
         android:text="@string/inventario_boton"
         android:textStyle="bold"/>
 
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/relativeLayout2"
+        android:id="@+id/botonTienda"
         android:layout_width="123dp"
         android:layout_height="55dp"
         android:layout_margin="10dp"

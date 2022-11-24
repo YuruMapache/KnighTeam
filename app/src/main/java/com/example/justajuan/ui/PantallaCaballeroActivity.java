@@ -1,15 +1,15 @@
 package com.example.justajuan.ui;
 
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
-import android.widget.RelativeLayout;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.justajuan.R;
 import com.example.justajuan.model.Time;
@@ -17,7 +17,7 @@ import com.example.justajuan.model.Time;
 public class PantallaCaballeroActivity extends AppCompatActivity {
 
     private Time glblTimer;      // Textview del tiempo restante del temporizador
-    private Button botonAcciones;
+    private AppCompatButton botonDesplAcciones;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +31,9 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         glblTimer = new Time(findViewById(R.id.timerTextView));
         glblTimer.startTimer();
 
-        botonAcciones = findViewById(R.id.relativeLayout3);
+        botonDesplAcciones = findViewById(R.id.botonAcciones);
 
-        botonAcciones.setOnClickListener(new View.OnClickListener() {
+        botonDesplAcciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 final Dialog acciones = new Dialog(PantallaCaballeroActivity.this);
@@ -45,4 +45,19 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this, R.style.AlertDialogTheme)
+                .setMessage("¿Quieres cerrar la app?")
+
+                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        finishAffinity();
+                        System.exit(0);
+                    }
+                })
+
+                .setNegativeButton("No", null)
+                .show();
+    }
 }

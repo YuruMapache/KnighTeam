@@ -58,7 +58,7 @@ public class PantallaPlantillasActivity extends AppCompatActivity {
         botonPlantSencilla.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(PantallaPlantillasActivity.this);
+                AlertDialog.Builder builder = new AlertDialog.Builder(PantallaPlantillasActivity.this, R.style.AlertDialogTheme);
 
                 builder.setCancelable(true);
                 builder.setTitle("PLANTILLA SENCILLA");
