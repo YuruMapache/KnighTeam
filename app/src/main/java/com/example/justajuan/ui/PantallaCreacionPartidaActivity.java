@@ -81,11 +81,6 @@ public class PantallaCreacionPartidaActivity extends AppCompatActivity {
 
                 FirebaseDAO.setPlayer(Integer.parseInt(tokenSala), user);
 
-                //HashMap<String, String> Registro = new HashMap<>();
-                //Registro.put("Edad", edadARegistrar);
-                //Registro.put("Genero", generoARegistrar);
-
-                //databaseReference.child("Partida/" + tokenSala + "/" + nombreARegistrar).setValue(Registro);
                 Intent i = new Intent(PantallaCreacionPartidaActivity.this, PantallaEsperaLoginActivity.class);
                 i.putExtra("codigo", tokenSala);
                 i.putExtra("nombreUsuario", nombreARegistrar);

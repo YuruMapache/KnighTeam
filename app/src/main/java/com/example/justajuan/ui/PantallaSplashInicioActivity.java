@@ -25,8 +25,8 @@ public class PantallaSplashInicioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pantalla_splash_inicio);
 
         new Handler().postDelayed(new Runnable(){
-            public void run(){
-                // Cuando pasen los 3 segundos, pasamos a la actividad principal de la aplicación
+            public void run() {
+                // Cuando pasen 1 segundo, pasamos a la actividad principal de la aplicación
                 Intent intent = new Intent(PantallaSplashInicioActivity.this, PantallaInicioActivity.class);
                 startActivity(intent);
                 finish();
