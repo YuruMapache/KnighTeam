@@ -17,7 +17,7 @@ import com.example.justajuan.model.Time;
 public class PantallaCaballeroActivity extends AppCompatActivity {
 
     private Time glblTimer;      // Textview del tiempo restante del temporizador
-    private Button botonAcciones = findViewById(R.id.relativeLayout3);
+    private Button botonAcciones;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +31,12 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         glblTimer = new Time(findViewById(R.id.timerTextView));
         glblTimer.startTimer();
 
+        botonAcciones = findViewById(R.id.relativeLayout3);
+
         botonAcciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Dialog acciones = new Dialog(PantallaCaballeroActivity.this, android.R.style.Theme_Black_NoTitleBar);
+                final Dialog acciones = new Dialog(PantallaCaballeroActivity.this);
                 acciones.setContentView(R.layout.acciones_pop_up_alpha);
                 acciones.setCancelable(true);
                 acciones.show();
