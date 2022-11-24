@@ -14,6 +14,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.justajuan.R;
+import com.example.justajuan.model.Sesion;
+import com.example.justajuan.model.User;
+import com.example.justajuan.persistence.FirebaseDAO;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -51,7 +54,6 @@ public class PantallaCreacionPartidaActivity extends AppCompatActivity {
 
         botonCrearPartida = findViewById(R.id.botonCrearJugador);
 
-
         botonCrearPartida.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -69,12 +71,21 @@ public class PantallaCreacionPartidaActivity extends AppCompatActivity {
                 int codigoAleatorio = (int) ((Math.random() * 100000));
                 String tokenSala = String.valueOf(codigoAleatorio);
 
-                HashMap<String, String> Registro = new HashMap<>();
-                Registro.put("Edad", edadARegistrar);
-                Registro.put("Genero", generoARegistrar);
+                //Crear usuario
+                User user = new User();
+                user.setNombre(nombreARegistrar);
+                user.setEdad(Integer.parseInt(edadARegistrar));
+                user.setGenero(generoARegistrar);
+                Sesion.getInstance().setUsuario(user);
+                Sesion.getInstance().setNumLobby(Integer.parseInt(tokenSala));
 
-                databaseReference.child("Partida/" + tokenSala + "/" + nombreARegistrar)
-                        .setValue(Registro);
+                FirebaseDAO.setPlayer(Integer.parseInt(tokenSala), user);
+
+                //HashMap<String, String> Registro = new HashMap<>();
+                //Registro.put("Edad", edadARegistrar);
+                //Registro.put("Genero", generoARegistrar);
+
+                //databaseReference.child("Partida/" + tokenSala + "/" + nombreARegistrar).setValue(Registro);
                 Intent i = new Intent(PantallaCreacionPartidaActivity.this, PantallaEsperaLoginActivity.class);
                 i.putExtra("codigo", tokenSala);
                 i.putExtra("nombreUsuario", nombreARegistrar);

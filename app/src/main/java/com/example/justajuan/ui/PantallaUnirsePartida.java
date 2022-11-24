@@ -82,18 +82,12 @@ public class PantallaUnirsePartida extends AppCompatActivity {
                 user.setGenero(generoARegistrar);
                 Sesion.getInstance().setUsuario(user);
                 Sesion.getInstance().setNumLobby(Integer.parseInt(numSala));
-                HashMap<String, String> Registro = new HashMap<>();
+
                 salaReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                         if (datasnapshot.hasChild(numSala)) {
                             if (datasnapshot.child(numSala).getChildrenCount() < 5) {
-
-                                //registro.put("Edad", edadARegistrar);
-                                //registro.put("Genero", generoARegistrar);
-
-                                //databaseReference.child("Partida/" + numSala + "/" + nombreJugadorARegistrar)
-                                //.setValue(registro);
 
                                 FirebaseDAO.setPlayer(Integer.parseInt(numSala), user);
 
