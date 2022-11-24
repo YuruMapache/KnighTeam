@@ -1,9 +1,12 @@
 package com.example.justajuan.ui;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +16,7 @@ import com.example.justajuan.model.Time;
 public class PantallaCaballeroActivity extends AppCompatActivity {
 
     private Time glblTimer;      // Textview del tiempo restante del temporizador
+    private RelativeLayout botonAcciones = findViewById(R.id.relativeLayout3);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +29,16 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
 
         glblTimer = new Time(findViewById(R.id.timerTextView));
         glblTimer.startTimer();
+
+        botonAcciones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog acciones = new Dialog(PantallaCaballeroActivity.this, android.R.style.Theme_Black_NoTitleBar);
+                acciones.setContentView(R.layout.acciones_pop_up_alpha);
+                acciones.setCancelable(true);
+                acciones.show();
+            }
+        });
 
     }
 
