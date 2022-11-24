@@ -129,7 +129,7 @@
             android:gravity="center"
             android:importantForAutofill="no"
             android:minHeight="48dp"
-            android:textColor="@android:color/primary_text_dark"
+            android:textColor="@color/black"
             android:textSize="15sp"
             android:textStyle="bold" />
 

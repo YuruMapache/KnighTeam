@@ -15,6 +15,9 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.justajuan.R;
+import com.example.justajuan.model.Sesion;
+import com.example.justajuan.model.User;
+import com.example.justajuan.persistence.FirebaseDAO;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -72,21 +75,28 @@ public class PantallaUnirsePartida extends AppCompatActivity {
                     return;
                 }
 
-                HashMap<String, String> registro = new HashMap<>();
-
+                //Crear usuario
+                User user = new User();
+                user.setNombre(nombreJugadorARegistrar);
+                Sesion.getInstance().setUsuario(user);
+                Sesion.getInstance().setNumLobby(Integer.parseInt(numSala));
+                HashMap<String, String> Registro = new HashMap<>();
                 salaReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                         if (datasnapshot.hasChild(numSala)) {
                             if (datasnapshot.child(numSala).getChildrenCount() < 5) {
 
-                                registro.put("Edad", edadARegistrar);
-                                registro.put("Genero", generoARegistrar);
+                                //registro.put("Edad", edadARegistrar);
+                                //registro.put("Genero", generoARegistrar);
 
-                                databaseReference.child("Partida/" + numSala + "/" + nombreJugadorARegistrar)
-                                        .setValue(registro);
+                                //databaseReference.child("Partida/" + numSala + "/" + nombreJugadorARegistrar)
+                                        //.setValue(registro);
+
+                                FirebaseDAO.setPlayer(Integer.parseInt(numSala),user);
 
                                 Intent i = new Intent(PantallaUnirsePartida.this, PantallaEsperaLoginActivity.class);
+                                i.putExtra("codigo", numSala);
                                 i.putExtra("nombreUsuario", nombreJugadorARegistrar);
                                 i.putExtra("edad", edadARegistrar);
                                 i.putExtra("genero", generoARegistrar);
