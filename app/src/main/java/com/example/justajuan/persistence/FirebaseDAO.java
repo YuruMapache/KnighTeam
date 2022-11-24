@@ -33,10 +33,10 @@ public class FirebaseDAO {
 
         dr.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot snapshot) {
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Sesion sesion = Sesion.getInstance();
                 while (sesion.getRol() == null) {
-                    String tmp = String.valueOf((int) ((Math.random() * (5 - 1)) + 1));
+                    String tmp = String.valueOf((int) (Math.random()*5+ 1));
                     if (!snapshot.hasChild(tmp)) {
                         dr.child(tmp).setValue(user);
                         sesion.setRol(Integer.parseInt(tmp) - 1);

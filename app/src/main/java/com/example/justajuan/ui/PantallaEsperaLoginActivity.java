@@ -53,7 +53,7 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
 
         creacionSala.setText(String.format("¡Sala creada! El código es %s", getCodigoSala()));
 
-        int pantallaAleatoria = (int) ((Math.random() * (5 - 1)) + 1);
+        //int pantallaAleatoria = (int) ((Math.random() * (5 - 1)) + 1);
 
         ArrayList<String> listaRoles = new ArrayList<>();
         listaRoles.add(Rol.CABALLERO.name());
@@ -76,7 +76,7 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
                     Intent i;
 
                     if (numJugadores == 5) {
-                        for (DataSnapshot hijo : dataSnapshot.getChildren()) {
+                        /*for (DataSnapshot hijo : dataSnapshot.getChildren()) {
                             for (String rol : listaRoles) {
                                 registro.put("Edad", getEdad());
                                 registro.put("Genero", getGenero());
@@ -86,47 +86,42 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
                                         .setValue(registro);
                                 break;
                             }
-                        }
-                        switch (pantallaAleatoria) {
-                            case 1:
-                                registro.put("Rol", "HERRERO");
+                        }*/
+                        switch (Sesion.getInstance().getRol().toString()) {
+                            case "HERRERO":
+                                //registro.put("Rol", "HERRERO");
 
-                                databaseReference.child("Partida/" + getCodigoSala() + "/" + getNombreUsuario())
-                                        .setValue(registro);
+                                //databaseReference.child("Partida/" + getCodigoSala() + "/" + getNombreUsuario()).setValue(registro);
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaHerreroActivity.class);
                                 i.putExtra("rol", Rol.HERRERO);
                                 break;
-                            case 2:
-                                registro.put("Rol", "CURANDERO");
+                            case "CURANDERO":
+                                //registro.put("Rol", "CURANDERO");
 
-                                databaseReference.child("Partida/" + getCodigoSala() + "/" + getNombreUsuario())
-                                        .setValue(registro);
+                                //databaseReference.child("Partida/" + getCodigoSala() + "/" + getNombreUsuario()).setValue(registro);
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaCuranderoActivity.class);
                                 i.putExtra("rol", Rol.CURANDERO);
 
                                 break;
-                            case 3:
-                                registro.put("Rol", "DRUIDA");
+                            case "DRUIDA":
+                                //registro.put("Rol", "DRUIDA");
 
-                                databaseReference.child("Partida/" + getCodigoSala() + "/" + getNombreUsuario())
-                                        .setValue(registro);
-                                i = new Intent(PantallaEsperaLoginActivity.this, PantallaHerreroActivity.class);
+                                //databaseReference.child("Partida/" + getCodigoSala() + "/" + getNombreUsuario()).setValue(registro);
+                                i = new Intent(PantallaEsperaLoginActivity.this, PantallaDruidaActivity.class);
                                 i.putExtra("rol", Rol.DRUIDA);
                                 break;
-                            case 4:
-                                registro.put("Rol", "CABALLERO");
+                            case "CABALLERO":
+                                //registro.put("Rol", "CABALLERO");
 
-                                databaseReference.child("Partida/" + getCodigoSala() + "/" + getNombreUsuario())
-                                        .setValue(registro);
+                                //databaseReference.child("Partida/" + getCodigoSala() + "/" + getNombreUsuario()).setValue(registro);
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaCaballeroActivity.class);
                                 i.putExtra("rol", Rol.CABALLERO);
 
                                 break;
-                            case 5:
-                                registro.put("Rol", "MAESTRO_CUADRAS");
+                            case "MAESTRO_CUADRAS":
+                                //registro.put("Rol", "MAESTRO_CUADRAS");
 
-                                databaseReference.child("Partida/" + getCodigoSala() + "/" + getNombreUsuario())
-                                        .setValue(registro);
+                                //databaseReference.child("Partida/" + getCodigoSala() + "/" + getNombreUsuario()).setValue(registro);
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaMaestroCuadrasActivity.class);
                                 i.putExtra("rol", Rol.MAESTRO_CUADRAS);
 

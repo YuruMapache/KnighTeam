@@ -78,6 +78,8 @@ public class PantallaUnirsePartida extends AppCompatActivity {
                 //Crear usuario
                 User user = new User();
                 user.setNombre(nombreJugadorARegistrar);
+                user.setEdad(Integer.parseInt(edadARegistrar));
+                user.setGenero(generoARegistrar);
                 Sesion.getInstance().setUsuario(user);
                 Sesion.getInstance().setNumLobby(Integer.parseInt(numSala));
                 HashMap<String, String> Registro = new HashMap<>();
@@ -91,9 +93,9 @@ public class PantallaUnirsePartida extends AppCompatActivity {
                                 //registro.put("Genero", generoARegistrar);
 
                                 //databaseReference.child("Partida/" + numSala + "/" + nombreJugadorARegistrar)
-                                        //.setValue(registro);
+                                //.setValue(registro);
 
-                                FirebaseDAO.setPlayer(Integer.parseInt(numSala),user);
+                                FirebaseDAO.setPlayer(Integer.parseInt(numSala), user);
 
                                 Intent i = new Intent(PantallaUnirsePartida.this, PantallaEsperaLoginActivity.class);
                                 i.putExtra("codigo", numSala);
