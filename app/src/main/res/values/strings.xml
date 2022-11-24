@@ -46,5 +46,6 @@
     <string name="botonJugar">JUGAR</string>
     <string name="password_jugador">Contraseña:</string>
     <string name="crearUsuario">Crea tu usuario</string>
+    <string name="simboloMas">+</string>
 
 </resources>
