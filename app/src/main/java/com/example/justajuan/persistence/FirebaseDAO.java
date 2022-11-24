@@ -1,10 +1,15 @@
 package com.example.justajuan.persistence;
 
+import android.app.Activity;
+import android.app.Application;
+import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 
 import com.example.justajuan.model.Rol;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.model.User;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -35,8 +40,9 @@ public class FirebaseDAO {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Sesion sesion = Sesion.getInstance();
+
                 while (sesion.getRol() == null) {
-                    String tmp = String.valueOf((int) (Math.random()*5+ 1));
+                    String tmp = String.valueOf((int) (Math.random()*5 + 1));
                     if (!snapshot.hasChild(tmp)) {
                         user.setRol(Rol.values()[Integer.parseInt(tmp)-1]);
                         dr.child(tmp).setValue(user);
@@ -47,7 +53,7 @@ public class FirebaseDAO {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                System.out.println("DATABASE ERROR");
             }
         });
     }
