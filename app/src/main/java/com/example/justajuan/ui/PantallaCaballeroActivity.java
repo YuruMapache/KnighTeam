@@ -6,13 +6,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.GridView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.justajuan.R;
+import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Time;
+import com.example.justajuan.persistence.AdaptadorMateriales;
+
+import java.util.ArrayList;
 
 public class PantallaCaballeroActivity extends AppCompatActivity {
 
@@ -21,6 +26,8 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
     private AppCompatButton botonDesplTienda;
     private AppCompatButton botonDesplInventario;
     private AppCompatButton botonDesplDiario;
+    private ArrayList<Material> listaMateriales= new ArrayList<>();
+    private GridView vistaLista;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +37,17 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_pantalla_caballero);
+
+        vistaLista=(GridView) findViewById(R.id.textViewResume);
+        listaMateriales.add(new Material("Hierro",R.drawable.sword,20));
+        listaMateriales.add(new Material("Cuero",R.drawable.horseshoe,150));
+        listaMateriales.add(new Material("Oro",R.drawable.gold,5000));
+        listaMateriales.add(new Material("Obsidiana",R.drawable.sword,3));
+        listaMateriales.add(new Material("Musgo",R.drawable.gold,5000));
+
+        AdaptadorMateriales adaptador= new AdaptadorMateriales(this,R.layout.activity_gridview_materiales,listaMateriales);
+        vistaLista.setAdapter(adaptador);
+
 
         glblTimer = new Time(findViewById(R.id.timerTextView));
         glblTimer.startTimer();

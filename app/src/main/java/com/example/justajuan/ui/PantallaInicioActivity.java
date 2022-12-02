@@ -49,7 +49,7 @@ public class PantallaInicioActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 //Pasa a las ventanas del tutorial
-                startActivity(new Intent(PantallaInicioActivity.this, Tutorial1.class));
+                startActivity(new Intent(PantallaInicioActivity.this, Tutorial.class));
             }
         });
     }
