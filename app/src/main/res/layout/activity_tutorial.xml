@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/fondoherrero"
+    android:theme="@style/ThemeOverlay.JustaJuan.FullscreenContainer"
+    tools:context=".ui.Tutorial">
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="358dp"
+        android:layout_height="132dp"
+        android:layout_marginTop="116dp"
+        android:background="@drawable/pergamino"
+        android:foregroundGravity="center"
+        android:paddingHorizontal="15dp"
+        android:paddingVertical="10dp"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayoutTime"
+        app:layout_constraintVertical_bias="1.0">
+
+        <TextView
+            android:id="@+id/textViewResume"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@null" />
+    </FrameLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutItems"
+        android:layout_width="400dp"
+        android:layout_height="200dp"
+        android:background="@drawable/pergamino"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:paddingHorizontal="5dp"
+        android:paddingVertical="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/linearLayoutTime"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textViewTextPersonName4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autofillHints=""
+            android:background="@null"
+            android:ems="10"
+            android:gravity="center|center_horizontal"
+            android:minHeight="48dp"
+            android:text="@string/feudal_resources"
+            android:textAlignment="center"
+            android:textColor="@color/black" />
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="10dp">
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="20dp"
+                    android:gravity="center_vertical"
+                    android:padding="5dp"
+                    android:text="@string/default_objstate"
+                    app:drawableStartCompat="@drawable/sword" />
+
+                <TextView
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="20dp"
+                    android:gravity="center_vertical"
+                    android:padding="5dp"
+                    android:text="@string/default_objstate"
+                    app:drawableStartCompat="@drawable/gold" />
+
+            </LinearLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayoutTime"
+        android:layout_width="294dp"
+        android:layout_height="58dp"
+        android:background="@drawable/pergamino"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="20dp"
+        android:paddingVertical="5dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/TextViewTextPersonName"
+            android:layout_width="195dp"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:ems="10"
+            android:gravity="center_vertical"
+            android:importantForAutofill="no"
+            android:minHeight="48dp"
+            android:text="@string/time_intro"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/timerTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:ems="10"
+            android:gravity="center"
+            android:importantForAutofill="no"
+            android:minHeight="48dp"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/botonDiario"
+        android:layout_width="123dp"
+        android:layout_height="55dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/rock_button"
+        android:clickable="false"
+        android:gravity="center"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/botonTienda"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/diario_boton"
+        android:textStyle="bold"/>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/botonAcciones"
+        android:layout_width="123dp"
+        android:layout_height="55dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/rock_button"
+        android:clickable="true"
+        android:gravity="center"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toTopOf="@+id/botonInventario"
+        app:layout_constraintEnd_toStartOf="@+id/botonDiario"
+        android:text="@string/acciones_boton"
+        android:textStyle="bold"/>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/botonInventario"
+        android:layout_width="123dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/rock_button"
+        android:clickable="false"
+        android:gravity="center"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/botonTienda"
+        android:text="@string/inventario_boton"
+        android:textStyle="bold"/>
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/botonTienda"
+        android:layout_width="123dp"
+        android:layout_height="55dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/rock_button"
+        android:clickable="false"
+        android:gravity="center"
+        android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/comprar_boton"
+        android:textStyle="bold"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,7 +29,7 @@
     <string name="nombre_jugador">Nombre:</string>
     <string name="edad_jugador">Edad:</string>
     <string name="genero_jugador">Género:</string>
-    <string-array name = "genero">
+    <string-array name="genero">
         <item>Masculino</item>
         <item>Femenino</item>
         <item>Otro</item>
@@ -40,4 +40,14 @@
     <string name="crearUsuario">Crea tu usuario</string>
     <string name="simboloMas">+</string>
 
+    <string name="tutorial1Texto1">Aquí podras ver los materiales disponibles,así como la cantidad que dispones de cada uno de ellos.</string>
+    <string name="tutorial1Texto2">El personaje te servirá como recordatorio de tu rol y además al final de cada toma de decisiones te dará los resultados.</string>
+    <string name="tutorial2Texto1">En esta parte de la pantalla tendrás siempre disponible el tiempo restante para realizar tus diversas acciones.</string>
+    <string name="tutorial2Texto2">Esto se ve reflejado como tiempo hasta vuestra próxima justa.</string>
+    <string name="tutorial3Texto">Desde aquí podrás ver las acciones que ya has comenzado y que están actualmente en progreso, además del tiempo hasta su finalización.</string>
+    <string name="tutorial4Texto1">Podrás usar estos cuatros botones a tu antojo durante el tiempo disponible para la toma de decisiones.</string>
+    <string name="tutorial4Texto2">El botón Acciones te permitirá ver una lista de actividades disponibles para tu rol</string>
+    <string name="tutorial4Texto3">Desde Diario verás un resumen de los mensajes recibidos hasta el momento de los resultados de cada justa</string>
+    <string name="tutorial4Texto4">En Inventario podrás ver todo lo que tienes almacenado y disponible.</string>
+    <string name="tutorial4Texto5">Con Comprar podrás acceder a un apartado para intercambiar diversos objetos disponibles para tu rol a cambio de un módico precio, más fácil que craftearlos a mano.</string>
 </resources>
