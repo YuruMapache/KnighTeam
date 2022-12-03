@@ -4,12 +4,17 @@ public class Material {
     private String name;
     private int idDrawable;
     private int cantidad;
+    private String rol;
 
-    public Material(String name, int idDrawable, int cantidad){
+    public Material(){
+
+    }
+
+    public Material(String name, int idDrawable, int cantidad, String rol){
         this.name=name;
         this.idDrawable=idDrawable;
         this.cantidad=cantidad;
-
+        this.rol=rol;
     }
 
     public String getName() {
@@ -28,11 +33,19 @@ public class Material {
         this.idDrawable = idDrawable;
     }
 
-    public String getCantidad() {
-        return String.valueOf(cantidad);
+    public int getCantidad() {
+        return cantidad;
     }
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
     }
 }

@@ -38,10 +38,13 @@ public class AdaptadorMateriales extends ArrayAdapter {
         TextView textoCantidad = (TextView) v.findViewById(R.id.cantidadMateriales);
         imageView.setImageResource(listaMateriales.get(position).getIdDrawable());
         textoNombre.setText(listaMateriales.get(position).getName());
-        textoCantidad.setText(listaMateriales.get(position).getCantidad());
+        textoCantidad.setText(String.valueOf(listaMateriales.get(position).getCantidad()));
 
         return v;
 
+    }
+    public void setListaMateriales(ArrayList objects){
+        listaMateriales=objects;
     }
 
 

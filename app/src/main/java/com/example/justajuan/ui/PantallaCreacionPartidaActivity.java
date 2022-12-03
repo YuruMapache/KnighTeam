@@ -14,12 +14,15 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.justajuan.R;
+import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.model.User;
 import com.example.justajuan.persistence.FirebaseDAO;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.AbstractCollection;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 
@@ -79,7 +82,16 @@ public class PantallaCreacionPartidaActivity extends AppCompatActivity {
                 Sesion.getInstance().setUsuario(user);
                 Sesion.getInstance().setNumLobby(Integer.parseInt(tokenSala));
 
+                //Crear el Array de materiales
+                ArrayList<Material> listaMateriales= new ArrayList<>();
+                listaMateriales.add(new Material("Hierro",R.drawable.sword,20,"Herrero"));
+                listaMateriales.add(new Material("Cuero",R.drawable.horseshoe,150,"Caballero"));
+                listaMateriales.add(new Material("Oro",R.drawable.gold,5000,"Caballero"));
+                listaMateriales.add(new Material("Obsidiana",R.drawable.sword,3,"Caballero"));
+                listaMateriales.add(new Material("Musgo",R.drawable.gold,5000,"Caballero"));
+
                 FirebaseDAO.setPlayer(tokenSala, user);
+                FirebaseDAO.setMateriales(tokenSala,listaMateriales);
 
                 Intent i = new Intent(PantallaCreacionPartidaActivity.this, PantallaEsperaLoginActivity.class);
                 i.putExtra("codigo", tokenSala);
