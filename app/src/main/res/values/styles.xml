@@ -14,4 +14,7 @@
     <style name="AlertDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
         <item name="android:background">@color/white</item>
     </style>
+    <style name="PopUpTutorialTheme" parent="">
+        <item name="android:background">@drawable/manusccritopixel</item>
+    </style>
 </resources>
