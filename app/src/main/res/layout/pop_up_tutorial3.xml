@@ -19,6 +19,7 @@
         android:justificationMode="inter_word"
         android:text="@string/tutorial3Texto"
         android:textSize="34dp"
+        android:textColor="@color/black"
         android:textStyle="bold" />
 
 </LinearLayout>

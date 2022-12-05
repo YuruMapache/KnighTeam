@@ -4,6 +4,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.View;
@@ -42,7 +43,7 @@ public class Tutorial extends AppCompatActivity {
         layoutItems = findViewById(R.id.linearLayoutItems);
         layoutRecursos = findViewById(R.id.frameLayout);
 
-
+/*
         layoutTiempo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,7 +63,18 @@ public class Tutorial extends AppCompatActivity {
                 builder.show();
             }
         });
+*/
+        layoutTiempo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog acciones = new Dialog(Tutorial.this);
+                acciones.setContentView(R.layout.pop_up_tutorial2);
+                acciones.setCancelable(true);
+                acciones.show();
+            }
+        });
 
+        /*
         layoutRecursos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -83,7 +95,19 @@ public class Tutorial extends AppCompatActivity {
                 builder.show();
             }
         });
+        */
 
+        layoutRecursos.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog acciones = new Dialog(Tutorial.this);
+                acciones.setContentView(R.layout.pop_up_tutorial1);
+                acciones.setCancelable(true);
+                acciones.show();
+            }
+        });
+
+        /*
         layoutItems.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,7 +127,19 @@ public class Tutorial extends AppCompatActivity {
                 builder.show();
             }
         });
+        */
 
+        layoutItems.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog acciones = new Dialog(Tutorial.this);
+                acciones.setContentView(R.layout.pop_up_tutorial3);
+                acciones.setCancelable(true);
+                acciones.show();
+            }
+        });
+
+        /*
         botonDesplAcciones.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -122,7 +158,19 @@ public class Tutorial extends AppCompatActivity {
                 builder.show();
             }
         });
+        */
 
+        botonDesplAcciones.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog acciones = new Dialog(Tutorial.this);
+                acciones.setContentView(R.layout.pop_up_tutorial4);
+                acciones.setCancelable(true);
+                acciones.show();
+            }
+        });
+
+        /*
         botonDesplTienda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,7 +190,19 @@ public class Tutorial extends AppCompatActivity {
                 builder.show();
             }
         });
+        */
 
+        botonDesplTienda.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog acciones = new Dialog(Tutorial.this);
+                acciones.setContentView(R.layout.pop_up_tutorial4);
+                acciones.setCancelable(true);
+                acciones.show();
+            }
+        });
+
+        /*
         botonDesplDiario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -162,7 +222,19 @@ public class Tutorial extends AppCompatActivity {
                 builder.show();
             }
         });
+        */
 
+        botonDesplDiario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog acciones = new Dialog(Tutorial.this);
+                acciones.setContentView(R.layout.pop_up_tutorial4);
+                acciones.setCancelable(true);
+                acciones.show();
+            }
+        });
+
+        /*
         botonDesplInventario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -179,6 +251,17 @@ public class Tutorial extends AppCompatActivity {
                     }
                 });
                 builder.show();
+            }
+        });
+        */
+
+        botonDesplInventario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Dialog acciones = new Dialog(Tutorial.this);
+                acciones.setContentView(R.layout.pop_up_tutorial4);
+                acciones.setCancelable(true);
+                acciones.show();
             }
         });
 

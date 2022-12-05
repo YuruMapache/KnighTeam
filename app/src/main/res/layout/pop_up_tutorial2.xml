@@ -20,6 +20,7 @@
         android:justificationMode="inter_word"
         android:text="@string/tutorial2Texto1"
         android:textSize="34dp"
+        android:textColor="@color/black"
         android:textStyle="bold" />
 
     <TextView
@@ -32,6 +33,7 @@
         android:justificationMode="inter_word"
         android:text="@string/tutorial2Texto2"
         android:textSize="34dp"
+        android:textColor="@color/black"
         android:textStyle="bold" />
 
 </LinearLayout>

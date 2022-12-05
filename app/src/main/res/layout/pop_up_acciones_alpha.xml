@@ -22,8 +22,8 @@
         tools:layout_editor_absoluteY="46dp" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <GridLayout
             android:layout_width="wrap_content"
@@ -176,6 +176,22 @@
                 android:textColor="@color/black" />
 
         </GridLayout>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="right"
+        android:layout_marginRight="90dp">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/botonAtras"
+            android:layout_width="85dp"
+            android:layout_height="60dp"
+            android:background="@drawable/rock_button"
+            android:text="@string/botonAtras"
+            android:textColor="@color/black" />
 
     </LinearLayout>
 

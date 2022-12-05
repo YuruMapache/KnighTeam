@@ -8,78 +8,98 @@
     android:background="@drawable/manusccritopixel"
     android:orientation="vertical">
 
-    <ScrollView
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:scrollbars="vertical">
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        android:layout_marginRight="45dp"
+        android:layout_marginBottom="60dp">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-            <TextView
-                android:id="@+id/texto1"
-                android:layout_width="713dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="70dp"
-                android:layout_marginTop="70dp"
-                android:layout_marginBottom="20dp"
-                android:fontFamily="sans-serif"
-                android:gravity="start"
-                android:justificationMode="inter_word"
-                android:text="@string/tutorial4Texto1"
-                android:textSize="34dp"
-                android:textStyle="bold" />
+            android:scrollbars="vertical">
 
-            <TextView
-                android:id="@+id/texto2"
-                android:layout_width="713dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="70dp"
-                android:fontFamily="sans-serif"
-                android:gravity="start"
-                android:justificationMode="inter_word"
-                android:text="@string/tutorial4Texto2"
-                android:textSize="34dp"
-                android:textStyle="bold" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/texto3"
-                android:layout_width="713dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="70dp"
-                android:fontFamily="sans-serif"
-                android:gravity="start"
-                android:justificationMode="inter_word"
-                android:text="@string/tutorial4Texto3"
-                android:textSize="34dp"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/texto1"
+                    android:layout_width="713dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="start"
+                    android:justificationMode="inter_word"
+                    android:text="@string/tutorial4Texto1"
+                    android:textColor="@color/black"
+                    android:textSize="34dp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/texto4"
-                android:layout_width="713dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="70dp"
-                android:fontFamily="sans-serif"
-                android:gravity="start"
-                android:justificationMode="inter_word"
-                android:text="@string/tutorial4Texto4"
-                android:textSize="34dp"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/texto2"
+                    android:layout_width="713dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="70dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="start"
+                    android:justificationMode="inter_word"
+                    android:text="@string/tutorial4Texto2"
+                    android:textColor="@color/black"
+                    android:textSize="34dp"
+                    android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/texto5"
-                android:layout_width="713dp"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="70dp"
-                android:fontFamily="sans-serif"
-                android:gravity="start"
-                android:justificationMode="inter_word"
-                android:text="@string/tutorial4Texto5"
-                android:textSize="34dp"
-                android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/texto3"
+                    android:layout_width="713dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="start"
+                    android:justificationMode="inter_word"
+                    android:text="@string/tutorial4Texto3"
+                    android:textColor="@color/black"
+                    android:textSize="34dp"
+                    android:textStyle="bold" />
 
-        </LinearLayout>
-    </ScrollView>
+                <TextView
+                    android:id="@+id/texto4"
+                    android:layout_width="713dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="start"
+                    android:justificationMode="inter_word"
+                    android:text="@string/tutorial4Texto4"
+                    android:textColor="@color/black"
+                    android:textSize="34dp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/texto5"
+                    android:layout_width="713dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="70dp"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="start"
+                    android:justificationMode="inter_word"
+                    android:text="@string/tutorial4Texto5"
+                    android:textColor="@color/black"
+                    android:textSize="34dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+        </ScrollView>
+
+    </LinearLayout>
+
 
 </LinearLayout>

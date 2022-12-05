@@ -33,6 +33,7 @@ public class PantallaHerreroActivity extends AppCompatActivity {
     private AppCompatButton botonDesplTienda;
     private AppCompatButton botonDesplInventario;
     private AppCompatButton botonDesplDiario;
+    private AppCompatButton botonAtras;
     private ArrayList<Material> listaMateriales= new ArrayList<>();
     private GridView vistaLista;
     private FirebaseDatabase firebaseDatabase;
@@ -92,6 +93,17 @@ public class PantallaHerreroActivity extends AppCompatActivity {
                 acciones.setContentView(R.layout.pop_up_acciones_alpha);
                 acciones.setCancelable(true);
                 acciones.show();
+
+                botonAtras = findViewById(R.id.botonAtras);
+                botonAtras.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        final Dialog acciones = new Dialog(PantallaHerreroActivity.this);
+                        acciones.setContentView(R.layout.activity_pantalla_herrero);
+                        acciones.setCancelable(true);
+                        acciones.show();
+                    }
+                });
             }
         });
 
