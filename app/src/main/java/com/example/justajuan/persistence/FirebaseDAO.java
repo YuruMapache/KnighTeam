@@ -6,6 +6,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Rol;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.model.User;
@@ -15,6 +16,9 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 
 public class FirebaseDAO {
 
@@ -30,6 +34,30 @@ public class FirebaseDAO {
         mUser.child("name").child(id).setValue(name);
         mUser.child("email").child(id).setValue(email);
         mUser.child("password").child(id).setValue(password);
+    }
+
+    public static void setMateriales(String nlobby, ArrayList<Material> materiales){
+        FirebaseDatabase fd = FirebaseDatabase.getInstance();
+        DatabaseReference dr = fd.getReference().child("Materiales").child(nlobby);
+
+        dr.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Sesion sesion = Sesion.getInstance();
+
+                for (int i=0; i<materiales.size();i++) {
+
+                        dr.child(materiales.get(i).getName()).setValue(materiales.get(i));
+                    }
+                }
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println("DATABASE ERROR");
+            }
+        });
+
     }
 
     public static void setPlayer(String nlobby, User user) {
@@ -56,6 +84,33 @@ public class FirebaseDAO {
                 System.out.println("DATABASE ERROR");
             }
         });
+    }
+
+
+    public static ArrayList<Material> getMateriales(String nlobby, String rol){
+        ArrayList<Material> listaMateriales= new ArrayList<>();
+        FirebaseDatabase fd = FirebaseDatabase.getInstance();
+        DatabaseReference dr = fd.getReference().child("Materiales").child(nlobby);
+
+
+        dr.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                listaMateriales.clear();
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    Material material = postSnapshot.getValue(Material.class);
+                        listaMateriales.add(material);
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        return listaMateriales;
     }
 
 

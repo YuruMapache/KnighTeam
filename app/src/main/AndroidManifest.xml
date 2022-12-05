@@ -71,6 +71,15 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".ui.Tutorial"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.JustaJuan.Fullscreen">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.PantallaUnirsePartida"
             android:exported="false"
             android:screenOrientation="landscape"
