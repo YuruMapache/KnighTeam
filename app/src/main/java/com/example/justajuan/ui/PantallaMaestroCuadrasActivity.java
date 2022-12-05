@@ -125,6 +125,13 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
             }
         });
 
+        if(glblTimer.equals(0)){
+            final Dialog acciones = new Dialog(PantallaMaestroCuadrasActivity.this);
+            acciones.setContentView(R.layout.activity_resultados_maestro_cuadras);
+            acciones.setCancelable(true);
+            acciones.show();
+        }
+
     }
 
     @Override

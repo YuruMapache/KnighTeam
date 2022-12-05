@@ -127,6 +127,13 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
             }
         });
 
+        if(glblTimer.equals(0)){
+            final Dialog acciones = new Dialog(PantallaCuranderoActivity.this);
+            acciones.setContentView(R.layout.activity_resultados_curandera);
+            acciones.setCancelable(true);
+            acciones.show();
+        }
+
     }
 
     @Override

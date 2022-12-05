@@ -132,6 +132,13 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
             }
         });
 
+        if(glblTimer.equals(0)){
+            final Dialog acciones = new Dialog(PantallaCaballeroActivity.this);
+            acciones.setContentView(R.layout.activity_resultados_caballero);
+            acciones.setCancelable(true);
+            acciones.show();
+        }
+
     }
 
     @Override

@@ -137,6 +137,13 @@ public class PantallaHerreroActivity extends AppCompatActivity {
             }
         });
 
+        if(glblTimer.equals(0)){
+            final Dialog acciones = new Dialog(PantallaHerreroActivity.this);
+            acciones.setContentView(R.layout.activity_resultados_herrero);
+            acciones.setCancelable(true);
+            acciones.show();
+        }
+
     }
 
     @Override

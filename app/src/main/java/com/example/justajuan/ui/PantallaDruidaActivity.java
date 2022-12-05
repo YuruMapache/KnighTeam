@@ -125,6 +125,13 @@ public class PantallaDruidaActivity extends AppCompatActivity {
             }
         });
 
+        if(glblTimer.equals(0)){
+            final Dialog acciones = new Dialog(PantallaDruidaActivity.this);
+            acciones.setContentView(R.layout.activity_resultados_druida);
+            acciones.setCancelable(true);
+            acciones.show();
+        }
+
     }
 
     @Override
