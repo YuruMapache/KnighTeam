@@ -5,14 +5,21 @@
     android:id="@+id/tutorial1PopUp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/manusccritopixel"
+    android:background="@color/fui_transparent"
     android:orientation="vertical">
 
+    <LinearLayout
+        android:id="@+id/tutorial1PopUpPergamino"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/manusccritopixel"
+        android:orientation="vertical">
     <TextView
         android:id="@+id/texto1"
-        android:layout_width="713dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="70dp"
+        android:layout_marginRight="80dp"
         android:layout_marginTop="70dp"
         android:fontFamily="sans-serif"
         android:gravity="start"
@@ -24,9 +31,10 @@
 
     <TextView
         android:id="@+id/texto2"
-        android:layout_width="713dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="70dp"
+        android:layout_marginRight="80dp"
         android:layout_marginBottom="50dp"
         android:fontFamily="sans-serif"
         android:gravity="start"
@@ -35,5 +43,6 @@
         android:textSize="34dp"
         android:textColor="@color/black"
         android:textStyle="bold" />
+    </LinearLayout>
 
 </LinearLayout>

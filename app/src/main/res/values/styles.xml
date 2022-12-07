@@ -1,7 +1,7 @@
 <resources>
 
     <style name="Widget.Theme.JustaJuan.NoActionBar.Fullscreen" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="android:background">@color/black_overlay</item>
+        <item name="android:background">@android:color/transparent</item>
     </style>
 
     <style name="Widget.Theme.JustaJuan.ButtonBar.Fullscreen" parent="">
@@ -16,5 +16,9 @@
     </style>
     <style name="PopUpTutorialTheme" parent="">
         <item name="android:background">@drawable/manusccritopixel</item>
+    </style>
+
+    <style name="Fragment" parent="Widget.AppCompat.ActionBar">
+        <item name="android:background">@android:color/transparent</item>
     </style>
 </resources>

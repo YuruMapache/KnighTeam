@@ -3,37 +3,44 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/tutorial2PopUp"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/manusccritopixel"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/texto1"
-        android:layout_width="713dp"
+    <LinearLayout
+        android:id="@+id/tutorial2PopUpPergamino"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="70dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginBottom="20dp"
-        android:fontFamily="sans-serif"
-        android:gravity="start"
-        android:justificationMode="inter_word"
-        android:text="@string/tutorial2Texto1"
-        android:textSize="34dp"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
+        android:background="@drawable/manusccritopixel"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/texto2"
-        android:layout_width="713dp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="70dp"
-        android:fontFamily="sans-serif"
-        android:gravity="start"
-        android:justificationMode="inter_word"
-        android:text="@string/tutorial2Texto2"
-        android:textSize="34dp"
-        android:textColor="@color/black"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/texto1"
+            android:layout_width="713dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="70dp"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="sans-serif"
+            android:gravity="start"
+            android:justificationMode="inter_word"
+            android:text="@string/tutorial2Texto1"
+            android:textColor="@color/black"
+            android:textSize="34dp"
+            android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/texto2"
+            android:layout_width="713dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="70dp"
+            android:fontFamily="sans-serif"
+            android:gravity="start"
+            android:justificationMode="inter_word"
+            android:text="@string/tutorial2Texto2"
+            android:textColor="@color/black"
+            android:textSize="34dp"
+            android:textStyle="bold" />
+    </LinearLayout>
 </LinearLayout>

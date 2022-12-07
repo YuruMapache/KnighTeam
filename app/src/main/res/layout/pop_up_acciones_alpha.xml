@@ -5,194 +5,65 @@
     android:id="@+id/accionesPopUpAlpha"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/pergamino"
+    android:background="@color/fui_transparent"
+
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/close"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="50dp"
-        android:fontFamily="sans-serif"
-        android:gravity="top|start"
-        android:text="ACCIONES DISPONIBLES"
-        android:textSize="25dp"
-        android:textStyle="bold|italic"
-        tools:layout_editor_absoluteX="64dp"
-        tools:layout_editor_absoluteY="46dp" />
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:id="@+id/PergaminoAcciones"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:background="@drawable/pergamino"
+        android:orientation="vertical"
+        android:padding="30dp">
 
-        <GridLayout
+        <TextView
+            android:id="@+id/close"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:columnCount="3"
-            android:rowCount="2">
+            android:layout_marginTop="40dp"
+            android:fontFamily="sans-serif"
+            android:gravity="top|start"
+            android:text="ACCIONES DISPONIBLES"
+            android:textSize="25dp"
+            android:textStyle="bold|italic"
+            tools:layout_editor_absoluteX="64dp"
+            tools:layout_editor_absoluteY="46dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:layout_margin="20dp"
-                android:text="Habilidad Esgrima: "
-                android:textSize="20dp"
-                tools:layout_editor_absoluteX="66dp"
-                tools:layout_editor_absoluteY="107dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="0"
-                android:layout_column="1"
-                android:layout_margin="20dp"
-                android:text="1/10"
-                android:textSize="20dp"
-                tools:layout_editor_absoluteX="66dp"
-                tools:layout_editor_absoluteY="107dp" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/botonSubirEsgrima"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_row="0"
-                android:layout_column="2"
-                android:layout_margin="15dp"
-                android:background="@drawable/rock_button"
-                android:text="@string/simboloMas"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="1"
-                android:layout_column="0"
-                android:layout_margin="20dp"
-                android:text="Habilidad Montar: "
-                android:textSize="20dp"
-                tools:layout_editor_absoluteX="66dp"
-                tools:layout_editor_absoluteY="107dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="1"
-                android:layout_column="1"
-                android:layout_margin="20dp"
-                android:text="1/10"
-                android:textSize="20dp"
-                tools:layout_editor_absoluteX="66dp"
-                tools:layout_editor_absoluteY="107dp" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/botonSubirMontar"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_row="1"
-                android:layout_column="2"
-                android:layout_margin="15dp"
-                android:background="@drawable/rock_button"
-                android:text="@string/simboloMas"
-                android:textColor="@color/black" />
-
-        </GridLayout>
-
-        <GridLayout
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:columnCount="3"
-            android:rowCount="2">
+            android:layout_weight="1">
 
-            <TextView
+            <GridView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="0"
-                android:layout_column="0"
-                android:layout_gravity="start|center"
-                android:text="Crear pocion básica"
-                android:textSize="20dp"
-                tools:layout_editor_absoluteX="66dp"
-                tools:layout_editor_absoluteY="107dp" />
+                android:layout_height="match_parent"
+                android:layout_marginLeft="30dp"
+                android:layout_weight="1" />
 
-            <TextView
+            <GridView
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="0"
-                android:layout_column="1"
-                android:layout_gravity="start|center"
-                android:layout_margin="20dp"
-                android:text="Actual (0)"
-                android:textSize="20dp"
-                tools:layout_editor_absoluteX="66dp"
-                tools:layout_editor_absoluteY="107dp" />
+                android:layout_height="match_parent"
+                android:layout_marginLeft="20dp"
+                android:layout_weight="1"/>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/botonCrearPocionBasica"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_row="0"
-                android:layout_column="2"
-                android:layout_margin="15dp"
-                android:background="@drawable/rock_button"
-                android:text="@string/simboloMas"
-                android:textColor="@color/black" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="1"
-                android:layout_column="0"
-                android:layout_gravity="start|center"
-                android:text="Crear vendaje"
-                android:textSize="20dp"
-                tools:layout_editor_absoluteX="66dp"
-                tools:layout_editor_absoluteY="107dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_row="1"
-                android:layout_column="1"
-                android:layout_gravity="start|center"
-                android:layout_margin="20dp"
-                android:text="Actual (0)"
-                android:textSize="20dp"
-                tools:layout_editor_absoluteX="66dp"
-                tools:layout_editor_absoluteY="107dp" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/botonCrearVendaje"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_row="1"
-                android:layout_column="2"
-                android:layout_margin="15dp"
-                android:background="@drawable/rock_button"
-                android:text="@string/simboloMas"
-                android:textColor="@color/black" />
-
-        </GridLayout>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:layout_marginRight="90dp">
+        </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/botonAtras"
             android:layout_width="85dp"
             android:layout_height="60dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="15dp"
             android:background="@drawable/rock_button"
             android:text="@string/botonAtras"
+
             android:textColor="@color/black" />
 
-    </LinearLayout>
 
+    </LinearLayout>
 </LinearLayout>

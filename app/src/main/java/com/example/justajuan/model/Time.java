@@ -26,7 +26,6 @@ public class Time {
 
             @Override
             public void onFinish() {
-
             }
         }.start();
     }
@@ -54,4 +53,6 @@ public class Time {
     public void stopTimer(){
         globalTimer.cancel();
     }
+
+
 }
