@@ -66,7 +66,7 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
                 listaMateriales.clear();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Material material = postSnapshot.getValue(Material.class);
-                    if (material.getRol().equals("Curandero")) {
+                    if (material.getRol().contains("Curandero")) {
                         listaMateriales.add(material);
                     }
                 }

@@ -64,7 +64,7 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
                 listaMateriales.clear();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Material material = postSnapshot.getValue(Material.class);
-                    if (material.getRol().equals("MaestroCuadras")) {
+                    if (material.getRol().contains("MaestroCuadras")) {
                         listaMateriales.add(material);
                     }
                 }

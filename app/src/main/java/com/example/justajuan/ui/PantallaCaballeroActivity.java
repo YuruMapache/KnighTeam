@@ -69,7 +69,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 listaMateriales.clear();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Material material = postSnapshot.getValue(Material.class);
-                    if (material.getRol().equals("Caballero")) {
+                    if (material.getRol().contains("Caballero")) {
                         listaMateriales.add(material);
                     }
                 }

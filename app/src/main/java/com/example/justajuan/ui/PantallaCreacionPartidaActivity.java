@@ -84,11 +84,13 @@ public class PantallaCreacionPartidaActivity extends AppCompatActivity {
 
                 //Crear el Array de materiales
                 ArrayList<Material> listaMateriales= new ArrayList<>();
-                listaMateriales.add(new Material("Hierro",R.drawable.sword,20,"Herrero"));
-                listaMateriales.add(new Material("Cuero",R.drawable.horseshoe,150,"Caballero"));
+                listaMateriales.add(new Material("Carbón",R.drawable.sword,20,"Herrero Druida Curandero "));
+                listaMateriales.add(new Material("Cuero",R.drawable.horseshoe,150,"Herrero Maestro_Cuadras"));
                 listaMateriales.add(new Material("Oro",R.drawable.gold,5000,"Caballero"));
-                listaMateriales.add(new Material("Obsidiana",R.drawable.sword,3,"Caballero"));
-                listaMateriales.add(new Material("Musgo",R.drawable.gold,5000,"Caballero"));
+                listaMateriales.add(new Material("Hierro",R.drawable.sword,3,"Herrero"));
+                listaMateriales.add(new Material("Heno",R.drawable.gold,5000,"Maestro_Cuadras"));
+                listaMateriales.add(new Material("Paño Humedo",R.drawable.sword,3,"Curandero Maestro_Cuadras"));
+                listaMateriales.add(new Material("Musgo",R.drawable.sword,3,"Druida"));
 
                 FirebaseDAO.setPlayer(tokenSala, user);
                 FirebaseDAO.setMateriales(tokenSala,listaMateriales);

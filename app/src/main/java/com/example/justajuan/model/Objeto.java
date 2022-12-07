@@ -1,4 +1,4 @@
-package objeto;
+package com.example.justajuan.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -18,7 +18,21 @@ public class Objeto implements Serializable {
     private String tiempoCreacion;
     private Map<String, Integer> precio= new HashMap<>();
 
+    public Objeto(){
 
+    }
+    public Objeto(String nombre, String clase, String descripcion, int salud, int ataque, int defensa, int cansancio, int motivacion, String tiempoCreacion, Map<String, Integer> precio) {
+        this.nombre = nombre;
+        this.clase = clase;
+        this.descripcion = descripcion;
+        this.salud = salud;
+        this.ataque = ataque;
+        this.defensa = defensa;
+        this.cansancio = cansancio;
+        this.motivacion = motivacion;
+        this.tiempoCreacion = tiempoCreacion;
+        this.precio = precio;
+    }
 
     public String getNombre() {
         return nombre;

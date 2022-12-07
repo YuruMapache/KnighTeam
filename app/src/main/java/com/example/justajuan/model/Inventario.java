@@ -1,4 +1,4 @@
-package objeto;
+package com.example.justajuan.model;
 
 public class Inventario {
 
