@@ -101,8 +101,6 @@ public class PantallaDruidaActivity extends AppCompatActivity {
 
         }.start();
 
-        //glblTimer = new Time(findViewById(R.id.timerTextView));
-        //glblTimer.startTimer();
 
         botonDesplAcciones = findViewById(R.id.botonAcciones);
         botonDesplTienda = findViewById(R.id.botonTienda);

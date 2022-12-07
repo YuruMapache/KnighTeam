@@ -2,11 +2,14 @@ package com.example.justajuan.ui;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -75,10 +78,28 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
             }
         });
 
+        TextView glblTimer = findViewById(R.id.timerTextView);
+        new CountDownTimer(6000,1000) {
 
+            public void onTick(long millisUntilFinished) {
+                int minutes = (int) millisUntilFinished / 60000;
+                int seconds = (int) millisUntilFinished % 60000 / 1000;
+                String timeLeftText;
+                timeLeftText = "" + minutes;
+                timeLeftText += ":";
+                if (seconds < 10) {
+                    timeLeftText += "0";
+                }
+                timeLeftText += seconds;
+                glblTimer.setText(timeLeftText);
+            }
 
-        glblTimer = new Time(findViewById(R.id.timerTextView));
-        glblTimer.startTimer();
+            public void onFinish() {
+                startActivity(new Intent(PantallaMaestroCuadrasActivity.this, ResultadosMaestroCuadras.class));
+                PantallaMaestroCuadrasActivity.this.finish();
+            }
+
+        }.start();
 
         botonDesplAcciones = findViewById(R.id.botonAcciones);
         botonDesplTienda = findViewById(R.id.botonTienda);
@@ -124,14 +145,6 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
                 acciones.show();
             }
         });
-
-        if(glblTimer.equals(0)){
-            final Dialog acciones = new Dialog(PantallaMaestroCuadrasActivity.this);
-            acciones.setContentView(R.layout.activity_resultados_maestro_cuadras);
-            acciones.setCancelable(true);
-            acciones.show();
-        }
-
     }
 
     @Override
