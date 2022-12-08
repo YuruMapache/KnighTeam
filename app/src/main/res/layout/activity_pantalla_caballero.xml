@@ -73,7 +73,8 @@
                     android:gravity="center_vertical"
                     android:padding="5dp"
                     android:text="@string/default_objstate"
-                    app:drawableStartCompat="@drawable/sword" />
+                    app:drawableStartCompat="@drawable/sword"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -82,7 +83,8 @@
                     android:gravity="center_vertical"
                     android:padding="5dp"
                     android:text="@string/default_objstate"
-                    app:drawableStartCompat="@drawable/gold" />
+                    app:drawableStartCompat="@drawable/gold"
+                    android:textColor="@color/black"/>
 
                 <TextView
                     android:layout_width="fill_parent"
@@ -91,7 +93,8 @@
                     android:gravity="center_vertical"
                     android:padding="5dp"
                     android:text="@string/default_objstate"
-                    app:drawableStartCompat="@drawable/horseshoe" />
+                    app:drawableStartCompat="@drawable/horseshoe"
+                    android:textColor="@color/black"/>
             </LinearLayout>
         </ScrollView>
 
@@ -147,7 +150,8 @@
         app:layout_constraintBottom_toTopOf="@+id/botonTienda"
         app:layout_constraintEnd_toEndOf="parent"
         android:text="@string/diario_boton"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -162,7 +166,8 @@
         app:layout_constraintBottom_toTopOf="@+id/botonInventario"
         app:layout_constraintEnd_toStartOf="@+id/botonDiario"
         android:text="@string/acciones_boton"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -178,7 +183,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/botonTienda"
         android:text="@string/inventario_boton"
-        android:textStyle="bold"/>
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
 
 
     <androidx.appcompat.widget.AppCompatButton
@@ -192,7 +198,8 @@
         android:textAlignment="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/comprar_boton"
-        android:textStyle="bold"/>
+        android:text="@string/bar_boton"
+        android:textStyle="bold"
+        android:textColor="@color/black"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

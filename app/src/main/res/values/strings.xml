@@ -11,6 +11,7 @@
     <string name="diario_boton">DIARIO</string>
     <string name="inventario_boton">INVENTARIO</string>
     <string name="comprar_boton">TIENDA</string>
+    <string name="bar_boton">BAR</string>
     <string name="reparaciones">Reparaciones</string>
     <string name="progreso">En progreso…</string>
     <string name="tiempoEspada">Quedan X minutos </string>
