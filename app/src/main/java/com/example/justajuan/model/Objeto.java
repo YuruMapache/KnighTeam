@@ -1,5 +1,7 @@
 package com.example.justajuan.model;
 
+import android.os.CountDownTimer;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -8,13 +10,14 @@ import java.util.Map;
 public class Objeto implements Serializable {
 
     private String nombre;
-    //private String clase;
+    private String clase;
     private String descripcion;
     private int salud;
     private int ataque;
     private int velocidad;
     private int estamina;
     private int tiempo; //Tiempo que tarda en craftearse. Ideal en múltiplos de número de rondas
+    private CountDownTimer contador;
     private Map<String, Integer> precio = new HashMap<>();
     private boolean esConsumible;
     private int idDrawable;
@@ -24,9 +27,9 @@ public class Objeto implements Serializable {
 
     }
 
-    public Objeto(String nombre, /*String clase, String descripcion,*/ int salud, int ataque, int velocidad, int estamina, int tiempo, Map<String, Integer> precio) {
+    public Objeto(String nombre,String clase, String descripcion, int salud, int ataque, int velocidad, int estamina, int tiempo, Map<String, Integer> precio, boolean esConsumible, int idDrawable) {
         setNombre(nombre);
-        //setClase(clase);
+        setClase(clase);
         setDescripcion(descripcion);
         setSalud(salud);
         setAtaque(ataque);
@@ -35,6 +38,7 @@ public class Objeto implements Serializable {
         setPrecio(precio);
         setEstamina(estamina);
         setEsConsumible(esConsumible);
+        setIdDrawable(idDrawable);
     }
 
     public String getNombre() {
@@ -45,13 +49,13 @@ public class Objeto implements Serializable {
         this.nombre = nombre;
     }
 
-    /*public String getClase() {
+    public String getClase() {
         return clase;
-    }*/
+    }
 
-    /*public void setClase(String clase) {
+    public void setClase(String clase) {
         this.clase = clase;
-    }*/
+    }
 
     public String getDescripcion() {
         return descripcion;
@@ -99,6 +103,14 @@ public class Objeto implements Serializable {
 
     public void setTiempo(int tiempo) {
         this.tiempo = tiempo;
+    }
+
+    public CountDownTimer getContador() {
+        return contador;
+    }
+
+    public void setContador(CountDownTimer contador) {
+        this.contador = contador;
     }
 
     public Map<String, Integer> getPrecio() {
