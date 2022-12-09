@@ -6,29 +6,27 @@ public class Enemigo implements Serializable {
 
     private String nombre;
     private int salud;
-    //private int cansancio;
-    //private int motivacion;
     private int ataque;
-    private int defensa;
     private double velocidadAtaque;
+    private int monedasGanas;
 
     public Enemigo() {
     }
 
-    public Enemigo(String nombre, int salud, int ataque, int defensa, double velocidadAtaque) {
-        this.nombre = nombre;
-        this.salud = salud;
-        this.ataque = ataque;
-        this.defensa = defensa;
-        this.velocidadAtaque = velocidadAtaque;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public Enemigo(String nombre, int salud, int ataque, double velocidadAtaque, int monedasGanas) {
+        setNombre(nombre);
+        setSalud(salud);
+        setAtaque(ataque);
+        setVelocidadAtaque(velocidadAtaque);
+        setMonedasGanas(monedasGanas);
     }
 
     public String getNombre() {
         return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public int getSalud() {
@@ -47,19 +45,19 @@ public class Enemigo implements Serializable {
         this.ataque = ataque;
     }
 
-    public int getDefensa() {
-        return defensa;
-    }
-
-    public void setDefensa(int defensa) {
-        this.defensa = defensa;
-    }
-
     public double getVelocidadAtaque() {
         return velocidadAtaque;
     }
 
     public void setVelocidadAtaque(double velocidadAtaque) {
         this.velocidadAtaque = velocidadAtaque;
+    }
+
+    public int getMonedasGanas() {
+        return monedasGanas;
+    }
+
+    public void setMonedasGanas(int monedasGanas) {
+        this.monedasGanas = monedasGanas;
     }
 }

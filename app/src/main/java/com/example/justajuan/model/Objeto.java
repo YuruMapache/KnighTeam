@@ -13,25 +13,23 @@ public class Objeto implements Serializable {
     private int salud;
     private int ataque;
     private int defensa;
-    private int cansancio;
-    private int motivacion;
+    private int estamina;
     private String tiempoCreacion;
     private Map<String, Integer> precio= new HashMap<>();
 
     public Objeto(){
 
     }
-    public Objeto(String nombre, String clase, String descripcion, int salud, int ataque, int defensa, int cansancio, int motivacion, String tiempoCreacion, Map<String, Integer> precio) {
-        this.nombre = nombre;
-        this.clase = clase;
-        this.descripcion = descripcion;
-        this.salud = salud;
-        this.ataque = ataque;
-        this.defensa = defensa;
-        this.cansancio = cansancio;
-        this.motivacion = motivacion;
-        this.tiempoCreacion = tiempoCreacion;
-        this.precio = precio;
+    public Objeto(String nombre, String clase, String descripcion, int salud, int ataque, int defensa, int estamina, String tiempoCreacion, Map<String, Integer> precio) {
+        setNombre(nombre);
+        setClase(clase);
+        setDescripcion(descripcion);
+        setSalud(salud);
+        setAtaque(ataque);
+        setDefensa(defensa);
+        setTiempoCreacion(tiempoCreacion);
+        setPrecio(precio);
+        setEstamina(estamina);
     }
 
     public String getNombre() {
@@ -82,21 +80,14 @@ public class Objeto implements Serializable {
         this.defensa = defensa;
     }
 
-    public int getCansancio() {
-        return cansancio;
+    public int getEstamina() {
+        return estamina;
     }
 
-    public void setCansancio(int cansancio) {
-        this.cansancio = cansancio;
+    public void setEstamina(int estamina) {
+        this.estamina = estamina;
     }
 
-    public int getMotivacion() {
-        return motivacion;
-    }
-
-    public void setMotivacion(int motivacion) {
-        this.motivacion = motivacion;
-    }
     public String getTiempoCreacion() {
         return tiempoCreacion;
     }

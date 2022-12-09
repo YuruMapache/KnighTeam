@@ -73,7 +73,7 @@
                     android:gravity="center_vertical"
                     android:padding="5dp"
                     android:text="@string/default_objstate"
-                    app:drawableStartCompat="@drawable/sword"
+                    app:drawableStartCompat="@drawable/espada_ajustada"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -83,7 +83,7 @@
                     android:gravity="center_vertical"
                     android:padding="5dp"
                     android:text="@string/default_objstate"
-                    app:drawableStartCompat="@drawable/gold"
+                    app:drawableStartCompat="@drawable/moneda_ajustada"
                     android:textColor="@color/black"/>
 
                 <TextView
@@ -93,7 +93,7 @@
                     android:gravity="center_vertical"
                     android:padding="5dp"
                     android:text="@string/default_objstate"
-                    app:drawableStartCompat="@drawable/horseshoe"
+                    app:drawableStartCompat="@drawable/herradura_ajustada"
                     android:textColor="@color/black"/>
             </LinearLayout>
         </ScrollView>

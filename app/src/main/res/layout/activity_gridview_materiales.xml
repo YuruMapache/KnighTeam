@@ -8,7 +8,7 @@
         android:id="@+id/imagenMaterial"
         android:layout_width="25dp"
         android:layout_height="25dp"
-        android:src="@drawable/sword"
+        android:src="@drawable/espada_ajustada"
         android:layout_gravity="center"/>
     <TextView
         android:id="@+id/nombreMaterial"

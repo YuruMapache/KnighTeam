@@ -14,9 +14,9 @@ public class Consumible extends Objeto implements Serializable {
     }
 
     public Consumible(String nombre, String clase, String descripcion, int salud, int ataque, int defensa,
-                      int cansancio, int motivacion, String tiempoCreacion, Map<String, Integer> precio,
+                      int estamina, String tiempoCreacion, Map<String, Integer> precio,
                       boolean veneno, boolean paraCaballo) {
-        super(nombre, clase, descripcion, salud, ataque, defensa, cansancio, motivacion, tiempoCreacion, precio);
+        super(nombre, clase, descripcion, salud, ataque, defensa, estamina, tiempoCreacion, precio);
         this.veneno = veneno;
         this.paraCaballo = paraCaballo;
     }
