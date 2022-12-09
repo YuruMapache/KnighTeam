@@ -17,11 +17,11 @@ public class Equipo extends Objeto implements Serializable {
     }
 
     public Equipo(String nombre, String clase, String descripcion, int salud, int ataque,
-                  int defensa, int cansancio, int motivacion, String tiempoCreacion,
+                  int defensa, int estamina, String tiempoCreacion,
                   Map<String, Integer> precio, int durabilidad, boolean metalico, boolean pesado,
                   boolean oxidado, String tipo) {
 
-        super(nombre, clase, descripcion, salud, ataque, defensa, cansancio, motivacion, tiempoCreacion, precio);
+        super(nombre, clase, descripcion, salud, ataque, defensa, estamina, tiempoCreacion, precio);
         this.durabilidad = durabilidad;
         this.metalico = metalico;
         this.pesado = pesado;
