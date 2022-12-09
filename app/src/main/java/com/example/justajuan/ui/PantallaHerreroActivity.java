@@ -55,7 +55,7 @@ public class PantallaHerreroActivity extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference().child("Materiales").child(Sesion.getNumLobby());
 
 
-        vistaLista=(GridView) findViewById(R.id.textViewResume);
+        vistaLista=(GridView) findViewById(R.id.textRecursos);
 
         AdaptadorMateriales adaptador= new AdaptadorMateriales(this,R.layout.activity_gridview_materiales,listaMateriales);
 
@@ -66,7 +66,7 @@ public class PantallaHerreroActivity extends AppCompatActivity {
                 listaMateriales.clear();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Material material = postSnapshot.getValue(Material.class);
-                    if (material.getRol().equals("Herrero")) {
+                    if (material.getRol().contains("Herrero")) {
                         listaMateriales.add(material);
                     }
                 }
@@ -81,7 +81,7 @@ public class PantallaHerreroActivity extends AppCompatActivity {
         });
 
         TextView glblTimer = findViewById(R.id.timerTextView);
-        new CountDownTimer(6000,1000) {
+        new CountDownTimer(60000,1000) {
 
             public void onTick(long millisUntilFinished) {
                 int minutes = (int) millisUntilFinished / 60000;
