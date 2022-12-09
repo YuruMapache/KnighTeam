@@ -16,11 +16,13 @@ public class Objeto implements Serializable {
     private int estamina;
     private String tiempoCreacion;
     private Map<String, Integer> precio= new HashMap<>();
+    private boolean esConsumible;
+    private int idDrawable;
 
     public Objeto(){
 
     }
-    public Objeto(String nombre, String clase, String descripcion, int salud, int ataque, int defensa, int estamina, String tiempoCreacion, Map<String, Integer> precio) {
+    public Objeto(String nombre, String clase, String descripcion, int salud, int ataque, int defensa, int estamina, String tiempoCreacion, Map<String, Integer> precio,boolean esConsumible) {
         setNombre(nombre);
         setClase(clase);
         setDescripcion(descripcion);
@@ -30,6 +32,7 @@ public class Objeto implements Serializable {
         setTiempoCreacion(tiempoCreacion);
         setPrecio(precio);
         setEstamina(estamina);
+        setEsConsumible(esConsumible);
     }
 
     public String getNombre() {
@@ -102,5 +105,21 @@ public class Objeto implements Serializable {
 
     public void setPrecio(Map<String, Integer> precio) {
         this.precio = precio;
+    }
+
+    public boolean isEsConsumible() {
+        return esConsumible;
+    }
+
+    public void setEsConsumible(boolean esConsumible) {
+        this.esConsumible = esConsumible;
+    }
+
+    public int getIdDrawable() {
+        return idDrawable;
+    }
+
+    public void setIdDrawable(int idDrawable) {
+        this.idDrawable = idDrawable;
     }
 }
