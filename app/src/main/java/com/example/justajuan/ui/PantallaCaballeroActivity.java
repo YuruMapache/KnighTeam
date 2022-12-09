@@ -21,6 +21,7 @@ import com.example.justajuan.R;
 import com.example.justajuan.model.Caballero;
 import com.example.justajuan.model.Enemigo;
 import com.example.justajuan.model.Material;
+import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.model.Time;
 import com.example.justajuan.persistence.AdaptadorMateriales;
@@ -211,6 +212,13 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                            enemigo.setSalud(enemigo.getSalud()-caballero.getAtaque());
                        }
                    }
+                   ArrayList<Objeto> nuevoEquipado= new ArrayList<Objeto>();
+                   for (int i=0; i<caballero.getEquipado().size();i++){
+                       if (caballero.getEquipado().get(i).isEsConsumible()==false){
+                           nuevoEquipado.add(caballero.getEquipado().get(i));
+                       }
+                   }
+                   caballero.setEquipado(nuevoEquipado);
                     Intent i;
                    if (caballero.getSalud()>0){
                        if (nRonda<10) {
