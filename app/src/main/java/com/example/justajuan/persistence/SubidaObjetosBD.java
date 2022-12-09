@@ -3,6 +3,7 @@ package com.example.justajuan.persistence;
 import androidx.annotation.NonNull;
 
 import com.example.justajuan.R;
+import com.example.justajuan.model.Enemigo;
 import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Sesion;
@@ -151,5 +152,41 @@ public class SubidaObjetosBD {
             }
         });
 
+    }
+
+    public static void subirEnemigos(){
+
+        FirebaseDatabase fd = FirebaseDatabase.getInstance();
+        DatabaseReference dr = fd.getReference().child("Enemigos");
+
+        ArrayList<Enemigo> listaEnemigos = new ArrayList<>();
+
+        listaEnemigos.add(new Enemigo("Campesino Paco",100,6,1,200));
+        listaEnemigos.add(new Enemigo("Pepe el tortas",125,10,1,200));
+        listaEnemigos.add(new Enemigo("Soberbia",175,20,2,200));
+        listaEnemigos.add(new Enemigo("Avaricia",200,30,3,200));
+        listaEnemigos.add(new Enemigo("Lujuria",250,40,5,200));
+        listaEnemigos.add(new Enemigo("Gula",300,50,8,200));
+        listaEnemigos.add(new Enemigo("Envidia",400,60,10,200));
+        listaEnemigos.add(new Enemigo("Pereza",550,70,15,200));
+        listaEnemigos.add(new Enemigo("Ira",700,80,20,200));
+        listaEnemigos.add(new Enemigo("Sir Joaquines",1000,100,30,10000));
+
+        dr.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Sesion sesion = Sesion.getInstance();
+
+                for (int i=0; i<listaEnemigos.size();i++) {
+
+                    dr.child(String.valueOf(i+1)).setValue(listaEnemigos.get(i));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println("DATABASE ERROR");
+            }
+        });
     }
 }

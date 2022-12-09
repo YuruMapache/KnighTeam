@@ -61,7 +61,19 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("Materiales").child(Sesion.getNumLobby());
 
-        caballero=getCaballero();
+        //caballero=getCaballero();
+
+        firebaseDatabase.getReference().child("Caballero").child(Sesion.getNumLobby()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                caballero=(Caballero) snapshot.getValue(Caballero.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
         vistaLista=(GridView) findViewById(R.id.textRecursos);
 
@@ -105,8 +117,10 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
-                startActivity(new Intent(PantallaCaballeroActivity.this, ResultadosCaballero.class));
-                PantallaCaballeroActivity.this.finish();
+
+                algoritmo(1);
+                //startActivity(new Intent(PantallaCaballeroActivity.this, ResultadosCaballero.class));
+                //PantallaCaballeroActivity.this.finish();
             }
 
         }.start();
@@ -187,7 +201,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
     public void algoritmo(int nRonda){
 
 
-        firebaseDatabase.getReference().child("Enemigo").child(String.valueOf(nRonda)).addListenerForSingleValueEvent(new ValueEventListener() {
+        firebaseDatabase.getReference().child("Enemigos").child(String.valueOf(nRonda)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
