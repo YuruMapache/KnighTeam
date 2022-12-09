@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import com.example.justajuan.R;
+import com.example.justajuan.persistence.SubidaObjetosBD;
 
 public class PantallaInicioActivity extends AppCompatActivity {
 

@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.justajuan.R;
+import com.example.justajuan.model.Caballero;
 import com.example.justajuan.model.Rol;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.persistence.FirebaseDAO;
@@ -76,9 +77,12 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
                                 i.putExtra("rol", Rol.DRUIDA);
                                 break;
                             case "CABALLERO":
+                                Caballero caballero= new Caballero();
+                                FirebaseDAO.setCaballero(getCodigoSala(),caballero);
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
                                 i.putExtra("codigo", getCodigoSala());
                                 i.putExtra("rol", Rol.CABALLERO);
+                                i.putExtra("Caballero",caballero);
                                 break;
                             case "MAESTRO_CUADRAS":
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);

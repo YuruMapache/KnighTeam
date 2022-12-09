@@ -18,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.justajuan.R;
+import com.example.justajuan.model.Caballero;
+import com.example.justajuan.model.Enemigo;
 import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.model.Time;
@@ -44,6 +46,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
     private GridView vistaLista;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
+    private Caballero caballero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("Materiales").child(Sesion.getNumLobby());
 
+        caballero=getCaballero();
 
         vistaLista=(GridView) findViewById(R.id.textRecursos);
 
@@ -168,4 +172,81 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 .setNegativeButton("No", null)
                 .show();
     }
+
+
+    public Caballero getCaballero(){
+        Bundle extras= getIntent().getExtras();
+        if (extras!=null){
+            return (Caballero) extras.get("Caballero");
+        }
+        return null;
+    }
+
+
+    public void algoritmo(int nRonda){
+
+
+        firebaseDatabase.getReference().child("Enemigo").child(String.valueOf(nRonda)).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                   Enemigo enemigo= snapshot.getValue(Enemigo.class);
+                   if (caballero.getVelocidadAtaque()>enemigo.getVelocidadAtaque()) {
+                       while (caballero.getSalud() <= 0 || enemigo.getSalud() <= 0) {
+                            enemigo.setSalud(enemigo.getSalud()-caballero.getAtaque());
+                            if (enemigo.getSalud()<=0){
+                                break;
+                            }
+                            caballero.setSalud(caballero.getSalud()-enemigo.getAtaque());
+                       }
+                   }
+                   else{
+                       while (caballero.getSalud() <= 0 || enemigo.getSalud() <= 0) {
+
+                           caballero.setSalud(caballero.getSalud()-enemigo.getAtaque());
+                           if (caballero.getSalud()<=0){
+                               break;
+                           }
+
+                           enemigo.setSalud(enemigo.getSalud()-caballero.getAtaque());
+                       }
+                   }
+                    Intent i;
+                   if (caballero.getSalud()>0){
+                       if (nRonda<10) {
+                           i = new Intent(PantallaCaballeroActivity.this, ResultadosCaballero.class);
+                           i.putExtra("Caballero", caballero);
+                           i.putExtra("nRonda", nRonda + 1);
+                           for (int j = 0; j < listaMateriales.size(); j++) {
+                               if (listaMateriales.get(j).getName().equals("Moneda")) {
+                                   listaMateriales.get(j).setCantidad(listaMateriales.get(j).getCantidad() + enemigo.getMonedasGanas());
+                                   FirebaseDAO.setMateriales(Sesion.getNumLobby(), listaMateriales);
+                               }
+                           }
+                       }
+                       else{
+                           i= i = new Intent(PantallaCaballeroActivity.this, PantallaVictoria.class);
+                       }
+
+                   }
+                   else{
+                       i= new Intent(PantallaCaballeroActivity.this, PantallaDerrota.class);
+
+                   }
+                startActivity(i);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
+    }
+
+
 }

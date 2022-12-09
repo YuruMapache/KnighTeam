@@ -4,6 +4,8 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.justajuan.model.Caballero;
+import com.example.justajuan.model.Enemigo;
 import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Rol;
@@ -51,6 +53,8 @@ public class FirebaseDAO {
                 }
 
 
+
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 System.out.println("DATABASE ERROR");
@@ -58,6 +62,33 @@ public class FirebaseDAO {
         });
 
     }
+
+
+    public static void setCaballero(String nlobby, Caballero caballero){
+        FirebaseDatabase fd = FirebaseDatabase.getInstance();
+        DatabaseReference dr = fd.getReference().child("Caballero").child(nlobby);
+
+        dr.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Sesion sesion = Sesion.getInstance();
+
+                    dr.setValue(caballero);
+
+            }
+
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println("DATABASE ERROR");
+            }
+        });
+
+    }
+
+
 
     public static void setPlayer(String nlobby, User user) {
         FirebaseDatabase fd = FirebaseDatabase.getInstance();
@@ -118,33 +149,6 @@ public class FirebaseDAO {
             }
         });
         return obj;
-    }
-
-
-    public static ArrayList<Material> getMateriales(String nlobby, String rol){
-        ArrayList<Material> listaMateriales= new ArrayList<>();
-        FirebaseDatabase fd = FirebaseDatabase.getInstance();
-        DatabaseReference dr = fd.getReference().child("Materiales").child(nlobby);
-
-
-        dr.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                listaMateriales.clear();
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    Material material = postSnapshot.getValue(Material.class);
-                        listaMateriales.add(material);
-
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        return listaMateriales;
     }
 
 

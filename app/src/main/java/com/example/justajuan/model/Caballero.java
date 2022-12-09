@@ -1,21 +1,28 @@
 package com.example.justajuan.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Caballero implements Serializable {
 
     private int salud;
+    private int salud_max;
     private int ataque;
     private int velocidadAtaque;
     private int estamina;
     private int monedas;
+    private ArrayList<Objeto> equipado;
 
-    public Caballero(int salud, int ataque, int velocidadAtaque){
+
+    public Caballero(){
         setSalud(100);
+        setSalud_max(100);
         setAtaque(5);
         setVelocidadAtaque(1);
         setEstamina(100);
         setMonedas(100);
+        equipado= new ArrayList<Objeto>();
+
     }
 
     public int getSalud() {
@@ -56,5 +63,21 @@ public class Caballero implements Serializable {
 
     public void setMonedas(int monedas) {
         this.monedas = monedas;
+    }
+
+    public int getSalud_max() {
+        return salud_max;
+    }
+
+    public void setSalud_max(int salud_max) {
+        this.salud_max = salud_max;
+    }
+
+    public ArrayList<Objeto> getEquipado() {
+        return equipado;
+    }
+
+    public void setEquipado(ArrayList<Objeto> equipado) {
+        this.equipado = equipado;
     }
 }
