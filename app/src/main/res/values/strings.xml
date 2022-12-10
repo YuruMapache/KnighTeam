@@ -11,6 +11,7 @@
     <string name="diario_boton">DIARIO</string>
     <string name="inventario_boton">INVENTARIO</string>
     <string name="comprar_boton">TIENDA</string>
+    <string name="bar_boton">BAR</string>
     <string name="reparaciones">Reparaciones</string>
     <string name="progreso">En progreso…</string>
     <string name="tiempoEspada">Quedan X minutos </string>
@@ -39,6 +40,8 @@
     <string name="password_jugador">Contraseña:</string>
     <string name="crearUsuario">Crea tu usuario</string>
     <string name="simboloMas">+</string>
+    <string name="victoria">¡VICTORIA!</string>
+    <string name="derrota">DERROTA...</string>
 
     <string name="tutorial1Texto1">Aquí podras ver los materiales disponibles,así como la cantidad que dispones de cada uno de ellos.</string>
     <string name="tutorial1Texto2">El personaje te servirá como recordatorio de tu rol y además al final de cada toma de decisiones te dará los resultados.</string>

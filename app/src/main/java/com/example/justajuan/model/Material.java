@@ -3,18 +3,20 @@ package com.example.justajuan.model;
 public class Material {
     private String name;
     private int idDrawable;
-    private int cantidad;
+    private int cantidad; //El numero que tienes (e.j: el herrero tiene 15 de hierro)
+    private int precio; //El precio/valor del material cuando lo compras en la tienda (e.j: el hierro vale 2 monedas).
     private String rol;
 
     public Material(){
 
     }
 
-    public Material(String name, int idDrawable, int cantidad, String rol){
-        this.name=name;
-        this.idDrawable=idDrawable;
-        this.cantidad=cantidad;
-        this.rol=rol;
+    public Material(String name, int idDrawable, int cantidad, int precio, String rol){
+        setName(name);
+        setIdDrawable(idDrawable);
+        setCantidad(cantidad);
+        setPrecio(precio);
+        setRol(rol);
     }
 
     public String getName() {
@@ -39,6 +41,14 @@ public class Material {
 
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
+    }
+
+    public int getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(int precio) {
+        this.precio = precio;
     }
 
     public String getRol() {

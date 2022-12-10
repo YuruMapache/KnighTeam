@@ -53,7 +53,7 @@ public class PantallaDruidaActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("Materiales").child(Sesion.getNumLobby());
 
-        vistaLista=(GridView) findViewById(R.id.textViewResume);
+        vistaLista=(GridView) findViewById(R.id.textRecursos);
 
         AdaptadorMateriales adaptador= new AdaptadorMateriales(this,R.layout.activity_gridview_materiales,listaMateriales);
 

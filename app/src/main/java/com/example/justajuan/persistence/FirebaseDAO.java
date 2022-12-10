@@ -1,24 +1,25 @@
 package com.example.justajuan.persistence;
 
-import android.app.Activity;
-import android.app.Application;
-import android.widget.Toast;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 
+import com.example.justajuan.model.Caballero;
+import com.example.justajuan.model.Enemigo;
 import com.example.justajuan.model.Material;
+import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Rol;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.model.User;
-import com.google.firebase.FirebaseException;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FirebaseDAO {
 
@@ -52,6 +53,8 @@ public class FirebaseDAO {
                 }
 
 
+
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 System.out.println("DATABASE ERROR");
@@ -59,6 +62,33 @@ public class FirebaseDAO {
         });
 
     }
+
+
+    public static void setCaballero(String nlobby, Caballero caballero){
+        FirebaseDatabase fd = FirebaseDatabase.getInstance();
+        DatabaseReference dr = fd.getReference().child("Caballero").child(nlobby);
+
+        dr.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Sesion sesion = Sesion.getInstance();
+
+                    dr.setValue(caballero);
+
+            }
+
+
+
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                System.out.println("DATABASE ERROR");
+            }
+        });
+
+    }
+
+
 
     public static void setPlayer(String nlobby, User user) {
         FirebaseDatabase fd = FirebaseDatabase.getInstance();
@@ -86,31 +116,39 @@ public class FirebaseDAO {
         });
     }
 
-
-    public static ArrayList<Material> getMateriales(String nlobby, String rol){
-        ArrayList<Material> listaMateriales= new ArrayList<>();
+    /**
+     * Obtiene los atributos de un objeto.
+     *
+     * @param id Identificador del objeto.
+     * @param level Nivel del objeto a obtener.
+     *
+     * @return Objeto de tipo Objeto.
+     */
+    public static Objeto getObjeto(String id, int level){
         FirebaseDatabase fd = FirebaseDatabase.getInstance();
-        DatabaseReference dr = fd.getReference().child("Materiales").child(nlobby);
+        DatabaseReference dr = fd.getReference().child("Objetos").child(id).child(String.valueOf(level));
+        Objeto obj = new Objeto();
 
-
-        dr.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                listaMateriales.clear();
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    Material material = postSnapshot.getValue(Material.class);
-                        listaMateriales.add(material);
-
-                }
+        dr.get().addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Log.e("firebase", "Error getting data", task.getException());
             }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
+            else {
+                DataSnapshot ds = task.getResult();
+                obj.setSalud((Integer) ds.child("Salud").getValue());
+                obj.setAtaque((Integer) ds.child("Ataque").getValue());
+                obj.setVelocidad((Integer) ds.child("Velocidad").getValue());
+                obj.setEstamina((Integer) ds.child("Estamina").getValue());
+                obj.setTiempo((Integer) ds.child("Tiempo").getValue());
+                //Obtener lista de precios
+                Map<String, Integer> costes = new HashMap();
+                for (DataSnapshot snapshot : ds.child("Precio").getChildren()) {
+                    costes.put(snapshot.getKey(), (Integer) snapshot.getValue());
+                }
+                obj.setPrecio(costes);
             }
         });
-
-        return listaMateriales;
+        return obj;
     }
 
 

@@ -1,5 +1,7 @@
 package com.example.justajuan.model;
 
+import android.os.CountDownTimer;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,26 +14,31 @@ public class Objeto implements Serializable {
     private String descripcion;
     private int salud;
     private int ataque;
-    private int defensa;
-    private int cansancio;
-    private int motivacion;
-    private String tiempoCreacion;
-    private Map<String, Integer> precio= new HashMap<>();
+    private int velocidad;
+    private int estamina;
+    private int tiempo; //Tiempo que tarda en craftearse. Ideal en múltiplos de número de rondas
+    private CountDownTimer contador;
+    private Map<String, Integer> precio = new HashMap<>();
+    private boolean esConsumible;
+    private int idDrawable;
 
-    public Objeto(){
+
+    public Objeto() {
 
     }
-    public Objeto(String nombre, String clase, String descripcion, int salud, int ataque, int defensa, int cansancio, int motivacion, String tiempoCreacion, Map<String, Integer> precio) {
-        this.nombre = nombre;
-        this.clase = clase;
-        this.descripcion = descripcion;
-        this.salud = salud;
-        this.ataque = ataque;
-        this.defensa = defensa;
-        this.cansancio = cansancio;
-        this.motivacion = motivacion;
-        this.tiempoCreacion = tiempoCreacion;
-        this.precio = precio;
+
+    public Objeto(String nombre,String clase, String descripcion, int salud, int ataque, int velocidad, int estamina, int tiempo, Map<String, Integer> precio, boolean esConsumible, int idDrawable) {
+        setNombre(nombre);
+        setClase(clase);
+        setDescripcion(descripcion);
+        setSalud(salud);
+        setAtaque(ataque);
+        setVelocidad(velocidad);
+        setTiempo(tiempo);
+        setPrecio(precio);
+        setEstamina(estamina);
+        setEsConsumible(esConsumible);
+        setIdDrawable(idDrawable);
     }
 
     public String getNombre() {
@@ -74,35 +81,36 @@ public class Objeto implements Serializable {
         this.ataque = ataque;
     }
 
-    public int getDefensa() {
-        return defensa;
+    public int getVelocidad() {
+        return velocidad;
     }
 
-    public void setDefensa(int defensa) {
-        this.defensa = defensa;
+    public void setVelocidad(int velocidad) {
+        this.velocidad = velocidad;
     }
 
-    public int getCansancio() {
-        return cansancio;
+    public int getEstamina() {
+        return estamina;
     }
 
-    public void setCansancio(int cansancio) {
-        this.cansancio = cansancio;
+    public void setEstamina(int estamina) {
+        this.estamina = estamina;
     }
 
-    public int getMotivacion() {
-        return motivacion;
+    public int getTiempo() {
+        return tiempo;
     }
 
-    public void setMotivacion(int motivacion) {
-        this.motivacion = motivacion;
-    }
-    public String getTiempoCreacion() {
-        return tiempoCreacion;
+    public void setTiempo(int tiempo) {
+        this.tiempo = tiempo;
     }
 
-    public void setTiempoCreacion(String tiempoCreacion) {
-        this.tiempoCreacion = tiempoCreacion;
+    public CountDownTimer getContador() {
+        return contador;
+    }
+
+    public void setContador(CountDownTimer contador) {
+        this.contador = contador;
     }
 
     public Map<String, Integer> getPrecio() {
@@ -111,5 +119,21 @@ public class Objeto implements Serializable {
 
     public void setPrecio(Map<String, Integer> precio) {
         this.precio = precio;
+    }
+
+    public boolean isEsConsumible() {
+        return esConsumible;
+    }
+
+    public void setEsConsumible(boolean esConsumible) {
+        this.esConsumible = esConsumible;
+    }
+
+    public int getIdDrawable() {
+        return idDrawable;
+    }
+
+    public void setIdDrawable(int idDrawable) {
+        this.idDrawable = idDrawable;
     }
 }

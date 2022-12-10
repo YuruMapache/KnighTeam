@@ -18,7 +18,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.justajuan.R;
+import com.example.justajuan.model.Caballero;
+import com.example.justajuan.model.Enemigo;
 import com.example.justajuan.model.Material;
+import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.model.Time;
 import com.example.justajuan.persistence.AdaptadorMateriales;
@@ -45,6 +48,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private AppCompatButton botonCombate;
+    private Caballero caballero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +62,21 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("Materiales").child(Sesion.getNumLobby());
 
+        //caballero=getCaballero();
 
-        vistaLista=(GridView) findViewById(R.id.textViewResume);
+        firebaseDatabase.getReference().child("Caballero").child(Sesion.getNumLobby()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                caballero=(Caballero) snapshot.getValue(Caballero.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        vistaLista=(GridView) findViewById(R.id.textRecursos);
 
         AdaptadorMateriales adaptador= new AdaptadorMateriales(this,R.layout.activity_gridview_materiales,listaMateriales);
 
@@ -102,8 +119,10 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
-                startActivity(new Intent(PantallaCaballeroActivity.this, ResultadosCaballero.class));
-                PantallaCaballeroActivity.this.finish();
+
+                algoritmo(1);
+                //startActivity(new Intent(PantallaCaballeroActivity.this, ResultadosCaballero.class));
+                //PantallaCaballeroActivity.this.finish();
             }
 
         }.start();
@@ -180,4 +199,88 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 .setNegativeButton("No", null)
                 .show();
     }
+
+
+    public Caballero getCaballero(){
+        Bundle extras= getIntent().getExtras();
+        if (extras!=null){
+            return (Caballero) extras.get("Caballero");
+        }
+        return null;
+    }
+
+
+    public void algoritmo(int nRonda){
+
+
+        firebaseDatabase.getReference().child("Enemigos").child(String.valueOf(nRonda)).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                   Enemigo enemigo= snapshot.getValue(Enemigo.class);
+                   if (caballero.getVelocidadAtaque()>enemigo.getVelocidadAtaque()) {
+                       while (caballero.getSalud() <= 0 || enemigo.getSalud() <= 0) {
+                            enemigo.setSalud(enemigo.getSalud()-caballero.getAtaque());
+                            if (enemigo.getSalud()<=0){
+                                break;
+                            }
+                            caballero.setSalud(caballero.getSalud()-enemigo.getAtaque());
+                       }
+                   }
+                   else{
+                       while (caballero.getSalud() <= 0 || enemigo.getSalud() <= 0) {
+
+                           caballero.setSalud(caballero.getSalud()-enemigo.getAtaque());
+                           if (caballero.getSalud()<=0){
+                               break;
+                           }
+
+                           enemigo.setSalud(enemigo.getSalud()-caballero.getAtaque());
+                       }
+                   }
+                   ArrayList<Objeto> nuevoEquipado= new ArrayList<Objeto>();
+                   for (int i=0; i<caballero.getEquipado().size();i++){
+                       if (caballero.getEquipado().get(i).isEsConsumible()==false){
+                           nuevoEquipado.add(caballero.getEquipado().get(i));
+                       }
+                   }
+                   caballero.setEquipado(nuevoEquipado);
+                    Intent i;
+                   if (caballero.getSalud()>0){
+                       if (nRonda<10) {
+                           i = new Intent(PantallaCaballeroActivity.this, ResultadosCaballero.class);
+                           i.putExtra("Caballero", caballero);
+                           i.putExtra("nRonda", nRonda + 1);
+                           for (int j = 0; j < listaMateriales.size(); j++) {
+                               if (listaMateriales.get(j).getName().equals("Moneda")) {
+                                   listaMateriales.get(j).setCantidad(listaMateriales.get(j).getCantidad() + enemigo.getMonedasGanas());
+                                   FirebaseDAO.setMateriales(Sesion.getNumLobby(), listaMateriales);
+                               }
+                           }
+                       }
+                       else{
+                           i= i = new Intent(PantallaCaballeroActivity.this, PantallaVictoria.class);
+                       }
+
+                   }
+                   else{
+                       i= new Intent(PantallaCaballeroActivity.this, PantallaDerrota.class);
+
+                   }
+                startActivity(i);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
+    }
+
+
 }

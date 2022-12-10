@@ -12,6 +12,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import com.example.justajuan.R;
+import com.example.justajuan.persistence.SubidaObjetosBD;
 
 public class PantallaInicioActivity extends AppCompatActivity {
 
@@ -48,6 +49,7 @@ public class PantallaInicioActivity extends AppCompatActivity {
         botonTutorial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SubidaObjetosBD.subirEnemigos();
                 //Pasa a las ventanas del tutorial
                 startActivity(new Intent(PantallaInicioActivity.this, Tutorial.class));
             }
