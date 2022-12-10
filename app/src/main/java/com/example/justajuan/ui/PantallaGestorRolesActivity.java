@@ -27,7 +27,6 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
 
     // Duración en milisegundos que se mostrará el splash
     private final int DURACION_SPLASH = 6000; // 1 segundo
-
     private TextView rolSeleccionado;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference, partidaReference;
@@ -51,7 +50,7 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
-                partidaReference.child(getCodigoSala()).addValueEventListener(new ValueEventListener() {
+                partidaReference.child(getCodigoSala()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         int numJugadores;

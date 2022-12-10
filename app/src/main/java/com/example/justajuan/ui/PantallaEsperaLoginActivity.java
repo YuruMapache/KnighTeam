@@ -50,7 +50,7 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
 
         creacionSala.setText(String.format("¡Sala creada! El código es %s", getCodigoSala()));
 
-        partidaReference.child(getCodigoSala()).addValueEventListener(new ValueEventListener() {
+        partidaReference.child(getCodigoSala()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int numJugadores;
@@ -62,16 +62,19 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
                     if (numJugadores == 5) {
                         switch (Sesion.getInstance().getRol().toString()) {
                             case "HERRERO":
+                                partidaReference.child(getCodigoSala()).child("2").child("combateListo").setValue(0);
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
                                 i.putExtra("codigo", getCodigoSala());
                                 i.putExtra("rol", Rol.HERRERO);
                                 break;
                             case "CURANDERO":
+                                partidaReference.child(getCodigoSala()).child("4").child("combateListo").setValue(0);
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
                                 i.putExtra("codigo", getCodigoSala());
                                 i.putExtra("rol", Rol.CURANDERO);
                                 break;
                             case "DRUIDA":
+                                partidaReference.child(getCodigoSala()).child("5").child("combateListo").setValue(0);
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
                                 i.putExtra("codigo", getCodigoSala());
                                 i.putExtra("rol", Rol.DRUIDA);
@@ -79,13 +82,14 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
                             case "CABALLERO":
                                 Caballero caballero= new Caballero();
                                 FirebaseDAO.setCaballero(getCodigoSala(),caballero);
-                                partidaReference.child(getCodigoSala()).child("1").child("Listo").setValue(0);
+                                partidaReference.child(getCodigoSala()).child("1").child("combateListo").setValue(0);
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
                                 i.putExtra("codigo", getCodigoSala());
                                 i.putExtra("rol", Rol.CABALLERO);
                                 i.putExtra("Caballero",caballero);
                                 break;
                             case "MAESTRO_CUADRAS":
+                                partidaReference.child(getCodigoSala()).child("3").child("combateListo").setValue(0);
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
                                 i.putExtra("codigo", getCodigoSala());
                                 i.putExtra("rol", Rol.MAESTRO_CUADRAS);
