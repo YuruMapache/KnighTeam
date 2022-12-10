@@ -5,11 +5,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +24,7 @@ import com.example.justajuan.model.Caballero;
 import com.example.justajuan.model.Enemigo;
 import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Objeto;
+import com.example.justajuan.model.Rol;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.model.Time;
 import com.example.justajuan.persistence.AdaptadorMateriales;
@@ -34,6 +37,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class PantallaCaballeroActivity extends AppCompatActivity {
@@ -43,7 +47,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
     private AppCompatButton botonDesplTienda;
     private AppCompatButton botonDesplInventario;
     private AppCompatButton botonDesplDiario;
-    private ArrayList<Material> listaMateriales= new ArrayList<>();
+    private ArrayList<Material> listaMateriales = new ArrayList<>();
     private GridView vistaLista;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -67,7 +71,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         firebaseDatabase.getReference().child("Caballero").child(Sesion.getNumLobby()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                caballero=(Caballero) snapshot.getValue(Caballero.class);
+                caballero = (Caballero) snapshot.getValue(Caballero.class);
             }
 
             @Override
@@ -76,9 +80,9 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
             }
         });
 
-        vistaLista=(GridView) findViewById(R.id.textRecursos);
+        vistaLista = (GridView) findViewById(R.id.textRecursos);
 
-        AdaptadorMateriales adaptador= new AdaptadorMateriales(this,R.layout.activity_gridview_materiales,listaMateriales);
+        AdaptadorMateriales adaptador = new AdaptadorMateriales(this, R.layout.activity_gridview_materiales, listaMateriales);
 
         botonCombate = findViewById(R.id.botonCombate);
 
@@ -103,7 +107,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         });
 
         TextView glblTimer = findViewById(R.id.timerTextView);
-        new CountDownTimer(6000,1000) {
+        new CountDownTimer(6000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 int minutes = (int) millisUntilFinished / 60000;
@@ -177,11 +181,36 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
             public void onClick(View view) {
                 botonCombate.setClickable(false);
                 Sesion sesion = Sesion.getInstance();
-                firebaseDatabase.getReference().child(sesion.getNumLobby()).child("1").
+                DatabaseReference dr = firebaseDatabase.getReference().child(sesion.getNumLobby()).child("1").child("Listo");
 
+                dr.get().addOnCompleteListener(task -> {
+                    if (!task.isSuccessful()) {
+                        Log.e("firebase", "Error getting data", task.getException());
+                    } else {
+                        DataSnapshot ds = task.getResult();
+                        Log.d("firebaseN", String.valueOf(dr.get()));
+                        Log.d("firebaseNS", String.valueOf(ds.getValue()));
+                        dr.setValue(4);
+                    }
+                });
+                /*dr.addValueEventListener(new ValueEventListener() {
+                    Intent i;
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        botonCombate.setText(String.format("COMBATE (%s/5)", dataSnapshot.getValue()));
+                        if(((Integer) dataSnapshot.getValue()) == 5) {
+                            i = new Intent(PantallaCaballeroActivity.this, ResultadosCaballero.class);
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        Toast.makeText(getApplicationContext(), "Usuarios no están listos", Toast.LENGTH_SHORT).show();
+                    }
+                });*/
             }
         });
-
     }
 
     @Override
@@ -201,72 +230,69 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
     }
 
 
-    public Caballero getCaballero(){
-        Bundle extras= getIntent().getExtras();
-        if (extras!=null){
+    public Caballero getCaballero() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
             return (Caballero) extras.get("Caballero");
         }
         return null;
     }
 
 
-    public void algoritmo(int nRonda){
+    public void algoritmo(int nRonda) {
 
 
         firebaseDatabase.getReference().child("Enemigos").child(String.valueOf(nRonda)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                   Enemigo enemigo= snapshot.getValue(Enemigo.class);
-                   if (caballero.getVelocidadAtaque()>enemigo.getVelocidadAtaque()) {
-                       while (caballero.getSalud() <= 0 || enemigo.getSalud() <= 0) {
-                            enemigo.setSalud(enemigo.getSalud()-caballero.getAtaque());
-                            if (enemigo.getSalud()<=0){
-                                break;
+                Enemigo enemigo = snapshot.getValue(Enemigo.class);
+                if (caballero.getVelocidadAtaque() > enemigo.getVelocidadAtaque()) {
+                    while (caballero.getSalud() <= 0 || enemigo.getSalud() <= 0) {
+                        enemigo.setSalud(enemigo.getSalud() - caballero.getAtaque());
+                        if (enemigo.getSalud() <= 0) {
+                            break;
+                        }
+                        caballero.setSalud(caballero.getSalud() - enemigo.getAtaque());
+                    }
+                } else {
+                    while (caballero.getSalud() <= 0 || enemigo.getSalud() <= 0) {
+
+                        caballero.setSalud(caballero.getSalud() - enemigo.getAtaque());
+                        if (caballero.getSalud() <= 0) {
+                            break;
+                        }
+
+                        enemigo.setSalud(enemigo.getSalud() - caballero.getAtaque());
+                    }
+                }
+                ArrayList<Objeto> nuevoEquipado = new ArrayList<Objeto>();
+                for (int i = 0; i < caballero.getEquipado().size(); i++) {
+                    if (caballero.getEquipado().get(i).isEsConsumible() == false) {
+                        nuevoEquipado.add(caballero.getEquipado().get(i));
+                    }
+                }
+                caballero.setEquipado(nuevoEquipado);
+                Intent i;
+                if (caballero.getSalud() > 0) {
+                    if (nRonda < 10) {
+                        i = new Intent(PantallaCaballeroActivity.this, ResultadosCaballero.class);
+                        i.putExtra("Caballero", caballero);
+                        i.putExtra("nRonda", nRonda + 1);
+                        for (int j = 0; j < listaMateriales.size(); j++) {
+                            if (listaMateriales.get(j).getName().equals("Moneda")) {
+                                listaMateriales.get(j).setCantidad(listaMateriales.get(j).getCantidad() + enemigo.getMonedasGanas());
+                                FirebaseDAO.setMateriales(Sesion.getNumLobby(), listaMateriales);
                             }
-                            caballero.setSalud(caballero.getSalud()-enemigo.getAtaque());
-                       }
-                   }
-                   else{
-                       while (caballero.getSalud() <= 0 || enemigo.getSalud() <= 0) {
+                        }
+                    } else {
+                        i = i = new Intent(PantallaCaballeroActivity.this, PantallaVictoria.class);
+                    }
 
-                           caballero.setSalud(caballero.getSalud()-enemigo.getAtaque());
-                           if (caballero.getSalud()<=0){
-                               break;
-                           }
+                } else {
+                    i = new Intent(PantallaCaballeroActivity.this, PantallaDerrota.class);
 
-                           enemigo.setSalud(enemigo.getSalud()-caballero.getAtaque());
-                       }
-                   }
-                   ArrayList<Objeto> nuevoEquipado= new ArrayList<Objeto>();
-                   for (int i=0; i<caballero.getEquipado().size();i++){
-                       if (caballero.getEquipado().get(i).isEsConsumible()==false){
-                           nuevoEquipado.add(caballero.getEquipado().get(i));
-                       }
-                   }
-                   caballero.setEquipado(nuevoEquipado);
-                    Intent i;
-                   if (caballero.getSalud()>0){
-                       if (nRonda<10) {
-                           i = new Intent(PantallaCaballeroActivity.this, ResultadosCaballero.class);
-                           i.putExtra("Caballero", caballero);
-                           i.putExtra("nRonda", nRonda + 1);
-                           for (int j = 0; j < listaMateriales.size(); j++) {
-                               if (listaMateriales.get(j).getName().equals("Moneda")) {
-                                   listaMateriales.get(j).setCantidad(listaMateriales.get(j).getCantidad() + enemigo.getMonedasGanas());
-                                   FirebaseDAO.setMateriales(Sesion.getNumLobby(), listaMateriales);
-                               }
-                           }
-                       }
-                       else{
-                           i= i = new Intent(PantallaCaballeroActivity.this, PantallaVictoria.class);
-                       }
-
-                   }
-                   else{
-                       i= new Intent(PantallaCaballeroActivity.this, PantallaDerrota.class);
-
-                   }
+                }
                 startActivity(i);
             }
 
@@ -275,9 +301,6 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
 
             }
         });
-
-
-
 
 
     }
