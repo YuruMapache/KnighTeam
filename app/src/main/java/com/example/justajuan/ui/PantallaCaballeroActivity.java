@@ -44,6 +44,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
     private GridView vistaLista;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
+    private AppCompatButton botonCombate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
 
         AdaptadorMateriales adaptador= new AdaptadorMateriales(this,R.layout.activity_gridview_materiales,listaMateriales);
 
+        botonCombate = findViewById(R.id.botonCombate);
 
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -148,6 +150,16 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 acciones.setContentView(R.layout.pop_up_inventario);
                 acciones.setCancelable(true);
                 acciones.show();
+            }
+        });
+
+        botonCombate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                botonCombate.setClickable(false);
+                Sesion sesion = Sesion.getInstance();
+                firebaseDatabase.getReference().child(sesion.getNumLobby()).child("1").
+
             }
         });
 

@@ -50,4 +50,5 @@
     <string name="tutorial4Texto3">Desde Diario verás un resumen de los mensajes recibidos hasta el momento de los resultados de cada justa</string>
     <string name="tutorial4Texto4">En Inventario podrás ver todo lo que tienes almacenado y disponible.</string>
     <string name="tutorial4Texto5">Con Comprar podrás acceder a un apartado para intercambiar diversos objetos disponibles para tu rol a cambio de un módico precio, más fácil que craftearlos a mano.</string>
+    <string name="combate_boton">COMBATE </string>
 </resources>

@@ -76,6 +76,7 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
                                 i.putExtra("rol", Rol.DRUIDA);
                                 break;
                             case "CABALLERO":
+                                partidaReference.child(getCodigoSala()).child("1").child("Listo").setValue(0);
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
                                 i.putExtra("codigo", getCodigoSala());
                                 i.putExtra("rol", Rol.CABALLERO);

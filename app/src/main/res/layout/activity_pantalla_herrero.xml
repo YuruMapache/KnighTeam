@@ -136,6 +136,29 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/linearLayoutCombate"
+        android:layout_width="140dp"
+        android:layout_height="60dp"
+        android:gravity="center_vertical"
+        android:layout_marginStart="70dp"
+        android:layout_marginTop="70dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/botonCombate"
+            android:layout_width="123dp"
+            android:layout_height="55dp"
+            android:layout_margin="10dp"
+            android:background="@drawable/rock_button"
+            android:clickable="false"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:text="@string/combate_boton"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/botonDiario"
         android:layout_width="123dp"
