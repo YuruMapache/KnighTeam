@@ -31,15 +31,15 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
             android:layout_gravity="center"
-            android:padding="35dp"
+            android:padding="25dp"
             android:text="¡Hola! Estos han sido los resultados de la justa:"
             android:textColor="@color/black"
             android:textSize="25dp"
             android:textStyle="bold|italic" />
 
         <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="800dp"
+            android:layout_height="100dp">
 
             <TextView
                 android:id="@+id/resultados"
@@ -48,6 +48,17 @@
 
             </TextView>
         </ScrollView>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/botonCombate"
+            android:layout_width="123dp"
+            android:layout_height="55dp"
+            android:layout_gravity="bottom|right"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/rock_button"
+            android:clickable="false"
+            android:text="@string/botonSiguiente"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
 
     </LinearLayout>
 
