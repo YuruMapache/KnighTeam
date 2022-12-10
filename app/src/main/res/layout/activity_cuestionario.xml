@@ -93,8 +93,18 @@
                     android:textColor="@color/black"
                     android:textSize="16sp" />
             </TableRow>
-
         </RadioGroup>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/botonCombate"
+            android:layout_width="123dp"
+            android:layout_height="55dp"
+            android:layout_gravity="right"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/rock_button"
+            android:clickable="false"
+            android:text="@string/botonSiguiente"
+            android:textStyle="bold"
+            android:textColor="@color/black"/>
 
     </LinearLayout>
 </LinearLayout>
