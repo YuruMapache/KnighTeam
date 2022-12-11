@@ -28,6 +28,7 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
     // Duración en milisegundos que se mostrará el splash
     private final int DURACION_SPLASH = 6000; // 1 segundo
     private TextView rolSeleccionado;
+    private TextView descripcionRol;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference, partidaReference;
 
@@ -46,6 +47,25 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
 
         rolSeleccionado = findViewById(R.id.rolEscogido);
         rolSeleccionado.setText(String.format("TU ROL ASIGNADO ES:\n %s", Sesion.getInstance().getRol().toString()));
+
+        descripcionRol = findViewById(R.id.descripcionRol);
+        if(Sesion.getInstance().getRol().toString().equals("HERRERO")){
+            descripcionRol.setText(String.format("Durante el transcurso de la partida tu rol será decisivo para aumentar la salud, daño o velocidad del caballero."));
+        }
+        else if(Sesion.getInstance().getRol().toString().equals("CABALLERO")){
+            descripcionRol.setText(String.format("El rol que cuenta con los atributos, tu mision es vencer al oponente con la ayuda de tu equipo."));
+        }
+        else if(Sesion.getInstance().getRol().toString().equals("MAESTRO_CUADRAS")){
+            descripcionRol.setText(String.format("Durante el transcurso de la partida tu rol será decisivo para aumentar la velocidad, asi como cuidar al caballo."));
+        }
+        else if(Sesion.getInstance().getRol().toString().equals("CURANDERO")){
+            descripcionRol.setText(String.format("Durante el transcurso de la partida tu rol será decisivo para regenerar la vida del caballero y curarle de sus heridas"));
+        }
+        else{
+            descripcionRol.setText(String.format("Durante el transcurso de la partida tu rol será decisivo para aumentar la velocidad, salud y ataque maximos."));
+        }
+
+
 
         new Timer().schedule(new TimerTask() {
             @Override

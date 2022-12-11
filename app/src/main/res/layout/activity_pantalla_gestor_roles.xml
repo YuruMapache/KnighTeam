@@ -20,15 +20,25 @@
         android:layout_marginTop="25dp"
         android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/rolEscogido"
-        android:layout_width="250dp"
-        android:layout_height="61dp"
-        android:gravity="center"
-        android:fontFamily="sans-serif"
-        android:textSize="20sp"
-        android:textColor="?android:textColorPrimary"
-        android:textStyle="bold" />
+        <TextView
+            android:id="@+id/rolEscogido"
+            android:layout_width="250dp"
+            android:layout_height="61dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/descripcionRol"
+            android:layout_width="250dp"
+            android:layout_height="61dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
