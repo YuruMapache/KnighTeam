@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
@@ -128,7 +129,7 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
      */
     public void back() {
         Sesion sesion = Sesion.getInstance();
-        FirebaseDAO.deletePlayer(sesion.getNumLobby(), sesion.getUsuario().getNombre());
+        FirebaseDAO.deletePlayer(String.valueOf(sesion.getNumLobby()), sesion.getUsuario().getNombre());
         Intent intent = new Intent(PantallaEsperaLoginActivity.this, PantallaInicioActivity.class);
         startActivity(intent);
     }

@@ -12,7 +12,7 @@
         android:id="@+id/tutorial2PopUpPergamino"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/manusccritopixel"
+        android:background="@drawable/manuscritopixel"
         android:orientation="vertical">
 
         <TextView

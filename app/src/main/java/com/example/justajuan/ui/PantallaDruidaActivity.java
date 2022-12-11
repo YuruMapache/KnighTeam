@@ -54,7 +54,7 @@ public class PantallaDruidaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pantalla_druida);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference().child("Materiales").child(Sesion.getNumLobby());
+        databaseReference = firebaseDatabase.getReference().child("Materiales").child(String.valueOf(Sesion.getNumLobby()));
         partidaReference = firebaseDatabase.getReference().child("Partida");
 
         vistaLista=(GridView) findViewById(R.id.textRecursos);

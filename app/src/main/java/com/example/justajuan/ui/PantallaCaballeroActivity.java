@@ -59,7 +59,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pantalla_caballero);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference().child("Materiales").child(Sesion.getNumLobby());
+        databaseReference = firebaseDatabase.getReference().child("Materiales").child(String.valueOf(Sesion.getNumLobby()));
         partidaReference = firebaseDatabase.getReference().child("Partida");
 
         vistaLista = (GridView) findViewById(R.id.textRecursos);
@@ -99,7 +99,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
 
         //caballero=getCaballero();
 
-        firebaseDatabase.getReference().child("Caballero").child(Sesion.getNumLobby()).addListenerForSingleValueEvent(new ValueEventListener() {
+        firebaseDatabase.getReference().child("Caballero").child(String.valueOf(Sesion.getNumLobby())).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 caballero = (Caballero) snapshot.getValue(Caballero.class);
@@ -278,7 +278,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                         for (int j = 0; j < listaMateriales.size(); j++) {
                             if (listaMateriales.get(j).getName().equals("Moneda")) {
                                 listaMateriales.get(j).setCantidad(listaMateriales.get(j).getCantidad() + enemigo.getMonedasGanas());
-                                FirebaseDAO.setMateriales(Sesion.getNumLobby(), listaMateriales);
+                                FirebaseDAO.setMateriales(String.valueOf(Sesion.getNumLobby()), listaMateriales);
                             }
                         }
                     } else {

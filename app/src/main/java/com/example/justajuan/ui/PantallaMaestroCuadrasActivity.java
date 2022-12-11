@@ -54,7 +54,7 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pantalla_maestro_cuadras);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference().child("Materiales").child(Sesion.getNumLobby());
+        databaseReference = firebaseDatabase.getReference().child("Materiales").child(String.valueOf(Sesion.getNumLobby()));
         partidaReference = firebaseDatabase.getReference().child("Partida");
 
         botonCombate = findViewById(R.id.botonCombate);

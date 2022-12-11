@@ -55,7 +55,7 @@ public class PantallaHerreroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pantalla_herrero);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference().child("Materiales").child(Sesion.getNumLobby());
+        databaseReference = firebaseDatabase.getReference().child("Materiales").child(String.valueOf(Sesion.getNumLobby()));
         partidaReference = firebaseDatabase.getReference().child("Partida");
 
         botonCombate = findViewById(R.id.botonCombate);

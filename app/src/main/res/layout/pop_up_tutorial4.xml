@@ -5,7 +5,7 @@
     android:id="@+id/tutorial4PopUp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/manusccritopixel"
+    android:background="@drawable/manuscritopixel"
     android:orientation="vertical">
 
     <LinearLayout
