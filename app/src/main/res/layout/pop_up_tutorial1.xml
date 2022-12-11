@@ -5,14 +5,14 @@
     android:id="@+id/tutorial1PopUp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/transparent"
+    android:background="@drawable/madera_pixel"
     android:orientation="horizontal">
 
     <LinearLayout
         android:id="@+id/tutorial1PopUpPergamino"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/manuscritopixel"
+        android:background="@drawable/pergamino"
         android:orientation="vertical">
     <TextView
         android:id="@+id/texto1"

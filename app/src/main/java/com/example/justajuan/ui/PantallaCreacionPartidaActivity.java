@@ -87,7 +87,7 @@ public class PantallaCreacionPartidaActivity extends AppCompatActivity {
 
                 //Crear el Array de materiales
                 ArrayList<Material> listaMateriales= new ArrayList<>();
-                listaMateriales.add(new Material("Cuero",R.drawable.herradura_ajustada,0,3,"Curandero Maestro_Cuadras"));
+                listaMateriales.add(new Material("Cuero", R.drawable.cuero_ajustado,0,3,"Curandero Maestro_Cuadras"));
                 listaMateriales.add(new Material("Hierro",R.drawable.espada_ajustada,0,3,"Herrero"));
                 listaMateriales.add(new Material("Heno",R.drawable.heno_ajustado,0,2,"Maestro_Cuadras"));
                 listaMateriales.add(new Material("Madera",R.drawable.tronco_ajustado, 0, 1, "Herrero Druida"));

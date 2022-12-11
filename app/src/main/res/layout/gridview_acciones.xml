@@ -1,32 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    >
 
-
+<ImageView
+    android:id="@+id/ImagenObjeto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:background="@drawable/pocion_ajustada"
+    />
     <TextView
+        android:id="@+id/NombreObjeto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="Habilidad Esgrima: "
+        android:layout_gravity="center"
+        android:text="Poción de Velocidad: "
+
         android:textStyle="bold"
         android:textSize="20dp"/>
 
-    <TextView
+    <GridLayout
+        android:id="@+id/ListaMateriales"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text="1/10"
-        android:textSize="20dp" />
+        android:rowCount="2"
+        android:columnCount="2">
 
+
+    </GridLayout>
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/botonSubirEsgrima"
+        android:id="@+id/botonCrearObjeto"
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginLeft="10dp"
-        android:gravity="center"
+        android:layout_gravity="center"
         android:background="@drawable/rock_button"
-        android:text="@string/simboloMas"
+        android:text="Crear"
         android:textColor="@color/black" />
 
 </LinearLayout>

@@ -40,12 +40,15 @@ public class AdaptadorMateriales extends ArrayAdapter {
         textoNombre.setText(listaMateriales.get(position).getName());
         textoCantidad.setText(String.valueOf(listaMateriales.get(position).getCantidad()));
 
+
         return v;
 
     }
     public void setListaMateriales(ArrayList objects){
         listaMateriales=objects;
     }
+
+
 
 
 

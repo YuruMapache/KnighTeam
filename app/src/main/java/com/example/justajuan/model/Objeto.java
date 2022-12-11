@@ -21,6 +21,7 @@ public class Objeto implements Serializable {
     private Map<String, Integer> precio = new HashMap<>();
     private boolean esConsumible;
     private int idDrawable;
+    private boolean acabado;
 
 
     public Objeto() {
@@ -135,5 +136,13 @@ public class Objeto implements Serializable {
 
     public void setIdDrawable(int idDrawable) {
         this.idDrawable = idDrawable;
+    }
+
+    public boolean isAcabado() {
+        return acabado;
+    }
+
+    public void setAcabado(boolean acabado) {
+        this.acabado = acabado;
     }
 }
