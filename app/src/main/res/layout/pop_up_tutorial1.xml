@@ -5,7 +5,7 @@
     android:id="@+id/tutorial1PopUp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/fui_transparent"
+    android:background=""
     android:orientation="vertical">
 
     <LinearLayout
@@ -16,11 +16,11 @@
         android:orientation="vertical">
     <TextView
         android:id="@+id/texto1"
-        android:layout_width="match_parent"
+        android:layout_width="700dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="70dp"
-        android:layout_marginRight="80dp"
+        android:layout_gravity="center"
         android:layout_marginTop="70dp"
+        android:layout_marginRight="20dp"
         android:fontFamily="sans-serif"
         android:gravity="start"
         android:justificationMode="inter_word"
@@ -31,13 +31,13 @@
 
     <TextView
         android:id="@+id/texto2"
-        android:layout_width="match_parent"
+        android:layout_width="700dp"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="70dp"
-        android:layout_marginRight="80dp"
+        android:layout_marginRight="20dp"
         android:layout_marginBottom="50dp"
         android:fontFamily="sans-serif"
         android:gravity="start"
+        android:layout_gravity="center"
         android:justificationMode="inter_word"
         android:text="@string/tutorial1Texto2"
         android:textSize="34dp"
