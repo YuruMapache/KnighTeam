@@ -47,6 +47,7 @@ public class PantallaHerreroActivity extends AppCompatActivity {
     private ValueEventListener listenerMateriales;
     private ValueEventListener listenerCombate;
     private ArrayList<Objeto> listaObjetos;
+    private ArrayList<Objeto> objetosCreandose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,6 +89,13 @@ public class PantallaHerreroActivity extends AppCompatActivity {
 
         }.start();
 
+
+        objetosCreandose=getObjetosCreandose();
+        if (objetosCreandose==null){
+            objetosCreandose=new ArrayList<>();
+        }
+
+
         botonDesplAcciones = findViewById(R.id.botonAcciones);
         botonDesplTienda = findViewById(R.id.botonTienda);
         botonDesplDiario = findViewById(R.id.botonDiario);
@@ -103,7 +111,7 @@ public class PantallaHerreroActivity extends AppCompatActivity {
                 listaObjetos=getListaObjetos();
 
                 GridView ui_listaObjetos= (GridView) acciones.findViewById(R.id.ui_ListaObjetos);
-                AdaptadorAcciones adaptadorAcciones= new AdaptadorAcciones(acciones.getContext(),R.layout.pop_up_acciones_alpha,listaObjetos,getCodigoSala());
+                AdaptadorAcciones adaptadorAcciones= new AdaptadorAcciones(acciones.getContext(),R.layout.pop_up_acciones_alpha,listaObjetos,getCodigoSala(),objetosCreandose);
                 ui_listaObjetos.setAdapter(adaptadorAcciones);
 
                 botonAtras = acciones.findViewById(R.id.botonAtras);
@@ -243,6 +251,13 @@ public class PantallaHerreroActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             return extras.getString("codigo");
+        }
+        return null;
+    }
+    public ArrayList<Objeto> getObjetosCreandose(){
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            return (ArrayList<Objeto>) extras.getSerializable("objetosCreandose");
         }
         return null;
     }

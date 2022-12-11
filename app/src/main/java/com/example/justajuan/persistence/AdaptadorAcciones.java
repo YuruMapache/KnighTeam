@@ -27,11 +27,13 @@ import java.util.ArrayList;
 public class AdaptadorAcciones extends ArrayAdapter {
     private ArrayList<Objeto> listaObjetos;
     private String numLobby;
+    private ArrayList<Objeto> objetoCreandose;
 
-    public AdaptadorAcciones(Context context, int textViewResourceId, ArrayList objects,String numLobby){
+    public AdaptadorAcciones(Context context, int textViewResourceId, ArrayList objects,String numLobby, ArrayList objetoCreandose){
         super(context,textViewResourceId,objects);
         listaObjetos=objects;
         this.numLobby=numLobby;
+        this.objetoCreandose=objetoCreandose;
     }
     @Override
     public int getCount(){
@@ -59,7 +61,7 @@ public class AdaptadorAcciones extends ArrayAdapter {
             tv.setLayoutParams(params);
             listaMateriales.addView(tv);
             TextView cantidad= new TextView(getContext());
-            cantidad.setText(listaObjetos.get(position).getPrecio().get(i));
+            cantidad.setText(String.valueOf(listaObjetos.get(position).getPrecio().get(i)));
             params= new GridLayout.LayoutParams(GridLayout.spec(j,GridLayout.CENTER),GridLayout.spec(1,GridLayout.CENTER));
             cantidad.setLayoutParams(params);
             listaMateriales.addView(cantidad);
@@ -90,6 +92,8 @@ public class AdaptadorAcciones extends ArrayAdapter {
 
                 listaObjetos.get(position).setContador(contador);
                 listaObjetos.get(position).getContador().start();
+                objetoCreandose.add(listaObjetos.get(position));
+
 
             }
         });
