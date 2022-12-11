@@ -6,6 +6,7 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -270,17 +271,7 @@ public class Tutorial extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        new AlertDialog.Builder(this, R.style.AlertDialogTheme)
-                .setMessage("¿Quieres cerrar la app?")
-
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        finishAffinity();
-                        System.exit(0);
-                    }
-                })
-
-                .setNegativeButton("No", null)
-                .show();
+        Intent i = new Intent(Tutorial.this, PantallaInicioActivity.class);
+        startActivity(i);
     }
 }
