@@ -48,14 +48,15 @@
 
             </TextView>
         </ScrollView>
+
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/botonCombate"
+            android:id="@+id/botonSiguienteResult"
             android:layout_width="123dp"
             android:layout_height="55dp"
-            android:layout_gravity="bottom|right"
-            android:layout_marginRight="20dp"
+            android:layout_gravity="bottom|end"
+            android:layout_marginEnd="20dp"
             android:background="@drawable/rock_button"
-            android:clickable="false"
+            android:onClick="avanzarResultados"
             android:text="@string/botonSiguiente"
             android:textStyle="bold"
             android:textColor="@color/black"/>

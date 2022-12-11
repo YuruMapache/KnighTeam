@@ -100,6 +100,7 @@ public class FirebaseDAO {
                         user.setRol(Rol.values()[Integer.parseInt(tmp) - 1]);
                         dr.child(tmp).setValue(user);
                         dr.child(tmp).child("combateListo").setValue(0);
+                        dr.child(tmp).child("resultadosListos").setValue(0);
                         sesion.setRol(Integer.parseInt(tmp) - 1);
                     }
                 }
@@ -156,7 +157,7 @@ public class FirebaseDAO {
     }
 
 
-    public static void deletePlayer(String nlobby, String id) {
+    public static void deletePlayer(String nlobby, int id) {
         FirebaseDatabase fd = FirebaseDatabase.getInstance();
         DatabaseReference dr = fd.getReference().child("Partida");
         dr.child(nlobby).child(String.valueOf(id)).removeValue();

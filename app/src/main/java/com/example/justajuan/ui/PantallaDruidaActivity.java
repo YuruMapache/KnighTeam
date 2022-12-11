@@ -178,6 +178,7 @@ public class PantallaDruidaActivity extends AppCompatActivity {
 
                 if (listoCaballero == 1 && listoHerrero == 1 && listoMaestroCuadras == 1 && listoCurandero == 1 && listoDruida == 1) {
                     Intent i = new Intent(PantallaDruidaActivity.this, ResultadosDruida.class);
+                    i.putExtra("codigo", getCodigoSala());
                     startActivity(i);
                 }
 
@@ -193,6 +194,7 @@ public class PantallaDruidaActivity extends AppCompatActivity {
 
     public void clickBotonCombate(View view) {
         partidaReference.child(getCodigoSala()).child("5").child("combateListo").setValue(1);
+        partidaReference.child(getCodigoSala()).child("5").child("resultadosListos").setValue(0);
     }
 
     @Override

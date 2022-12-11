@@ -200,6 +200,7 @@ public class PantallaHerreroActivity extends AppCompatActivity {
 
                 if (listoCaballero == 1 && listoHerrero == 1 && listoMaestroCuadras == 1 && listoCurandero == 1 && listoDruida == 1) {
                     Intent i = new Intent(PantallaHerreroActivity.this, ResultadosHerrero.class);
+                    i.putExtra("codigo", getCodigoSala());
                     startActivity(i);
                 }
 
@@ -214,6 +215,7 @@ public class PantallaHerreroActivity extends AppCompatActivity {
 
     public void clickBotonCombate(View view) {
         partidaReference.child(getCodigoSala()).child("2").child("combateListo").setValue(1);
+        partidaReference.child(getCodigoSala()).child("2").child("resultadosListos").setValue(0);
     }
 
     @Override
