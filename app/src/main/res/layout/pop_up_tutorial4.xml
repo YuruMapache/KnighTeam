@@ -5,17 +5,15 @@
     android:id="@+id/tutorial4PopUp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/manuscritopixel"
+    android:background="@drawable/madera_pixel"
     android:orientation="vertical">
 
     <LinearLayout
+        android:background="@drawable/pergamino"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="center"
-        android:layout_marginTop="40dp"
-        android:layout_marginRight="45dp"
-        android:layout_marginLeft="15dp"
-        android:layout_marginBottom="60dp">
+        android:paddingTop="40dp"
+        android:paddingBottom="40dp">
 
         <ScrollView
             android:layout_width="match_parent"
