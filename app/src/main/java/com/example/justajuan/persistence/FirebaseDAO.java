@@ -150,7 +150,7 @@ public class FirebaseDAO {
     }
 
 
-    public static void deletePlayer(String nlobby, String id) {
+    public static void deletePlayer(String nlobby, int id) {
         FirebaseDatabase fd = FirebaseDatabase.getInstance();
         DatabaseReference dr = fd.getReference().child("Partida");
         dr.child(nlobby).child(String.valueOf(id)).removeValue();
