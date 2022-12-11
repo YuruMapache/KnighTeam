@@ -110,11 +110,21 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
                                         i.putExtra("listaObjetos",temporal);
                                         break;
                                     case "CURANDERO":
+                                        for (int j=0; j<listaObjetos.size();j++){
+                                            if (listaObjetos.get(j).getClase().equals("Curandero")){
+                                                temporal.add(listaObjetos.get(j));
+                                            }
+                                        }
                                         i = new Intent(PantallaGestorRolesActivity.this, PantallaCuranderoActivity.class);
                                         i.putExtra("codigo", getCodigoSala());
                                         i.putExtra("rol", Rol.CURANDERO);
                                         break;
                                     case "DRUIDA":
+                                        for (int j=0; j<listaObjetos.size();j++){
+                                            if (listaObjetos.get(j).getClase().equals("Druida")){
+                                                temporal.add(listaObjetos.get(j));
+                                            }
+                                        }
                                         i = new Intent(PantallaGestorRolesActivity.this, PantallaDruidaActivity.class);
                                         i.putExtra("codigo", getCodigoSala());
                                         i.putExtra("rol", Rol.DRUIDA);
@@ -125,6 +135,11 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
                                         i.putExtra("rol", Rol.CABALLERO);
                                         break;
                                     case "MAESTRO_CUADRAS":
+                                        for (int j=0; j<listaObjetos.size();j++){
+                                            if (listaObjetos.get(j).getClase().equals("Maestro_Cuadras")){
+                                                temporal.add(listaObjetos.get(j));
+                                            }
+                                        }
                                         i = new Intent(PantallaGestorRolesActivity.this, PantallaMaestroCuadrasActivity.class);
                                         i.putExtra("codigo", getCodigoSala());
                                         i.putExtra("rol", Rol.MAESTRO_CUADRAS);

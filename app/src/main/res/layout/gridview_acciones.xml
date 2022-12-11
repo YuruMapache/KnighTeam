@@ -9,7 +9,6 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@drawable/pocion_ajustada"
     />
     <TextView
         android:id="@+id/NombreObjeto"
@@ -22,6 +21,8 @@
         android:textSize="20dp"/>
 
     <GridLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginEnd="10dp"
         android:id="@+id/ListaMateriales"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

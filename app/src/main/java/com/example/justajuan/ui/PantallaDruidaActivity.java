@@ -21,6 +21,7 @@ import com.example.justajuan.R;
 import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Sesion;
+import com.example.justajuan.persistence.AdaptadorAcciones;
 import com.example.justajuan.persistence.AdaptadorMateriales;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -36,6 +37,7 @@ public class PantallaDruidaActivity extends AppCompatActivity {
     private AppCompatButton botonDesplTienda;
     private AppCompatButton botonDesplInventario;
     private AppCompatButton botonDesplDiario;
+    private AppCompatButton botonAtras;
     private ArrayList<Material> listaMateriales= new ArrayList<>();
     private GridView vistaLista;
     private FirebaseDatabase firebaseDatabase;
@@ -45,6 +47,8 @@ public class PantallaDruidaActivity extends AppCompatActivity {
     private ValueEventListener listenerMateriales;
     private ValueEventListener listenerCombate;
     private int numRonda;
+    private ArrayList<Objeto> listaObjetos;
+    private ArrayList<Objeto> objetosCreandose;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,6 +119,10 @@ public class PantallaDruidaActivity extends AppCompatActivity {
 
         }.start();
 
+        objetosCreandose=getObjetosCreandose();
+        if (objetosCreandose==null){
+            objetosCreandose=new ArrayList<>();
+        }
 
         botonDesplAcciones = findViewById(R.id.botonAcciones);
         botonDesplTienda = findViewById(R.id.botonTienda);
@@ -128,6 +136,19 @@ public class PantallaDruidaActivity extends AppCompatActivity {
                 acciones.setContentView(R.layout.pop_up_acciones_alpha);
                 acciones.setCancelable(true);
                 acciones.show();
+                listaObjetos=getListaObjetos();
+
+                GridView ui_listaObjetos= (GridView) acciones.findViewById(R.id.ui_ListaObjetos);
+                AdaptadorAcciones adaptadorAcciones= new AdaptadorAcciones(acciones.getContext(),R.layout.pop_up_acciones_alpha,listaObjetos,getCodigoSala(),objetosCreandose);
+                ui_listaObjetos.setAdapter(adaptadorAcciones);
+
+                botonAtras = acciones.findViewById(R.id.botonAtras);
+                botonAtras.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        acciones.hide();
+                    }
+                });
             }
         });
 
@@ -291,6 +312,14 @@ public class PantallaDruidaActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             return (ArrayList<Objeto>) extras.getSerializable("listaObjetos");
+        }
+        return null;
+    }
+
+    public ArrayList<Objeto> getObjetosCreandose(){
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            return (ArrayList<Objeto>) extras.getSerializable("objetosCreandose");
         }
         return null;
     }
