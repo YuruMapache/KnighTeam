@@ -118,6 +118,7 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
                                         i = new Intent(PantallaGestorRolesActivity.this, PantallaCuranderoActivity.class);
                                         i.putExtra("codigo", getCodigoSala());
                                         i.putExtra("rol", Rol.CURANDERO);
+                                        i.putExtra("listaObjetos",temporal);
                                         break;
                                     case "DRUIDA":
                                         for (int j=0; j<listaObjetos.size();j++){
@@ -128,6 +129,7 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
                                         i = new Intent(PantallaGestorRolesActivity.this, PantallaDruidaActivity.class);
                                         i.putExtra("codigo", getCodigoSala());
                                         i.putExtra("rol", Rol.DRUIDA);
+                                        i.putExtra("listaObjetos",temporal);
                                         break;
                                     case "CABALLERO":
                                         i = new Intent(PantallaGestorRolesActivity.this, PantallaCaballeroActivity.class);
@@ -143,6 +145,7 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
                                         i = new Intent(PantallaGestorRolesActivity.this, PantallaMaestroCuadrasActivity.class);
                                         i.putExtra("codigo", getCodigoSala());
                                         i.putExtra("rol", Rol.MAESTRO_CUADRAS);
+                                        i.putExtra("listaObjetos",temporal);
                                         break;
                                     default:
                                         i = new Intent(PantallaGestorRolesActivity.this, PantallaGestorRolesActivity.class);
