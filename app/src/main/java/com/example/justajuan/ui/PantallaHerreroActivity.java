@@ -83,6 +83,7 @@ public class PantallaHerreroActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
+
                 startActivity(new Intent(PantallaHerreroActivity.this, ResultadosHerrero.class));
                 PantallaHerreroActivity.this.finish();
             }

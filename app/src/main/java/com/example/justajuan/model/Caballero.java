@@ -14,6 +14,7 @@ public class Caballero implements Serializable {
     private ArrayList<Objeto> equipado;
 
 
+
     public Caballero(){
         setSalud(100);
         setSalud_max(100);
