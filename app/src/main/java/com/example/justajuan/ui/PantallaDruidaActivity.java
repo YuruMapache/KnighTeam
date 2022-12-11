@@ -133,6 +133,7 @@ public class PantallaDruidaActivity extends AppCompatActivity {
 
     }
 
+
     @Override
     protected void onStart() {
         super.onStart();
@@ -155,7 +156,7 @@ public class PantallaDruidaActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(getApplicationContext(), "Error con los materiales", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -179,6 +180,7 @@ public class PantallaDruidaActivity extends AppCompatActivity {
                     Intent i = new Intent(PantallaDruidaActivity.this, ResultadosDruida.class);
                     startActivity(i);
                 }
+
             }
 
             @Override
@@ -221,6 +223,8 @@ public class PantallaDruidaActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         databaseReference.removeEventListener(listenerMateriales);
-        partidaReference.removeEventListener(listenerCombate);
+        partidaReference.child(getCodigoSala()).removeEventListener(listenerCombate);
     }
+
+
 }

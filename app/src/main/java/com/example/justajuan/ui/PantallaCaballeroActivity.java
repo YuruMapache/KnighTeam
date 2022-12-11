@@ -310,7 +310,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         databaseReference.removeEventListener(listenerMateriales);
-        partidaReference.removeEventListener(listenerCombate);
+        partidaReference.child(getCodigoSala()).removeEventListener(listenerCombate);
     }
 
     public String getCodigoSala() {
