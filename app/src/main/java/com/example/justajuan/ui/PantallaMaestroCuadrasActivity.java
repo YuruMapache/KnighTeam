@@ -19,6 +19,7 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.justajuan.R;
 import com.example.justajuan.model.Material;
+import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.persistence.AdaptadorMateriales;
 import com.google.firebase.database.DataSnapshot;
@@ -43,6 +44,7 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
     private AppCompatButton botonCombate;
     private ValueEventListener listenerMateriales;
     private ValueEventListener listenerCombate;
+    private int numRonda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,8 +80,36 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
-                startActivity(new Intent(PantallaMaestroCuadrasActivity.this, ResultadosMaestroCuadras.class));
-                PantallaMaestroCuadrasActivity.this.finish();
+
+                partidaReference.child(getCodigoSala()).child("1").child("justaGanada").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        if(snapshot.getValue(Boolean.class) == true) {
+
+                            if(numRonda != 5) {
+                                Intent i = new Intent(PantallaMaestroCuadrasActivity.this, ResultadosMaestroCuadras.class);
+                                i.putExtra("codigo", getCodigoSala());
+                                i.putExtra("listaObjetos", getListaObjetos());
+                                startActivity(i);
+
+                            } else {
+                                Intent i = new Intent(PantallaMaestroCuadrasActivity.this, PantallaCuestionario.class);
+                                i.putExtra("codigo", getCodigoSala());
+                                i.putExtra("listaObjetos", getListaObjetos());
+                                startActivity(i);
+                            }
+                        } else {
+                            Intent i = new Intent(PantallaMaestroCuadrasActivity.this, PantallaDerrota.class);
+                        }
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
             }
 
         }.start();
@@ -128,6 +158,18 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
                 acciones.show();
             }
         });
+
+        partidaReference.child(getCodigoSala()).child("1").child("numRonda").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                numRonda = snapshot.getValue(Integer.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
     @Override
@@ -173,9 +215,33 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
                 }
 
                 if (listoCaballero == 1 && listoHerrero == 1 && listoMaestroCuadras == 1 && listoCurandero == 1 && listoDruida == 1) {
-                    Intent i = new Intent(PantallaMaestroCuadrasActivity.this, ResultadosMaestroCuadras.class);
-                    i.putExtra("codigo", getCodigoSala());
-                    startActivity(i);
+
+                    partidaReference.child(getCodigoSala()).child("1").child("justaGanada").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                            if(snapshot.getValue(Boolean.class) == true) {
+
+                                if(numRonda != 1) {
+                                    Intent i = new Intent(PantallaMaestroCuadrasActivity.this, ResultadosMaestroCuadras.class);
+                                    i.putExtra("codigo", getCodigoSala());
+                                    i.putExtra("listaObjetos", getListaObjetos());
+                                    startActivity(i);
+
+                                } else {
+                                    Intent i = new Intent(PantallaMaestroCuadrasActivity.this, PantallaCuestionario.class);
+                                    i.putExtra("codigo", getCodigoSala());
+                                    i.putExtra("listaObjetos", getListaObjetos());
+                                    startActivity(i);
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
 
             }
@@ -221,6 +287,14 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             return extras.getString("codigo");
+        }
+        return null;
+    }
+
+    public ArrayList<Objeto> getListaObjetos(){
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            return (ArrayList<Objeto>) extras.getSerializable("listaObjetos");
         }
         return null;
     }

@@ -47,6 +47,7 @@ public class PantallaHerreroActivity extends AppCompatActivity {
     private ValueEventListener listenerMateriales;
     private ValueEventListener listenerCombate;
     private ArrayList<Objeto> listaObjetos;
+    private int numRonda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,8 +83,36 @@ public class PantallaHerreroActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
-                startActivity(new Intent(PantallaHerreroActivity.this, ResultadosHerrero.class));
-                PantallaHerreroActivity.this.finish();
+
+                partidaReference.child(getCodigoSala()).child("1").child("justaGanada").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        if(snapshot.getValue(Boolean.class) == true) {
+
+                            if(numRonda != 5) {
+                                Intent i = new Intent(PantallaHerreroActivity.this, ResultadosHerrero.class);
+                                i.putExtra("codigo", getCodigoSala());
+                                i.putExtra("listaObjetos", getListaObjetos());
+                                startActivity(i);
+
+                            } else {
+                                Intent i = new Intent(PantallaHerreroActivity.this, PantallaCuestionario.class);
+                                i.putExtra("codigo", getCodigoSala());
+                                i.putExtra("listaObjetos", getListaObjetos());
+                                startActivity(i);
+                            }
+                        } else {
+                            Intent i = new Intent(PantallaHerreroActivity.this, PantallaDerrota.class);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
             }
 
         }.start();
@@ -146,6 +175,18 @@ public class PantallaHerreroActivity extends AppCompatActivity {
             }
         });
 
+        partidaReference.child(getCodigoSala()).child("1").child("numRonda").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                numRonda = snapshot.getValue(Integer.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     @Override
@@ -191,9 +232,33 @@ public class PantallaHerreroActivity extends AppCompatActivity {
                 }
 
                 if (listoCaballero == 1 && listoHerrero == 1 && listoMaestroCuadras == 1 && listoCurandero == 1 && listoDruida == 1) {
-                    Intent i = new Intent(PantallaHerreroActivity.this, ResultadosHerrero.class);
-                    i.putExtra("codigo", getCodigoSala());
-                    startActivity(i);
+
+                    partidaReference.child(getCodigoSala()).child("1").child("justaGanada").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                            if(snapshot.getValue(Boolean.class) == true) {
+
+                                if(numRonda != 1) {
+                                    Intent i = new Intent(PantallaHerreroActivity.this, ResultadosHerrero.class);
+                                    i.putExtra("codigo", getCodigoSala());
+                                    i.putExtra("listaObjetos", getListaObjetos());
+                                    startActivity(i);
+
+                                } else {
+                                    Intent i = new Intent(PantallaHerreroActivity.this, PantallaCuestionario.class);
+                                    i.putExtra("codigo", getCodigoSala());
+                                    i.putExtra("listaObjetos", getListaObjetos());
+                                    startActivity(i);
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
 
             }

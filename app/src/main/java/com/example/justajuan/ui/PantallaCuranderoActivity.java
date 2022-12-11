@@ -100,7 +100,10 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
                                 i.putExtra("listaObjetos", getListaObjetos());
                                 startActivity(i);
                             }
+                        } else {
+                            Intent i = new Intent(PantallaCuranderoActivity.this, PantallaDerrota.class);
                         }
+
                     }
 
                     @Override
@@ -109,8 +112,6 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
                     }
                 });
 
-                startActivity(new Intent(PantallaCuranderoActivity.this, ResultadosCurandera.class));
-                PantallaCuranderoActivity.this.finish();
             }
 
         }.start();
@@ -244,10 +245,6 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
 
                         }
                     });
-
-                    Intent i = new Intent(PantallaCuranderoActivity.this, ResultadosCurandera.class);
-                    i.putExtra("codigo", getCodigoSala());
-                    startActivity(i);
                 }
             }
 
