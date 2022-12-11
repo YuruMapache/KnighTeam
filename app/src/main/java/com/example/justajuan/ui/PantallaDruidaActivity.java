@@ -178,6 +178,7 @@ public class PantallaDruidaActivity extends AppCompatActivity {
 
                 if (listoCaballero == 1 && listoHerrero == 1 && listoMaestroCuadras == 1 && listoCurandero == 1 && listoDruida == 1) {
                     Intent i = new Intent(PantallaDruidaActivity.this, ResultadosDruida.class);
+                    i.putExtra("codigo", getCodigoSala());
                     startActivity(i);
                 }
 

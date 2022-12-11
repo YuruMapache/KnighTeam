@@ -100,6 +100,7 @@ public class FirebaseDAO {
                         user.setRol(Rol.values()[Integer.parseInt(tmp) - 1]);
                         dr.child(tmp).setValue(user);
                         dr.child(tmp).child("combateListo").setValue(0);
+                        dr.child(tmp).child("resultadosListos").setValue(0);
                         sesion.setRol(Integer.parseInt(tmp) - 1);
                     }
                 }

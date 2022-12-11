@@ -191,12 +191,13 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
 
                 int jugadores = (listoCaballero + listoHerrero + listoMaestroCuadras + listoCurandero + listoDruida);
 
-                if(listoCaballero == 1) {
+                if (listoCaballero == 1) {
                     botonCombate.setText(String.format("COMBATE (%s/5)", jugadores));
                 }
 
                 if (listoCaballero == 1 && listoHerrero == 1 && listoMaestroCuadras == 1 && listoCurandero == 1 && listoDruida == 1) {
                     Intent i = new Intent(PantallaCaballeroActivity.this, ResultadosCaballero.class);
+                    i.putExtra("codigo", getCodigoSala());
                     startActivity(i);
                 }
             }

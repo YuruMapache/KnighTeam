@@ -34,8 +34,6 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Sesion.getInstance().setNumLobby(Integer.parseInt(getCodigoSala()));
-
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
@@ -50,7 +48,6 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
         jugadoresTotales = findViewById(R.id.esperaJugadores);
 
         creacionSala.setText(String.format("¡Sala creada! El código es %s", getCodigoSala()));
-
 
     }
 
@@ -70,19 +67,16 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
                     if (numJugadores == 5) {
                         switch (Sesion.getInstance().getRol().toString()) {
                             case "HERRERO":
-                                partidaReference.child(getCodigoSala()).child("2").child("combateListo").setValue(0);
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
                                 i.putExtra("codigo", getCodigoSala());
                                 i.putExtra("rol", Rol.HERRERO);
                                 break;
                             case "CURANDERO":
-                                partidaReference.child(getCodigoSala()).child("4").child("combateListo").setValue(0);
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
                                 i.putExtra("codigo", getCodigoSala());
                                 i.putExtra("rol", Rol.CURANDERO);
                                 break;
                             case "DRUIDA":
-                                partidaReference.child(getCodigoSala()).child("5").child("combateListo").setValue(0);
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
                                 i.putExtra("codigo", getCodigoSala());
                                 i.putExtra("rol", Rol.DRUIDA);
@@ -90,14 +84,12 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
                             case "CABALLERO":
                                 Caballero caballero= new Caballero();
                                 FirebaseDAO.setCaballero(getCodigoSala(),caballero);
-                                partidaReference.child(getCodigoSala()).child("1").child("combateListo").setValue(0);
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
                                 i.putExtra("codigo", getCodigoSala());
                                 i.putExtra("rol", Rol.CABALLERO);
                                 i.putExtra("Caballero",caballero);
                                 break;
                             case "MAESTRO_CUADRAS":
-                                partidaReference.child(getCodigoSala()).child("3").child("combateListo").setValue(0);
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
                                 i.putExtra("codigo", getCodigoSala());
                                 i.putExtra("rol", Rol.MAESTRO_CUADRAS);
@@ -128,34 +120,9 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
      */
     public void back() {
         Sesion sesion = Sesion.getInstance();
-        FirebaseDAO.deletePlayer(sesion.getNumLobby(), sesion.getUsuario().getRol().ordinal()+1);
+        FirebaseDAO.deletePlayer(getCodigoSala(), sesion.getUsuario().getRol().ordinal()+1);
         Intent intent = new Intent(PantallaEsperaLoginActivity.this, PantallaInicioActivity.class);
         startActivity(intent);
-    }
-
-
-    public String getNombreUsuario() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            return extras.getString("nombreUsuario");
-        }
-        return null;
-    }
-
-    public String getEdad() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            return extras.getString("edad");
-        }
-        return null;
-    }
-
-    public String getGenero() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            return extras.getString("genero");
-        }
-        return null;
     }
 
     public String getCodigoSala() {
