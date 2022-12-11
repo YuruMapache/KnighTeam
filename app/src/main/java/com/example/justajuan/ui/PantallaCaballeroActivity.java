@@ -258,7 +258,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
 
                 Enemigo enemigo = snapshot.getValue(Enemigo.class);
                 if (caballero.getVelocidadAtaque() > enemigo.getVelocidadAtaque()) {
-                    while (caballero.getSalud() <= 0 || enemigo.getSalud() <= 0) {
+                    while (caballero.getSalud() > 0 || enemigo.getSalud() > 0) {
                         enemigo.setSalud(enemigo.getSalud() - caballero.getAtaque());
                         if (enemigo.getSalud() <= 0) {
                             break;
@@ -266,7 +266,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                         caballero.setSalud(caballero.getSalud() - enemigo.getAtaque());
                     }
                 } else {
-                    while (caballero.getSalud() <= 0 || enemigo.getSalud() <= 0) {
+                    while (caballero.getSalud() > 0 || enemigo.getSalud() > 0) {
 
                         caballero.setSalud(caballero.getSalud() - enemigo.getAtaque());
                         if (caballero.getSalud() <= 0) {
