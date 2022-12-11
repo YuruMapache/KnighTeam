@@ -28,6 +28,7 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
     private TextView jugadoresTotales;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference, partidaReference;
+    private ValueEventListener listener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +51,21 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
 
         creacionSala.setText(String.format("¡Sala creada! El código es %s", getCodigoSala()));
 
-        partidaReference.child(getCodigoSala()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        listener = partidaReference.child(getCodigoSala()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int numJugadores;
+                Intent i;
                 if (dataSnapshot.exists()) {
                     numJugadores = (int) dataSnapshot.getChildrenCount();
                     jugadoresTotales.setText(String.format("Esperando jugadores... (%s/5)", numJugadores));
-                    Intent i;
 
                     if (numJugadores == 5) {
                         switch (Sesion.getInstance().getRol().toString()) {
@@ -156,6 +164,12 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
             return extras.getString("codigo");
         }
         return null;
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        partidaReference.removeEventListener(listener);
     }
 
 }

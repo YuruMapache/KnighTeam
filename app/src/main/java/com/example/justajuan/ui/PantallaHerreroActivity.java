@@ -42,7 +42,8 @@ public class PantallaHerreroActivity extends AppCompatActivity {
     private DatabaseReference databaseReference;
     private DatabaseReference partidaReference;
     private AppCompatButton botonCombate;
-    private ValueEventListener listener;
+    private ValueEventListener listenerMateriales;
+    private ValueEventListener listenerCombate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,31 +62,8 @@ public class PantallaHerreroActivity extends AppCompatActivity {
 
         vistaLista=(GridView) findViewById(R.id.textRecursos);
 
-        AdaptadorMateriales adaptador= new AdaptadorMateriales(this,R.layout.activity_gridview_materiales,listaMateriales);
-
-
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                listaMateriales.clear();
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    Material material = postSnapshot.getValue(Material.class);
-                    if (material.getRol().contains("Herrero")) {
-                        listaMateriales.add(material);
-                    }
-                }
-                adaptador.setListaMateriales(listaMateriales);
-                vistaLista.setAdapter(adaptador);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
         TextView glblTimer = findViewById(R.id.timerTextView);
-        new CountDownTimer(420000,1000) {
+        new CountDownTimer(360000,1000) {
 
             public void onTick(long millisUntilFinished) {
                 int minutes = (int) millisUntilFinished / 60000;
@@ -169,7 +147,29 @@ public class PantallaHerreroActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        listener = partidaReference.child(Sesion.getNumLobby()).addValueEventListener(new ValueEventListener() {
+        AdaptadorMateriales adaptador= new AdaptadorMateriales(this,R.layout.activity_gridview_materiales,listaMateriales);
+
+        listenerMateriales = databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                listaMateriales.clear();
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    Material material = postSnapshot.getValue(Material.class);
+                    if (material.getRol().contains("Herrero")) {
+                        listaMateriales.add(material);
+                    }
+                }
+                adaptador.setListaMateriales(listaMateriales);
+                vistaLista.setAdapter(adaptador);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        listenerCombate = partidaReference.child(getCodigoSala()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -200,13 +200,14 @@ public class PantallaHerreroActivity extends AppCompatActivity {
     }
 
     public void clickBotonCombate(View view) {
-        partidaReference.child(getCodigoSala()).child("1").child("combateListo").setValue(1);
+        partidaReference.child(getCodigoSala()).child("2").child("combateListo").setValue(1);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        partidaReference.removeEventListener(listener);
+        databaseReference.removeEventListener(listenerMateriales);
+        partidaReference.removeEventListener(listenerCombate);
     }
 
     @Override

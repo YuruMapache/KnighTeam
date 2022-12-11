@@ -46,7 +46,8 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
     private DatabaseReference partidaReference;
     private AppCompatButton botonCombate;
     private Caballero caballero;
-    private ValueEventListener listener;
+    private ValueEventListener listenerCombate;
+    private ValueEventListener listenerMateriales;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,49 +62,13 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference().child("Materiales").child(Sesion.getNumLobby());
         partidaReference = firebaseDatabase.getReference().child("Partida");
 
-        //caballero=getCaballero();
-
-        firebaseDatabase.getReference().child("Caballero").child(Sesion.getNumLobby()).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                caballero = (Caballero) snapshot.getValue(Caballero.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
         vistaLista = (GridView) findViewById(R.id.textRecursos);
-
-        AdaptadorMateriales adaptador = new AdaptadorMateriales(this, R.layout.activity_gridview_materiales, listaMateriales);
 
         botonCombate = findViewById(R.id.botonCombate);
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                listaMateriales.clear();
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    Material material = postSnapshot.getValue(Material.class);
-                    if (material.getRol().contains("Caballero")) {
-                        listaMateriales.add(material);
-                    }
-                }
-                adaptador.setListaMateriales(listaMateriales);
-                vistaLista.setAdapter(adaptador);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
         TextView glblTimer = findViewById(R.id.timerTextView);
 
-        new CountDownTimer(420000, 1000) {
+        new CountDownTimer(360000, 1000) {
 
             public void onTick(long millisUntilFinished) {
                 int minutes = (int) millisUntilFinished / 60000;
@@ -131,6 +96,21 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         botonDesplTienda = findViewById(R.id.botonTienda);
         botonDesplDiario = findViewById(R.id.botonDiario);
         botonDesplInventario = findViewById(R.id.botonInventario);
+
+        //caballero=getCaballero();
+
+        firebaseDatabase.getReference().child("Caballero").child(Sesion.getNumLobby()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                caballero = (Caballero) snapshot.getValue(Caballero.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         botonDesplAcciones.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -177,7 +157,29 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        listener = partidaReference.child(Sesion.getNumLobby()).addValueEventListener(new ValueEventListener() {
+        AdaptadorMateriales adaptador = new AdaptadorMateriales(this, R.layout.activity_gridview_materiales, listaMateriales);
+
+        listenerMateriales = databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                listaMateriales.clear();
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    Material material = postSnapshot.getValue(Material.class);
+                    if (material.getRol().contains("Caballero")) {
+                        listaMateriales.add(material);
+                    }
+                }
+                adaptador.setListaMateriales(listaMateriales);
+                vistaLista.setAdapter(adaptador);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        listenerCombate = partidaReference.child(getCodigoSala()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -307,7 +309,8 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        partidaReference.removeEventListener(listener);
+        databaseReference.removeEventListener(listenerMateriales);
+        partidaReference.removeEventListener(listenerCombate);
     }
 
     public String getCodigoSala() {

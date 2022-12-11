@@ -83,7 +83,7 @@ public class PantallaUnirsePartida extends AppCompatActivity {
                 Sesion.getInstance().setUsuario(user);
                 Sesion.getInstance().setNumLobby(Integer.parseInt(numSala));
 
-                salaReference.addValueEventListener(new ValueEventListener() {
+                salaReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot datasnapshot) {
                         if (datasnapshot.hasChild(numSala)) {

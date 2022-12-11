@@ -77,9 +77,6 @@ public class FirebaseDAO {
 
             }
 
-
-
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 System.out.println("DATABASE ERROR");
