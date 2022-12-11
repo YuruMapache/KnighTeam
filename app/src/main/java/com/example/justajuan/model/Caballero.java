@@ -80,4 +80,5 @@ public class Caballero implements Serializable {
     public void setEquipado(ArrayList<Objeto> equipado) {
         this.equipado = equipado;
     }
+
 }

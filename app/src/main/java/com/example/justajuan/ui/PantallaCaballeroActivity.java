@@ -48,6 +48,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
     private Caballero caballero;
     private ValueEventListener listenerCombate;
     private ValueEventListener listenerMateriales;
+    private int numRonda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,9 +86,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
 
             public void onFinish() {
 
-                algoritmo(1);
-                //startActivity(new Intent(PantallaCaballeroActivity.this, ResultadosCaballero.class));
-                //PantallaCaballeroActivity.this.finish();
+                algoritmo(numRonda);
             }
 
         }.start();
@@ -103,6 +102,20 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 caballero = (Caballero) snapshot.getValue(Caballero.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+
+        partidaReference.child(getCodigoSala()).child("1").child("numRonda").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                numRonda = snapshot.getValue(Integer.class);
             }
 
             @Override
@@ -238,7 +251,6 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
 
     public void algoritmo(int nRonda) {
 
-
         firebaseDatabase.getReference().child("Enemigos").child(String.valueOf(nRonda)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -280,6 +292,9 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                             if (listaMateriales.get(j).getName().equals("Moneda")) {
                                 listaMateriales.get(j).setCantidad(listaMateriales.get(j).getCantidad() + enemigo.getMonedasGanas());
                                 FirebaseDAO.setMateriales(String.valueOf(Sesion.getNumLobby()), listaMateriales);
+                                partidaReference.child(getCodigoSala()).child("1").child("numRonda").setValue(nRonda + 1);
+                                partidaReference.child(getCodigoSala()).child("1").child("justaGanada").setValue(true);
+
                             }
                         }
                     } else {
@@ -287,6 +302,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                     }
 
                 } else {
+                    partidaReference.child(getCodigoSala()).child("1").child("justaGanada").setValue(false);
                     i = new Intent(PantallaCaballeroActivity.this, PantallaDerrota.class);
 
                 }
@@ -306,6 +322,8 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
     public void clickBotonCombate(View view) {
         partidaReference.child(getCodigoSala()).child("1").child("combateListo").setValue(1);
         partidaReference.child(getCodigoSala()).child("1").child("resultadosListos").setValue(0);
+
+        algoritmo(numRonda);
     }
 
     @Override
