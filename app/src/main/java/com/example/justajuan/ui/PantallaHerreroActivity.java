@@ -189,8 +189,8 @@ public class PantallaHerreroActivity extends AppCompatActivity {
                     Intent i = new Intent(PantallaHerreroActivity.this, ResultadosHerrero.class);
                     startActivity(i);
                 }
-            }
 
+            }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getApplicationContext(), "Usuarios no están listos para combate", Toast.LENGTH_SHORT).show();
@@ -207,7 +207,7 @@ public class PantallaHerreroActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         databaseReference.removeEventListener(listenerMateriales);
-        partidaReference.removeEventListener(listenerCombate);
+        partidaReference.child(getCodigoSala()).removeEventListener(listenerCombate);
     }
 
     @Override

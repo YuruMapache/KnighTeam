@@ -75,6 +75,11 @@ public class PantallaUnirsePartida extends AppCompatActivity {
                     return;
                 }
 
+                /*if(Integer.parseInt(edadARegistrar) < 18) {
+                    Toast.makeText(getApplicationContext(), "Edad mínima 18 años", Toast.LENGTH_SHORT).show();
+                    return;
+                }*/
+
                 //Crear usuario
                 User user = new User();
                 user.setNombre(nombreJugadorARegistrar);
@@ -97,7 +102,7 @@ public class PantallaUnirsePartida extends AppCompatActivity {
                                 i.putExtra("genero", generoARegistrar);
                                 i.putExtra("codigo", numSala);
                                 startActivity(i);
-                            } else if (datasnapshot.child(numSala).getChildrenCount() > 5) {
+                            } else if (datasnapshot.child(numSala).getChildrenCount() >= 5) {
                                 Toast.makeText(getApplicationContext(), "La sala está llena", Toast.LENGTH_SHORT).show();
                             }
                         } else {

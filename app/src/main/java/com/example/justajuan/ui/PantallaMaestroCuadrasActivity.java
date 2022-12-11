@@ -176,6 +176,7 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
                     Intent i = new Intent(PantallaMaestroCuadrasActivity.this, ResultadosMaestroCuadras.class);
                     startActivity(i);
                 }
+
             }
 
             @Override
@@ -194,7 +195,7 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
     protected void onStop() {
         super.onStop();
         databaseReference.removeEventListener(listenerMateriales);
-        partidaReference.removeEventListener(listenerCombate);
+        partidaReference.child(getCodigoSala()).removeEventListener(listenerCombate);
     }
 
 

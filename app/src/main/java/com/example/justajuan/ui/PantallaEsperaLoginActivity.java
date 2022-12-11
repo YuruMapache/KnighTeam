@@ -170,7 +170,7 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        partidaReference.removeEventListener(listener);
+        partidaReference.child(getCodigoSala()).removeEventListener(listener);
     }
 
 }

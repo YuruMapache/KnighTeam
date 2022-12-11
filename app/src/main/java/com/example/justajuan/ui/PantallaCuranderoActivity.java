@@ -138,7 +138,6 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
 
         AdaptadorMateriales adaptador = new AdaptadorMateriales(this,R.layout.activity_gridview_materiales,listaMateriales);
 
-
         listenerMateriales = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -196,8 +195,8 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        databaseReference.removeEventListener(listenerCombate);
-        partidaReference.removeEventListener(listenerCombate);
+        databaseReference.removeEventListener(listenerMateriales);
+        partidaReference.child(getCodigoSala()).removeEventListener(listenerCombate);
     }
 
     @Override

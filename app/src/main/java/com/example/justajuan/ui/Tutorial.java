@@ -6,24 +6,17 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import android.app.Dialog;
 import android.content.DialogInterface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.ColorDrawable;
+import android.content.Intent;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 
 import com.example.justajuan.R;
 
 public class Tutorial extends AppCompatActivity {
-
-    private AlertDialog.Builder dialogBuilder;
-    private AlertDialog dialog;
-
 
     private AppCompatButton botonDesplAcciones;
     private AppCompatButton botonDesplTienda;
@@ -266,7 +259,10 @@ public class Tutorial extends AppCompatActivity {
         botonDesplInventario.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                createNewPopUp();
+                final Dialog acciones = new Dialog(Tutorial.this);
+                acciones.setContentView(R.layout.pop_up_tutorial4);
+                acciones.setCancelable(true);
+                acciones.show();
             }
         });
 
@@ -275,26 +271,7 @@ public class Tutorial extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        new AlertDialog.Builder(this, R.style.AlertDialogTheme)
-                .setMessage("¿Quieres cerrar la app?")
-
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        finishAffinity();
-                        System.exit(0);
-                    }
-                })
-
-                .setNegativeButton("No", null)
-                .show();
-    }
-
-    public void createNewPopUp() {
-        dialogBuilder = new AlertDialog.Builder(this);
-        final View tutopop = getLayoutInflater().inflate(R.layout.popupprueba, null);
-        tutopop.setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-        dialogBuilder.setView(tutopop);
-        dialog = dialogBuilder.create();
-        dialog.show();
+        Intent i = new Intent(Tutorial.this, PantallaInicioActivity.class);
+        startActivity(i);
     }
 }
