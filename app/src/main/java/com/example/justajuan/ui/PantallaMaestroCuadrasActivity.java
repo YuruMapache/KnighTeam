@@ -190,6 +190,7 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
 
     public void clickBotonCombate(View view) {
         partidaReference.child(getCodigoSala()).child("3").child("combateListo").setValue(1);
+        partidaReference.child(getCodigoSala()).child("3").child("resultadosListos").setValue(0);
     }
 
     @Override

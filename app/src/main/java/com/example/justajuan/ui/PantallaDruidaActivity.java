@@ -194,6 +194,7 @@ public class PantallaDruidaActivity extends AppCompatActivity {
 
     public void clickBotonCombate(View view) {
         partidaReference.child(getCodigoSala()).child("5").child("combateListo").setValue(1);
+        partidaReference.child(getCodigoSala()).child("5").child("resultadosListos").setValue(0);
     }
 
     @Override

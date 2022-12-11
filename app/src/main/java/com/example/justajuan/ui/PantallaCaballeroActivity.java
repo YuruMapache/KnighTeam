@@ -305,6 +305,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
 
     public void clickBotonCombate(View view) {
         partidaReference.child(getCodigoSala()).child("1").child("combateListo").setValue(1);
+        partidaReference.child(getCodigoSala()).child("1").child("resultadosListos").setValue(0);
     }
 
     @Override

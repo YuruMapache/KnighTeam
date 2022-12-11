@@ -191,6 +191,7 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
 
     public void clickBotonCombate(View view) {
         partidaReference.child(getCodigoSala()).child("4").child("combateListo").setValue(1);
+        partidaReference.child(getCodigoSala()).child("4").child("resultadosListos").setValue(0);
     }
 
     @Override
