@@ -170,7 +170,7 @@ public class SubidaObjetosBD {
         listaEnemigos.add(new Enemigo("Envidia",400,60,10,200));
         listaEnemigos.add(new Enemigo("Pereza",550,70,15,200));
         listaEnemigos.add(new Enemigo("Ira",700,80,20,200));
-        listaEnemigos.add(new Enemigo("Sir Joaquines",1000,100,30,10000));
+        listaEnemigos.add(new Enemigo("Mano Derecha Del Rey",1000,100,30,10000));
 
         dr.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override

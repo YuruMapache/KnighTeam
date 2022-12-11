@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.justajuan.R;
+import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Rol;
 import com.example.justajuan.model.Sesion;
 import com.google.firebase.database.DataSnapshot;
@@ -20,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -31,6 +33,8 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
     private TextView descripcionRol;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference, partidaReference;
+    private ArrayList<Objeto> listaObjetos= new ArrayList<>();
+    private ArrayList<Objeto> temporal= new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +70,21 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
         }
 
 
+        databaseReference.child("Objetos").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    Objeto objeto = postSnapshot.getValue(Objeto.class);
+                    listaObjetos.add(objeto);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
         new Timer().schedule(new TimerTask() {
             @Override
@@ -80,9 +99,15 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
                             if (numJugadores == 5) {
                                 switch (Sesion.getInstance().getRol().toString()) {
                                     case "HERRERO":
+                                        for (int j=0; j<listaObjetos.size();j++){
+                                            if (listaObjetos.get(j).getClase().equals("Herrero")){
+                                                temporal.add(listaObjetos.get(j));
+                                            }
+                                        }
                                         i = new Intent(PantallaGestorRolesActivity.this, PantallaHerreroActivity.class);
                                         i.putExtra("codigo", getCodigoSala());
                                         i.putExtra("rol", Rol.HERRERO);
+                                        i.putExtra("listaObjetos",temporal);
                                         break;
                                     case "CURANDERO":
                                         i = new Intent(PantallaGestorRolesActivity.this, PantallaCuranderoActivity.class);

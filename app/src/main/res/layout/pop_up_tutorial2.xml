@@ -5,22 +5,23 @@
     android:id="@+id/tutorial2PopUp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/transparent"
+    android:background="@drawable/madera_pixel"
     android:orientation="vertical">
 
     <LinearLayout
         android:id="@+id/tutorial2PopUpPergamino"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/manuscritopixel"
+        android:background="@drawable/pergamino"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/texto1"
-            android:layout_width="713dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
-            android:layout_marginTop="70dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="40dp"
+            android:layout_marginTop="30dp"
             android:layout_marginBottom="20dp"
             android:fontFamily="sans-serif"
             android:gravity="start"
@@ -32,9 +33,10 @@
 
         <TextView
             android:id="@+id/texto2"
-            android:layout_width="713dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="70dp"
+            android:layout_marginLeft="50dp"
+            android:layout_marginRight="40dp"
             android:fontFamily="sans-serif"
             android:gravity="start"
             android:justificationMode="inter_word"

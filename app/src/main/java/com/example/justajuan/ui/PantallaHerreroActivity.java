@@ -19,7 +19,9 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.justajuan.R;
 import com.example.justajuan.model.Material;
+import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Sesion;
+import com.example.justajuan.persistence.AdaptadorAcciones;
 import com.example.justajuan.persistence.AdaptadorMateriales;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -44,6 +46,7 @@ public class PantallaHerreroActivity extends AppCompatActivity {
     private AppCompatButton botonCombate;
     private ValueEventListener listenerMateriales;
     private ValueEventListener listenerCombate;
+    private ArrayList<Objeto> listaObjetos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,15 +100,17 @@ public class PantallaHerreroActivity extends AppCompatActivity {
                 acciones.setContentView(R.layout.pop_up_acciones_alpha);
                 acciones.setCancelable(true);
                 acciones.show();
+                listaObjetos=getListaObjetos();
 
-                botonAtras = findViewById(R.id.botonAtras);
+                GridView ui_listaObjetos= (GridView) acciones.findViewById(R.id.ui_ListaObjetos);
+                AdaptadorAcciones adaptadorAcciones= new AdaptadorAcciones(acciones.getContext(),R.layout.pop_up_acciones_alpha,listaObjetos,getCodigoSala());
+                ui_listaObjetos.setAdapter(adaptadorAcciones);
+
+                botonAtras = acciones.findViewById(R.id.botonAtras);
                 botonAtras.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        final Dialog acciones = new Dialog(PantallaHerreroActivity.this);
-                        acciones.setContentView(R.layout.activity_pantalla_herrero);
-                        acciones.setCancelable(true);
-                        acciones.show();
+                        acciones.hide();
                     }
                 });
             }
@@ -225,6 +230,14 @@ public class PantallaHerreroActivity extends AppCompatActivity {
 
                 .setNegativeButton("No", null)
                 .show();
+    }
+
+    public ArrayList<Objeto> getListaObjetos(){
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            return (ArrayList<Objeto>) extras.getSerializable("listaObjetos");
+        }
+        return null;
     }
 
     public String getCodigoSala() {

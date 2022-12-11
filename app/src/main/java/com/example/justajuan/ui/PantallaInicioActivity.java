@@ -49,7 +49,7 @@ public class PantallaInicioActivity extends AppCompatActivity {
         botonTutorial.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SubidaObjetosBD.subirEnemigos();
+                SubidaObjetosBD.setObjetos();
                 //Pasa a las ventanas del tutorial
                 startActivity(new Intent(PantallaInicioActivity.this, Tutorial.class));
             }
