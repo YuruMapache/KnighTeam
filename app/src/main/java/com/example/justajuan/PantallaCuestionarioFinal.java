@@ -1,4 +1,7 @@
-package com.example.justajuan.ui;
+package com.example.justajuan;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -6,19 +9,15 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.justajuan.R;
 import com.example.justajuan.model.Formulario;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.persistence.FirebaseDAO;
+import com.example.justajuan.ui.PantallaCuestionario;
 
-public class PantallaCuestionario extends AppCompatActivity {
+public class PantallaCuestionarioFinal extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,9 +25,8 @@ public class PantallaCuestionario extends AppCompatActivity {
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_cuestionario);
+        setContentView(R.layout.activity_pantalla_cuestionario_final);
     }
-
 
     @Override
     public void onBackPressed() {
@@ -46,20 +44,6 @@ public class PantallaCuestionario extends AppCompatActivity {
                 .show();
     }
 
-    private void ponerCuestionarioFinal() {
-        /*for( int i = 0; i<llpreguntas.getChildCount()-1; i++){
-            rg = (RadioGroup) llpreguntas.getChildAt(i);
-            int selectedId = rg.getCheckedRadioButtonId();
-            if(selectedId == -1){
-                ok = false;
-                Toast.makeText(PantallaCuestionario.this, "Por favor rellena todos los campos", Toast.LENGTH_SHORT).show();
-                break;
-            }else{
-                form.setPregunta(i,selectedId);
-            }
-        }*/
-    }
-
     public void enviarRespuestas(View view) {
         boolean ok = true;
         RadioGroup rg;
@@ -72,7 +56,7 @@ public class PantallaCuestionario extends AppCompatActivity {
             int selectedId = rg.getCheckedRadioButtonId();
             if (selectedId == -1) {
                 ok = false;
-                Toast.makeText(PantallaCuestionario.this, "Por favor rellena todos los campos", Toast.LENGTH_SHORT).show();
+                Toast.makeText(PantallaCuestionarioFinal.this, "Por favor rellena todos los campos", Toast.LENGTH_SHORT).show();
                 break;
             } else {
                 form.setPregunta(i, selectedId);
@@ -80,7 +64,7 @@ public class PantallaCuestionario extends AppCompatActivity {
         }
         if (ok) {
             Sesion sesion = Sesion.getInstance();
-            FirebaseDAO.setForm(sesion.getNumLobby(), sesion.getRol().ordinal(), 0, form);
+            FirebaseDAO.setForm(sesion.getNumLobby(), sesion.getRol().ordinal(), 1, form);
         }
     }
 }

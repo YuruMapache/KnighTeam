@@ -6,6 +6,7 @@ import androidx.annotation.NonNull;
 
 import com.example.justajuan.model.Caballero;
 import com.example.justajuan.model.Enemigo;
+import com.example.justajuan.model.Formulario;
 import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Rol;
@@ -37,7 +38,7 @@ public class FirebaseDAO {
         mUser.child("password").child(id).setValue(password);
     }
 
-    public static void setMateriales(String nlobby, ArrayList<Material> materiales){
+    public static void setMateriales(String nlobby, ArrayList<Material> materiales) {
         FirebaseDatabase fd = FirebaseDatabase.getInstance();
         DatabaseReference dr = fd.getReference().child("Materiales").child(nlobby);
 
@@ -46,13 +47,11 @@ public class FirebaseDAO {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Sesion sesion = Sesion.getInstance();
 
-                for (int i=0; i<materiales.size();i++) {
+                for (int i = 0; i < materiales.size(); i++) {
 
-                        dr.child(materiales.get(i).getName()).setValue(materiales.get(i));
-                    }
+                    dr.child(materiales.get(i).getName()).setValue(materiales.get(i));
                 }
-
-
+            }
 
 
             @Override
@@ -64,7 +63,7 @@ public class FirebaseDAO {
     }
 
 
-    public static void setCaballero(String nlobby, Caballero caballero){
+    public static void setCaballero(String nlobby, Caballero caballero) {
         FirebaseDatabase fd = FirebaseDatabase.getInstance();
         DatabaseReference dr = fd.getReference().child("Caballero").child(nlobby);
 
@@ -73,7 +72,7 @@ public class FirebaseDAO {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Sesion sesion = Sesion.getInstance();
 
-                    dr.setValue(caballero);
+                dr.setValue(caballero);
 
             }
 
@@ -84,7 +83,6 @@ public class FirebaseDAO {
         });
 
     }
-
 
 
     public static void setPlayer(String nlobby, User user) {
@@ -97,9 +95,9 @@ public class FirebaseDAO {
                 Sesion sesion = Sesion.getInstance();
 
                 while (sesion.getRol() == null) {
-                    String tmp = String.valueOf((int) (Math.random()*5 + 1));
+                    String tmp = String.valueOf((int) (Math.random() * 5 + 1));
                     if (!snapshot.hasChild(tmp)) {
-                        user.setRol(Rol.values()[Integer.parseInt(tmp)-1]);
+                        user.setRol(Rol.values()[Integer.parseInt(tmp) - 1]);
                         dr.child(tmp).setValue(user);
                         dr.child(tmp).child("combateListo").setValue(0);
                         sesion.setRol(Integer.parseInt(tmp) - 1);
@@ -117,12 +115,11 @@ public class FirebaseDAO {
     /**
      * Obtiene los atributos de un objeto.
      *
-     * @param id Identificador del objeto.
+     * @param id    Identificador del objeto.
      * @param level Nivel del objeto a obtener.
-     *
      * @return Objeto de tipo Objeto.
      */
-    public static Objeto getObjeto(String id, int level){
+    public static Objeto getObjet(String id, int level) {
         FirebaseDatabase fd = FirebaseDatabase.getInstance();
         DatabaseReference dr = fd.getReference().child("Objetos").child(id).child(String.valueOf(level));
         Objeto obj = new Objeto();
@@ -130,8 +127,7 @@ public class FirebaseDAO {
         dr.get().addOnCompleteListener(task -> {
             if (!task.isSuccessful()) {
                 Log.e("firebase", "Error getting data", task.getException());
-            }
-            else {
+            } else {
                 DataSnapshot ds = task.getResult();
                 obj.setSalud((Integer) ds.child("Salud").getValue());
                 obj.setAtaque((Integer) ds.child("Ataque").getValue());
@@ -147,6 +143,16 @@ public class FirebaseDAO {
             }
         });
         return obj;
+    }
+
+    public static void setForm(int nlobby, int user, int id, Formulario form) {
+        FirebaseDatabase fd = FirebaseDatabase.getInstance();
+        DatabaseReference dr = fd.getReference().child("Partida").child(String.valueOf(nlobby)).child(String.valueOf(user)).child("Formularios").child(String.valueOf(id));
+        Map preguntas = form.getPreguntas();
+        preguntas.forEach(
+                (key, value)
+                        -> dr.setValue(key, value)
+        );
     }
 
 

@@ -30,11 +30,6 @@
     <string name="nombre_jugador">Nombre:</string>
     <string name="edad_jugador">Edad:</string>
     <string name="genero_jugador">Género:</string>
-    <string-array name="genero">
-        <item>Masculino</item>
-        <item>Femenino</item>
-        <item>Otro</item>
-    </string-array>
     <string name="numeroSala">Número de sala:</string>
     <string name="botonJugar">JUGAR</string>
     <string name="password_jugador">Contraseña:</string>
@@ -42,8 +37,8 @@
     <string name="simboloMas">+</string>
     <string name="victoria">¡VICTORIA!</string>
     <string name="derrota">DERROTA...</string>
-
     <string name="tutorial1Texto1">Aquí podras ver los materiales disponibles,así como la cantidad que dispones de cada uno de ellos.</string>
+
     <string name="tutorial1Texto2">El personaje te servirá como recordatorio de tu rol y además al final de cada toma de decisiones te dará los resultados.</string>
     <string name="tutorial2Texto1">En esta parte de la pantalla tendrás siempre disponible el tiempo restante para realizar tus diversas acciones.</string>
     <string name="tutorial2Texto2">Esto se ve reflejado como tiempo hasta vuestra próxima justa.</string>
@@ -54,4 +49,43 @@
     <string name="tutorial4Texto4">En Inventario podrás ver todo lo que tienes almacenado y disponible.</string>
     <string name="tutorial4Texto5">Con Comprar podrás acceder a un apartado para intercambiar diversos objetos disponibles para tu rol a cambio de un módico precio, más fácil que craftearlos a mano.</string>
     <string name="combate_boton">COMBATE </string>
+    <string name="tutorial4Texto">Podrás usar estos cuatros botones a tu antojo durante el tiempo disponible para la toma de decisiones.\n
+        El botón Acciones te permitirá ver una lista de actividades disponibles para tu rol.\n
+        Desde Diario verás un resumen de los mensajes recibidos hasta el momento de los resultados de cada justa\n
+        En Inventario podrás ver todo lo que tienes almacenado y disponible.\n
+        Con Comprar podrás acceder a un apartado para intercambiar diversos objetos disponibles para tu rol a cambio de un módico precio, más fácil que craftearlos a mano.
+    </string>
+    <string name="muy_en_desacuerdo">Muy en desacuerdo</string>
+    <string name="en_desacuerdo">En desacuerdo</string>
+    <string name="indiferente">Indiferente</string>
+    <string name="de_acuerdo">De acuerdo</string>
+    <string name="muy_de_acuerdo">Muy de acuerdo</string>
+
+
+    <!--Preguntas 1-->
+    <string name="pregunta1.1">¿Te parece que ha sido posible entenderte con tus compañeros?</string>
+    <string name="pregunta1.2">¿Consideras que tu equipo se aprovecha de las capacidades de cada uno de sus miembros?</string>
+    <string name="pregunta1.3">¿Crees que tanto tú como tus compañeros os sentís animados por la idea de ganar el juego?</string>
+    <string name="pregunta1.4">¿Estimas que colaboras mejor con tus compañeros después de unos turnos?</string>
+    <string name="pregunta1.5">¿Las decisiones que has tenido que tomar hasta ahora te han resultado complejas?</string>
+    <string name="pregunta1.6">¿Estimas que has sido capaz de mantener motivado al equipo cuando las cosas no han ido bien?</string>
+    <string name="pregunta1.7">¿Crees que la comunicación en vuestro equipo ha mejorado después de utilizar este juego?</string>
+    <string name="pregunta1.8">¿Te parece que estáis sabiendo enfrentarnos a los problemas de forma adecuada?</string>
+
+    <!--Preguntas 2-->
+    <string name="pregunta2.1">¿Consideras que la comunicación ha sido fluida entre los jugadores?</string>
+    <string name="pregunta2.2">¿Crees que ha habido un trabajo en equipo óptimo?</string>
+    <string name="pregunta2.3">¿Consideras que en tu equipo ha habido motivación entre los jugadores?</string>
+    <string name="pregunta2.4">¿Crees que si lo repitieseis, sacaréis mejores resultados como equipo?</string>
+    <string name="pregunta2.5">¿Cómo de difíciles han sido las decisiones que has tenido que tomar?</string>
+    <string name="pregunta2.6">Me he sentido capaz de animar a mis compañeros cuando el jueg vi o no ha ido a nuestro favor.</string>
+    <string name="pregunta2.7">El juego ha sido una herramienta útil para favorecer la comunicación.</string>
+    <string name="pregunta2.8">Hemos sabido afrontar juntos los problemas que han ido surgiendo.</string>
+
+    <string-array name="genero">
+        <item>Masculino</item>
+        <item>Femenino</item>
+        <item>Otro</item>
+    </string-array>
+
 </resources>

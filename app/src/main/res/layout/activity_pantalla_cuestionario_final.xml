@@ -5,7 +5,8 @@
     android:layout_height="match_parent"
     android:background="@drawable/fondo_cuestionario"
     android:orientation="horizontal"
-    android:paddingTop="100dp">
+    android:paddingTop="100dp"
+    tools:context=".PantallaCuestionarioFinal">
 
 
     <ScrollView
@@ -37,7 +38,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/pregunta1.1"
+                    android:text="@string/pregunta2.1"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
@@ -94,7 +95,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/pregunta1.2"
+                    android:text="@string/pregunta2.2"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
@@ -151,7 +152,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/pregunta1.3"
+                    android:text="@string/pregunta2.3"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
@@ -208,7 +209,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/pregunta1.4"
+                    android:text="@string/pregunta2.4"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
@@ -265,7 +266,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/pregunta1.5"
+                    android:text="@string/pregunta2.5"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
@@ -322,7 +323,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/pregunta1.6"
+                    android:text="@string/pregunta2.6"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
@@ -379,7 +380,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/pregunta1.7"
+                    android:text="@string/pregunta2.7"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
@@ -436,7 +437,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/pregunta1.8"
+                    android:text="@string/pregunta2.8"
                     android:textColor="@color/black"
                     android:textStyle="bold" />
 
@@ -466,14 +467,12 @@
                         android:text="@string/indiferente" />
 
                     <RadioButton
-                        android:id="@+id/radioButton8.4"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="4dp"
                         android:text="@string/de_acuerdo" />
 
                     <RadioButton
-                        android:id="@+id/radioButton8.5"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="4dp"
