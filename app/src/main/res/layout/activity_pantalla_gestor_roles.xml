@@ -23,7 +23,7 @@
         <TextView
             android:id="@+id/rolEscogido"
             android:layout_width="250dp"
-            android:layout_height="61dp"
+            android:layout_height="60dp"
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:textColor="@color/black"
@@ -32,8 +32,8 @@
 
         <TextView
             android:id="@+id/descripcionRol"
-            android:layout_width="250dp"
-            android:layout_height="61dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
             android:gravity="center"
             android:textColor="@color/black"
