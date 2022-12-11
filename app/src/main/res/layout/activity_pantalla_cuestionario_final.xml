@@ -492,7 +492,6 @@
                     android:layout_width="123dp"
                     android:layout_height="55dp"
                     android:background="@drawable/rock_button"
-                    android:clickable="false"
                     android:onClick="enviarRespuestas"
                     android:text="@string/botonSiguiente"
                     android:textColor="@color/black"
