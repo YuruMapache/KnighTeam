@@ -19,6 +19,7 @@ import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.justajuan.R;
 import com.example.justajuan.model.Material;
+import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.persistence.AdaptadorMateriales;
 import com.google.firebase.database.DataSnapshot;
@@ -43,6 +44,7 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
     private AppCompatButton botonCombate;
     private ValueEventListener listenerMateriales;
     private ValueEventListener listenerCombate;
+    private int numRonda;
 
 
     @Override
@@ -79,6 +81,34 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
+
+                partidaReference.child(getCodigoSala()).child("1").child("justaGanada").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        if(snapshot.getValue(Boolean.class) == true) {
+
+                            if(numRonda != 5) {
+                                Intent i = new Intent(PantallaCuranderoActivity.this, ResultadosCurandera.class);
+                                i.putExtra("codigo", getCodigoSala());
+                                i.putExtra("listaObjetos", getListaObjetos());
+                                startActivity(i);
+
+                            } else {
+                                Intent i = new Intent(PantallaCuranderoActivity.this, PantallaCuestionario.class);
+                                i.putExtra("codigo", getCodigoSala());
+                                i.putExtra("listaObjetos", getListaObjetos());
+                                startActivity(i);
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
                 startActivity(new Intent(PantallaCuranderoActivity.this, ResultadosCurandera.class));
                 PantallaCuranderoActivity.this.finish();
             }
@@ -130,6 +160,18 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
             }
         });
 
+        partidaReference.child(getCodigoSala()).child("1").child("numRonda").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                numRonda = snapshot.getValue(Integer.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
     }
 
     @Override
@@ -175,6 +217,34 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
                 }
 
                 if (listoCaballero == 1 && listoHerrero == 1 && listoMaestroCuadras == 1 && listoCurandero == 1 && listoDruida == 1) {
+
+                    partidaReference.child(getCodigoSala()).child("1").child("justaGanada").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                            if(snapshot.getValue(Boolean.class) == true) {
+
+                                if(numRonda != 5) {
+                                    Intent i = new Intent(PantallaCuranderoActivity.this, ResultadosCurandera.class);
+                                    i.putExtra("codigo", getCodigoSala());
+                                    i.putExtra("listaObjetos", getListaObjetos());
+                                    startActivity(i);
+
+                                } else {
+                                    Intent i = new Intent(PantallaCuranderoActivity.this, PantallaCuestionario.class);
+                                    i.putExtra("codigo", getCodigoSala());
+                                    i.putExtra("listaObjetos", getListaObjetos());
+                                    startActivity(i);
+                                }
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
                     Intent i = new Intent(PantallaCuranderoActivity.this, ResultadosCurandera.class);
                     i.putExtra("codigo", getCodigoSala());
                     startActivity(i);
@@ -192,6 +262,7 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
     public void clickBotonCombate(View view) {
         partidaReference.child(getCodigoSala()).child("4").child("combateListo").setValue(1);
         partidaReference.child(getCodigoSala()).child("4").child("resultadosListos").setValue(0);
+
     }
 
     @Override
@@ -221,6 +292,14 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             return extras.getString("codigo");
+        }
+        return null;
+    }
+
+    public ArrayList<Objeto> getListaObjetos(){
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            return (ArrayList<Objeto>) extras.getSerializable("listaObjetos");
         }
         return null;
     }
