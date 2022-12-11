@@ -286,6 +286,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 if (caballero.getSalud() > 0) {
                     if (nRonda < 10) {
                         i = new Intent(PantallaCaballeroActivity.this, ResultadosCaballero.class);
+                        i.putExtra("codigo", getCodigoSala());
                         i.putExtra("Caballero", caballero);
                         i.putExtra("nRonda", nRonda + 1);
                         for (int j = 0; j < listaMateriales.size(); j++) {
