@@ -134,6 +134,14 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 acciones.setContentView(R.layout.pop_up_acciones_alpha);
                 acciones.setCancelable(true);
                 acciones.show();
+
+                botonAtras = acciones.findViewById(R.id.botonAtras);
+                botonAtras.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        acciones.hide();
+                    }
+                });
             }
         });
 
@@ -144,6 +152,15 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 acciones.setContentView(R.layout.pop_up_tienda_alpha);
                 acciones.setCancelable(true);
                 acciones.show();
+
+
+                botonAtras = acciones.findViewById(R.id.botonAtras);
+                botonAtras.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        acciones.hide();
+                    }
+                });
             }
         });
 
@@ -162,13 +179,18 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                         TextView diarioAcum = (TextView) acciones.findViewById(R.id.infoAcumulada);
                         diarioAcum.setText(snapshot.child("ResultadosAcumulados").getValue(String.class));
 
+                        botonAtras = acciones.findViewById(R.id.botonAtras);
+                        botonAtras.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                acciones.hide();
+                            }
+                        });
+
                     }
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
-
-
                     }
                 });
 
