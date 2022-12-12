@@ -9,7 +9,7 @@
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/close"
+        android:id="@+id/titulo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="50dp"
@@ -18,6 +18,7 @@
         android:text="@string/diario_boton"
         android:textSize="25sp"
         android:textStyle="bold|italic"
+        android:textColor="@color/black"
         tools:layout_editor_absoluteX="64dp"
         tools:layout_editor_absoluteY="46dp" />
 
@@ -33,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text=" "
+        android:justificationMode="inter_word"
         android:textColor="@color/black"
         android:textSize="20sp"
         android:textStyle="bold">
