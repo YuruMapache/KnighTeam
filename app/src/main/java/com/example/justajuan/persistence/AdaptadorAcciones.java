@@ -73,10 +73,13 @@ public class AdaptadorAcciones extends ArrayAdapter {
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //360000*listaObjetos.get(position).getTiempo()
 
-                CountDownTimer contador= new CountDownTimer(360000*listaObjetos.get(position).getTiempo(),1000) {
+                CountDownTimer contador= new CountDownTimer(2000,1000) {
                     @Override
                     public void onTick(long millisUntilFinished) {
+
+                        listaObjetos.get(position).setTiempoQueFalta(millisUntilFinished);
 
                     }
 

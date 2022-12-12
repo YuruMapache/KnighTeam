@@ -22,6 +22,7 @@ public class Objeto implements Serializable {
     private boolean esConsumible;
     private int idDrawable;
     private boolean acabado;
+    private long tiempoQueFalta;
 
 
     public Objeto() {
@@ -144,5 +145,13 @@ public class Objeto implements Serializable {
 
     public void setAcabado(boolean acabado) {
         this.acabado = acabado;
+    }
+
+    public long getTiempoQueFalta() {
+        return tiempoQueFalta;
+    }
+
+    public void setTiempoQueFalta(long tiempoQueFalta) {
+        this.tiempoQueFalta = tiempoQueFalta;
     }
 }

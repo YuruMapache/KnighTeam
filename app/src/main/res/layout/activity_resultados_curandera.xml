@@ -37,17 +37,19 @@
             android:textSize="25dp"
             android:textStyle="bold|italic" />
 
-        <ScrollView
-            android:layout_width="800dp"
-            android:layout_height="100dp">
+        <TextView
+            android:id="@+id/resultados"
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:fontFamily="sans-serif"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textColor="@color/black"
+            android:justificationMode="inter_word"
+            android:textSize="20sp"
+            android:textStyle="bold|italic">
+        </TextView>
 
-            <TextView
-                android:id="@+id/resultados"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-            </TextView>
-        </ScrollView>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/botonSiguienteResult"

@@ -4,39 +4,30 @@
     android:layout_height="wrap_content"
     >
 
-<ImageView
-    android:id="@+id/ImagenObjeto"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_gravity="center"
-    />
-    <TextView
-        android:id="@+id/NombreObjeto"
+    <ImageView
+        android:id="@+id/imagenInventario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Poción de Velocidad: "
-
+        />
+    <TextView
+        android:id="@+id/nombreInventario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Poción de Velocidad "
+        android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="20dp"/>
 
-    <GridLayout
-        android:id="@+id/ListaMateriales"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:rowCount="2"
-        android:columnCount="2">
-
-
-    </GridLayout>
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/botonCrearObjeto"
-        android:layout_width="50dp"
+        android:id="@+id/botonObjetoInventario"
+        android:layout_width="80dp"
         android:layout_height="50dp"
         android:layout_marginLeft="10dp"
         android:layout_gravity="center"
         android:background="@drawable/rock_button"
-        android:text="Crear"
+        android:text="Equipar"
         android:textColor="@color/black" />
 
 </LinearLayout>

@@ -23,6 +23,7 @@ import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.persistence.AdaptadorAcciones;
 import com.example.justajuan.persistence.AdaptadorMateriales;
+import com.example.justajuan.persistence.AdaptadorProgreso;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -67,6 +68,13 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
 
         vistaLista=(GridView) findViewById(R.id.textRecursos);
 
+        objetosCreandose=getObjetosCreandose();
+        if (objetosCreandose==null){
+            objetosCreandose=new ArrayList<>();
+        }
+
+        AdaptadorProgreso adaptadorProgreso= new AdaptadorProgreso(this,R.layout.gridview_recursos_feudo,objetosCreandose);
+
         TextView glblTimer = findViewById(R.id.timerTextView);
         new CountDownTimer(360000,1000) {
 
@@ -81,6 +89,9 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
                 }
                 timeLeftText += seconds;
                 glblTimer.setText(timeLeftText);
+
+                GridView ui_listaObjetos= (GridView) findViewById(R.id.recursosFeudoGridView);
+                ui_listaObjetos.setAdapter(adaptadorProgreso);
             }
 
             public void onFinish() {
@@ -206,7 +217,7 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
                 listaMateriales.clear();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Material material = postSnapshot.getValue(Material.class);
-                    if (material.getRol().contains("MaestroCuadras")) {
+                    if (material.getRol().contains("Maestro_Cuadras")) {
                         listaMateriales.add(material);
                     }
                 }
@@ -248,6 +259,7 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
                                     Intent i = new Intent(PantallaMaestroCuadrasActivity.this, ResultadosMaestroCuadras.class);
                                     i.putExtra("codigo", getCodigoSala());
                                     i.putExtra("listaObjetos", getListaObjetos());
+                                    i.putExtra("numRonda", numRonda);
                                     startActivity(i);
 
                                 } else {

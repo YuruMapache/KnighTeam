@@ -23,6 +23,7 @@ import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.persistence.AdaptadorAcciones;
 import com.example.justajuan.persistence.AdaptadorMateriales;
+import com.example.justajuan.persistence.AdaptadorProgreso;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -40,6 +41,7 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
     private AppCompatButton botonAtras;
     private ArrayList<Material> listaMateriales= new ArrayList<>();
     private GridView vistaLista;
+    private GridView vistaProgreso;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private DatabaseReference partidaReference;
@@ -68,6 +70,16 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
 
         vistaLista=(GridView) findViewById(R.id.textRecursos);
 
+
+        objetosCreandose=getObjetosCreandose();
+        if (objetosCreandose==null){
+            objetosCreandose=new ArrayList<>();
+        }
+
+        AdaptadorProgreso adaptadorProgreso= new AdaptadorProgreso(this,R.layout.gridview_recursos_feudo,objetosCreandose);
+
+
+
         TextView glblTimer = findViewById(R.id.timerTextView);
         new CountDownTimer(360000,1000) {
 
@@ -82,6 +94,11 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
                 }
                 timeLeftText += seconds;
                 glblTimer.setText(timeLeftText);
+
+
+                GridView ui_listaObjetos= (GridView) findViewById(R.id.recursosFeudoGridView);
+                ui_listaObjetos.setAdapter(adaptadorProgreso);
+
             }
 
             public void onFinish() {
@@ -120,10 +137,12 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
 
         }.start();
 
-        objetosCreandose=getObjetosCreandose();
-        if (objetosCreandose==null){
-            objetosCreandose=new ArrayList<>();
-        }
+
+
+
+
+
+
 
         botonDesplAcciones = findViewById(R.id.botonAcciones);
         botonDesplTienda = findViewById(R.id.botonTienda);
@@ -222,6 +241,10 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
 
             }
         });
+
+
+
+
 
         listenerCombate = partidaReference.child(getCodigoSala()).addValueEventListener(new ValueEventListener() {
             @Override
