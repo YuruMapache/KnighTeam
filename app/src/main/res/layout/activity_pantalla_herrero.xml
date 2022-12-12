@@ -57,44 +57,19 @@
             android:textAlignment="center"
             android:textColor="@color/black" />
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:paddingHorizontal="10dp">
 
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="20dp"
-                    android:gravity="center_vertical"
-                    android:padding="5dp"
-                    android:text="@string/default_objstate"
-                    app:drawableStartCompat="@drawable/espada_ajustada" />
+                <GridView
+                    android:id="@+id/recursosFeudoGridView"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:numColumns="1" />
 
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="20dp"
-                    android:gravity="center_vertical"
-                    android:padding="5dp"
-                    android:text="@string/default_objstate"
-                    app:drawableStartCompat="@drawable/moneda_ajustada" />
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:drawablePadding="20dp"
-                    android:gravity="center_vertical"
-                    android:padding="5dp"
-                    android:text="@string/default_objstate"
-                    app:drawableStartCompat="@drawable/herradura_ajustada" />
             </LinearLayout>
-        </ScrollView>
 
     </LinearLayout>
 

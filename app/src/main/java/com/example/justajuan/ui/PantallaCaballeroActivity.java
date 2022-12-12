@@ -23,6 +23,8 @@ import com.example.justajuan.model.Enemigo;
 import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Sesion;
+import com.example.justajuan.persistence.AdaptadorAcciones;
+import com.example.justajuan.persistence.AdaptadorInventario;
 import com.example.justajuan.persistence.AdaptadorMateriales;
 import com.example.justajuan.persistence.FirebaseDAO;
 import com.google.firebase.database.DataSnapshot;
@@ -39,6 +41,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
     private AppCompatButton botonDesplTienda;
     private AppCompatButton botonDesplInventario;
     private AppCompatButton botonDesplDiario;
+    private AppCompatButton botonAtras;
     private ArrayList<Material> listaMateriales = new ArrayList<>();
     private GridView vistaLista;
     private FirebaseDatabase firebaseDatabase;
@@ -96,7 +99,6 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         botonDesplDiario = findViewById(R.id.botonDiario);
         botonDesplInventario = findViewById(R.id.botonInventario);
 
-        //caballero=getCaballero();
 
         firebaseDatabase.getReference().child("Caballero").child(String.valueOf(Sesion.getNumLobby())).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -162,6 +164,39 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 acciones.setContentView(R.layout.pop_up_inventario);
                 acciones.setCancelable(true);
                 acciones.show();
+
+                firebaseDatabase.getReference().child("Inventario").child(getCodigoSala()).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        ArrayList<Objeto> inventario= new ArrayList<>();
+
+                        for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                            Objeto objeto = postSnapshot.getValue(Objeto.class);
+                            inventario.add(objeto);
+                        }
+
+                        GridView ui_listaObjetos= (GridView) acciones.findViewById(R.id.gridView_Inventario);
+                        AdaptadorInventario adaptadorInventario= new AdaptadorInventario(acciones.getContext(),R.layout.pop_up_inventario,inventario,caballero);
+                        ui_listaObjetos.setAdapter(adaptadorInventario);
+
+                        botonAtras = acciones.findViewById(R.id.botonAtras);
+                        botonAtras.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View view) {
+                                acciones.hide();
+                            }
+                        });
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
             }
         });
     }
