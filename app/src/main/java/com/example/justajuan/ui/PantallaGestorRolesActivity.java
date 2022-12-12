@@ -132,6 +132,7 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
                                         i.putExtra("listaObjetos",temporal);
                                         break;
                                     case "CABALLERO":
+                                        partidaReference.child(getCodigoSala()).child("1").child("justaGanada").setValue(0);
                                         i = new Intent(PantallaGestorRolesActivity.this, PantallaCaballeroActivity.class);
                                         i.putExtra("codigo", getCodigoSala());
                                         i.putExtra("rol", Rol.CABALLERO);

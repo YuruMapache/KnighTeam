@@ -129,39 +129,39 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
 
             public void onFinish() {
 
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        // Actions to do after 10 seconds
 
 
-                partidaReference.child(getCodigoSala()).child("1").child("justaGanada").addListenerForSingleValueEvent(new ValueEventListener() {
+                partidaReference.child(getCodigoSala()).child("1").child("justaGanada").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                        if(snapshot.getValue(Boolean.class) == true) {
+                        if(snapshot.getValue(Integer.class) != 0) {
 
-                                for (Objeto i: objetosCreandose){
+                            if (snapshot.getValue(Integer.class) == 1) {
+
+                                for (Objeto i : objetosCreandose) {
                                     i.getContador().cancel();
                                     i.setContador(null);
                                 }
 
-                            if(numRonda != 5) {
-                                Intent i = new Intent(PantallaCuranderoActivity.this, ResultadosCurandera.class);
-                                i.putExtra("codigo", getCodigoSala());
-                                i.putExtra("listaObjetos", getListaObjetos());
-                                i.putExtra("objetosCreandose",objetosCreandose);
-                                startActivity(i);
+                                if (numRonda != 5) {
+                                    Intent i = new Intent(PantallaCuranderoActivity.this, ResultadosCurandera.class);
+                                    i.putExtra("codigo", getCodigoSala());
+                                    i.putExtra("listaObjetos", getListaObjetos());
+                                    i.putExtra("objetosCreandose", objetosCreandose);
+                                    startActivity(i);
 
+                                } else {
+                                    Intent i = new Intent(PantallaCuranderoActivity.this, PantallaCuestionario.class);
+                                    i.putExtra("codigo", getCodigoSala());
+                                    i.putExtra("listaObjetos", getListaObjetos());
+                                    i.putExtra("objetosCreandose", objetosCreandose);
+                                    startActivity(i);
+                                }
                             } else {
-                                Intent i = new Intent(PantallaCuranderoActivity.this, PantallaCuestionario.class);
-                                i.putExtra("codigo", getCodigoSala());
-                                i.putExtra("listaObjetos", getListaObjetos());
-                                i.putExtra("objetosCreandose",objetosCreandose);
+                                Intent i = new Intent(PantallaCuranderoActivity.this, PantallaCuestionarioFinal.class);
                                 startActivity(i);
                             }
-                        }else{
-                            Intent i = new Intent(PantallaCuranderoActivity.this, PantallaCuestionarioFinal.class);
                         }
 
                     }
@@ -172,8 +172,6 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
                     }
                 });
 
-                    }
-                }, 500);
 
             }
 
@@ -364,31 +362,33 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
                         }
                     }
 
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        public void run() {
-                            // Actions to do after 10 seconds
 
-                    partidaReference.child(getCodigoSala()).child("1").child("justaGanada").addListenerForSingleValueEvent(new ValueEventListener() {
+
+                    partidaReference.child(getCodigoSala()).child("1").child("justaGanada").addValueEventListener(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                            if(snapshot.getValue(Boolean.class) == true) {
+                            if(snapshot.getValue(Integer.class) != 0) {
 
-                                if(numRonda != 1) {
-                                    Intent i = new Intent(PantallaCuranderoActivity.this, ResultadosCurandera.class);
-                                    i.putExtra("codigo", getCodigoSala());
-                                    i.putExtra("listaObjetos", getListaObjetos());
-                                    i.putExtra("objetosCreandose",objetosCreandose);
-                                    i.putExtra("numRonda", numRonda);
-                                    startActivity(i);
+                                if (snapshot.getValue(Integer.class) == 1) {
 
-                                } else {
-                                    Intent i = new Intent(PantallaCuranderoActivity.this, PantallaCuestionario.class);
-                                    i.putExtra("codigo", getCodigoSala());
-                                    i.putExtra("listaObjetos", getListaObjetos());
-                                    i.putExtra("objetosCreandose",objetosCreandose);
-                                    startActivity(i);
+                                    if (numRonda != 1) {
+                                        Intent i = new Intent(PantallaCuranderoActivity.this, ResultadosCurandera.class);
+                                        i.putExtra("codigo", getCodigoSala());
+                                        i.putExtra("listaObjetos", getListaObjetos());
+                                        i.putExtra("objetosCreandose", objetosCreandose);
+                                        i.putExtra("numRonda", numRonda);
+                                        startActivity(i);
+
+                                    } else {
+                                        Intent i = new Intent(PantallaCuranderoActivity.this, PantallaCuestionario.class);
+                                        i.putExtra("codigo", getCodigoSala());
+                                        i.putExtra("listaObjetos", getListaObjetos());
+                                        i.putExtra("objetosCreandose", objetosCreandose);
+                                        startActivity(i);
+                                    }
+                                }else{
+                                    Intent i = new Intent(PantallaCuranderoActivity.this, PantallaCuestionarioFinal.class);
                                 }
                             }
                         }
@@ -398,8 +398,7 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
 
                         }
                     });
-                        }
-                    }, 500);
+
                 }
             }
 
