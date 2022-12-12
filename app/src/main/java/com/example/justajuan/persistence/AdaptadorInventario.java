@@ -52,8 +52,12 @@ public class AdaptadorInventario extends ArrayAdapter {
                 if (boton.getText().toString().equals("Equipar")) {
                     boton.setText("Equipado");
                     caballero.getEquipado().add(listaObjetos.get(position));
+                    caballero.setAtaque(caballero.getAtaque()+listaObjetos.get(position).getAtaque());
+                    caballero.setSalud(caballero.getSalud()+listaObjetos.get(position).getSalud());
+                    caballero.setEstamina(caballero.getEstamina()+listaObjetos.get(position).getEstamina());
                 }else{
                     for (int i=0; i<caballero.getEquipado().size();i++){
+                        boton.setText("Equipar");
                         if (caballero.getEquipado().get(i).getNombre().equals(listaObjetos.get(position).getNombre())){
                             caballero.getEquipado().remove(i);
                         }

@@ -164,7 +164,6 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 acciones.setContentView(R.layout.pop_up_inventario);
                 acciones.setCancelable(true);
                 acciones.show();
-
                 firebaseDatabase.getReference().child("Inventario").child(getCodigoSala()).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -195,7 +194,6 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
 
                     }
                 });
-
 
             }
         });
@@ -244,6 +242,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 }
 
                 if (listoCaballero == 1 && listoHerrero == 1 && listoMaestroCuadras == 1 && listoCurandero == 1 && listoDruida == 1) {
+                    partidaReference.child(getCodigoSala()).child("1").child("combateListo").setValue(0);
                     algoritmo(numRonda);
                 }
             }
@@ -290,7 +289,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
 
                 Enemigo enemigo = snapshot.getValue(Enemigo.class);
                 if (caballero.getVelocidadAtaque() > enemigo.getVelocidadAtaque()) {
-                    while (caballero.getSalud() > 0 || enemigo.getSalud() > 0) {
+                    while (caballero.getSalud() > 0 && enemigo.getSalud() > 0) {
                         enemigo.setSalud(enemigo.getSalud() - caballero.getAtaque());
                         if (enemigo.getSalud() <= 0) {
                             break;
@@ -298,7 +297,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                         caballero.setSalud(caballero.getSalud() - enemigo.getAtaque());
                     }
                 } else {
-                    while (caballero.getSalud() > 0 || enemigo.getSalud() > 0) {
+                    while (caballero.getSalud() > 0 && enemigo.getSalud() > 0) {
 
                         caballero.setSalud(caballero.getSalud() - enemigo.getAtaque());
                         if (caballero.getSalud() <= 0) {
@@ -325,14 +324,17 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                         for (int j = 0; j < listaMateriales.size(); j++) {
                             if (listaMateriales.get(j).getName().equals("Moneda")) {
                                 listaMateriales.get(j).setCantidad(listaMateriales.get(j).getCantidad() + enemigo.getMonedasGanas());
+                            }
+                        }
                                 FirebaseDAO.setMateriales(String.valueOf(Sesion.getNumLobby()), listaMateriales);
+                                firebaseDatabase.getReference().child("Caballero").child(getCodigoSala()).setValue(caballero);
                                 partidaReference.child(getCodigoSala()).child("1").child("numRonda").setValue(nRonda + 1);
                                 partidaReference.child(getCodigoSala()).child("1").child("justaGanada").setValue(true);
 
-                            }
-                        }
+
+
                     } else {
-                        i = i = new Intent(PantallaCaballeroActivity.this, PantallaVictoria.class);
+                        i = new Intent(PantallaCaballeroActivity.this, PantallaVictoria.class);
                     }
 
                 } else {
@@ -340,7 +342,9 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                     i = new Intent(PantallaCaballeroActivity.this, PantallaDerrota.class);
 
                 }
+
                 startActivity(i);
+
             }
 
             @Override
@@ -363,6 +367,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         super.onStop();
         databaseReference.removeEventListener(listenerMateriales);
         partidaReference.child(getCodigoSala()).removeEventListener(listenerCombate);
+
     }
 
     public String getCodigoSala() {
