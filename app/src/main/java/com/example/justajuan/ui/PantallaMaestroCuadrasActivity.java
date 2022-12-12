@@ -48,6 +48,7 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
     private AppCompatButton botonCombate;
     private ValueEventListener listenerMateriales;
     private ValueEventListener listenerCombate;
+    private ValueEventListener listenerJusta;
     private ArrayList<Objeto> listaObjetos;
     private ArrayList<Objeto> objetosCreandose;
     private int numRonda;
@@ -87,7 +88,6 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
                     @Override
                     public void onFinish() {
 
-
                         i.setContador(null);
                         FirebaseDatabase.getInstance().getReference().child("Inventario").
                                 child(getCodigoSala()).child(i.getNombre()).setValue(i);
@@ -121,54 +121,7 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
-                Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-
-                partidaReference.child(getCodigoSala()).child("1").child("justaGanada").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                        if(snapshot.getValue(Boolean.class) == true) {
-
-                            for (Objeto i: objetosCreandose){
-                                i.getContador().cancel();
-                                i.setContador(null);
-                            }
-
-                            if(numRonda != 5) {
-                                Intent i = new Intent(PantallaMaestroCuadrasActivity.this, ResultadosMaestroCuadras.class);
-                                i.putExtra("codigo", getCodigoSala());
-                                i.putExtra("listaObjetos", getListaObjetos());
-                                i.putExtra("objetosCreandose",objetosCreandose);
-                                startActivity(i);
-
-                            } else {
-                                Intent i = new Intent(PantallaMaestroCuadrasActivity.this, PantallaCuestionario.class);
-                                i.putExtra("codigo", getCodigoSala());
-                                i.putExtra("listaObjetos", getListaObjetos());
-                                i.putExtra("objetosCreandose",objetosCreandose);
-                                startActivity(i);
-                            }
-                        } else {
-                            Intent i = new Intent(PantallaMaestroCuadrasActivity.this, PantallaDerrota.class);
-                        }
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-                    }
-                }, 500);
-
             }
-
-
-
-
         }.start();
 
 
@@ -325,58 +278,6 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
                     botonCombate.setText(String.format("COMBATE (%s/5)", jugadores));
                 }
 
-                if (listoCaballero == 1 && listoHerrero == 1 && listoMaestroCuadras == 1 && listoCurandero == 1 && listoDruida == 1) {
-
-                    for(Objeto i: objetosCreandose){
-                        long diferenciaTiempo= i.getTiempoQueFalta()-tiempoRonda;
-                        if (diferenciaTiempo<=0){
-                            i.setContador(null);
-                            FirebaseDatabase.getInstance().getReference().child("Inventario").
-                                    child(getCodigoSala()).child(i.getNombre()).setValue(i);
-                        }
-                        else{
-                            i.setTiempoQueFalta(diferenciaTiempo);
-                            i.setContador(null);
-                        }
-                    }
-
-                    Handler handler = new Handler();
-                    handler.postDelayed(new Runnable() {
-                        public void run() {
-
-                    partidaReference.child(getCodigoSala()).child("1").child("justaGanada").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                            if(snapshot.getValue(Boolean.class) == true) {
-
-                                if(numRonda != 1) {
-                                    Intent i = new Intent(PantallaMaestroCuadrasActivity.this, ResultadosMaestroCuadras.class);
-                                    i.putExtra("codigo", getCodigoSala());
-                                    i.putExtra("listaObjetos", getListaObjetos());
-                                    i.putExtra("objetosCreandose",objetosCreandose);
-                                    i.putExtra("numRonda", numRonda);
-                                    startActivity(i);
-
-                                } else {
-                                    Intent i = new Intent(PantallaMaestroCuadrasActivity.this, PantallaCuestionario.class);
-                                    i.putExtra("codigo", getCodigoSala());
-                                    i.putExtra("listaObjetos", getListaObjetos());
-                                    i.putExtra("objetosCreandose",objetosCreandose);
-                                    startActivity(i);
-                                }
-                            }
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-
-                        }
-                    }, 500);
-                }
 
             }
 
@@ -385,6 +286,55 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
                 Toast.makeText(getApplicationContext(), "Usuarios no están listos para combate", Toast.LENGTH_SHORT).show();
             }
         });
+
+
+        listenerJusta=partidaReference.child(getCodigoSala()).child("1").child("justaGanada").addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if(snapshot.getValue(Integer.class) == 0) {
+                    if (snapshot.getValue(Integer.class) == 1) {
+
+                        for(Objeto i: objetosCreandose){
+                            long diferenciaTiempo= i.getTiempoQueFalta()-tiempoRonda;
+                            if (diferenciaTiempo<=0){
+                                i.setContador(null);
+                                FirebaseDatabase.getInstance().getReference().child("Inventario").
+                                        child(getCodigoSala()).child(i.getNombre()).setValue(i);
+                            }
+                            else{
+                                i.setTiempoQueFalta(diferenciaTiempo);
+                                i.setContador(null);
+                            }
+                        }
+
+                        if (numRonda != 1) {
+                            Intent i = new Intent(PantallaMaestroCuadrasActivity.this, ResultadosMaestroCuadras.class);
+                            i.putExtra("codigo", getCodigoSala());
+                            i.putExtra("listaObjetos", getListaObjetos());
+                            i.putExtra("objetosCreandose", objetosCreandose);
+                            i.putExtra("numRonda", numRonda);
+                            startActivity(i);
+
+                        } else {
+                            Intent i = new Intent(PantallaMaestroCuadrasActivity.this, PantallaCuestionario.class);
+                            i.putExtra("codigo", getCodigoSala());
+                            i.putExtra("listaObjetos", getListaObjetos());
+                            i.putExtra("objetosCreandose", objetosCreandose);
+                            startActivity(i);
+                        }
+                    }else{
+                        Intent i = new Intent(PantallaMaestroCuadrasActivity.this, PantallaCuestionarioFinal.class);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
 
     }
 
@@ -398,6 +348,7 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
         super.onStop();
         databaseReference.removeEventListener(listenerMateriales);
         partidaReference.child(getCodigoSala()).removeEventListener(listenerCombate);
+        partidaReference.child(getCodigoSala()).child("1").child("justaGanada").removeEventListener(listenerJusta);
     }
 
 

@@ -369,7 +369,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                                 FirebaseDAO.setMateriales(String.valueOf(Sesion.getNumLobby()), listaMateriales);
                                 firebaseDatabase.getReference().child("Caballero").child(getCodigoSala()).setValue(caballero);
                                 partidaReference.child(getCodigoSala()).child("1").child("numRonda").setValue(nRonda + 1);
-                                partidaReference.child(getCodigoSala()).child("1").child("justaGanada").setValue(true);
+                                partidaReference.child(getCodigoSala()).child("1").child("justaGanada").setValue(1);
 
 
 
@@ -378,7 +378,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                     }
 
                 } else {
-                    partidaReference.child(getCodigoSala()).child("1").child("justaGanada").setValue(false);
+                    partidaReference.child(getCodigoSala()).child("1").child("justaGanada").setValue(2);
                     i = new Intent(PantallaCaballeroActivity.this, PantallaCuestionarioFinal.class);
 
                 }
