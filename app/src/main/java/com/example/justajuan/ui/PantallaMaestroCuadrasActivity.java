@@ -129,10 +129,6 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
 
         }.start();
 
-        objetosCreandose=getObjetosCreandose();
-        if (objetosCreandose==null){
-            objetosCreandose=new ArrayList<>();
-        }
 
         botonDesplAcciones = findViewById(R.id.botonAcciones);
         botonDesplTienda = findViewById(R.id.botonTienda);
@@ -149,7 +145,7 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
                 listaObjetos=getListaObjetos();
 
                 GridView ui_listaObjetos= (GridView) acciones.findViewById(R.id.ui_ListaObjetos);
-                AdaptadorAcciones adaptadorAcciones= new AdaptadorAcciones(acciones.getContext(),R.layout.pop_up_acciones_alpha,listaObjetos,getCodigoSala(),objetosCreandose);
+                AdaptadorAcciones adaptadorAcciones= new AdaptadorAcciones(acciones.getContext(),R.layout.pop_up_acciones_alpha,listaObjetos,getCodigoSala(),objetosCreandose,listaMateriales);
                 ui_listaObjetos.setAdapter(adaptadorAcciones);
 
                 botonAtras = acciones.findViewById(R.id.botonAtras);

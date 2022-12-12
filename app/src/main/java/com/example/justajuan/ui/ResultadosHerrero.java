@@ -15,11 +15,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.justajuan.R;
+import com.example.justajuan.model.Objeto;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
 
 public class ResultadosHerrero extends AppCompatActivity {
 
@@ -73,6 +76,8 @@ public class ResultadosHerrero extends AppCompatActivity {
                 if (listoCaballero == 1 && listoHerrero == 1 && listoMaestroCuadras == 1 && listoCurandero == 1 && listoDruida == 1) {
                     Intent i = new Intent(ResultadosHerrero.this, PantallaHerreroActivity.class);
                     i.putExtra("codigo", getCodigoSala());
+                    i.putExtra("objetosCreandose",getObjetosCreandose());
+                    i.putExtra("listaObjetos",getListaObjetos());
                     startActivity(i);
                 }
             }
@@ -161,4 +166,21 @@ public class ResultadosHerrero extends AppCompatActivity {
         }
         return 0;
     }
+
+    public ArrayList<Objeto> getListaObjetos(){
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            return (ArrayList<Objeto>) extras.getSerializable("listaObjetos");
+        }
+        return null;
+    }
+
+    public ArrayList<Objeto> getObjetosCreandose(){
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            return (ArrayList<Objeto>) extras.getSerializable("objetosCreandose");
+        }
+        return null;
+    }
+
 }

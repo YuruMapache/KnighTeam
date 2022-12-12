@@ -50,6 +50,7 @@ public class PantallaHerreroActivity extends AppCompatActivity {
     private ArrayList<Objeto> listaObjetos;
     private int numRonda;
     private ArrayList<Objeto> objetosCreandose;
+    private long tiempoRonda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +75,30 @@ public class PantallaHerreroActivity extends AppCompatActivity {
         if (objetosCreandose==null){
             objetosCreandose=new ArrayList<>();
         }
+        else {
+            for (Objeto i : objetosCreandose) {
+                CountDownTimer contador = new CountDownTimer(i.getTiempoQueFalta(), 1000) {
+
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+
+                        i.setTiempoQueFalta(millisUntilFinished);
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+
+
+                        i.setContador(null);
+                        FirebaseDatabase.getInstance().getReference().child("Inventario").
+                                child(getCodigoSala()).child(i.getNombre()).setValue(i);
+                        objetosCreandose.remove(i);
+                    }
+                }.start();
+                i.setContador(contador);
+            }
+        }
 
         AdaptadorProgreso adaptadorProgreso= new AdaptadorProgreso(this,R.layout.gridview_recursos_feudo,objetosCreandose);
 
@@ -81,6 +106,7 @@ public class PantallaHerreroActivity extends AppCompatActivity {
         new CountDownTimer(360000,1000) {
 
             public void onTick(long millisUntilFinished) {
+                tiempoRonda=millisUntilFinished;
                 int minutes = (int) millisUntilFinished / 60000;
                 int seconds = (int) millisUntilFinished % 60000 / 1000;
                 String timeLeftText;
@@ -148,7 +174,7 @@ public class PantallaHerreroActivity extends AppCompatActivity {
                 listaObjetos=getListaObjetos();
 
                 GridView ui_listaObjetos= (GridView) acciones.findViewById(R.id.ui_ListaObjetos);
-                AdaptadorAcciones adaptadorAcciones= new AdaptadorAcciones(acciones.getContext(),R.layout.pop_up_acciones_alpha,listaObjetos,getCodigoSala(),objetosCreandose);
+                AdaptadorAcciones adaptadorAcciones= new AdaptadorAcciones(acciones.getContext(),R.layout.pop_up_acciones_alpha,listaObjetos,getCodigoSala(),objetosCreandose,listaMateriales);
                 ui_listaObjetos.setAdapter(adaptadorAcciones);
 
                 botonAtras = acciones.findViewById(R.id.botonAtras);
@@ -291,16 +317,30 @@ public class PantallaHerreroActivity extends AppCompatActivity {
 
                 if (listoCaballero == 1 && listoHerrero == 1 && listoMaestroCuadras == 1 && listoCurandero == 1 && listoDruida == 1) {
 
+                    for(Objeto i: objetosCreandose){
+                        long diferenciaTiempo= i.getTiempoQueFalta()-tiempoRonda;
+                        if (diferenciaTiempo<=0){
+                            i.setContador(null);
+                            FirebaseDatabase.getInstance().getReference().child("Inventario").
+                                    child(getCodigoSala()).child(i.getNombre()).setValue(i);
+                        }
+                        else{
+                            i.setTiempoQueFalta(diferenciaTiempo);
+                            i.setContador(null);
+                        }
+                    }
+
                     partidaReference.child(getCodigoSala()).child("1").child("justaGanada").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                             if(snapshot.getValue(Boolean.class) == true) {
 
-                                if(numRonda != 1) {
+                                if(numRonda != 5) {
                                     Intent i = new Intent(PantallaHerreroActivity.this, ResultadosHerrero.class);
                                     i.putExtra("codigo", getCodigoSala());
                                     i.putExtra("listaObjetos", getListaObjetos());
+                                    i.putExtra("objetosCreandose",objetosCreandose);
                                     i.putExtra("numRonda", numRonda);
                                     startActivity(i);
 
@@ -308,6 +348,7 @@ public class PantallaHerreroActivity extends AppCompatActivity {
                                     Intent i = new Intent(PantallaHerreroActivity.this, PantallaCuestionario.class);
                                     i.putExtra("codigo", getCodigoSala());
                                     i.putExtra("listaObjetos", getListaObjetos());
+                                    i.putExtra("objetosCreandose",objetosCreandose);
                                     startActivity(i);
                                 }
                             }

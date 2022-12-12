@@ -2,7 +2,6 @@ package com.example.justajuan.persistence;
 
 import android.content.Context;
 import android.os.CountDownTimer;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,24 +15,23 @@ import androidx.appcompat.widget.AppCompatButton;
 import com.example.justajuan.R;
 import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Objeto;
-import com.example.justajuan.model.Sesion;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firestore.v1.StructuredAggregationQuery;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class AdaptadorAcciones extends ArrayAdapter {
     private ArrayList<Objeto> listaObjetos;
     private String numLobby;
     private ArrayList<Objeto> objetoCreandose;
+    private ArrayList<Material> materiales;
 
-    public AdaptadorAcciones(Context context, int textViewResourceId, ArrayList objects,String numLobby, ArrayList objetoCreandose){
+    public AdaptadorAcciones(Context context, int textViewResourceId, ArrayList objects,String numLobby, ArrayList objetoCreandose,ArrayList materiales){
         super(context,textViewResourceId,objects);
         listaObjetos=objects;
         this.numLobby=numLobby;
         this.objetoCreandose=objetoCreandose;
+        this.materiales=materiales;
     }
     @Override
     public int getCount(){
@@ -73,31 +71,57 @@ public class AdaptadorAcciones extends ArrayAdapter {
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //360000*listaObjetos.get(position).getTiempo()
-
-                CountDownTimer contador= new CountDownTimer(2000,1000) {
-                    @Override
-                    public void onTick(long millisUntilFinished) {
-
-                        listaObjetos.get(position).setTiempoQueFalta(millisUntilFinished);
-
+                AtomicBoolean flag = new AtomicBoolean(true);
+                listaObjetos.get(position).getPrecio().forEach((key, value) -> {
+                    for (Material m : materiales) {
+                        if (m.getName().equals(key) && m.getCantidad() < value) {
+                            flag.set(false);
+                        }
                     }
 
-                    @Override
-                    public void onFinish() {
+                });
 
-                        Objeto objeto= listaObjetos.get(position);
-                        objeto.setContador(null);
-                        FirebaseDatabase.getInstance().getReference().child("Inventario").
-                                child(numLobby).child(listaObjetos.get(position).getNombre()).setValue(objeto);
+
+                if (flag.get()) {
+                    CountDownTimer contador = new CountDownTimer(360000L * listaObjetos.get(position).getTiempo(), 1000) {
+                        @Override
+                        public void onTick(long millisUntilFinished) {
+
+                            listaObjetos.get(position).setTiempoQueFalta(millisUntilFinished);
+
+                        }
+
+                        @Override
+                        public void onFinish() {
+
+                            Objeto objeto = listaObjetos.get(position);
+                            objeto.setContador(null);
+                            FirebaseDatabase.getInstance().getReference().child("Inventario").
+                                    child(numLobby).child(listaObjetos.get(position).getNombre()).setValue(objeto);
+                            objetoCreandose.remove(listaObjetos.get(position));
+                        }
+                    };
+
+                    listaObjetos.get(position).getPrecio().forEach((key, value) -> {
+                        for (Material m : materiales) {
+                            if (m.getName().equals(key)) {
+                                m.setCantidad(m.getCantidad()-value);
+                            }
+                        }
+
+                    });
+
+
+                    for(Material m: materiales) {
+                        FirebaseDatabase.getInstance().getReference().child("Materiales").child(numLobby).child(m.getName()).setValue(m);
                     }
-                };
+                    boton.setText("Creando");
+                    listaObjetos.get(position).setContador(contador);
+                    listaObjetos.get(position).getContador().start();
+                    objetoCreandose.add(listaObjetos.get(position));
 
-                listaObjetos.get(position).setContador(contador);
-                listaObjetos.get(position).getContador().start();
-                objetoCreandose.add(listaObjetos.get(position));
 
-
+                }
             }
         });
         return v;
