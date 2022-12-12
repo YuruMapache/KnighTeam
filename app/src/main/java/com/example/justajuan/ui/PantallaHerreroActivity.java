@@ -130,16 +130,23 @@ public class PantallaHerreroActivity extends AppCompatActivity {
 
                         if(snapshot.getValue(Boolean.class) == true) {
 
+                            for (Objeto i: objetosCreandose){
+                                i.getContador().cancel();
+                                i.setContador(null);
+                            }
+
                             if(numRonda != 5) {
                                 Intent i = new Intent(PantallaHerreroActivity.this, ResultadosHerrero.class);
                                 i.putExtra("codigo", getCodigoSala());
                                 i.putExtra("listaObjetos", getListaObjetos());
+                                i.putExtra("objetosCreandose",objetosCreandose);
                                 startActivity(i);
 
                             } else {
                                 Intent i = new Intent(PantallaHerreroActivity.this, PantallaCuestionario.class);
                                 i.putExtra("codigo", getCodigoSala());
                                 i.putExtra("listaObjetos", getListaObjetos());
+                                i.putExtra("objetosCreandose",objetosCreandose);
                                 startActivity(i);
                             }
                         } else {

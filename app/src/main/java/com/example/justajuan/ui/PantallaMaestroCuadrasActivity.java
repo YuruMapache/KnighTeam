@@ -50,6 +50,7 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
     private ArrayList<Objeto> listaObjetos;
     private ArrayList<Objeto> objetosCreandose;
     private int numRonda;
+    private long tiempoRonda;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,6 +72,29 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
         objetosCreandose=getObjetosCreandose();
         if (objetosCreandose==null){
             objetosCreandose=new ArrayList<>();
+        }else {
+            for (Objeto i : objetosCreandose) {
+                CountDownTimer contador = new CountDownTimer(i.getTiempoQueFalta(), 1000) {
+
+                    @Override
+                    public void onTick(long millisUntilFinished) {
+
+                        i.setTiempoQueFalta(millisUntilFinished);
+
+                    }
+
+                    @Override
+                    public void onFinish() {
+
+
+                        i.setContador(null);
+                        FirebaseDatabase.getInstance().getReference().child("Inventario").
+                                child(getCodigoSala()).child(i.getNombre()).setValue(i);
+                        objetosCreandose.remove(i);
+                    }
+                }.start();
+                i.setContador(contador);
+            }
         }
 
         AdaptadorProgreso adaptadorProgreso= new AdaptadorProgreso(this,R.layout.gridview_recursos_feudo,objetosCreandose);
@@ -79,6 +103,7 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
         new CountDownTimer(360000,1000) {
 
             public void onTick(long millisUntilFinished) {
+                tiempoRonda=millisUntilFinished;
                 int minutes = (int) millisUntilFinished / 60000;
                 int seconds = (int) millisUntilFinished % 60000 / 1000;
                 String timeLeftText;
@@ -102,16 +127,23 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
 
                         if(snapshot.getValue(Boolean.class) == true) {
 
+                            for (Objeto i: objetosCreandose){
+                                i.getContador().cancel();
+                                i.setContador(null);
+                            }
+
                             if(numRonda != 5) {
                                 Intent i = new Intent(PantallaMaestroCuadrasActivity.this, ResultadosMaestroCuadras.class);
                                 i.putExtra("codigo", getCodigoSala());
                                 i.putExtra("listaObjetos", getListaObjetos());
+                                i.putExtra("objetosCreandose",objetosCreandose);
                                 startActivity(i);
 
                             } else {
                                 Intent i = new Intent(PantallaMaestroCuadrasActivity.this, PantallaCuestionario.class);
                                 i.putExtra("codigo", getCodigoSala());
                                 i.putExtra("listaObjetos", getListaObjetos());
+                                i.putExtra("objetosCreandose",objetosCreandose);
                                 startActivity(i);
                             }
                         } else {
@@ -285,6 +317,19 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
 
                 if (listoCaballero == 1 && listoHerrero == 1 && listoMaestroCuadras == 1 && listoCurandero == 1 && listoDruida == 1) {
 
+                    for(Objeto i: objetosCreandose){
+                        long diferenciaTiempo= i.getTiempoQueFalta()-tiempoRonda;
+                        if (diferenciaTiempo<=0){
+                            i.setContador(null);
+                            FirebaseDatabase.getInstance().getReference().child("Inventario").
+                                    child(getCodigoSala()).child(i.getNombre()).setValue(i);
+                        }
+                        else{
+                            i.setTiempoQueFalta(diferenciaTiempo);
+                            i.setContador(null);
+                        }
+                    }
+
                     partidaReference.child(getCodigoSala()).child("1").child("justaGanada").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -295,6 +340,7 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
                                     Intent i = new Intent(PantallaMaestroCuadrasActivity.this, ResultadosMaestroCuadras.class);
                                     i.putExtra("codigo", getCodigoSala());
                                     i.putExtra("listaObjetos", getListaObjetos());
+                                    i.putExtra("objetosCreandose",objetosCreandose);
                                     i.putExtra("numRonda", numRonda);
                                     startActivity(i);
 
@@ -302,6 +348,7 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
                                     Intent i = new Intent(PantallaMaestroCuadrasActivity.this, PantallaCuestionario.class);
                                     i.putExtra("codigo", getCodigoSala());
                                     i.putExtra("listaObjetos", getListaObjetos());
+                                    i.putExtra("objetosCreandose",objetosCreandose);
                                     startActivity(i);
                                 }
                             }
