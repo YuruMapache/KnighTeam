@@ -16,10 +16,21 @@
         android:fontFamily="sans-serif"
         android:gravity="top|start"
         android:text="@string/diario_boton"
-        android:textSize="25dp"
+        android:textSize="25sp"
         android:textStyle="bold|italic"
         tools:layout_editor_absoluteX="64dp"
         tools:layout_editor_absoluteY="46dp" />
+
+    <TextView
+        android:id="@+id/infoAcumulada"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text=""
+        android:textColor="@color/black"
+        android:textSize="25sp"
+        android:textStyle="bold">
+    </TextView>
 
     <LinearLayout
         android:layout_width="wrap_content"
