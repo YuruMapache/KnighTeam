@@ -339,7 +339,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
 
                 } else {
                     partidaReference.child(getCodigoSala()).child("1").child("justaGanada").setValue(false);
-                    i = new Intent(PantallaCaballeroActivity.this, PantallaDerrota.class);
+                    i = new Intent(PantallaCaballeroActivity.this, PantallaCuestionarioFinal.class);
 
                 }
 

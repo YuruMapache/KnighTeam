@@ -82,6 +82,8 @@
     <string name="pregunta2.7">El juego ha sido una herramienta útil para favorecer la comunicación.</string>
     <string name="pregunta2.8">Hemos sabido afrontar juntos los problemas que han ido surgiendo.</string>
 
+    <string name="presentacion_resultados">Estos han sido los resultados</string>
+
     <string-array name="genero">
         <item>Masculino</item>
         <item>Femenino</item>

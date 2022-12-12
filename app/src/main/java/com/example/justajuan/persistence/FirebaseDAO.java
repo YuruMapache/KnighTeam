@@ -5,7 +5,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.justajuan.model.Caballero;
-import com.example.justajuan.model.Enemigo;
 import com.example.justajuan.model.Formulario;
 import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Objeto;
@@ -21,6 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class FirebaseDAO {
 
@@ -153,8 +153,32 @@ public class FirebaseDAO {
         Map preguntas = form.getPreguntas();
         preguntas.forEach(
                 (key, value)
-                        -> dr.setValue(key, value)
+                        -> dr.child(String.valueOf(key)).setValue(value)
         );
+    }
+
+    public static Map<Integer, Map<Integer, Integer>> getResults(int nlobby) {
+        FirebaseDatabase fd = FirebaseDatabase.getInstance();
+        DatabaseReference dr = fd.getReference().child("Partida").child(String.valueOf(nlobby));
+        Map<Integer, Map<Integer, Integer>> resultados = new HashMap<>();
+        dr.get().addOnCompleteListener(task -> {
+            if (!task.isSuccessful()) {
+                Log.e("firebase", "Error getting data", task.getException());
+            } else {
+                DataSnapshot ds = task.getResult();
+                for (int j = 0; j < 5; j++) {
+                    for (int i = 0; i < 8; i++) {
+                        resultados.get(i).put((Integer) ds.child(String.valueOf(j)).child("Formularios").child(String.valueOf(0)).child(String.valueOf(i)).getValue(), resultados.get(i).get(ds.child(String.valueOf(j)).child("Formularios").child(String.valueOf(0)).child(String.valueOf(i)).getValue()) + 1);
+                    }
+                }
+                for (int j = 0; j < 5; j++) {
+                    for (int i = 0; i < 8; i++) {
+                        resultados.get(i+8).put((Integer) ds.child(String.valueOf(j)).child("Formularios").child(String.valueOf(0)).child(String.valueOf(i)).getValue(), resultados.get(i).get(ds.child(String.valueOf(j)).child("Formularios").child(String.valueOf(0)).child(String.valueOf(i)).getValue()) + 1);
+                    }
+                }
+            }
+        });
+        return resultados;
     }
 
 
