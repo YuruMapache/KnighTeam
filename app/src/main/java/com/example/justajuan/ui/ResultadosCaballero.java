@@ -28,6 +28,7 @@ public class ResultadosCaballero extends AppCompatActivity {
     private DatabaseReference caballeroReference;
     private ValueEventListener listenerSiguiente;
     private TextView textoResultados;
+    private String resultadosAcumulados;
     private AppCompatButton botonSiguiente;
 
     @Override
@@ -83,15 +84,31 @@ public class ResultadosCaballero extends AppCompatActivity {
             }
         });
 
+        firebaseDatabase.getReference().child("Diario").child(getCodigoSala()).child("Caballero").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                resultadosAcumulados = snapshot.child("ResultadosAcumulados").getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         caballeroReference.child(getCodigoSala()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                textoResultados.setText(String.format("¡Enhorabuena! ¡Has ganado la ronda! \n Tu ataque es: %s                      " +
-                        "Tu estamina es: %s \n Tus monedas son: %s                   Tu salud es: %s \n Tu salud maxima es: %s    Tu velocidad de ataque es: %s \n",
+                String resultados = String.format("¡Enhorabuena! ¡Has ganado la ronda! \n Tu ataque es: %s                      " +
+                                "Tu estamina es: %s \n Tus monedas son: %s                   Tu salud es: %s \n Tu salud maxima es: %s    Tu velocidad de ataque es: %s \n",
                         snapshot.child("ataque").getValue(Integer.class), snapshot.child("estamina").getValue(Integer.class),
                         snapshot.child("monedas").getValue(Integer.class), snapshot.child("salud").getValue(Integer.class),
-                        snapshot.child("salud_max").getValue(Integer.class), snapshot.child("velocidadAtaque").getValue(Integer.class)));
+                        snapshot.child("salud_max").getValue(Integer.class), snapshot.child("velocidadAtaque").getValue(Integer.class));
+
+                textoResultados.setText(String.format(resultados));
+                resultadosAcumulados = resultadosAcumulados + resultados;
+                firebaseDatabase.getReference().child("Diario").child(getCodigoSala()).child("Caballero").child("ResultadosAcumulados").setValue(resultadosAcumulados);
+
             }
 
             @Override
