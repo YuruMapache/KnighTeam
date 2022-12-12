@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -120,6 +121,9 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
             }
 
             public void onFinish() {
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
 
                 partidaReference.child(getCodigoSala()).child("1").child("justaGanada").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
@@ -157,7 +161,13 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
 
                     }
                 });
+                    }
+                }, 500);
+
             }
+
+
+
 
         }.start();
 
@@ -330,6 +340,10 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
                         }
                     }
 
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+
                     partidaReference.child(getCodigoSala()).child("1").child("justaGanada").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -359,6 +373,9 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
 
                         }
                     });
+
+                        }
+                    }, 500);
                 }
 
             }

@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -128,6 +129,12 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
 
             public void onFinish() {
 
+                Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        // Actions to do after 10 seconds
+
+
                 partidaReference.child(getCodigoSala()).child("1").child("justaGanada").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -154,7 +161,7 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
                                 startActivity(i);
                             }
                         }else{
-                            Intent i = new Intent(PantallaCuranderoActivity.this, PantallaDerrota.class);
+                            Intent i = new Intent(PantallaCuranderoActivity.this, PantallaCuestionarioFinal.class);
                         }
 
                     }
@@ -165,7 +172,11 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
                     }
                 });
 
+                    }
+                }, 500);
+
             }
+
 
         }.start();
 
@@ -353,6 +364,11 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
                         }
                     }
 
+                    Handler handler = new Handler();
+                    handler.postDelayed(new Runnable() {
+                        public void run() {
+                            // Actions to do after 10 seconds
+
                     partidaReference.child(getCodigoSala()).child("1").child("justaGanada").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -382,6 +398,8 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
 
                         }
                     });
+                        }
+                    }, 500);
                 }
             }
 
