@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.justajuan.R;
@@ -24,8 +25,10 @@ public class ResultadosHerrero extends AppCompatActivity {
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference partidaReference;
+    private DatabaseReference enemigoReference;
     private ValueEventListener listenerSiguiente;
     private AppCompatButton botonSiguiente;
+    private TextView textoResultadosHerrero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +41,12 @@ public class ResultadosHerrero extends AppCompatActivity {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         partidaReference = firebaseDatabase.getReference().child("Partida");
+        enemigoReference = firebaseDatabase.getReference().child("Enemigos");
 
         botonSiguiente = findViewById(R.id.botonSiguienteResult);
+
+        textoResultadosHerrero = findViewById(R.id.resultados);
+
     }
 
     @Override
@@ -72,6 +79,20 @@ public class ResultadosHerrero extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getApplicationContext(), "Usuarios no están listos para pasar la ventana", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        enemigoReference.child(String.valueOf(getNumRonda() + 1)).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                textoResultadosHerrero.setText(String.format("¡Enhorabuena! ¡Has ganado la ronda! \n El siguiente enemigo se llama %s \n" +
+                        "Su salud es %s \n", snapshot.child("nombre").getValue(), snapshot.child("salud").getValue()));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), "Error al mostrar la informacion del enemigo", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -109,5 +130,13 @@ public class ResultadosHerrero extends AppCompatActivity {
             return extras.getString("codigo");
         }
         return null;
+    }
+
+    public int getNumRonda() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            return extras.getInt("numRonda");
+        }
+        return 0;
     }
 }

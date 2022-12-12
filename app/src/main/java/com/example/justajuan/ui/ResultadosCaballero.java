@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.justajuan.R;
@@ -24,7 +25,9 @@ public class ResultadosCaballero extends AppCompatActivity {
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference partidaReference;
+    private DatabaseReference caballeroReference;
     private ValueEventListener listenerSiguiente;
+    private TextView textoResultados;
     private AppCompatButton botonSiguiente;
 
     @Override
@@ -38,6 +41,9 @@ public class ResultadosCaballero extends AppCompatActivity {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         partidaReference = firebaseDatabase.getReference().child("Partida");
+        caballeroReference = firebaseDatabase.getReference().child("Caballero");
+
+        textoResultados = findViewById(R.id.resultados);
 
         botonSiguiente = findViewById(R.id.botonSiguienteResult);
 
@@ -74,6 +80,23 @@ public class ResultadosCaballero extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getApplicationContext(), "Usuarios no están listos para pasar la ventana", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        caballeroReference.child(getCodigoSala()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                textoResultados.setText(String.format("¡Enhorabuena! ¡Has ganado la ronda! \n Tu ataque es: %s                      " +
+                        "Tu estamina es: %s \n Tus monedas son: %s                   Tu salud es: %s \n Tu salud maxima es: %s    Tu velocidad de ataque es: %s \n",
+                        snapshot.child("ataque").getValue(Integer.class), snapshot.child("estamina").getValue(Integer.class),
+                        snapshot.child("monedas").getValue(Integer.class), snapshot.child("salud").getValue(Integer.class),
+                        snapshot.child("salud_max").getValue(Integer.class), snapshot.child("velocidadAtaque").getValue(Integer.class)));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), "Error al mostrar las estadisticas del caballero", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -251,6 +251,7 @@ public class PantallaHerreroActivity extends AppCompatActivity {
                                     Intent i = new Intent(PantallaHerreroActivity.this, ResultadosHerrero.class);
                                     i.putExtra("codigo", getCodigoSala());
                                     i.putExtra("listaObjetos", getListaObjetos());
+                                    i.putExtra("numRonda", numRonda);
                                     startActivity(i);
 
                                 } else {
@@ -321,6 +322,7 @@ public class PantallaHerreroActivity extends AppCompatActivity {
         }
         return null;
     }
+
     public ArrayList<Objeto> getObjetosCreandose(){
         Bundle extras = getIntent().getExtras();
         if (extras != null) {

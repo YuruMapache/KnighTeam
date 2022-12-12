@@ -251,6 +251,7 @@ public class PantallaDruidaActivity extends AppCompatActivity {
                                     Intent i = new Intent(PantallaDruidaActivity.this, ResultadosDruida.class);
                                     i.putExtra("codigo", getCodigoSala());
                                     i.putExtra("listaObjetos", getListaObjetos());
+                                    i.putExtra("numRonda", numRonda);
                                     startActivity(i);
 
                                 } else {
