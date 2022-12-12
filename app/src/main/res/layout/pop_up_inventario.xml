@@ -2,14 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/inventarioPopUpAlpha"
+    android:id="@+id/accionesPopUpAlpha"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/madera_pixel"
-
     android:orientation="vertical">
 
+
     <LinearLayout
+        android:id="@+id/textoInventario"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/pergamino"
@@ -17,34 +18,32 @@
         android:orientation="vertical"
         android:padding="30dp">
 
-
-    <TextView
-        android:id="@+id/textoInventario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="30dp"
-        android:layout_marginTop="40dp"
-        android:fontFamily="sans-serif"
-        android:gravity="top|start"
-        android:text="@string/inventario_boton"
-        android:textSize="25dp"
-        android:textStyle="bold|italic"
-        android:textColor="@color/black"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1">
-
-        <GridView
-            android:id="@+id/gridView_Inventario"
+        <TextView
+            android:id="@+id/titulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:numColumns="1"
-            />
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif"
+            android:gravity="top|start"
+            android:text="@string/inventario_boton"
+            android:textSize="25sp"
+            android:textStyle="bold|italic"
+            android:textColor="@color/black"/>
 
-    </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <GridView
+                android:id="@+id/gridView_Inventario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:numColumns="1" />
+
+        </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/botonAtras"
@@ -52,10 +51,8 @@
             android:layout_height="60dp"
             android:layout_gravity="right"
             android:background="@drawable/rock_button"
+            android:layout_marginRight="15dp"
             android:text="@string/botonAtras"
-            android:textColor="@color/black"
-            android:layout_marginRight="15dp"/>
+            android:textColor="@color/black" />
     </LinearLayout>
-
-
 </LinearLayout>

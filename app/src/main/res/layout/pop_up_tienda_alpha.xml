@@ -2,14 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/inventarioPopUpAlpha"
+    android:id="@+id/accionesPopUpAlpha"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/madera_pixel"
-
     android:orientation="vertical">
 
+
     <LinearLayout
+        android:id="@+id/PergaminoTienda"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/pergamino"
@@ -17,17 +18,16 @@
         android:orientation="vertical"
         android:padding="30dp">
 
-
         <TextView
-            android:id="@+id/textoTienda"
+            android:id="@+id/titulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="sans-serif"
             android:gravity="top|start"
             android:text="@string/comprar_boton"
-            android:textSize="25dp"
+            android:textSize="25sp"
             android:textStyle="bold|italic"
             android:textColor="@color/black"/>
 
@@ -41,8 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:numColumns="1"
-                />
+                android:numColumns="1" />
 
         </LinearLayout>
 
@@ -52,10 +51,8 @@
             android:layout_height="60dp"
             android:layout_gravity="right"
             android:background="@drawable/rock_button"
+            android:layout_marginRight="15dp"
             android:text="@string/botonAtras"
-            android:textColor="@color/black"
-            android:layout_marginRight="15dp"/>
+            android:textColor="@color/black" />
     </LinearLayout>
-
-
 </LinearLayout>

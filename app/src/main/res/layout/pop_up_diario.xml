@@ -5,59 +5,64 @@
     android:id="@+id/diarioPopUpAlpha"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/pergamino"
+    android:background="@drawable/madera_pixel"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/titulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="50dp"
-        android:fontFamily="sans-serif"
-        android:gravity="top|start"
-        android:text="@string/diario_boton"
-        android:textSize="25sp"
-        android:textStyle="bold|italic"
-        android:textColor="@color/black"
-        tools:layout_editor_absoluteX="64dp"
-        tools:layout_editor_absoluteY="46dp" />
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_marginHorizontal="30dp"
-        android:layout_height="150dp"
-        android:layout_gravity="center">
-
-    <TextView
-        android:id="@+id/infoAcumulada"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text=" "
-        android:justificationMode="inter_word"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        android:textStyle="bold">
-    </TextView>
-    </ScrollView>
-
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginEnd="90dp"
-        android:layout_marginTop="10dp">
+        android:id="@+id/PergaminoDiario"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/pergamino"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:padding="30dp">
+
+        <TextView
+            android:id="@+id/titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="10dp"
+            android:fontFamily="sans-serif"
+            android:gravity="top|start"
+            android:text="@string/diario_boton"
+            android:textSize="25sp"
+            android:textStyle="bold|italic"
+            android:textColor="@color/black"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+
+            <ScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center">
+
+                <TextView
+                    android:id="@+id/infoAcumulada"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text=" "
+                    android:justificationMode="inter_word"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold">
+                </TextView>
+            </ScrollView>
+        </LinearLayout>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/botonAtras"
             android:layout_width="85dp"
             android:layout_height="60dp"
+            android:layout_gravity="right"
             android:background="@drawable/rock_button"
+            android:layout_marginRight="15dp"
             android:text="@string/botonAtras"
             android:textColor="@color/black" />
     </LinearLayout>
-
-
-
 
 </LinearLayout>
