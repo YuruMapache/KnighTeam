@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.justajuan.R;
@@ -24,8 +25,10 @@ public class ResultadosCurandera extends AppCompatActivity {
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference partidaReference;
+    private DatabaseReference caballeroReference;
     private ValueEventListener listenerSiguiente;
     private AppCompatButton botonSiguiente;
+    private TextView textoResultadosCurandero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,8 +41,10 @@ public class ResultadosCurandera extends AppCompatActivity {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         partidaReference = firebaseDatabase.getReference().child("Partida");
+        caballeroReference = firebaseDatabase.getReference().child("Caballero");
 
         botonSiguiente = findViewById(R.id.botonSiguienteResult);
+        textoResultadosCurandero = findViewById(R.id.resultados);
     }
 
     @Override
@@ -72,6 +77,20 @@ public class ResultadosCurandera extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getApplicationContext(), "Usuarios no están listos para pasar la ventana", Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        caballeroReference.child(getCodigoSala()).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                textoResultadosCurandero.setText(String.format("¡Enhorabuena! ¡Has ganado la ronda! \n El caballero tiene una salud actual de %s después de la justa \n"
+                        , snapshot.child("salud").getValue()));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(getApplicationContext(), "Error al mostrar la informacion del enemigo", Toast.LENGTH_SHORT).show();
             }
         });
     }

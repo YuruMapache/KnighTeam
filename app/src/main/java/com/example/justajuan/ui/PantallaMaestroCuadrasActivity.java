@@ -259,6 +259,7 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
                                     Intent i = new Intent(PantallaMaestroCuadrasActivity.this, ResultadosMaestroCuadras.class);
                                     i.putExtra("codigo", getCodigoSala());
                                     i.putExtra("listaObjetos", getListaObjetos());
+                                    i.putExtra("numRonda", numRonda);
                                     startActivity(i);
 
                                 } else {
