@@ -29,6 +29,7 @@ public class ResultadosCurandera extends AppCompatActivity {
     private ValueEventListener listenerSiguiente;
     private AppCompatButton botonSiguiente;
     private TextView textoResultadosCurandero;
+    private String resultadosAcumulados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,12 +81,34 @@ public class ResultadosCurandera extends AppCompatActivity {
             }
         });
 
+        firebaseDatabase.getReference().child("Diario").child(getCodigoSala()).child("Curandero").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                resultadosAcumulados = snapshot.child("ResultadosAcumulados").getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         caballeroReference.child(getCodigoSala()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                textoResultadosCurandero.setText(String.format("¡Enhorabuena! ¡Has ganado la ronda! \n El caballero tiene una salud actual de %s después de la justa \n"
-                        , snapshot.child("salud").getValue()));
+                String resultados = String.format("¡Enhorabuena! ¡Has ganado la ronda! \n El caballero tiene una salud actual de %s después de la justa \n"
+                        , snapshot.child("salud").getValue());
+
+                textoResultadosCurandero.setText(resultados);
+
+                if(getNumRonda() == 2) {
+                    resultadosAcumulados = resultados;
+                } else {
+                    resultadosAcumulados = resultadosAcumulados + resultados;
+                }
+
+                firebaseDatabase.getReference().child("Diario").child(getCodigoSala()).child("Curandero").child("ResultadosAcumulados").setValue(resultadosAcumulados);
             }
 
             @Override
@@ -128,5 +151,13 @@ public class ResultadosCurandera extends AppCompatActivity {
             return extras.getString("codigo");
         }
         return null;
+    }
+
+    public int getNumRonda() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            return extras.getInt("nRonda");
+        }
+        return 0;
     }
 }

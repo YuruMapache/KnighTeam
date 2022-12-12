@@ -29,6 +29,7 @@ public class ResultadosHerrero extends AppCompatActivity {
     private ValueEventListener listenerSiguiente;
     private AppCompatButton botonSiguiente;
     private TextView textoResultadosHerrero;
+    private String resultadosAcumulados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,12 +83,33 @@ public class ResultadosHerrero extends AppCompatActivity {
             }
         });
 
+        firebaseDatabase.getReference().child("Diario").child(getCodigoSala()).child("Herrero").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                resultadosAcumulados = snapshot.child("ResultadosAcumulados").getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         enemigoReference.child(String.valueOf(getNumRonda() + 1)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                textoResultadosHerrero.setText(String.format("¡Enhorabuena! ¡Has ganado la ronda! \n El siguiente enemigo se llama %s \n" +
-                        "Su salud es %s \n", snapshot.child("nombre").getValue(), snapshot.child("salud").getValue()));
+                String resultados = String.format("¡Enhorabuena! ¡Has ganado la ronda! \n El siguiente enemigo se llama %s \n" +
+                        "Su salud es %s \n", snapshot.child("nombre").getValue(), snapshot.child("salud").getValue());
+                textoResultadosHerrero.setText(resultados);
+
+                if(getNumRonda() == 2) {
+                    resultadosAcumulados = resultados;
+                } else {
+                    resultadosAcumulados = resultadosAcumulados + resultados;
+                }
+
+                firebaseDatabase.getReference().child("Diario").child(getCodigoSala()).child("Herrero").child("ResultadosAcumulados").setValue(resultadosAcumulados);
             }
 
             @Override

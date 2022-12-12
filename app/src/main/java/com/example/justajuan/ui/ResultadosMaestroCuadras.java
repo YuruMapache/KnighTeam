@@ -29,6 +29,7 @@ public class ResultadosMaestroCuadras extends AppCompatActivity {
     private ValueEventListener listenerSiguiente;
     private AppCompatButton botonSiguiente;
     private TextView textoResultadosMaestroCuadras;
+    private String resultadosAcumulados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,12 +82,34 @@ public class ResultadosMaestroCuadras extends AppCompatActivity {
             }
         });
 
+        firebaseDatabase.getReference().child("Diario").child(getCodigoSala()).child("Maestro_Cuadras").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                resultadosAcumulados = snapshot.child("ResultadosAcumulados").getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         enemigoReference.child(String.valueOf(getNumRonda() + 1)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                textoResultadosMaestroCuadras.setText(String.format("¡Enhorabuena! ¡Has ganado la ronda! \n El siguiente enemigo se llama %s \n" +
-                        "Su velocidad de ataque será %s \n", snapshot.child("nombre").getValue(), snapshot.child("velocidadAtaque").getValue()));
+                String resultados = String.format("¡Enhorabuena! ¡Has ganado la ronda! \n El siguiente enemigo se llama %s \n" +
+                        "Su velocidad de ataque será %s \n", snapshot.child("nombre").getValue(), snapshot.child("velocidadAtaque").getValue());
+                textoResultadosMaestroCuadras.setText(resultados);
+
+                if(getNumRonda() == 2) {
+                    resultadosAcumulados = resultados;
+                } else {
+                    resultadosAcumulados = resultadosAcumulados + resultados;
+                }
+
+                firebaseDatabase.getReference().child("Diario").child(getCodigoSala()).child("Maestro_Cuadras").child("ResultadosAcumulados").setValue(resultadosAcumulados);
+
             }
 
             @Override

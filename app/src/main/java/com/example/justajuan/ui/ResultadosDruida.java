@@ -29,6 +29,7 @@ public class ResultadosDruida extends AppCompatActivity {
     private ValueEventListener listenerSiguiente;
     private AppCompatButton botonSiguiente;
     private TextView textoResultadosDruida;
+    private String resultadosAcumulados;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,12 +83,33 @@ public class ResultadosDruida extends AppCompatActivity {
             }
         });
 
+        firebaseDatabase.getReference().child("Diario").child(getCodigoSala()).child("Druida").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                resultadosAcumulados = snapshot.child("ResultadosAcumulados").getValue(String.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         enemigoReference.child(String.valueOf(getNumRonda() + 1)).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                textoResultadosDruida.setText(String.format("¡Enhorabuena! ¡Has ganado la ronda! \n El siguiente enemigo se llama %s \n" +
-                        "Su próximo ataque valdrá %s \n", snapshot.child("nombre").getValue(), snapshot.child("ataque").getValue()));
+                String resultados = String.format("¡Enhorabuena! ¡Has ganado la ronda! \n El siguiente enemigo se llama %s \n" +
+                        "Su próximo ataque valdrá %s \n", snapshot.child("nombre").getValue(), snapshot.child("ataque").getValue());
+                textoResultadosDruida.setText(resultados);
+
+                if(getNumRonda() == 2) {
+                    resultadosAcumulados = resultados;
+                } else {
+                    resultadosAcumulados = resultadosAcumulados + resultados;
+                }
+
+                firebaseDatabase.getReference().child("Diario").child(getCodigoSala()).child("Druida").child("ResultadosAcumulados").setValue(resultadosAcumulados);
             }
 
             @Override

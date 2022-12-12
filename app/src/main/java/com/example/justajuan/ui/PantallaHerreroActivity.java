@@ -178,6 +178,24 @@ public class PantallaHerreroActivity extends AppCompatActivity {
                 acciones.setContentView(R.layout.pop_up_diario);
                 acciones.setCancelable(true);
                 acciones.show();
+
+                firebaseDatabase.getReference().child("Diario").child(getCodigoSala()).child("Herrero").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        TextView diarioAcum = (TextView) acciones.findViewById(R.id.infoAcumulada);
+                        diarioAcum.setText(snapshot.child("ResultadosAcumulados").getValue(String.class));
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+
+
+                    }
+                });
+
             }
         });
 
