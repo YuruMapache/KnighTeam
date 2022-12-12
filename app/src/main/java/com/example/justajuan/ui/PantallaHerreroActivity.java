@@ -23,6 +23,7 @@ import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.persistence.AdaptadorAcciones;
 import com.example.justajuan.persistence.AdaptadorMateriales;
+import com.example.justajuan.persistence.AdaptadorProgreso;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -63,9 +64,18 @@ public class PantallaHerreroActivity extends AppCompatActivity {
         databaseReference = firebaseDatabase.getReference().child("Materiales").child(String.valueOf(Sesion.getNumLobby()));
         partidaReference = firebaseDatabase.getReference().child("Partida");
 
+        vistaLista=(GridView) findViewById(R.id.textRecursos);
+
         botonCombate = findViewById(R.id.botonCombate);
 
-        vistaLista=(GridView) findViewById(R.id.textRecursos);
+
+
+        objetosCreandose=getObjetosCreandose();
+        if (objetosCreandose==null){
+            objetosCreandose=new ArrayList<>();
+        }
+
+        AdaptadorProgreso adaptadorProgreso= new AdaptadorProgreso(this,R.layout.gridview_recursos_feudo,objetosCreandose);
 
         TextView glblTimer = findViewById(R.id.timerTextView);
         new CountDownTimer(360000,1000) {
@@ -81,6 +91,9 @@ public class PantallaHerreroActivity extends AppCompatActivity {
                 }
                 timeLeftText += seconds;
                 glblTimer.setText(timeLeftText);
+
+                GridView ui_listaObjetos= (GridView) findViewById(R.id.recursosFeudoGridView);
+                ui_listaObjetos.setAdapter(adaptadorProgreso);
             }
 
             public void onFinish() {
@@ -118,11 +131,6 @@ public class PantallaHerreroActivity extends AppCompatActivity {
 
         }.start();
 
-
-        objetosCreandose=getObjetosCreandose();
-        if (objetosCreandose==null){
-            objetosCreandose=new ArrayList<>();
-        }
 
 
         botonDesplAcciones = findViewById(R.id.botonAcciones);

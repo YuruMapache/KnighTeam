@@ -78,6 +78,8 @@ public class AdaptadorAcciones extends ArrayAdapter {
                     @Override
                     public void onTick(long millisUntilFinished) {
 
+                        listaObjetos.get(position).setTiempoQueFalta(millisUntilFinished);
+
                     }
 
                     @Override
