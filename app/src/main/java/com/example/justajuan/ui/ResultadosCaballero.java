@@ -106,7 +106,13 @@ public class ResultadosCaballero extends AppCompatActivity {
                         snapshot.child("salud_max").getValue(Integer.class), snapshot.child("velocidadAtaque").getValue(Integer.class));
 
                 textoResultados.setText(String.format(resultados));
-                resultadosAcumulados = resultadosAcumulados + resultados;
+
+                if(getNumRonda() == 2) {
+                    resultadosAcumulados = resultados;
+                } else {
+                    resultadosAcumulados = resultadosAcumulados + resultados;
+                }
+
                 firebaseDatabase.getReference().child("Diario").child(getCodigoSala()).child("Caballero").child("ResultadosAcumulados").setValue(resultadosAcumulados);
 
             }
@@ -151,6 +157,14 @@ public class ResultadosCaballero extends AppCompatActivity {
             return extras.getString("codigo");
         }
         return null;
+    }
+
+    public int getNumRonda() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            return extras.getInt("nRonda");
+        }
+        return 0;
     }
 
 
