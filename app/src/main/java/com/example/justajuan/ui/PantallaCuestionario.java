@@ -1,12 +1,12 @@
 package com.example.justajuan.ui;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -65,11 +65,14 @@ public class PantallaCuestionario extends AppCompatActivity {
         RadioGroup rg;
         LinearLayout block;
         Formulario form = new Formulario();
+        int selectedId;
         LinearLayout llpreguntas = findViewById(R.id.LinearLayoutPreguntas);
         for (int i = 0; i < llpreguntas.getChildCount() - 1; i++) {
             block = (LinearLayout) llpreguntas.getChildAt(i);
-            rg = (RadioGroup) block.getChildAt(0);
-            int selectedId = rg.getCheckedRadioButtonId();
+            rg = (RadioGroup) block.getChildAt(1);
+            int radioButtonID = rg.getCheckedRadioButtonId();
+            View radioButton = rg.findViewById(radioButtonID);
+            selectedId  = rg.indexOfChild(radioButton);
             if (selectedId == -1) {
                 ok = false;
                 Toast.makeText(PantallaCuestionario.this, "Por favor rellena todos los campos", Toast.LENGTH_SHORT).show();
@@ -80,7 +83,9 @@ public class PantallaCuestionario extends AppCompatActivity {
         }
         if (ok) {
             Sesion sesion = Sesion.getInstance();
-            FirebaseDAO.setForm(sesion.getNumLobby(), sesion.getRol().ordinal(), 0, form);
+            FirebaseDAO.setForm(sesion.getNumLobby(), sesion.getRol().ordinal()+1, 0, form);
+            Intent i = new Intent(PantallaCuestionario.this, PantallaDerrota.class);
+            startActivity(i);
         }
     }
 }

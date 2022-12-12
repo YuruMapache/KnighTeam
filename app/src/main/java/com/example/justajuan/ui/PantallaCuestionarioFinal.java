@@ -1,9 +1,10 @@
-package com.example.justajuan;
+package com.example.justajuan.ui;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -12,10 +13,10 @@ import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
+import com.example.justajuan.R;
 import com.example.justajuan.model.Formulario;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.persistence.FirebaseDAO;
-import com.example.justajuan.ui.PantallaCuestionario;
 
 public class PantallaCuestionarioFinal extends AppCompatActivity {
 
@@ -49,11 +50,14 @@ public class PantallaCuestionarioFinal extends AppCompatActivity {
         RadioGroup rg;
         LinearLayout block;
         Formulario form = new Formulario();
+        int selectedId;
         LinearLayout llpreguntas = findViewById(R.id.LinearLayoutPreguntas);
         for (int i = 0; i < llpreguntas.getChildCount() - 1; i++) {
             block = (LinearLayout) llpreguntas.getChildAt(i);
-            rg = (RadioGroup) block.getChildAt(0);
-            int selectedId = rg.getCheckedRadioButtonId();
+            rg = (RadioGroup) block.getChildAt(1);
+            int radioButtonID = rg.getCheckedRadioButtonId();
+            View radioButton = rg.findViewById(radioButtonID);
+            selectedId  = rg.indexOfChild(radioButton);
             if (selectedId == -1) {
                 ok = false;
                 Toast.makeText(PantallaCuestionarioFinal.this, "Por favor rellena todos los campos", Toast.LENGTH_SHORT).show();
@@ -64,7 +68,9 @@ public class PantallaCuestionarioFinal extends AppCompatActivity {
         }
         if (ok) {
             Sesion sesion = Sesion.getInstance();
-            FirebaseDAO.setForm(sesion.getNumLobby(), sesion.getRol().ordinal(), 1, form);
+            FirebaseDAO.setForm(sesion.getNumLobby(), sesion.getRol().ordinal()+1, 1, form);
+            Intent i = new Intent(PantallaCuestionarioFinal.this, PantallaResultadosCuestionario.class);
+            startActivity(i);
         }
     }
 }
