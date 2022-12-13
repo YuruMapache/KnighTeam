@@ -6,9 +6,11 @@ import java.util.Map;
 public class Formulario {
 
     private Map<Integer, Integer> preguntas;
+    private String preguntaCuestionario;
+
 
     public Formulario() {
-        this.preguntas = new HashMap<>();
+
     }
 
     public void setPregunta(int num, int res) {
@@ -19,5 +21,11 @@ public class Formulario {
         return preguntas;
     }
 
+    public String getPreguntaCuestionario() {
+        return preguntaCuestionario;
+    }
 
+    public void setPreguntaCuestionario(String preguntaCuestionario) {
+        this.preguntaCuestionario = preguntaCuestionario;
+    }
 }

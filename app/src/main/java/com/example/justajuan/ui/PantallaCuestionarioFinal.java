@@ -11,6 +11,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.justajuan.R;
@@ -20,6 +21,16 @@ import com.example.justajuan.persistence.FirebaseDAO;
 
 public class PantallaCuestionarioFinal extends AppCompatActivity {
 
+    TextView pregunta1;
+    TextView pregunta2;
+    TextView pregunta3;
+    TextView pregunta4;
+    TextView pregunta5;
+    TextView pregunta6;
+    TextView pregunta7;
+    TextView pregunta8;
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -27,6 +38,25 @@ public class PantallaCuestionarioFinal extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_pantalla_cuestionario_final);
+
+        pregunta1 = findViewById(R.id.textView1);
+        pregunta1.getText().toString();
+        pregunta2 = findViewById(R.id.textView2);
+        pregunta2.getText().toString();
+        pregunta3 = findViewById(R.id.textView3);
+        pregunta3.getText().toString();
+        pregunta4 = findViewById(R.id.textView4);
+        pregunta4.getText().toString();
+        pregunta5 = findViewById(R.id.textView5);
+        pregunta5.getText().toString();
+        pregunta6 = findViewById(R.id.textView6);
+        pregunta6.getText().toString();
+        pregunta7 = findViewById(R.id.textView7);
+        pregunta7.getText().toString();
+        pregunta8 = findViewById(R.id.textView8);
+        pregunta8.getText().toString();
+
+
     }
 
     @Override

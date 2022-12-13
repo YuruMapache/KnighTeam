@@ -4,31 +4,32 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.GridView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.justajuan.R;
+import com.example.justajuan.model.Cuestionario;
+import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Sesion;
-import com.example.justajuan.persistence.FirebaseDAO;
+import com.example.justajuan.persistence.AdaptadorCuestionario;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.ArrayList;
+
 
 public class PantallaResultadosCuestionario extends AppCompatActivity{
 
-    FirebaseDatabase fd = FirebaseDatabase.getInstance();
-    DatabaseReference dr = fd.getReference().child("Cuestionarios").child(String.valueOf(Sesion.getInstance().getNumLobby()));
-    Map<Integer, Map<Integer, Integer>> resultados = new HashMap<>();
-    LinearLayout bloque, respuestas, columna;
+    private FirebaseDatabase fd;
+    private DatabaseReference dr;
+    private ArrayList<Cuestionario> listaCuestionario;
+    private GridView preguntas;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,30 +39,23 @@ public class PantallaResultadosCuestionario extends AppCompatActivity{
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_resultados_cuestionario);
 
-        LinearLayout llpreguntas = findViewById(R.id.LinearLayoutPreguntas);
+        fd = FirebaseDatabase.getInstance();
+        dr = fd.getReference().child("Cuestionarios").child(String.valueOf(Sesion.getInstance().getNumLobby()));
+
+        preguntas = findViewById(R.id.ui_ListaPreguntas);
 
         dr.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (int j = 1; j < 6; j++) {
 
-                    Map map = new HashMap<Integer, Integer>();
-
-                    for (int i = 0; i < 8; i++) {
-                        map.put(i, snapshot.child(String.valueOf(j)).child("Intermedio").child(String.valueOf(i)).getValue());
-                        map.put(i+8, snapshot.child(String.valueOf(j)).child("Final").child(String.valueOf(i)).getValue());
-                    }
-                    resultados.put(j, map);
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                    Cuestionario cuestionario = postSnapshot.getValue(Cuestionario.class);
+                    listaCuestionario.add(cuestionario);
                 }
 
-                for(int i = 0; i<16; i++){
-                    bloque = (LinearLayout) llpreguntas.getChildAt(i+1);
-                    respuestas = (LinearLayout) bloque.getChildAt(1);
-                    for(int j=0; j<5; j++){
-                        columna = (LinearLayout) respuestas.getChildAt(j);
-                        ((TextView) columna.getChildAt(1)).setText(resultados.get(i).get(j));
-                    }
-                }
+                AdaptadorCuestionario adaptadorCuestionario = new AdaptadorCuestionario(PantallaResultadosCuestionario.this, R.layout.gridview_preguntas, listaCuestionario);
+
+                preguntas.setAdapter(adaptadorCuestionario);
 
             }
 
@@ -70,6 +64,9 @@ public class PantallaResultadosCuestionario extends AppCompatActivity{
 
             }
         });
+
+
+
     }
 
     @Override
