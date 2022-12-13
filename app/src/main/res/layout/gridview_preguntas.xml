@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center|top"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/pregunta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/pregunta1.1"
+        android:textColor="@color/black"
+        android:textStyle="bold" />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:rowCount="2"
+        android:columnCount="5"
+        android:useDefaultMargins="true">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="0"
+            android:layout_gravity="center"
+            android:layout_marginEnd="25dp"
+            android:text="@string/muy_en_desacuerdo"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/respMuyDes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="0"
+            android:layout_gravity="center"
+            android:layout_marginEnd="25dp"
+            android:text="1"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="1"
+            android:layout_marginEnd="25dp"
+            android:layout_gravity="center"
+            android:text="@string/en_desacuerdo"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/respDes"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="1"
+            android:layout_marginEnd="25dp"
+            android:layout_gravity="center"
+            android:text="1"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="2"
+            android:layout_marginEnd="25dp"
+            android:layout_gravity="center"
+            android:text="@string/indiferente"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/respInd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="2"
+            android:layout_marginEnd="25dp"
+            android:layout_gravity="center"
+            android:text="1"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="3"
+            android:layout_marginEnd="25dp"
+            android:text="@string/de_acuerdo"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/respDac"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="3"
+            android:layout_marginEnd="25dp"
+            android:layout_gravity="center"
+            android:text="1"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="0"
+            android:layout_column="4"
+            android:layout_marginEnd="25dp"
+            android:text="@string/muy_de_acuerdo"
+            android:textColor="@color/black" />
+
+        <TextView
+            android:id="@+id/respMuyDac"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_row="1"
+            android:layout_column="4"
+            android:layout_marginEnd="25dp"
+            android:layout_gravity="center"
+            android:text="1"
+            android:textColor="@color/black" />
+
+
+
+    </GridLayout>
+
+</LinearLayout>
