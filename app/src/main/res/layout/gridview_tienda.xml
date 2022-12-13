@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    >
+
+<ImageView
+    android:id="@+id/ImagenMaterialCompra"
+    android:layout_width="50dp"
+    android:layout_height="50dp"
+    android:layout_gravity="center"
+    android:src="@drawable/espada_ajustada"
+    />
+    <TextView
+        android:id="@+id/NombreMaterialCompra"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Hierro "
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="30dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/moneda_ajustada"
+        />
+    <TextView
+        android:id="@+id/precioMaterial"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="200"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textSize="30dp"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/botonComprarMaterial"
+        android:layout_width="100dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center"
+        android:background="@drawable/rock_button"
+        android:text="Comprar"
+        android:textColor="@color/black" />
+
+</LinearLayout>

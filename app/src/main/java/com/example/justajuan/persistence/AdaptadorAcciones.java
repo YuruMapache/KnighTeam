@@ -83,7 +83,7 @@ public class AdaptadorAcciones extends ArrayAdapter {
 
 
                 if (flag.get()) {
-                    CountDownTimer contador = new CountDownTimer(360000L * listaObjetos.get(position).getTiempo(), 1000) {
+                    CountDownTimer contador = new CountDownTimer(180000L * listaObjetos.get(position).getTiempo(), 1000) {
                         @Override
                         public void onTick(long millisUntilFinished) {
 
