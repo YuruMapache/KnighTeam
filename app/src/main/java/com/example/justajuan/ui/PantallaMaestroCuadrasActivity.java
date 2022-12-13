@@ -25,6 +25,7 @@ import com.example.justajuan.model.Sesion;
 import com.example.justajuan.persistence.AdaptadorAcciones;
 import com.example.justajuan.persistence.AdaptadorMateriales;
 import com.example.justajuan.persistence.AdaptadorProgreso;
+import com.example.justajuan.persistence.AdaptadorTienda;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,6 +54,7 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
     private ArrayList<Objeto> objetosCreandose;
     private int numRonda;
     private long tiempoRonda;
+    private Material monedas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,6 +162,9 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
                 acciones.setContentView(R.layout.pop_up_tienda_alpha);
                 acciones.setCancelable(true);
                 acciones.show();
+                GridView gridViewTienda = (GridView) acciones.findViewById(R.id.gridView_Tienda);
+                AdaptadorTienda adaptadorTienda= new AdaptadorTienda(acciones.getContext(),R.layout.gridview_tienda,listaMateriales,getCodigoSala(),monedas);
+                gridViewTienda.setAdapter(adaptadorTienda);
 
                 botonAtras = acciones.findViewById(R.id.botonAtras);
                 botonAtras.setOnClickListener(new View.OnClickListener() {
@@ -250,6 +255,9 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
                     Material material = postSnapshot.getValue(Material.class);
                     if (material.getRol().contains("Maestro_Cuadras")) {
                         listaMateriales.add(material);
+                    }
+                    if (material.getName().equals("Moneda")){
+                        monedas=material;
                     }
                 }
                 adaptador.setListaMateriales(listaMateriales);

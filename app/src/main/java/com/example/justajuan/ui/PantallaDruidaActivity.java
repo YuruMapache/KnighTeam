@@ -25,6 +25,7 @@ import com.example.justajuan.model.Sesion;
 import com.example.justajuan.persistence.AdaptadorAcciones;
 import com.example.justajuan.persistence.AdaptadorMateriales;
 import com.example.justajuan.persistence.AdaptadorProgreso;
+import com.example.justajuan.persistence.AdaptadorTienda;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -53,6 +54,7 @@ public class PantallaDruidaActivity extends AppCompatActivity {
     private ArrayList<Objeto> listaObjetos;
     private ArrayList<Objeto> objetosCreandose;
     private long tiempoRonda;
+    private Material monedas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,6 +167,10 @@ public class PantallaDruidaActivity extends AppCompatActivity {
                 acciones.setCancelable(true);
                 acciones.show();
 
+                GridView gridViewTienda = (GridView) acciones.findViewById(R.id.gridView_Tienda);
+                AdaptadorTienda adaptadorTienda= new AdaptadorTienda(acciones.getContext(),R.layout.gridview_tienda,listaMateriales,getCodigoSala(),monedas);
+                gridViewTienda.setAdapter(adaptadorTienda);
+
                 botonAtras = acciones.findViewById(R.id.botonAtras);
                 botonAtras.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -256,6 +262,9 @@ public class PantallaDruidaActivity extends AppCompatActivity {
                     Material material = postSnapshot.getValue(Material.class);
                     if (material.getRol().contains("Druida")) {
                         listaMateriales.add(material);
+                    }
+                    if (material.getName().equals("Moneda")){
+                        monedas=material;
                     }
                 }
                 adaptador.setListaMateriales(listaMateriales);
