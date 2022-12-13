@@ -292,7 +292,8 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                if(snapshot.getValue(Integer.class) == 0) {
+                if(snapshot.getValue(Integer.class) != 0) {
+
                     if (snapshot.getValue(Integer.class) == 1) {
 
                         for(Objeto i: objetosCreandose){
@@ -325,6 +326,7 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
                         }
                     }else{
                         Intent i = new Intent(PantallaMaestroCuadrasActivity.this, PantallaCuestionarioFinal.class);
+                        startActivity(i);
                     }
                 }
             }

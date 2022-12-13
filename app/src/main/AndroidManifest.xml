@@ -30,6 +30,14 @@
                 android:value="" />
         </activity>
         <activity
+            android:name=".ui.PantallaResultadosCuestionario"
+            android:exported="false"
+            android:screenOrientation="landscape">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ui.PantallaDerrota"
             android:exported="false"
             android:screenOrientation="landscape">

@@ -147,9 +147,9 @@ public class FirebaseDAO {
         return obj;
     }
 
-    public static void setForm(int nlobby, int user, int id, Formulario form) {
+    public static void setForm(int nlobby, int user, Formulario form, String tipo) {
         FirebaseDatabase fd = FirebaseDatabase.getInstance();
-        DatabaseReference dr = fd.getReference().child("Partida").child(String.valueOf(nlobby)).child(String.valueOf(user)).child("Formularios").child(String.valueOf(id));
+        DatabaseReference dr = fd.getReference().child("Cuestionarios").child(String.valueOf(nlobby)).child(String.valueOf(user)).child(tipo);
         Map preguntas = form.getPreguntas();
         preguntas.forEach(
                 (key, value)
@@ -159,25 +159,37 @@ public class FirebaseDAO {
 
     public static Map<Integer, Map<Integer, Integer>> getResults(int nlobby) {
         FirebaseDatabase fd = FirebaseDatabase.getInstance();
-        DatabaseReference dr = fd.getReference().child("Partida").child(String.valueOf(nlobby));
+        DatabaseReference dr = fd.getReference().child("Cuestionarios").child(String.valueOf(nlobby));
         Map<Integer, Map<Integer, Integer>> resultados = new HashMap<>();
-        dr.get().addOnCompleteListener(task -> {
+
+        dr.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for (int j = 1; j < 6; j++) {
+                    for (int i = 0; i < 8; i++) {
+                        resultados.get(i).put((Integer) snapshot.child(String.valueOf(j)).child("Intermedio").child(String.valueOf(i)).getValue(), resultados.get(i).get(snapshot.child(String.valueOf(j)).child("Intermedio").child(String.valueOf(i)).getValue()) + 1);
+                    }
+                }
+                for (int j = 1; j < 6; j++) {
+                    for (int i = 0; i < 8; i++) {
+                        resultados.get(i+8).put((Integer) snapshot.child(String.valueOf(j)).child("Final").child(String.valueOf(i)).getValue(), resultados.get(i).get(snapshot.child(String.valueOf(j)).child("Final").child(String.valueOf(i)).getValue()) + 1);
+                    }
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        /*dr.get().addOnCompleteListener(task -> {
             if (!task.isSuccessful()) {
                 Log.e("firebase", "Error getting data", task.getException());
             } else {
-                DataSnapshot ds = task.getResult();
-                for (int j = 0; j < 5; j++) {
-                    for (int i = 0; i < 8; i++) {
-                        resultados.get(i).put((Integer) ds.child(String.valueOf(j)).child("Formularios").child(String.valueOf(0)).child(String.valueOf(i)).getValue(), resultados.get(i).get(ds.child(String.valueOf(j)).child("Formularios").child(String.valueOf(0)).child(String.valueOf(i)).getValue()) + 1);
-                    }
-                }
-                for (int j = 0; j < 5; j++) {
-                    for (int i = 0; i < 8; i++) {
-                        resultados.get(i+8).put((Integer) ds.child(String.valueOf(j)).child("Formularios").child(String.valueOf(0)).child(String.valueOf(i)).getValue(), resultados.get(i).get(ds.child(String.valueOf(j)).child("Formularios").child(String.valueOf(0)).child(String.valueOf(i)).getValue()) + 1);
-                    }
-                }
-            }
-        });
+                DataSnapshot ds = task.getResult();*/
+
         return resultados;
     }
 

@@ -68,7 +68,7 @@ public class PantallaCuestionarioFinal extends AppCompatActivity {
         }
         if (ok) {
             Sesion sesion = Sesion.getInstance();
-            FirebaseDAO.setForm(sesion.getNumLobby(), sesion.getRol().ordinal()+1, 1, form);
+            FirebaseDAO.setForm(sesion.getNumLobby(), sesion.getRol().ordinal()+1, form, "Final");
             Intent i = new Intent(PantallaCuestionarioFinal.this, PantallaResultadosCuestionario.class);
             startActivity(i);
         }
