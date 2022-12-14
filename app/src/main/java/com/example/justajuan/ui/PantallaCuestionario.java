@@ -25,6 +25,7 @@ import com.example.justajuan.model.Formulario;
 import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.persistence.AdaptadorCuestionario;
+import com.example.justajuan.persistence.AdaptadorCuestionarioPreguntas;
 import com.example.justajuan.persistence.FirebaseDAO;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -79,9 +80,9 @@ public class PantallaCuestionario extends AppCompatActivity {
                     preguntasCuestionario.add(cuestionario);
                 }
 
-                AdaptadorCuestionario adaptadorCuestionario = new AdaptadorCuestionario(PantallaCuestionario.this, R.layout.gridview_preguntas_cuestionario, preguntasCuestionario);
+                AdaptadorCuestionarioPreguntas adaptadorCuestionarioPreguntas = new AdaptadorCuestionarioPreguntas(PantallaCuestionario.this, R.layout.gridview_preguntas_cuestionario, preguntasCuestionario);
 
-                preguntas.setAdapter(adaptadorCuestionario);
+                preguntas.setAdapter(adaptadorCuestionarioPreguntas);
 
                 botonSiguiente.setOnClickListener(new View.OnClickListener() {
                     @Override

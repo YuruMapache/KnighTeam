@@ -432,6 +432,11 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                     partidaReference.child(getCodigoSala()).child("1").child("justaGanada").setValue(2);
                     i = new Intent(PantallaCaballeroActivity.this, PantallaCuestionario.class);
 
+                    i.putExtra("codigo", getCodigoSala());
+                    i.putExtra("nRonda", nRonda + 1);
+                    i.putExtra("rol", "1");
+
+
                 }
 
                 startActivity(i);

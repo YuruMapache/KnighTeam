@@ -145,6 +145,7 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
                                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                                 Intent j;
                                                 caballero = snapshot.getValue(Caballero.class);
+                                                caballero.setEquipado(new ArrayList<>());
                                                 partidaReference.child(getCodigoSala()).child("1").child("justaGanada").setValue(0);
                                                 j = new Intent(PantallaGestorRolesActivity.this, PantallaCaballeroActivity.class);
                                                 j.putExtra("codigo", getCodigoSala());
