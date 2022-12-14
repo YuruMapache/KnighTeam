@@ -20,6 +20,17 @@
         android:textSize="20dp"
         android:textColor="@color/black"
         />
+
+    <ProgressBar
+        android:id="@+id/barraProgresoObjeto"
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center"
+        style="@android:style/Widget.ProgressBar.Horizontal"
+        android:layout_marginRight="20dp"
+        />
+
     <TextView
         android:id="@+id/porcentajeProgreso"
         android:layout_width="wrap_content"
@@ -30,14 +41,6 @@
         android:textStyle="bold"
         android:textSize="25dp"
         android:textColor="@color/black"/>
-    <ProgressBar
-        android:id="@+id/barraProgresoObjeto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        style="@android:style/Widget.ProgressBar.Horizontal"
-        android:layout_marginRight="20dp"
-        />
 
 
 

@@ -20,12 +20,15 @@ import androidx.appcompat.widget.AppCompatButton;
 import com.example.justajuan.R;
 import com.example.justajuan.model.Caballero;
 import com.example.justajuan.model.Enemigo;
+import com.example.justajuan.model.Estadistico;
 import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.persistence.AdaptadorAcciones;
+import com.example.justajuan.persistence.AdaptadorEstadisticas;
 import com.example.justajuan.persistence.AdaptadorInventario;
 import com.example.justajuan.persistence.AdaptadorMateriales;
+import com.example.justajuan.persistence.AdaptadorProgreso;
 import com.example.justajuan.persistence.FirebaseDAO;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -70,7 +73,21 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
 
         botonCombate = findViewById(R.id.botonCombate);
 
+        firebaseDatabase.getReference().child("Caballero").child(String.valueOf(Sesion.getNumLobby())).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                caballero = (Caballero) snapshot.getValue(Caballero.class);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
         TextView glblTimer = findViewById(R.id.timerTextView);
+        ArrayList<Estadistico> estadisticos= new ArrayList<>();
+        AdaptadorEstadisticas adaptadorEstadisticas = new AdaptadorEstadisticas(this, R.layout.gridview_recursos_feudo, estadisticos);
 
         new CountDownTimer(360000, 1000) {
 
@@ -85,6 +102,18 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 }
                 timeLeftText += seconds;
                 glblTimer.setText(timeLeftText);
+
+                estadisticos.clear();
+                estadisticos.add(new Estadistico("Salud", R.drawable.salud_ajustado, caballero.getSalud(), caballero.getSalud_max()));
+                estadisticos.add(new Estadistico("Ataque", R.drawable.ataque_ajustado, caballero.getAtaque(), 120));
+                estadisticos.add(new Estadistico("Velocidad de ataque", R.drawable.velocidad_ajustado, caballero.getVelocidadAtaque(), 35));
+                estadisticos.add(new Estadistico("Estamina", R.drawable.estamina_ajustado, caballero.getEstamina(), 100));
+                adaptadorEstadisticas.setListaEstadisticas(estadisticos);
+
+                GridView ui_listaObjetos = (GridView) findViewById(R.id.recursosFeudoGridView);
+                ui_listaObjetos.setAdapter(adaptadorEstadisticas);
+
+
             }
 
             public void onFinish() {
@@ -98,20 +127,6 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         botonDesplTienda = findViewById(R.id.botonTienda);
         botonDesplDiario = findViewById(R.id.botonDiario);
         botonDesplInventario = findViewById(R.id.botonInventario);
-
-
-        firebaseDatabase.getReference().child("Caballero").child(String.valueOf(Sesion.getNumLobby())).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                caballero = (Caballero) snapshot.getValue(Caballero.class);
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
 
 
         partidaReference.child(getCodigoSala()).child("1").child("numRonda").addListenerForSingleValueEvent(new ValueEventListener() {
