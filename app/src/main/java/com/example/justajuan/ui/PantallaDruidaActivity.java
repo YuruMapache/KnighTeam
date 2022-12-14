@@ -336,7 +336,10 @@ public class PantallaDruidaActivity extends AppCompatActivity {
                         }
 
                     } else {
-                        Intent i = new Intent(PantallaDruidaActivity.this, PantallaCuestionarioFinal.class);
+                        Intent i = new Intent(PantallaDruidaActivity.this, PantallaCuestionario.class);
+                        i.putExtra("codigo", getCodigoSala());
+                        i.putExtra("listaObjetos", getListaObjetos());
+                        i.putExtra("objetosCreandose", objetosCreandose);
                         startActivity(i);
                     }
                 }

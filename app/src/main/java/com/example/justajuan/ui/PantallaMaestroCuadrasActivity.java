@@ -331,8 +331,11 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
                             i.putExtra("objetosCreandose", objetosCreandose);
                             startActivity(i);
                         }
-                    }else{
-                        Intent i = new Intent(PantallaMaestroCuadrasActivity.this, PantallaCuestionarioFinal.class);
+                    } else {
+                        Intent i = new Intent(PantallaMaestroCuadrasActivity.this, PantallaCuestionario.class);
+                        i.putExtra("codigo", getCodigoSala());
+                        i.putExtra("listaObjetos", getListaObjetos());
+                        i.putExtra("objetosCreandose", objetosCreandose);
                         startActivity(i);
                     }
                 }

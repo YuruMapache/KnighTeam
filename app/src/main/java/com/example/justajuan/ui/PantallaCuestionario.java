@@ -113,6 +113,10 @@ public class PantallaCuestionario extends AppCompatActivity {
                                 i = new Intent(PantallaCuestionario.this, PantallaDerrota.class);
                                 startActivity(i);
 
+                            } else if(getNRonda() >= 10) {
+                                i = new Intent(PantallaCuestionario.this, PantallaVictoria.class);
+                                startActivity(i);
+
                             } else {
 
                                 switch (Integer.parseInt(getRol())) {
@@ -151,7 +155,7 @@ public class PantallaCuestionario extends AppCompatActivity {
                                         i.putExtra("listaObjetos",getListaObjetos());
                                         break;
                                     default:
-                                        i = new Intent(PantallaCuestionario.this, PantallaResultadosCuestionario.class);
+                                        i = new Intent(PantallaCuestionario.this, PantallaCuestionario.class);
                                         break;
                                 }
                                 startActivity(i);

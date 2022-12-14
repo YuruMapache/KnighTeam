@@ -341,7 +341,10 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
                         }
 
                     } else {
-                        Intent i = new Intent(PantallaCuranderoActivity.this, PantallaCuestionarioFinal.class);
+                        Intent i = new Intent(PantallaCuranderoActivity.this, PantallaCuestionario.class);
+                        i.putExtra("codigo", getCodigoSala());
+                        i.putExtra("listaObjetos", getListaObjetos());
+                        i.putExtra("objetosCreandose", objetosCreandose);
                         startActivity(i);
                     }
                 }

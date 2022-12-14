@@ -342,8 +342,12 @@ public class PantallaHerreroActivity extends AppCompatActivity {
                             i.putExtra("objetosCreandose", objetosCreandose);
                             startActivity(i);
                         }
+
                     }else{
-                        Intent i = new Intent(PantallaHerreroActivity.this, PantallaCuestionarioFinal.class);
+                        Intent i = new Intent(PantallaHerreroActivity.this, PantallaCuestionario.class);
+                        i.putExtra("codigo", getCodigoSala());
+                        i.putExtra("listaObjetos", getListaObjetos());
+                        i.putExtra("objetosCreandose", objetosCreandose);
                         startActivity(i);
                     }
                 }
