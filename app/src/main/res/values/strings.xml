@@ -69,7 +69,7 @@
     <string name="pregunta1.4">¿Estimas que colaboras mejor con tus compañeros después de unos turnos?</string>
     <string name="pregunta1.5">¿Las decisiones que has tenido que tomar hasta ahora te han resultado complejas?</string>
     <string name="pregunta1.6">¿Estimas que has sido capaz de mantener motivado al equipo cuando las cosas no han ido bien?</string>
-    <string name="pregunta1.7">¿Crees que la comunicación en vuestro equipo ha mejorado después de utilizar este juego?</string>
+    <string name="pregunta1.7">¿Crees que la comunicación en vuestro equipo ha mejorado después de jugar algunas rondas?</string>
     <string name="pregunta1.8">¿Te parece que estáis sabiendo enfrentarnos a los problemas de forma adecuada?</string>
 
     <!--Preguntas 2-->
@@ -82,7 +82,6 @@
     <string name="pregunta2.7">El juego ha sido una herramienta útil para favorecer la comunicación.</string>
     <string name="pregunta2.8">Hemos sabido afrontar juntos los problemas que han ido surgiendo.</string>
 
-    <string name="presentacion_resultados">Estos han sido los resultados</string>
     <string name="estadisticas_caballero">Estadísticas caballero</string>
 
     <string-array name="genero">

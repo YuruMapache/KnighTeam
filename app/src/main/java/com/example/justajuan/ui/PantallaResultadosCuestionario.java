@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.justajuan.R;
 import com.example.justajuan.model.Cuestionario;
-import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.persistence.AdaptadorCuestionario;
 import com.google.firebase.database.DataSnapshot;
@@ -37,7 +36,7 @@ public class PantallaResultadosCuestionario extends AppCompatActivity{
         getSupportActionBar().hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        setContentView(R.layout.activity_resultados_cuestionario);
+        setContentView(R.layout.activity_pantalla_cuestionario);
 
         fd = FirebaseDatabase.getInstance();
         dr = fd.getReference().child("Cuestionarios").child(String.valueOf(Sesion.getInstance().getNumLobby()));
@@ -53,7 +52,7 @@ public class PantallaResultadosCuestionario extends AppCompatActivity{
                     listaCuestionario.add(cuestionario);
                 }
 
-                AdaptadorCuestionario adaptadorCuestionario = new AdaptadorCuestionario(PantallaResultadosCuestionario.this, R.layout.gridview_preguntas, listaCuestionario);
+                AdaptadorCuestionario adaptadorCuestionario = new AdaptadorCuestionario(PantallaResultadosCuestionario.this, R.layout.gridview_stats_preguntas, listaCuestionario);
 
                 preguntas.setAdapter(adaptadorCuestionario);
 

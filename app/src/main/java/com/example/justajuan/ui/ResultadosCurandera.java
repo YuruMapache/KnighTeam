@@ -165,6 +165,7 @@ public class ResultadosCurandera extends AppCompatActivity {
         }
         return 0;
     }
+
     public ArrayList<Objeto> getListaObjetos(){
         Bundle extras = getIntent().getExtras();
         if (extras != null) {

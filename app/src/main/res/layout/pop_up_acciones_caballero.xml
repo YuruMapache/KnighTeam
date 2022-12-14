@@ -40,6 +40,7 @@
             android:layout_weight="1"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
+            android:layout_marginLeft="20dp"
             android:rowCount="2"
             android:columnCount="2">
 
@@ -101,6 +102,7 @@
             android:layout_height="60dp"
             android:layout_gravity="right"
             android:layout_marginRight="15dp"
+            android:layout_marginBottom="10dp"
             android:background="@drawable/rock_button"
             android:text="@string/botonAtras"
 

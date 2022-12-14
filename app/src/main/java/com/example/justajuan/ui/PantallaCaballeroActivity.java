@@ -395,19 +395,32 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 Intent i;
                 if (caballero.getSalud() > 0) {
                     if (nRonda < 10) {
-                        i = new Intent(PantallaCaballeroActivity.this, ResultadosCaballero.class);
-                        i.putExtra("codigo", getCodigoSala());
-                        i.putExtra("Caballero", caballero);
-                        i.putExtra("nRonda", nRonda + 1);
-                        for (int j = 0; j < listaMateriales.size(); j++) {
-                            if (listaMateriales.get(j).getName().equals("Moneda")) {
-                                listaMateriales.get(j).setCantidad(listaMateriales.get(j).getCantidad() + enemigo.getMonedasGanas());
+
+                        if(nRonda != 5) {
+                            i = new Intent(PantallaCaballeroActivity.this, ResultadosCaballero.class);
+                            i.putExtra("codigo", getCodigoSala());
+                            i.putExtra("Caballero", caballero);
+                            i.putExtra("nRonda", nRonda + 1);
+
+                            for (int j = 0; j < listaMateriales.size(); j++) {
+                                if (listaMateriales.get(j).getName().equals("Moneda")) {
+                                    listaMateriales.get(j).setCantidad(listaMateriales.get(j).getCantidad() + enemigo.getMonedasGanas());
+                                }
                             }
+
+                            FirebaseDAO.setMateriales(String.valueOf(Sesion.getNumLobby()), listaMateriales);
+                            firebaseDatabase.getReference().child("Caballero").child(getCodigoSala()).setValue(caballero);
+                            partidaReference.child(getCodigoSala()).child("1").child("numRonda").setValue(nRonda + 1);
+                            partidaReference.child(getCodigoSala()).child("1").child("justaGanada").setValue(1);
+
+                        } else {
+                            i = new Intent(PantallaCaballeroActivity.this, PantallaCuestionario.class);
+                            i.putExtra("codigo", getCodigoSala());
+                            i.putExtra("Caballero", caballero);
+                            i.putExtra("nRonda", nRonda + 1);
+                            i.putExtra("rol", "1");
                         }
-                                FirebaseDAO.setMateriales(String.valueOf(Sesion.getNumLobby()), listaMateriales);
-                                firebaseDatabase.getReference().child("Caballero").child(getCodigoSala()).setValue(caballero);
-                                partidaReference.child(getCodigoSala()).child("1").child("numRonda").setValue(nRonda + 1);
-                                partidaReference.child(getCodigoSala()).child("1").child("justaGanada").setValue(1);
+
 
 
 
@@ -417,7 +430,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
 
                 } else {
                     partidaReference.child(getCodigoSala()).child("1").child("justaGanada").setValue(2);
-                    i = new Intent(PantallaCaballeroActivity.this, PantallaCuestionarioFinal.class);
+                    i = new Intent(PantallaCaballeroActivity.this, PantallaCuestionario.class);
 
                 }
 

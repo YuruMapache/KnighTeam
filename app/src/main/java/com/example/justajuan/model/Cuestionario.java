@@ -9,13 +9,12 @@ public class Cuestionario {
     private int deAcuerdo;
     private int muyAcuerdo;
 
-    public Cuestionario(String pregunta, int muyDesacuerdo, int desacuerdo, int indiferente, int deAcuerdo, int muyAcuerdo) {
+    public Cuestionario() {
+
+    }
+
+    public Cuestionario(String pregunta) {
         this.pregunta = pregunta;
-        this.muyDesacuerdo = muyDesacuerdo;
-        this.desacuerdo = desacuerdo;
-        this.indiferente = indiferente;
-        this.deAcuerdo = deAcuerdo;
-        this.muyAcuerdo = muyAcuerdo;
     }
 
     public String getPregunta() {
@@ -64,5 +63,13 @@ public class Cuestionario {
 
     public void setMuyAcuerdo(int muyAcuerdo) {
         this.muyAcuerdo = muyAcuerdo;
+    }
+
+    public void clear(){
+        setMuyDesacuerdo(0);
+        setDesacuerdo(0);
+        setIndiferente(0);
+        setDeAcuerdo(0);
+        setMuyAcuerdo(0);
     }
 }
