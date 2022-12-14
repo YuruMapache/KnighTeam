@@ -324,7 +324,7 @@ public class PantallaDruidaActivity extends AppCompatActivity {
                             i.putExtra("codigo", getCodigoSala());
                             i.putExtra("listaObjetos", getListaObjetos());
                             i.putExtra("objetosCreandose", objetosCreandose);
-                            i.putExtra("numRonda", numRonda);
+                            i.putExtra("nRonda", numRonda);
                             startActivity(i);
 
                         } else {
@@ -332,6 +332,8 @@ public class PantallaDruidaActivity extends AppCompatActivity {
                             i.putExtra("codigo", getCodigoSala());
                             i.putExtra("listaObjetos", getListaObjetos());
                             i.putExtra("objetosCreandose", objetosCreandose);
+                            i.putExtra("nRonda", numRonda + 1);
+                            i.putExtra("rol", "5");
                             startActivity(i);
                         }
 
@@ -340,6 +342,8 @@ public class PantallaDruidaActivity extends AppCompatActivity {
                         i.putExtra("codigo", getCodigoSala());
                         i.putExtra("listaObjetos", getListaObjetos());
                         i.putExtra("objetosCreandose", objetosCreandose);
+                        i.putExtra("nRonda", numRonda + 1);
+                        i.putExtra("rol", "5");
                         startActivity(i);
                     }
                 }
