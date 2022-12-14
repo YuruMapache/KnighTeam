@@ -13,6 +13,7 @@ public class Objeto implements Serializable {
     private String clase;
     private String descripcion;
     private int salud;
+    private int saludMax;
     private int ataque;
     private int velocidad;
     private int estamina;
@@ -29,11 +30,12 @@ public class Objeto implements Serializable {
 
     }
 
-    public Objeto(String nombre,String clase, String descripcion, int salud, int ataque, int velocidad, int estamina, int tiempo, Map<String, Integer> precio, boolean esConsumible, int idDrawable) {
+    public Objeto(String nombre,String clase, String descripcion, int salud, int saludMax, int ataque, int velocidad, int estamina, int tiempo, Map<String, Integer> precio, boolean esConsumible, int idDrawable) {
         setNombre(nombre);
         setClase(clase);
         setDescripcion(descripcion);
         setSalud(salud);
+        setSaludMax(saludMax);
         setAtaque(ataque);
         setVelocidad(velocidad);
         setTiempo(tiempo);
@@ -73,6 +75,14 @@ public class Objeto implements Serializable {
 
     public void setSalud(int salud) {
         this.salud = salud;
+    }
+
+    public int getSaludMax() {
+        return saludMax;
+    }
+
+    public void setSaludMax(int saludMax) {
+        this.saludMax = saludMax;
     }
 
     public int getAtaque() {
