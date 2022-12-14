@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -136,13 +135,13 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final Dialog acciones = new Dialog(PantallaMaestroCuadrasActivity.this);
-                acciones.setContentView(R.layout.pop_up_acciones_alpha);
+                acciones.setContentView(R.layout.pop_up_acciones);
                 acciones.setCancelable(true);
                 acciones.show();
                 listaObjetos=getListaObjetos();
 
                 GridView ui_listaObjetos= (GridView) acciones.findViewById(R.id.ui_ListaObjetos);
-                AdaptadorAcciones adaptadorAcciones= new AdaptadorAcciones(acciones.getContext(),R.layout.pop_up_acciones_alpha,listaObjetos,getCodigoSala(),objetosCreandose,listaMateriales);
+                AdaptadorAcciones adaptadorAcciones= new AdaptadorAcciones(acciones.getContext(),R.layout.pop_up_acciones,listaObjetos,getCodigoSala(),objetosCreandose,listaMateriales);
                 ui_listaObjetos.setAdapter(adaptadorAcciones);
 
                 botonAtras = acciones.findViewById(R.id.botonAtras);
@@ -159,7 +158,7 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final Dialog acciones = new Dialog(PantallaMaestroCuadrasActivity.this);
-                acciones.setContentView(R.layout.pop_up_tienda_alpha);
+                acciones.setContentView(R.layout.pop_up_tienda);
                 acciones.setCancelable(true);
                 acciones.show();
                 GridView gridViewTienda = (GridView) acciones.findViewById(R.id.gridView_Tienda);

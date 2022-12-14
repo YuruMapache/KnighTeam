@@ -24,11 +24,9 @@ import com.example.justajuan.model.Estadistico;
 import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Sesion;
-import com.example.justajuan.persistence.AdaptadorAcciones;
 import com.example.justajuan.persistence.AdaptadorEstadisticas;
 import com.example.justajuan.persistence.AdaptadorInventario;
 import com.example.justajuan.persistence.AdaptadorMateriales;
-import com.example.justajuan.persistence.AdaptadorProgreso;
 import com.example.justajuan.persistence.FirebaseDAO;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -140,7 +138,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final Dialog acciones = new Dialog(PantallaCaballeroActivity.this);
-                acciones.setContentView(R.layout.pop_up_acciones_alpha);
+                acciones.setContentView(R.layout.pop_up_acciones);
                 acciones.setCancelable(true);
                 acciones.show();
 
@@ -194,7 +192,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final Dialog acciones = new Dialog(PantallaCaballeroActivity.this);
-                acciones.setContentView(R.layout.pop_up_tienda_alpha);
+                acciones.setContentView(R.layout.pop_up_tienda);
                 acciones.setCancelable(true);
                 acciones.show();
 
