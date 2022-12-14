@@ -83,6 +83,7 @@
     <string name="pregunta2.8">Hemos sabido afrontar juntos los problemas que han ido surgiendo.</string>
 
     <string name="presentacion_resultados">Estos han sido los resultados</string>
+    <string name="estadisticas_caballero">Estadísticas caballero</string>
 
     <string-array name="genero">
         <item>Masculino</item>
