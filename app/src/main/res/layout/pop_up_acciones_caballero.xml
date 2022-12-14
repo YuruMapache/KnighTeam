@@ -5,7 +5,7 @@
     android:id="@+id/accionesPopUpAlpha"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/fui_transparent"
+    android:background="@drawable/madera_pixel"
 
     android:orientation="vertical">
 
@@ -36,9 +36,10 @@
 
         <GridLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_gravity="center"
+            android:layout_marginTop="10dp"
             android:rowCount="2"
             android:columnCount="2">
 
@@ -46,7 +47,6 @@
                 android:id="@+id/botonMejorarVida"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
-                android:layout_margin="25dp"
                 android:layout_gravity="center"
                 android:background="@drawable/rock_button"
                 android:text="Mejorar Vida"
@@ -58,7 +58,6 @@
                 android:id="@+id/botonMejorarAtaque"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
-                android:layout_margin="25dp"
                 android:background="@drawable/rock_button"
                 android:layout_gravity="center"
                 android:text="Mejorar Ataque"
@@ -70,7 +69,6 @@
                 android:id="@+id/botonMejorarVelocidad"
                 android:layout_width="200dp"
                 android:layout_height="60dp"
-                android:layout_margin="25dp"
                 android:background="@drawable/rock_button"
                 android:layout_gravity="center"
                 android:text="Mejorar Velocidad"

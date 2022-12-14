@@ -159,7 +159,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
 
-                        if (descansando==false && caballero.getEstamina()>=25){
+                        if (!descansando && caballero.getEstamina()>=25){
                             caballero.setAtaque(caballero.getAtaque()+5);
                             caballero.setEstamina(caballero.getEstamina()-25);
                         }
