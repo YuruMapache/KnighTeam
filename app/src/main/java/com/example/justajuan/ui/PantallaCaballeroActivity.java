@@ -53,6 +53,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
     private ValueEventListener listenerCombate;
     private ValueEventListener listenerMateriales;
     private int numRonda;
+    private Material moneda;
     private boolean descansando=false;
 
     @Override
@@ -66,6 +67,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("Materiales").child(String.valueOf(Sesion.getNumLobby()));
+        partidaReference = firebaseDatabase.getReference().child("Partida");
         partidaReference = firebaseDatabase.getReference().child("Partida");
 
         vistaLista = (GridView) findViewById(R.id.textRecursos);
@@ -197,16 +199,6 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         botonDesplTienda.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final Dialog acciones = new Dialog(PantallaCaballeroActivity.this);
-                acciones.setContentView(R.layout.pop_up_tienda);
-                acciones.setCancelable(true);
-                acciones.show();
-                    Material moneda=null;
-                for (Material m:listaMateriales) {
-                    if (m.getName().equals("moneda")) {
-                        moneda = m;
-                }
-                }
                 if (!descansando && moneda.getCantidad()>=22){
                     moneda.setCantidad(moneda.getCantidad()-22);
                     if (caballero.getEstamina()+50>=100){
@@ -218,16 +210,6 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 }else if (descansando){
                         Toast.makeText(PantallaCaballeroActivity.this, "Ya estas descansando en el bar, no puedes realizar mas acciones", Toast.LENGTH_SHORT).show();
                     }
-
-
-
-                botonAtras = acciones.findViewById(R.id.botonAtras);
-                botonAtras.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        acciones.hide();
-                    }
-                });
             }
         });
 
@@ -320,6 +302,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                     Material material = postSnapshot.getValue(Material.class);
                     if (material.getRol().contains("Caballero")) {
                         listaMateriales.add(material);
+                        moneda=material;
                     }
                 }
                 adaptador.setListaMateriales(listaMateriales);
