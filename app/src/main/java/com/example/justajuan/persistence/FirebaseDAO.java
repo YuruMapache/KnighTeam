@@ -70,7 +70,6 @@ public class FirebaseDAO {
         dr.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Sesion sesion = Sesion.getInstance();
 
                 dr.setValue(caballero);
 
