@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.justajuan.R;
+import com.example.justajuan.model.Caballero;
 import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Rol;
 import com.example.justajuan.model.Sesion;
@@ -35,6 +36,7 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
     private DatabaseReference databaseReference, partidaReference;
     private ArrayList<Objeto> listaObjetos= new ArrayList<>();
     private ArrayList<Objeto> temporal= new ArrayList<>();
+    private Caballero caballero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -108,6 +110,7 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
                                         i.putExtra("codigo", getCodigoSala());
                                         i.putExtra("rol", Rol.HERRERO);
                                         i.putExtra("listaObjetos",temporal);
+                                        startActivity(i);
                                         break;
                                     case "CURANDERO":
                                         for (int j=0; j<listaObjetos.size();j++){
@@ -119,6 +122,7 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
                                         i.putExtra("codigo", getCodigoSala());
                                         i.putExtra("rol", Rol.CURANDERO);
                                         i.putExtra("listaObjetos",temporal);
+                                        startActivity(i);
                                         break;
                                     case "DRUIDA":
                                         for (int j=0; j<listaObjetos.size();j++){
@@ -130,12 +134,32 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
                                         i.putExtra("codigo", getCodigoSala());
                                         i.putExtra("rol", Rol.DRUIDA);
                                         i.putExtra("listaObjetos",temporal);
+                                        startActivity(i);
                                         break;
                                     case "CABALLERO":
-                                        partidaReference.child(getCodigoSala()).child("1").child("justaGanada").setValue(0);
-                                        i = new Intent(PantallaGestorRolesActivity.this, PantallaCaballeroActivity.class);
-                                        i.putExtra("codigo", getCodigoSala());
-                                        i.putExtra("rol", Rol.CABALLERO);
+
+                                        databaseReference = firebaseDatabase.getReference().child("Caballero").child(getCodigoSala());
+
+                                        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                                Intent j;
+                                                caballero = snapshot.getValue(Caballero.class);
+                                                partidaReference.child(getCodigoSala()).child("1").child("justaGanada").setValue(0);
+                                                j = new Intent(PantallaGestorRolesActivity.this, PantallaCaballeroActivity.class);
+                                                j.putExtra("codigo", getCodigoSala());
+                                                j.putExtra("rol", Rol.CABALLERO);
+                                                j.putExtra("caballero", caballero);
+                                                startActivity(j);
+
+                                            }
+
+                                            @Override
+                                            public void onCancelled(@NonNull DatabaseError error) {
+
+                                            }
+                                        });
+
                                         break;
                                     case "MAESTRO_CUADRAS":
                                         for (int j=0; j<listaObjetos.size();j++){
@@ -147,12 +171,13 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
                                         i.putExtra("codigo", getCodigoSala());
                                         i.putExtra("rol", Rol.MAESTRO_CUADRAS);
                                         i.putExtra("listaObjetos",temporal);
+                                        startActivity(i);
                                         break;
                                     default:
                                         i = new Intent(PantallaGestorRolesActivity.this, PantallaGestorRolesActivity.class);
+                                        startActivity(i);
                                         break;
                                 }
-                                startActivity(i);
                             }
                         }
                     }

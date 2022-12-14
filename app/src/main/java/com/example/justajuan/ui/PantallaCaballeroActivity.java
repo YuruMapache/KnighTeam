@@ -94,34 +94,17 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 timeLeftText += seconds;
                 glblTimer.setText(timeLeftText);
 
-                firebaseDatabase.getReference().child("Caballero").child(getCodigoSala()).addListenerForSingleValueEvent(new ValueEventListener() {
+                caballero = getCaballero();
 
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        caballero = snapshot.getValue(Caballero.class);
-
-                        estadisticos.clear();
-                        estadisticos.add(new Estadistico("Salud", R.drawable.salud_ajustado, caballero.getSalud(), caballero.getSalud_max()));
-                        estadisticos.add(new Estadistico("Ataque", R.drawable.ataque_ajustado, caballero.getAtaque(), 120));
-                        estadisticos.add(new Estadistico("Velocidad de ataque", R.drawable.velocidad_ajustado, caballero.getVelocidadAtaque(), 35));
-                        estadisticos.add(new Estadistico("Estamina", R.drawable.estamina_ajustado, caballero.getEstamina(), 100));
-                        adaptadorEstadisticas.setListaEstadisticas(estadisticos);
+                estadisticos.clear();
+                estadisticos.add(new Estadistico("Salud", R.drawable.salud_ajustado, getCaballero().getSalud(), getCaballero().getSalud_max()));
+                estadisticos.add(new Estadistico("Ataque", R.drawable.ataque_ajustado, getCaballero().getAtaque(), 120));
+                estadisticos.add(new Estadistico("Velocidad de ataque", R.drawable.velocidad_ajustado, getCaballero().getVelocidadAtaque(), 35));
+                estadisticos.add(new Estadistico("Estamina", R.drawable.estamina_ajustado, getCaballero().getEstamina(), 100));
+                adaptadorEstadisticas.setListaEstadisticas(estadisticos);
 
 
-                        ui_listaObjetos.setAdapter(adaptadorEstadisticas);
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-
-
-
-
+                ui_listaObjetos.setAdapter(adaptadorEstadisticas);
 
 
             }
@@ -337,15 +320,6 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
     }
 
 
-    public Caballero getCaballero() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            return (Caballero) extras.get("Caballero");
-        }
-        return null;
-    }
-
-
     public void algoritmo(int nRonda) {
 
         firebaseDatabase.getReference().child("Enemigos").child(String.valueOf(nRonda)).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -439,6 +413,14 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             return extras.getString("codigo");
+        }
+        return null;
+    }
+
+    public Caballero getCaballero() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            return (Caballero) extras.getSerializable("caballero");
         }
         return null;
     }

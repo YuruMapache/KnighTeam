@@ -69,11 +69,6 @@ public class PantallaCreacionPartidaActivity extends AppCompatActivity {
                     return;
                 }
 
-                /*if(Integer.parseInt(edadARegistrar) < 18) {
-                    Toast.makeText(getApplicationContext(), "Edad mínima 18 años", Toast.LENGTH_SHORT).show();
-                    return;
-                }*/
-
                 int codigoAleatorio = (int) ((Math.random() * 100000));
                 String tokenSala = String.valueOf(codigoAleatorio);
 

@@ -21,6 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 
 public class PantallaEsperaLoginActivity extends AppCompatActivity {
 
@@ -82,7 +84,7 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
                                 i.putExtra("rol", Rol.DRUIDA);
                                 break;
                             case "CABALLERO":
-                                Caballero caballero= new Caballero();
+                                Caballero caballero = new Caballero(100, 100, 5, 1, 100, 100, new ArrayList<>());
                                 FirebaseDAO.setCaballero(getCodigoSala(),caballero);
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
                                 i.putExtra("codigo", getCodigoSala());
