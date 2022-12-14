@@ -1,6 +1,8 @@
 package com.example.justajuan.persistence;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,6 +50,19 @@ public class AdaptadorEstadisticas extends ArrayAdapter {
         textoNombre.setTextSize(15);
         textoValor.setText(listaEstadisticas.get(position).getValorActual() + "/" + listaEstadisticas.get(position).getValorMax());
         textoValor.setTextSize(15);
+
+        if(textoNombre.getText().equals("Salud")){
+            barraProgreso.setProgressTintList(ColorStateList.valueOf(Color.RED));
+        }
+        else if(textoNombre.getText().equals("Ataque")){
+            barraProgreso.setProgressTintList(ColorStateList.valueOf(Color.MAGENTA));
+        }
+        else if(textoNombre.getText().equals("Velocidad de ataque")){
+            barraProgreso.setProgressTintList(ColorStateList.valueOf(Color.CYAN));
+        }
+        else{
+            barraProgreso.setProgressTintList(ColorStateList.valueOf(Color.BLUE));
+        }
 
         int porcentaje= (int) (listaEstadisticas.get(position).getValorActual()*100/listaEstadisticas.get(position).getValorMax());
         barraProgreso.setProgress(porcentaje);
