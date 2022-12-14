@@ -73,21 +73,12 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
 
         botonCombate = findViewById(R.id.botonCombate);
 
-        firebaseDatabase.getReference().child("Caballero").child(String.valueOf(Sesion.getNumLobby())).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                caballero = (Caballero) snapshot.getValue(Caballero.class);
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
 
         TextView glblTimer = findViewById(R.id.timerTextView);
         ArrayList<Estadistico> estadisticos= new ArrayList<>();
         AdaptadorEstadisticas adaptadorEstadisticas = new AdaptadorEstadisticas(this, R.layout.gridview_recursos_feudo, estadisticos);
+        GridView ui_listaObjetos = (GridView) findViewById(R.id.gridView_EstadisticasCaballero);
 
         new CountDownTimer(360000, 1000) {
 
@@ -103,15 +94,34 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 timeLeftText += seconds;
                 glblTimer.setText(timeLeftText);
 
-                estadisticos.clear();
-                estadisticos.add(new Estadistico("Salud", R.drawable.salud_ajustado, caballero.getSalud(), caballero.getSalud_max()));
-                estadisticos.add(new Estadistico("Ataque", R.drawable.ataque_ajustado, caballero.getAtaque(), 120));
-                estadisticos.add(new Estadistico("Velocidad de ataque", R.drawable.velocidad_ajustado, caballero.getVelocidadAtaque(), 35));
-                estadisticos.add(new Estadistico("Estamina", R.drawable.estamina_ajustado, caballero.getEstamina(), 100));
-                adaptadorEstadisticas.setListaEstadisticas(estadisticos);
+                firebaseDatabase.getReference().child("Caballero").child(getCodigoSala()).addListenerForSingleValueEvent(new ValueEventListener() {
 
-                GridView ui_listaObjetos = (GridView) findViewById(R.id.recursosFeudoGridView);
-                ui_listaObjetos.setAdapter(adaptadorEstadisticas);
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        caballero = snapshot.getValue(Caballero.class);
+
+                        estadisticos.clear();
+                        estadisticos.add(new Estadistico("Salud", R.drawable.salud_ajustado, caballero.getSalud(), caballero.getSalud_max()));
+                        estadisticos.add(new Estadistico("Ataque", R.drawable.ataque_ajustado, caballero.getAtaque(), 120));
+                        estadisticos.add(new Estadistico("Velocidad de ataque", R.drawable.velocidad_ajustado, caballero.getVelocidadAtaque(), 35));
+                        estadisticos.add(new Estadistico("Estamina", R.drawable.estamina_ajustado, caballero.getEstamina(), 100));
+                        adaptadorEstadisticas.setListaEstadisticas(estadisticos);
+
+
+                        ui_listaObjetos.setAdapter(adaptadorEstadisticas);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+
+
+
 
 
             }
