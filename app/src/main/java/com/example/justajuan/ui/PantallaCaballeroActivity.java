@@ -152,7 +152,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         if (!descansando && caballero.getEstamina()>=30){
-                            caballero.setSalud_max(caballero.getSalud_max()+100);
+                            caballero.setSalud_max(caballero.getSalud_max()+50);
                             caballero.setEstamina(caballero.getEstamina()-30);
                             botonVida.setText("Salud Aumentada");
                         }
