@@ -50,11 +50,33 @@ public class AdaptadorInventario extends ArrayAdapter {
             @Override
             public void onClick(View v) {
                 if (boton.getText().toString().equals("Equipar")) {
-                    boton.setText("Equipado");
                     caballero.getEquipado().add(listaObjetos.get(position));
-                    caballero.setAtaque(caballero.getAtaque()+listaObjetos.get(position).getAtaque());
-                    caballero.setSalud(caballero.getSalud()+listaObjetos.get(position).getSalud());
-                    caballero.setEstamina(caballero.getEstamina()+listaObjetos.get(position).getEstamina());
+                    if(caballero.getAtaque() + listaObjetos.get(position).getAtaque() >= 120){
+                        caballero.setAtaque(120);
+                    }
+                    else{
+                        caballero.setAtaque(caballero.getAtaque()+listaObjetos.get(position).getAtaque());
+                    }
+                    caballero.setSalud_max(caballero.getSalud_max() + listaObjetos.get(position).getSaludMax());
+                    if(caballero.getSalud() + listaObjetos.get(position).getSalud() >= caballero.getSalud_max()){
+                        caballero.setSalud(caballero.getSalud_max());
+                    }
+                    else{
+                        caballero.setSalud(caballero.getSalud()+listaObjetos.get(position).getSalud());
+                    }
+                    if(caballero.getVelocidadAtaque() + listaObjetos.get(position).getVelocidad() >= 35){
+                        caballero.setVelocidadAtaque(35);
+                    }
+                    else{
+                        caballero.setVelocidadAtaque(caballero.getVelocidadAtaque()+listaObjetos.get(position).getVelocidad());
+                    }
+                    if(caballero.getEstamina() + listaObjetos.get(position).getEstamina() >= 100){
+                        caballero.setEstamina(100);
+                    }
+                    else{
+                        caballero.setEstamina(caballero.getEstamina()+listaObjetos.get(position).getEstamina());
+                    }
+                    boton.setText("Equipado");
                 }else{
                     for (int i=0; i<caballero.getEquipado().size();i++){
                         boton.setText("Equipar");
@@ -65,22 +87,10 @@ public class AdaptadorInventario extends ArrayAdapter {
                 }
             }
         });
-
-
-
-
-
-
         return v;
-
     }
+
     public void setListaObjetos(ArrayList objects){
         listaObjetos=objects;
     }
-
-
-
-
-
-
 }
