@@ -5,7 +5,6 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.os.Handler;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -21,7 +20,6 @@ import androidx.appcompat.widget.AppCompatButton;
 import com.example.justajuan.R;
 import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Objeto;
-import com.example.justajuan.model.Sesion;
 import com.example.justajuan.persistence.AdaptadorAcciones;
 import com.example.justajuan.persistence.AdaptadorMateriales;
 import com.example.justajuan.persistence.AdaptadorProgreso;
@@ -141,13 +139,13 @@ public class PantallaHerreroActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final Dialog acciones = new Dialog(PantallaHerreroActivity.this);
-                acciones.setContentView(R.layout.pop_up_acciones_alpha);
+                acciones.setContentView(R.layout.pop_up_acciones);
                 acciones.setCancelable(true);
                 acciones.show();
                 listaObjetos = getListaObjetos();
 
                 GridView ui_listaObjetos = (GridView) acciones.findViewById(R.id.ui_ListaObjetos);
-                AdaptadorAcciones adaptadorAcciones = new AdaptadorAcciones(acciones.getContext(), R.layout.pop_up_acciones_alpha, listaObjetos, getCodigoSala(), objetosCreandose, listaMateriales);
+                AdaptadorAcciones adaptadorAcciones = new AdaptadorAcciones(acciones.getContext(), R.layout.pop_up_acciones, listaObjetos, getCodigoSala(), objetosCreandose, listaMateriales);
                 ui_listaObjetos.setAdapter(adaptadorAcciones);
 
                 botonAtras = acciones.findViewById(R.id.botonAtras);
@@ -164,7 +162,7 @@ public class PantallaHerreroActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final Dialog acciones = new Dialog(PantallaHerreroActivity.this);
-                acciones.setContentView(R.layout.pop_up_tienda_alpha);
+                acciones.setContentView(R.layout.pop_up_tienda);
                 acciones.setCancelable(true);
                 acciones.show();
                 GridView gridViewTienda = (GridView) acciones.findViewById(R.id.gridView_Tienda);
