@@ -24,11 +24,9 @@ import com.example.justajuan.model.Estadistico;
 import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Sesion;
-import com.example.justajuan.persistence.AdaptadorAcciones;
 import com.example.justajuan.persistence.AdaptadorEstadisticas;
 import com.example.justajuan.persistence.AdaptadorInventario;
 import com.example.justajuan.persistence.AdaptadorMateriales;
-import com.example.justajuan.persistence.AdaptadorProgreso;
 import com.example.justajuan.persistence.FirebaseDAO;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -55,6 +53,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
     private ValueEventListener listenerCombate;
     private ValueEventListener listenerMateriales;
     private int numRonda;
+    private boolean descansando=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -139,9 +138,45 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final Dialog acciones = new Dialog(PantallaCaballeroActivity.this);
-                acciones.setContentView(R.layout.pop_up_acciones_alpha);
+                acciones.setContentView(R.layout.pop_up_acciones_caballero);
                 acciones.setCancelable(true);
                 acciones.show();
+
+                AppCompatButton botonVida= (AppCompatButton) acciones.findViewById(R.id.botonMejorarVida);
+                AppCompatButton botonAtaque= (AppCompatButton) acciones.findViewById(R.id.botonMejorarAtaque);
+                AppCompatButton botonVelocidadAtaque= (AppCompatButton) acciones.findViewById(R.id.botonMejorarVelocidad);
+                botonVida.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (descansando==false && caballero.getEstamina()>=30){
+                            caballero.setSalud_max(caballero.getSalud_max()+100);
+                            caballero.setEstamina(caballero.getEstamina()-30);
+                        }
+                    }
+                });
+
+                botonAtaque.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if (!descansando && caballero.getEstamina()>=25){
+                            caballero.setAtaque(caballero.getAtaque()+5);
+                            caballero.setEstamina(caballero.getEstamina()-25);
+                        }
+
+                    }
+                });
+                botonVelocidadAtaque.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (descansando==false && caballero.getEstamina()>=25){
+                            caballero.setVelocidadAtaque(caballero.getVelocidadAtaque()+2);
+                            caballero.setEstamina(caballero.getEstamina()-25);
+                        }
+                    }
+                });
+
+
 
                 botonAtras = acciones.findViewById(R.id.botonAtras);
                 botonAtras.setOnClickListener(new View.OnClickListener() {
@@ -157,7 +192,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final Dialog acciones = new Dialog(PantallaCaballeroActivity.this);
-                acciones.setContentView(R.layout.pop_up_tienda_alpha);
+                acciones.setContentView(R.layout.pop_up_tienda);
                 acciones.setCancelable(true);
                 acciones.show();
 

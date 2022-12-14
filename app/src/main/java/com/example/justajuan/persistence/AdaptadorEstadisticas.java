@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -44,10 +45,16 @@ public class AdaptadorEstadisticas extends ArrayAdapter {
 
         imageView.setImageResource(listaEstadisticas.get(position).getIdDrawable());
         textoNombre.setText(listaEstadisticas.get(position).getNombre());
+        textoNombre.setTextSize(15);
         textoValor.setText(listaEstadisticas.get(position).getValorActual() + "/" + listaEstadisticas.get(position).getValorMax());
+        textoValor.setTextSize(15);
 
         int porcentaje= (int) (listaEstadisticas.get(position).getValorActual()*100/listaEstadisticas.get(position).getValorMax());
         barraProgreso.setProgress(porcentaje);
+
+        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        barraProgreso.setLayoutParams(params);
 
         return v;
 
