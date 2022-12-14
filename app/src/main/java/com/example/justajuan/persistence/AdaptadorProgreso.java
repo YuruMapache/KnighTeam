@@ -41,8 +41,8 @@ public class AdaptadorProgreso extends ArrayAdapter {
         ProgressBar barraProgreso=(ProgressBar) v.findViewById(R.id.barraProgresoObjeto) ;
         imageView.setImageResource(listaObjetos.get(position).getIdDrawable());
         textoNombre.setText(listaObjetos.get(position).getNombre());
-        int total= 180000*listaObjetos.get(position).getTiempo();
-        int porcentaje= (int) (listaObjetos.get(position).getTiempoQueFalta()*100)/total;
+        int total = 180000*listaObjetos.get(position).getTiempo();
+        int porcentaje = 100 - (int) (listaObjetos.get(position).getTiempoQueFalta()*100)/total;
         porcentajeTexto.setText(String.valueOf(porcentaje)+"%");
         barraProgreso.setProgress(porcentaje);
 

@@ -83,6 +83,7 @@
     <string name="pregunta2.8">Hemos sabido afrontar juntos los problemas que han ido surgiendo.</string>
 
     <string name="estadisticas_caballero">Estadísticas caballero</string>
+    <string name="en_progreso">EN PROGRESO</string>
 
     <string-array name="genero">
         <item>Masculino</item>
