@@ -53,8 +53,9 @@
             android:ems="10"
             android:gravity="center|center_horizontal"
             android:minHeight="48dp"
-            android:text="@string/feudal_resources"
+            android:text="@string/en_progreso"
             android:textAlignment="center"
+            android:textStyle="bold"
             android:textColor="@color/black" />
 
 

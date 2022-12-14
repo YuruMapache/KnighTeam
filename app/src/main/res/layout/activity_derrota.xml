@@ -8,10 +8,9 @@
 
     <LinearLayout
         android:id="@+id/linearLayout3"
-        android:layout_width="666dp"
-        android:layout_height="280dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_marginStart="112dp"
         android:layout_marginTop="124dp"
         android:background="@drawable/pergamino"
         app:layout_constraintStart_toStartOf="parent"
@@ -20,20 +19,12 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginLeft="240dp"
+            android:layout_marginTop="100dp"
+            android:layout_gravity="center"
             android:text="@string/derrota"
             android:textSize="30dp"
             android:textStyle="bold"
             android:textColor="@color/black"/>
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="177dp">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" />
-        </ScrollView>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
