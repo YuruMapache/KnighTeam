@@ -59,6 +59,7 @@
             android:textStyle="bold"/>
 
         <GridView
+            android:layout_marginHorizontal="20dp"
             android:id="@+id/gridView_EstadisticasCaballero"
             android:numColumns="1"
             android:layout_width="match_parent"

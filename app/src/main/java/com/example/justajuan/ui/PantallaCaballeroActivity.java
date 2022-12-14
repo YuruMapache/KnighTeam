@@ -140,7 +140,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 final Dialog acciones = new Dialog(PantallaCaballeroActivity.this);
-                acciones.setContentView(R.layout.pop_up_acciones_alpha);
+                acciones.setContentView(R.layout.pop_up_acciones_caballero);
                 acciones.setCancelable(true);
                 acciones.show();
 
