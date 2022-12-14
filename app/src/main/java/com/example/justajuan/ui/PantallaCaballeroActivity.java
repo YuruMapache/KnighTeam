@@ -55,6 +55,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
     private ValueEventListener listenerCombate;
     private ValueEventListener listenerMateriales;
     private int numRonda;
+    private boolean descansando=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -142,6 +143,42 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 acciones.setContentView(R.layout.pop_up_acciones_alpha);
                 acciones.setCancelable(true);
                 acciones.show();
+
+                AppCompatButton botonVida= (AppCompatButton) acciones.findViewById(R.id.botonMejorarVida);
+                AppCompatButton botonAtaque= (AppCompatButton) acciones.findViewById(R.id.botonMejorarAtaque);
+                AppCompatButton botonVelocidadAtaque= (AppCompatButton) acciones.findViewById(R.id.botonMejorarVelocidad);
+                botonVida.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (descansando==false && caballero.getEstamina()>=30){
+                            caballero.setSalud_max(caballero.getSalud_max()+100);
+                            caballero.setEstamina(caballero.getEstamina()-30);
+                        }
+                    }
+                });
+
+                botonAtaque.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        if (descansando==false && caballero.getEstamina()>=25){
+                            caballero.setAtaque(caballero.getAtaque()+5);
+                            caballero.setEstamina(caballero.getEstamina()-25);
+                        }
+
+                    }
+                });
+                botonVelocidadAtaque.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (descansando==false && caballero.getEstamina()>=25){
+                            caballero.setVelocidadAtaque(caballero.getVelocidadAtaque()+2);
+                            caballero.setEstamina(caballero.getEstamina()-25);
+                        }
+                    }
+                });
+
+
 
                 botonAtras = acciones.findViewById(R.id.botonAtras);
                 botonAtras.setOnClickListener(new View.OnClickListener() {
