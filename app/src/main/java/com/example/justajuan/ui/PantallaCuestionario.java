@@ -42,6 +42,7 @@ public class PantallaCuestionario extends AppCompatActivity {
     private ArrayList<Cuestionario> preguntasCuestionario;
     private AppCompatButton botonSiguiente;
     private DatabaseReference dr;
+    FirebaseDatabase fd;
 
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +53,7 @@ public class PantallaCuestionario extends AppCompatActivity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_pantalla_cuestionario);
 
-        FirebaseDatabase fd = FirebaseDatabase.getInstance();
+        fd= FirebaseDatabase.getInstance();
 
         tituloCuestionario = findViewById(R.id.tituloCuestionario);
         preguntas = findViewById(R.id.ui_ListaPreguntas);
@@ -87,8 +88,7 @@ public class PantallaCuestionario extends AppCompatActivity {
                 botonSiguiente.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        FirebaseDatabase fd = FirebaseDatabase.getInstance();
-                        DatabaseReference dr = fd.getReference().child("CuestionariosRespuestas").child("Intermedio").child(getCodigoSala()).child(getRol());
+
 
 
                         boolean respondido = false;
@@ -111,6 +111,7 @@ public class PantallaCuestionario extends AppCompatActivity {
                             Intent i;
                             if (getNRonda() != 5) {
                                 i = new Intent(PantallaCuestionario.this, PantallaDerrota.class);
+                                startActivity(i);
 
                             } else {
 
@@ -120,32 +121,38 @@ public class PantallaCuestionario extends AppCompatActivity {
                                         i.putExtra("codigo", getCodigoSala());
                                         i.putExtra("nRonda", getNRonda() + 1);
                                         i.putExtra("Caballero", getCaballero());
+                                        break;
                                     case 2:
                                         i = new Intent(PantallaCuestionario.this, ResultadosHerrero.class);
                                         i.putExtra("codigo", getCodigoSala());
                                         i.putExtra("nRonda", getNRonda() + 1);
                                         i.putExtra("objetosCreandose",getObjetosCreandose());
                                         i.putExtra("listaObjetos",getListaObjetos());
+                                        break;
                                     case 3:
                                         i = new Intent(PantallaCuestionario.this, ResultadosMaestroCuadras.class);
                                         i.putExtra("codigo", getCodigoSala());
                                         i.putExtra("nRonda", getNRonda() + 1);
                                         i.putExtra("objetosCreandose",getObjetosCreandose());
                                         i.putExtra("listaObjetos",getListaObjetos());
+                                        break;
                                     case 4:
                                         i = new Intent(PantallaCuestionario.this, ResultadosCurandera.class);
                                         i.putExtra("codigo", getCodigoSala());
                                         i.putExtra("nRonda", getNRonda() + 1);
                                         i.putExtra("objetosCreandose",getObjetosCreandose());
                                         i.putExtra("listaObjetos",getListaObjetos());
+                                        break;
                                     case 5:
                                         i = new Intent(PantallaCuestionario.this, ResultadosDruida.class);
                                         i.putExtra("codigo", getCodigoSala());
                                         i.putExtra("nRonda", getNRonda() + 1);
                                         i.putExtra("objetosCreandose",getObjetosCreandose());
                                         i.putExtra("listaObjetos",getListaObjetos());
+                                        break;
                                     default:
                                         i = new Intent(PantallaCuestionario.this, PantallaResultadosCuestionario.class);
+                                        break;
                                 }
                                 startActivity(i);
                             }

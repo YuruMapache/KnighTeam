@@ -121,6 +121,8 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         botonDesplDiario = findViewById(R.id.botonDiario);
         botonDesplInventario = findViewById(R.id.botonInventario);
 
+        botonDesplTienda.setText("Bar");
+
 
         partidaReference.child(getCodigoSala()).child("1").child("numRonda").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -199,6 +201,24 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 acciones.setContentView(R.layout.pop_up_tienda);
                 acciones.setCancelable(true);
                 acciones.show();
+                    Material moneda=null;
+                for (Material m:listaMateriales) {
+                    if (m.getName().equals("moneda")) {
+                        moneda = m;
+                }
+                }
+                if (!descansando && moneda.getCantidad()>=22){
+                    moneda.setCantidad(moneda.getCantidad()-22);
+                    if (caballero.getEstamina()+50>=100){
+                        caballero.setEstamina(100);
+                    }else {
+                        caballero.setEstamina(caballero.getEstamina() + 50);
+                    }
+                    descansando=true;
+                }else if (descansando){
+                        Toast.makeText(PantallaCaballeroActivity.this, "Ya estas descansando en el bar, no puedes realizar mas acciones", Toast.LENGTH_SHORT).show();
+                    }
+
 
 
                 botonAtras = acciones.findViewById(R.id.botonAtras);

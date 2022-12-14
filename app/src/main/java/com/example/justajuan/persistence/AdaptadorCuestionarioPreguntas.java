@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
@@ -36,33 +37,32 @@ public class AdaptadorCuestionarioPreguntas extends ArrayAdapter {
         TextView nombrePregunta = (TextView) v.findViewById(R.id.pregunta);
         nombrePregunta.setText(listaPreguntas.get(position).getPregunta());
         RadioGroup radioPreguntas = v.findViewById(R.id.radioPreguntas);
+        RadioButton botonMuyDesacuerdo = v.findViewById(R.id.muyDesacuerdo);
+        RadioButton botonDesacuerdo = v.findViewById(R.id.desacuerdo);
+        RadioButton botonIndiferente = v.findViewById(R.id.indiferente);
+        RadioButton botonAcuerdo = v.findViewById(R.id.acuerdo);
+        RadioButton botonMuyAcuerdo = v.findViewById(R.id.muyacuerdo);
 
         radioPreguntas.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
 
-                switch(checkedId){
-                    case 0:
+                    if (botonMuyDesacuerdo.isChecked()) {
                         listaPreguntas.get(position).clear();
                         listaPreguntas.get(position).setMuyDesacuerdo(1);
-                        break;
-                    case 1:
-                        listaPreguntas.get(position).clear();
-                        listaPreguntas.get(position).setDesacuerdo(1);
-                        break;
-                    case 2:
+                    }else if (botonDesacuerdo.isChecked()) {
+                    listaPreguntas.get(position).clear();
+                    listaPreguntas.get(position).setDesacuerdo(1);
+                }else if(botonIndiferente.isChecked()) {
                         listaPreguntas.get(position).clear();
                         listaPreguntas.get(position).setIndiferente(1);
-                        break;
-                    case 3:
+                    }else if(botonAcuerdo.isChecked()) {
                         listaPreguntas.get(position).clear();
                         listaPreguntas.get(position).setDeAcuerdo(1);
-                        break;
-                    case 4:
+                    }else if(botonMuyAcuerdo.isChecked()) {
                         listaPreguntas.get(position).clear();
                         listaPreguntas.get(position).setMuyAcuerdo(1);
-                        break;
-                }
+                    }
             }
         });
 
