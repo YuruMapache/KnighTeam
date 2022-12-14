@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.justajuan.R;
+import com.example.justajuan.model.Caballero;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -74,6 +75,7 @@ public class ResultadosCaballero extends AppCompatActivity {
                 if (listoCaballero == 1 && listoHerrero == 1 && listoMaestroCuadras == 1 && listoCurandero == 1 && listoDruida == 1) {
                     Intent i = new Intent(ResultadosCaballero.this, PantallaCaballeroActivity.class);
                     i.putExtra("codigo", getCodigoSala());
+                    i.putExtra("caballero",getCaballero());
                     startActivity(i);
                 }
             }
@@ -167,5 +169,12 @@ public class ResultadosCaballero extends AppCompatActivity {
         return 0;
     }
 
+    public Caballero getCaballero() {
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            return (Caballero) extras.getSerializable("caballero");
+        }
+        return null;
+    }
 
 }

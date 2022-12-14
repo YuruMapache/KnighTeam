@@ -74,6 +74,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
 
 
 
+        caballero = getCaballero();
         TextView glblTimer = findViewById(R.id.timerTextView);
         ArrayList<Estadistico> estadisticos= new ArrayList<>();
         AdaptadorEstadisticas adaptadorEstadisticas = new AdaptadorEstadisticas(this, R.layout.gridview_recursos_feudo, estadisticos);
@@ -93,13 +94,13 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 timeLeftText += seconds;
                 glblTimer.setText(timeLeftText);
 
-                caballero = getCaballero();
+
 
                 estadisticos.clear();
-                estadisticos.add(new Estadistico("Salud", R.drawable.salud_ajustado, getCaballero().getSalud(), getCaballero().getSalud_max()));
-                estadisticos.add(new Estadistico("Ataque", R.drawable.ataque_ajustado, getCaballero().getAtaque(), 120));
-                estadisticos.add(new Estadistico("Velocidad de ataque", R.drawable.velocidad_ajustado, getCaballero().getVelocidadAtaque(), 35));
-                estadisticos.add(new Estadistico("Estamina", R.drawable.estamina_ajustado, getCaballero().getEstamina(), 100));
+                estadisticos.add(new Estadistico("Salud", R.drawable.salud_ajustado, caballero.getSalud(), caballero.getSalud_max()));
+                estadisticos.add(new Estadistico("Ataque", R.drawable.ataque_ajustado, caballero.getAtaque(), 120));
+                estadisticos.add(new Estadistico("Velocidad de ataque", R.drawable.velocidad_ajustado, caballero.getVelocidadAtaque(), 35));
+                estadisticos.add(new Estadistico("Estamina", R.drawable.estamina_ajustado, caballero.getEstamina(), 100));
                 adaptadorEstadisticas.setListaEstadisticas(estadisticos);
 
 
@@ -148,9 +149,10 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 botonVida.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (descansando==false && caballero.getEstamina()>=30){
+                        if (!descansando && caballero.getEstamina()>=30){
                             caballero.setSalud_max(caballero.getSalud_max()+100);
                             caballero.setEstamina(caballero.getEstamina()-30);
+                            botonVida.setText("Salud Aumentada");
                         }
                     }
                 });
@@ -162,6 +164,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                         if (!descansando && caballero.getEstamina()>=25){
                             caballero.setAtaque(caballero.getAtaque()+5);
                             caballero.setEstamina(caballero.getEstamina()-25);
+                            botonAtaque.setText("Ataque Aumentado");
                         }
 
                     }
@@ -169,9 +172,10 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 botonVelocidadAtaque.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (descansando==false && caballero.getEstamina()>=25){
+                        if (!descansando && caballero.getEstamina()>=25){
                             caballero.setVelocidadAtaque(caballero.getVelocidadAtaque()+2);
                             caballero.setEstamina(caballero.getEstamina()-25);
+                            botonVelocidadAtaque.setText("Velocidad Aumentada");
                         }
                     }
                 });
