@@ -26,6 +26,18 @@ public class Caballero implements Serializable {
 
     }
 
+    public Caballero(int salud, int salud_max, int ataque, int velocidadAtaque, int estamina, int monedas, ArrayList<Objeto> equipado) {
+        this.salud = salud;
+        this.salud_max = salud_max;
+        this.ataque = ataque;
+        this.velocidadAtaque = velocidadAtaque;
+        this.estamina = estamina;
+        this.monedas = monedas;
+        this.equipado = equipado;
+    }
+
+
+
     public int getSalud() {
         return salud;
     }
