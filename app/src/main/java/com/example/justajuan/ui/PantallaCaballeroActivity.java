@@ -421,6 +421,7 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                             i.putExtra("Caballero", caballero);
                             i.putExtra("nRonda", nRonda + 1);
                             i.putExtra("rol", "1");
+                            i.putExtra("justaGanada",1);
                         }
 
 

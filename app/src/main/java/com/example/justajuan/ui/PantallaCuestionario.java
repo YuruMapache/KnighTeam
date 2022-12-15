@@ -109,7 +109,7 @@ public class PantallaCuestionario extends AppCompatActivity {
                                 dr.child(String.valueOf(i)).setValue(preguntasCuestionario.get(i));
                             }
                             Intent i;
-                            if (getNRonda() != 5) {
+                            if (getNRonda() != 5 && getJustaGanada()==0) {
                                 i = new Intent(PantallaCuestionario.this, PantallaDerrota.class);
                                 startActivity(i);
 
@@ -220,6 +220,13 @@ public class PantallaCuestionario extends AppCompatActivity {
             return (ArrayList<Objeto>) extras.getSerializable("objetosCreandose");
         }
         return null;
+    }
+    public int getJustaGanada(){
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            return extras.getInt("justaGanada");
+        }
+        return 0;
     }
 
 
