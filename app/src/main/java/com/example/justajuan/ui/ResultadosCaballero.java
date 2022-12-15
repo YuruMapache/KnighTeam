@@ -77,7 +77,7 @@ public class ResultadosCaballero extends AppCompatActivity {
                 if (listoCaballero == 1 && listoHerrero == 1 && listoMaestroCuadras == 1 && listoCurandero == 1 && listoDruida == 1) {
                     Intent i = new Intent(ResultadosCaballero.this, PantallaCaballeroActivity.class);
                     i.putExtra("codigo", getCodigoSala());
-                    i.putExtra("caballero",getCaballero());
+                    i.putExtra("Caballero",getCaballero());
                     startActivity(i);
                 }
             }
