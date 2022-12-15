@@ -174,7 +174,7 @@ public class ResultadosCaballero extends AppCompatActivity {
     public Caballero getCaballero() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            return (Caballero) extras.getSerializable("caballero");
+            return (Caballero) extras.getSerializable("Caballero");
         }
         return null;
     }
