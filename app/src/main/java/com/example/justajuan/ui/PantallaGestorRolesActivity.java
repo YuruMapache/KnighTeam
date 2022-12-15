@@ -150,7 +150,7 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
                                                 j = new Intent(PantallaGestorRolesActivity.this, PantallaCaballeroActivity.class);
                                                 j.putExtra("codigo", getCodigoSala());
                                                 j.putExtra("rol", Rol.CABALLERO);
-                                                j.putExtra("caballero", caballero);
+                                                j.putExtra("Caballero", caballero);
                                                 startActivity(j);
 
                                             }
