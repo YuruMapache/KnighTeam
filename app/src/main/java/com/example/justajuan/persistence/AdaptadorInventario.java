@@ -49,10 +49,11 @@ public class AdaptadorInventario extends ArrayAdapter {
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(caballero.getEquipado().contains(listaObjetos.get(position))){
+                    boton.setText("Equipado");
+                }
                 if (boton.getText().toString().equals("Equipar")) {
-                    if(caballero.getEquipado().contains(listaObjetos.get(position)) && !listaObjetos.get(position).isEsConsumible()){
-                        boton.setText("Equipado");
-                    }
+
                     caballero.getEquipado().add(listaObjetos.get(position));
                     if(caballero.getAtaque() + listaObjetos.get(position).getAtaque() >= 120){
                         caballero.setAtaque(120);
