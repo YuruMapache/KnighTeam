@@ -68,7 +68,6 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("Materiales").child(String.valueOf(Sesion.getNumLobby()));
         partidaReference = firebaseDatabase.getReference().child("Partida");
-        partidaReference = firebaseDatabase.getReference().child("Partida");
 
         vistaLista = (GridView) findViewById(R.id.textRecursos);
 
