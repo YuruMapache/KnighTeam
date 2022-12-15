@@ -316,7 +316,7 @@ public class PantallaMaestroCuadrasActivity extends AppCompatActivity {
                             }
                         }
 
-                        if (numRonda != 1) {
+                        if (numRonda != 5) {
                             Intent i = new Intent(PantallaMaestroCuadrasActivity.this, ResultadosMaestroCuadras.class);
                             i.putExtra("codigo", getCodigoSala());
                             i.putExtra("listaObjetos", getListaObjetos());

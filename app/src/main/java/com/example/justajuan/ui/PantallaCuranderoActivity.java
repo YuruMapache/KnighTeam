@@ -324,7 +324,7 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
                             }
                         }
 
-                        if (numRonda != 1) {
+                        if (numRonda != 5) {
                             Intent i = new Intent(PantallaCuranderoActivity.this, ResultadosCurandera.class);
                             i.putExtra("codigo", getCodigoSala());
                             i.putExtra("listaObjetos", getListaObjetos());
