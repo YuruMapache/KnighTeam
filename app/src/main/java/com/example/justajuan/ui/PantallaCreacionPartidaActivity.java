@@ -93,8 +93,6 @@ public class PantallaCreacionPartidaActivity extends AppCompatActivity {
                 FirebaseDAO.setPlayer(tokenSala, user);
                 FirebaseDAO.setMateriales(tokenSala,listaMateriales);
 
-                databaseReference.child("Partida").child(tokenSala).child("1").child("justaGanada").setValue(0);
-                databaseReference.child("Partida").child(tokenSala).child("1").child("combateListo").setValue(0);
 
                 Intent i = new Intent(PantallaCreacionPartidaActivity.this, PantallaEsperaLoginActivity.class);
                 i.putExtra("codigo", tokenSala);
