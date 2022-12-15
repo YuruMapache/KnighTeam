@@ -56,6 +56,8 @@ public class ResultadosCaballero extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        partidaReference.child(getCodigoSala()).child("1").child("justaGanada").setValue(0);
+
         listenerSiguiente = partidaReference.child(getCodigoSala()).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
