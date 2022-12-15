@@ -87,6 +87,10 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
             }
         });
 
+        partidaReference.child(getCodigoSala()).child("1").child("justaGanada").setValue("0");
+        partidaReference.child(getCodigoSala()).child("1").child("combateListo").setValue("0");
+
+
 
         new Timer().schedule(new TimerTask() {
             @Override
