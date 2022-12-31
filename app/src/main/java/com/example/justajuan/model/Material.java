@@ -7,11 +7,11 @@ public class Material {
     private int precio; //El precio/valor del material cuando lo compras en la tienda (e.j: el hierro vale 2 monedas).
     private String rol;
 
-    public Material(){
+    public Material() {
 
     }
 
-    public Material(String name, int idDrawable, int cantidad, int precio, String rol){
+    public Material(String name, int idDrawable, int cantidad, int precio, String rol) {
         setName(name);
         setIdDrawable(idDrawable);
         setCantidad(cantidad);
@@ -52,7 +52,11 @@ public class Material {
     }
 
     public String getRol() {
-        return rol;
+        if (this.rol != null) {
+            return this.rol;
+        } else {
+            return "";
+        }
     }
 
     public void setRol(String rol) {

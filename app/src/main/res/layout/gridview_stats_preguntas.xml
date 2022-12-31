@@ -5,7 +5,7 @@
     android:layout_gravity="center|top"
     android:orientation="vertical">
 
-    <TextView
+    <!--<TextView
         android:id="@+id/pregunta"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             android:layout_column="0"
             android:layout_gravity="center"
             android:layout_marginEnd="25dp"
-            android:text="@string/muy_en_desacuerdo"
+            android:textarray="@string/valoraciones/muy_en_desacuerdo"
             android:textColor="@color/black" />
 
         <TextView
@@ -49,7 +49,7 @@
             android:layout_column="1"
             android:layout_marginEnd="25dp"
             android:layout_gravity="center"
-            android:text="@string/en_desacuerdo"
+            android:textarray="@string/valoraciones/en_desacuerdo"
             android:textColor="@color/black" />
 
         <TextView
@@ -70,7 +70,7 @@
             android:layout_column="2"
             android:layout_marginEnd="25dp"
             android:layout_gravity="center"
-            android:text="@string/indiferente"
+            android:textarray="@string/valoraciones/indiferente"
             android:textColor="@color/black" />
 
         <TextView
@@ -90,7 +90,7 @@
             android:layout_row="0"
             android:layout_column="3"
             android:layout_marginEnd="25dp"
-            android:text="@string/de_acuerdo"
+            android:textarray="@string/valoraciones/de_acuerdo"
             android:textColor="@color/black" />
 
         <TextView
@@ -110,7 +110,7 @@
             android:layout_row="0"
             android:layout_column="4"
             android:layout_marginEnd="25dp"
-            android:text="@string/muy_de_acuerdo"
+            android:textarray="@string/valoraciones/muy_de_acuerdo"
             android:textColor="@color/black" />
 
         <TextView
@@ -126,6 +126,6 @@
 
 
 
-    </GridLayout>
+    </GridLayout>-->
 
 </LinearLayout>

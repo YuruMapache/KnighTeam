@@ -1,7 +1,6 @@
 package com.example.justajuan.ui;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -18,13 +17,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.justajuan.R;
+import com.example.justajuan.adapter.AdaptadorAcciones;
+import com.example.justajuan.adapter.AdaptadorMateriales;
+import com.example.justajuan.adapter.AdaptadorProgreso;
+import com.example.justajuan.adapter.AdaptadorTienda;
 import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Sesion;
-import com.example.justajuan.persistence.AdaptadorAcciones;
-import com.example.justajuan.persistence.AdaptadorMateriales;
-import com.example.justajuan.persistence.AdaptadorProgreso;
-import com.example.justajuan.persistence.AdaptadorTienda;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -32,17 +31,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PantallaCuranderoActivity extends AppCompatActivity {
 
-    private AppCompatButton botonDesplAcciones;
-    private AppCompatButton botonDesplTienda;
-    private AppCompatButton botonDesplInventario;
-    private AppCompatButton botonDesplDiario;
     private AppCompatButton botonAtras;
-    private ArrayList<Material> listaMateriales = new ArrayList<>();
+    private ArrayList<Material> listaMateriales;
     private GridView vistaLista;
-    private GridView vistaProgreso;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
     private DatabaseReference partidaReference;
@@ -61,13 +56,16 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_pantalla_curandero);
 
+        listaMateriales = new ArrayList<>();
+        Sesion sesion = Sesion.getInstance();
+
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference().child("Materiales").child(String.valueOf(Sesion.getNumLobby()));
+        databaseReference = firebaseDatabase.getReference().child("Materiales").child(String.valueOf(Sesion.getInstance().getNumLobby()));
         partidaReference = firebaseDatabase.getReference().child("Partida");
 
         botonCombate = findViewById(R.id.botonCombate);
@@ -95,7 +93,7 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
 
                         i.setContador(null);
                         FirebaseDatabase.getInstance().getReference().child("Inventario").
-                                child(getCodigoSala()).child(i.getNombre()).setValue(i);
+                                child(String.valueOf(sesion.getNumLobby())).child(i.getNombre()).setValue(i);
                         objetosCreandose.remove(i);
                     }
                 }.start();
@@ -132,111 +130,79 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
             }
         }.start();
 
-        botonDesplAcciones = findViewById(R.id.botonAcciones);
-        botonDesplTienda = findViewById(R.id.botonTienda);
-        botonDesplDiario = findViewById(R.id.botonDiario);
-        botonDesplInventario = findViewById(R.id.botonInventario);
+        AppCompatButton botonDesplAcciones = findViewById(R.id.botonAcciones);
+        AppCompatButton botonDesplTienda = findViewById(R.id.botonTienda);
+        AppCompatButton botonDesplDiario = findViewById(R.id.botonDiario);
+        AppCompatButton botonDesplInventario = findViewById(R.id.botonInventario);
 
-        botonDesplAcciones.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog acciones = new Dialog(PantallaCuranderoActivity.this);
-                acciones.setContentView(R.layout.pop_up_acciones);
-                acciones.setCancelable(true);
-                acciones.show();
-                listaObjetos = getListaObjetos();
+        botonDesplAcciones.setOnClickListener(view -> {
+            final Dialog acciones = new Dialog(PantallaCuranderoActivity.this);
+            acciones.setContentView(R.layout.pop_up_acciones);
+            acciones.setCancelable(true);
+            acciones.show();
+            listaObjetos = getListaObjetos();
 
-                GridView ui_listaObjetos = (GridView) acciones.findViewById(R.id.ui_ListaObjetos);
-                AdaptadorAcciones adaptadorAcciones = new AdaptadorAcciones
-                        (acciones.getContext(), R.layout.pop_up_acciones, listaObjetos, getCodigoSala(), objetosCreandose, listaMateriales);
-                ui_listaObjetos.setAdapter(adaptadorAcciones);
+            GridView ui_listaObjetos = (GridView) acciones.findViewById(R.id.ui_ListaObjetos);
+            AdaptadorAcciones adaptadorAcciones = new AdaptadorAcciones
+                    (acciones.getContext(), R.layout.pop_up_acciones, listaObjetos, sesion.getNumLobby(), objetosCreandose, listaMateriales);
+            ui_listaObjetos.setAdapter(adaptadorAcciones);
 
-                botonAtras = acciones.findViewById(R.id.botonAtras);
-                botonAtras.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        acciones.hide();
-                    }
-                });
-            }
+            botonAtras = acciones.findViewById(R.id.botonAtras);
+            botonAtras.setOnClickListener(view1 -> acciones.hide());
         });
 
-        botonDesplTienda.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog acciones = new Dialog(PantallaCuranderoActivity.this);
-                acciones.setContentView(R.layout.pop_up_tienda);
-                acciones.setCancelable(true);
-                acciones.show();
+        botonDesplTienda.setOnClickListener(view -> {
+            final Dialog acciones = new Dialog(PantallaCuranderoActivity.this);
+            acciones.setContentView(R.layout.pop_up_tienda);
+            acciones.setCancelable(true);
+            acciones.show();
 
-                GridView gridViewTienda = (GridView) acciones.findViewById(R.id.gridView_Tienda);
-                AdaptadorTienda adaptadorTienda= new AdaptadorTienda(acciones.getContext(),R.layout.gridview_tienda,listaMateriales,getCodigoSala(),monedas);
-                gridViewTienda.setAdapter(adaptadorTienda);
+            GridView gridViewTienda = (GridView) acciones.findViewById(R.id.gridView_Tienda);
+            AdaptadorTienda adaptadorTienda = new AdaptadorTienda(acciones.getContext(), R.layout.gridview_tienda, listaMateriales, Sesion.getInstance().getNumLobby(), monedas);
+            gridViewTienda.setAdapter(adaptadorTienda);
 
-                botonAtras = acciones.findViewById(R.id.botonAtras);
-                botonAtras.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        acciones.hide();
-                    }
-                });
-            }
+            botonAtras = acciones.findViewById(R.id.botonAtras);
+            botonAtras.setOnClickListener(view12 -> acciones.hide());
         });
 
-        botonDesplDiario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog acciones = new Dialog(PantallaCuranderoActivity.this);
-                acciones.setContentView(R.layout.pop_up_diario);
-                acciones.setCancelable(true);
-                acciones.show();
+        botonDesplDiario.setOnClickListener(view -> {
+            final Dialog acciones = new Dialog(PantallaCuranderoActivity.this);
+            acciones.setContentView(R.layout.pop_up_diario);
+            acciones.setCancelable(true);
+            acciones.show();
 
-                firebaseDatabase.getReference().child("Diario").child(getCodigoSala()).child("Curandero").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+            firebaseDatabase.getReference().child("Diario").child(String.valueOf(sesion.getNumLobby())).child("Curandero").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                        TextView diarioAcum = (TextView) acciones.findViewById(R.id.infoAcumulada);
-                        diarioAcum.setText(snapshot.child("ResultadosAcumulados").getValue(String.class));
+                    TextView diarioAcum = (TextView) acciones.findViewById(R.id.infoAcumulada);
+                    diarioAcum.setText(snapshot.child("ResultadosAcumulados").getValue(String.class));
 
-                        botonAtras = acciones.findViewById(R.id.botonAtras);
-                        botonAtras.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                acciones.hide();
-                            }
-                        });
+                    botonAtras = acciones.findViewById(R.id.botonAtras);
+                    botonAtras.setOnClickListener(view13 -> acciones.hide());
 
-                    }
+                }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
 
-                    }
-                });
+                }
+            });
 
-            }
         });
 
-        botonDesplInventario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog acciones = new Dialog(PantallaCuranderoActivity.this);
-                acciones.setContentView(R.layout.pop_up_inventario);
-                acciones.setCancelable(true);
-                acciones.show();
+        botonDesplInventario.setOnClickListener(view -> {
+            final Dialog acciones = new Dialog(PantallaCuranderoActivity.this);
+            acciones.setContentView(R.layout.pop_up_inventario);
+            acciones.setCancelable(true);
+            acciones.show();
 
-                botonAtras = acciones.findViewById(R.id.botonAtras);
-                botonAtras.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        acciones.hide();
-                    }
-                });
-            }
+            botonAtras = acciones.findViewById(R.id.botonAtras);
+            botonAtras.setOnClickListener(view14 -> acciones.hide());
         });
 
-        partidaReference.child(getCodigoSala()).child("1").child("numRonda").addListenerForSingleValueEvent(new ValueEventListener() {
+        partidaReference.child(String.valueOf(sesion.getNumLobby())).child("1").child("numRonda").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 numRonda = snapshot.getValue(Integer.class);
@@ -255,6 +221,7 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
         super.onStart();
 
         AdaptadorMateriales adaptador = new AdaptadorMateriales(this, R.layout.activity_gridview_materiales, listaMateriales);
+        Sesion sesion = Sesion.getInstance();
 
         listenerMateriales = databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -262,11 +229,11 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
                 listaMateriales.clear();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Material material = postSnapshot.getValue(Material.class);
-                    if (material.getRol().contains("Curandero")) {
+                    if (Objects.requireNonNull(material).getRol().contains("Curandero")) {
                         listaMateriales.add(material);
                     }
-                    if (material.getName().equals("Moneda")){
-                        monedas=material;
+                    if (material.getName().equals("Moneda")) {
+                        monedas = material;
                     }
                 }
                 adaptador.setListaMateriales(listaMateriales);
@@ -279,20 +246,26 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
             }
         });
 
-        listenerCombate = partidaReference.child(getCodigoSala()).addValueEventListener(new ValueEventListener() {
+        listenerCombate = partidaReference.child(String.valueOf(sesion.getNumLobby())).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                int listoCaballero = snapshot.child("1").child("combateListo").getValue(Integer.class);
-                int listoHerrero = snapshot.child("2").child("combateListo").getValue(Integer.class);
-                int listoMaestroCuadras = snapshot.child("3").child("combateListo").getValue(Integer.class);
-                int listoCurandero = snapshot.child("4").child("combateListo").getValue(Integer.class);
-                int listoDruida = snapshot.child("5").child("combateListo").getValue(Integer.class);
+                int cont = 0;
+                boolean boton_press = false;
+                for (int i = 1; i < 6; i++) {
+                    Integer tmp = snapshot.child(String.valueOf(i)).child("combateListo").getValue(Integer.class);
+                    if (tmp != null) {
+                        if (tmp == 1) {
+                            if (i == sesion.getRol().ordinal() + 1) {
+                                boton_press = true;
+                            }
+                            cont++;
+                        }
+                    }
+                }
 
-                int jugadores = (listoCaballero + listoHerrero + listoMaestroCuadras + listoCurandero + listoDruida);
-
-                if (listoCurandero == 1) {
-                    botonCombate.setText(String.format("COMBATE (%s/5)", jugadores));
+                if (boton_press) {
+                    botonCombate.setText(getString(R.string.boton_combate_pressed, cont));
                 }
 
             }
@@ -303,77 +276,83 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
             }
         });
 
-        listenerJusta = partidaReference.child(getCodigoSala()).child("1").child("justaGanada").addValueEventListener(new ValueEventListener() {
+        listenerJusta = partidaReference.child(String.valueOf(sesion.getNumLobby())).
 
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                child("1").
 
-                if (snapshot.getValue(Integer.class) != 0) {
+                child("justaGanada").
 
-                    if (snapshot.getValue(Integer.class) == 1) {
+                addValueEventListener(new ValueEventListener() {
 
-                        for (Objeto i : objetosCreandose) {
-                            long diferenciaTiempo = i.getTiempoQueFalta() - tiempoRonda;
-                            if (diferenciaTiempo <= 0) {
-                                i.setContador(null);
-                                FirebaseDatabase.getInstance().getReference().child("Inventario").
-                                        child(getCodigoSala()).child(i.getNombre()).setValue(i);
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                        if (snapshot.getValue(Integer.class) != 0) {
+
+                            Intent i;
+                            if (snapshot.getValue(Integer.class) == 1) {
+
+                                for (Objeto o : objetosCreandose) {
+                                    long diferenciaTiempo = o.getTiempoQueFalta() - tiempoRonda;
+                                    if (diferenciaTiempo <= 0) {
+                                        o.setContador(null);
+                                        FirebaseDatabase.getInstance().getReference().child("Inventario").
+                                                child(String.valueOf(sesion.getNumLobby())).child(o.getNombre()).setValue(o);
+                                    } else {
+                                        o.setTiempoQueFalta(diferenciaTiempo);
+                                        o.setContador(null);
+                                    }
+                                }
+
+                                if (numRonda != 5) {
+                                    i = new Intent(PantallaCuranderoActivity.this, ResultadosCurandero.class);
+                                    i.putExtra("listaObjetos", getListaObjetos());
+                                    i.putExtra("objetosCreandose", objetosCreandose);
+                                    i.putExtra("nRonda", numRonda);
+                                    startActivity(i);
+
+                                } else {
+                                    i = new Intent(PantallaCuranderoActivity.this, PantallaCuestionario.class);
+                                    i.putExtra("listaObjetos", getListaObjetos());
+                                    i.putExtra("objetosCreandose", objetosCreandose);
+                                    i.putExtra("nRonda", numRonda + 1);
+                                    i.putExtra("tipo", 0);
+                                    startActivity(i);
+                                }
+
                             } else {
-                                i.setTiempoQueFalta(diferenciaTiempo);
-                                i.setContador(null);
+                                i = new Intent(PantallaCuranderoActivity.this, PantallaCuestionario.class);
+                                i.putExtra("listaObjetos", getListaObjetos());
+                                i.putExtra("objetosCreandose", objetosCreandose);
+                                i.putExtra("nRonda", numRonda + 1);
+                                i.putExtra("tipo", 1);
+                                startActivity(i);
                             }
                         }
-
-                        if (numRonda != 5) {
-                            Intent i = new Intent(PantallaCuranderoActivity.this, ResultadosCurandera.class);
-                            i.putExtra("codigo", getCodigoSala());
-                            i.putExtra("listaObjetos", getListaObjetos());
-                            i.putExtra("objetosCreandose", objetosCreandose);
-                            i.putExtra("nRonda", numRonda);
-                            startActivity(i);
-
-                        } else {
-                            Intent i = new Intent(PantallaCuranderoActivity.this, PantallaCuestionario.class);
-                            i.putExtra("codigo", getCodigoSala());
-                            i.putExtra("listaObjetos", getListaObjetos());
-                            i.putExtra("objetosCreandose", objetosCreandose);
-                            i.putExtra("nRonda", numRonda + 1);
-                            i.putExtra("rol", "4");
-                            startActivity(i);
-                        }
-
-                    } else {
-                        Intent i = new Intent(PantallaCuranderoActivity.this, PantallaCuestionario.class);
-                        i.putExtra("codigo", getCodigoSala());
-                        i.putExtra("listaObjetos", getListaObjetos());
-                        i.putExtra("objetosCreandose", objetosCreandose);
-                        i.putExtra("nRonda", numRonda + 1);
-                        i.putExtra("rol", "4");
-                        startActivity(i);
                     }
-                }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                    }
+                });
 
     }
 
     public void clickBotonCombate(View view) {
-        partidaReference.child(getCodigoSala()).child("4").child("combateListo").setValue(1);
-        partidaReference.child(getCodigoSala()).child("4").child("resultadosListos").setValue(0);
-
+        Sesion sesion = Sesion.getInstance();
+        DatabaseReference dr = partidaReference.child(String.valueOf(sesion.getNumLobby())).child(String.valueOf(sesion.getRol().ordinal() + 1));
+        dr.child("combateListo").setValue(1);
+        dr.child("resultadosListos").setValue(0);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         databaseReference.removeEventListener(listenerMateriales);
-        partidaReference.child(getCodigoSala()).removeEventListener(listenerCombate);
-        partidaReference.child(getCodigoSala()).child("1").child("justaGanada").removeEventListener(listenerJusta);
+        int numlobby = Sesion.getInstance().getNumLobby();
+        partidaReference.child(String.valueOf(numlobby)).removeEventListener(listenerCombate);
+        partidaReference.child(String.valueOf(numlobby)).child("1").child("justaGanada").removeEventListener(listenerJusta);
     }
 
     @Override
@@ -381,23 +360,13 @@ public class PantallaCuranderoActivity extends AppCompatActivity {
         new AlertDialog.Builder(this, R.style.AlertDialogTheme)
                 .setMessage("¿Quieres cerrar la app?")
 
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        finishAffinity();
-                        System.exit(0);
-                    }
+                .setPositiveButton("Si", (dialog, which) -> {
+                    finishAffinity();
+                    System.exit(0);
                 })
 
                 .setNegativeButton("No", null)
                 .show();
-    }
-
-    public String getCodigoSala() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            return extras.getString("codigo");
-        }
-        return null;
     }
 
     public ArrayList<Objeto> getListaObjetos() {

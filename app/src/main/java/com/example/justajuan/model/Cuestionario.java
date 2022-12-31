@@ -1,75 +1,70 @@
 package com.example.justajuan.model;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Clase encargada de modelar un cuestionario.
+ */
 public class Cuestionario {
+    private List<Pregunta> preguntas;
 
-    private String pregunta;
-    private int muyDesacuerdo;
-    private int desacuerdo;
-    private int indiferente;
-    private int deAcuerdo;
-    private int muyAcuerdo;
-
+    /**
+     * Constructor de la clase Cuestionario.
+     * Inicializa una lista vacía de objetos Pregunta.
+     */
     public Cuestionario() {
-
+        this.preguntas = new ArrayList<>();
     }
 
-    public Cuestionario(String pregunta) {
-        this.pregunta = pregunta;
+    /**
+     * Anade una pregunta al cuestionario.
+     *
+     * @param p Pregunta a anadir.
+     */
+    public void addPregunta(Pregunta p) {
+        this.preguntas.add(p);
     }
 
-    public String getPregunta() {
-        return pregunta;
+    /**
+     * Devuelve la pregunta con el indice introducido.
+     *
+     * @param index Indice de la pregunta.
+     *
+     * @return Pregunta elegida.
+     */
+    public Pregunta getPregunta(int index) {
+        return preguntas.get(index);
     }
 
-    public void setPregunta(String pregunta) {
-        this.pregunta = pregunta;
+    /**
+     * Devuekve la lista de objetos Pregunta del cuestionario.
+     *
+     * @return Lista de objetos Pregunta en el cuestionario.
+     */
+    public List<Pregunta> getPreguntas(){
+        return preguntas;
     }
 
-    public int getMuyDesacuerdo() {
-        return muyDesacuerdo;
-    }
-
-    public void setMuyDesacuerdo(int muyDesacuerdo) {
-        this.muyDesacuerdo = muyDesacuerdo;
-    }
-
-    public int getDesacuerdo() {
-        return desacuerdo;
-    }
-
-    public void setDesacuerdo(int desacuerdo) {
-        this.desacuerdo = desacuerdo;
-    }
-
-    public int getIndiferente() {
-        return indiferente;
-    }
-
-    public void setIndiferente(int indiferente) {
-        this.indiferente = indiferente;
-    }
-
-    public int getDeAcuerdo() {
-        return deAcuerdo;
-    }
-
-    public void setDeAcuerdo(int deAcuerdo) {
-        this.deAcuerdo = deAcuerdo;
-    }
-
-    public int getMuyAcuerdo() {
-        return muyAcuerdo;
-    }
-
-    public void setMuyAcuerdo(int muyAcuerdo) {
-        this.muyAcuerdo = muyAcuerdo;
-    }
-
-    public void clear(){
-        setMuyDesacuerdo(0);
-        setDesacuerdo(0);
-        setIndiferente(0);
-        setDeAcuerdo(0);
-        setMuyAcuerdo(0);
+    /**
+     * Devuelve un Map con el promedio de las preguntas de los cuestionarios.
+     *
+     * @param lista Lista de cuestionarios.
+     *
+     * @return Pares ID pregunta, media de la pregunta.
+     */
+    public static Map<Integer,Float> getResults(List<Cuestionario> lista){
+        Map<Integer,Float> results = new HashMap<>();
+        lista.forEach(form -> form.getPreguntas().forEach(elem ->{
+            int id = elem.getId();
+            float res = elem.getValor();
+            Float idres = results.get(id);
+            if(idres!=null) {
+                results.put(id, (res + idres) / 2);
+            }
+        }));
+        return results;
     }
 }

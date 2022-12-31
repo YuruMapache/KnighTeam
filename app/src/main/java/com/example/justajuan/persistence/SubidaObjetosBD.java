@@ -3,18 +3,14 @@ package com.example.justajuan.persistence;
 import androidx.annotation.NonNull;
 
 import com.example.justajuan.R;
-import com.example.justajuan.model.Cuestionario;
+import com.example.justajuan.model.CuestionarioAnt;
 import com.example.justajuan.model.Enemigo;
-import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Objeto;
-import com.example.justajuan.model.Sesion;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.checkerframework.checker.units.qual.C;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,8 +26,7 @@ public class SubidaObjetosBD {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Objeto subir;
-                ArrayList<Objeto> listaObjetos = new ArrayList<>();
-                HashMap<String, Integer> materiales = new HashMap<String, Integer>();
+                HashMap<String, Integer> materiales = new HashMap<>();
                 materiales.put("Hierro", 10);
                 materiales.put("Madera", 5);
                 subir = new Objeto("Espada nvl1", "Herrero", "Espada simple para mejorar nuestro daño",
@@ -196,7 +191,6 @@ public class SubidaObjetosBD {
         dr.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Sesion sesion = Sesion.getInstance();
 
                 for (int i = 0; i < listaEnemigos.size(); i++) {
 
@@ -221,16 +215,16 @@ public class SubidaObjetosBD {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                ArrayList<Cuestionario> subirPreguntas = new ArrayList<>();
+                ArrayList<CuestionarioAnt> subirPreguntas = new ArrayList<>();
 
-                subirPreguntas.add(new Cuestionario("¿Te parece que ha sido posible entenderte con tus compañeros?"));
-                subirPreguntas.add(new Cuestionario("¿Consideras que tu equipo se aprovecha de las capacidades de cada uno de sus miembros?"));
-                subirPreguntas.add(new Cuestionario("¿Crees que tanto tú como tus compañeros os sentís animados por la idea de ganar el juego?"));
-                subirPreguntas.add(new Cuestionario("¿Estimas que colaboras mejor con tus compañeros después de unos turnos?"));
-                subirPreguntas.add(new Cuestionario("¿Las decisiones que has tenido que tomar hasta ahora te han resultado complejas?"));
-                subirPreguntas.add(new Cuestionario("¿Estimas que has sido capaz de mantener motivado al equipo cuando las cosas no han ido bien?"));
-                subirPreguntas.add(new Cuestionario("¿Crees que la comunicación en vuestro equipo ha mejorado después de jugar algunas rondas?"));
-                subirPreguntas.add(new Cuestionario("¿Te parece que estáis sabiendo enfrentarnos a los problemas de forma adecuada?"));
+                subirPreguntas.add(new CuestionarioAnt("¿Te parece que ha sido posible entenderte con tus compañeros?"));
+                subirPreguntas.add(new CuestionarioAnt("¿Consideras que tu equipo se aprovecha de las capacidades de cada uno de sus miembros?"));
+                subirPreguntas.add(new CuestionarioAnt("¿Crees que tanto tú como tus compañeros os sentís animados por la idea de ganar el juego?"));
+                subirPreguntas.add(new CuestionarioAnt("¿Estimas que colaboras mejor con tus compañeros después de unos turnos?"));
+                subirPreguntas.add(new CuestionarioAnt("¿Las decisiones que has tenido que tomar hasta ahora te han resultado complejas?"));
+                subirPreguntas.add(new CuestionarioAnt("¿Estimas que has sido capaz de mantener motivado al equipo cuando las cosas no han ido bien?"));
+                subirPreguntas.add(new CuestionarioAnt("¿Crees que la comunicación en vuestro equipo ha mejorado después de jugar algunas rondas?"));
+                subirPreguntas.add(new CuestionarioAnt("¿Te parece que estáis sabiendo enfrentarnos a los problemas de forma adecuada?"));
 
                 for(int i= 0; i<8; i++) {
                     dr.child("Intermedio").child(String.valueOf(i)).setValue(subirPreguntas.get(i));
@@ -238,14 +232,14 @@ public class SubidaObjetosBD {
 
                 subirPreguntas.clear();
 
-                subirPreguntas.add(new Cuestionario("¿Consideras que la comunicación ha sido fluida entre los jugadores?"));
-                subirPreguntas.add(new Cuestionario("¿Crees que ha habido un trabajo en equipo óptimo?"));
-                subirPreguntas.add(new Cuestionario("¿Consideras que en tu equipo ha habido motivación entre los jugadores?"));
-                subirPreguntas.add(new Cuestionario("¿Crees que si lo repitieseis, sacaréis mejores resultados como equipo?"));
-                subirPreguntas.add(new Cuestionario("¿Cómo de difíciles han sido las decisiones que has tenido que tomar?"));
-                subirPreguntas.add(new Cuestionario("Me he sentido capaz de animar a mis compañeros cuando el juego no ha ido a nuestro favor"));
-                subirPreguntas.add(new Cuestionario("El juego ha sido una herramienta útil para favorecer la comunicación"));
-                subirPreguntas.add(new Cuestionario("Hemos sabido afrontar juntos los problemas que han ido surgiendo"));
+                subirPreguntas.add(new CuestionarioAnt("¿Consideras que la comunicación ha sido fluida entre los jugadores?"));
+                subirPreguntas.add(new CuestionarioAnt("¿Crees que ha habido un trabajo en equipo óptimo?"));
+                subirPreguntas.add(new CuestionarioAnt("¿Consideras que en tu equipo ha habido motivación entre los jugadores?"));
+                subirPreguntas.add(new CuestionarioAnt("¿Crees que si lo repitieseis, sacaréis mejores resultados como equipo?"));
+                subirPreguntas.add(new CuestionarioAnt("¿Cómo de difíciles han sido las decisiones que has tenido que tomar?"));
+                subirPreguntas.add(new CuestionarioAnt("Me he sentido capaz de animar a mis compañeros cuando el juego no ha ido a nuestro favor"));
+                subirPreguntas.add(new CuestionarioAnt("El juego ha sido una herramienta útil para favorecer la comunicación"));
+                subirPreguntas.add(new CuestionarioAnt("Hemos sabido afrontar juntos los problemas que han ido surgiendo"));
 
                 for(int i= 0; i<8; i++) {
                     dr.child("Final").child(String.valueOf(i)).setValue(subirPreguntas.get(i));

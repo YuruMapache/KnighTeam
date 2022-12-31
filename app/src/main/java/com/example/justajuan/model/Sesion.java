@@ -16,19 +16,19 @@ public class Sesion {
     private Sesion() {
     }
 
-    public static int getNumLobby() {
+    public int getNumLobby() {
         return numlobby;
     }
 
-    public static void setNumLobby(int numlobby) {
+    public void setNumLobby(int numlobby) {
         Sesion.numlobby = numlobby;
     }
 
-    public static User getUsuario() {
+    public User getUsuario() {
         return usuario;
     }
 
-    public static void setUsuario(User usuario) {
+    public void setUsuario(User usuario) {
         Sesion.usuario = usuario;
     }
 

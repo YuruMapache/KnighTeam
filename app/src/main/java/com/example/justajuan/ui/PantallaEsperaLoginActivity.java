@@ -1,8 +1,5 @@
 package com.example.justajuan.ui;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Window;
@@ -10,9 +7,11 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.justajuan.R;
 import com.example.justajuan.model.Caballero;
-import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Rol;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.persistence.FirebaseDAO;
@@ -23,14 +22,13 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 
 public class PantallaEsperaLoginActivity extends AppCompatActivity {
 
-    private TextView creacionSala;
     private TextView jugadoresTotales;
-    private FirebaseDatabase firebaseDatabase;
-    private DatabaseReference databaseReference, partidaReference;
+    private DatabaseReference partidaReference;
     private ValueEventListener listener;
 
     @Override
@@ -38,19 +36,18 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_pantalla_espera_login);
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         partidaReference = firebaseDatabase.getReference().child("Partida");
 
-        creacionSala = findViewById(R.id.salaCreada);
+        TextView creacionSala = findViewById(R.id.salaCreada);
         jugadoresTotales = findViewById(R.id.esperaJugadores);
 
-        creacionSala.setText(String.format("¡Sala creada! El código es %s", getCodigoSala()));
+        creacionSala.setText(getString(R.string.sala_espera, Sesion.getInstance().getNumLobby()));
 
     }
 
@@ -58,7 +55,8 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        listener = partidaReference.child(getCodigoSala()).addValueEventListener(new ValueEventListener() {
+        Sesion sesion = Sesion.getInstance();
+        listener = partidaReference.child(String.valueOf(sesion.getNumLobby())).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 int numJugadores;
@@ -71,30 +69,30 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
                         switch (Sesion.getInstance().getRol().toString()) {
                             case "HERRERO":
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
-                                i.putExtra("codigo", getCodigoSala());
+                                i.putExtra("codigo", sesion.getNumLobby());
                                 i.putExtra("rol", Rol.HERRERO);
                                 break;
                             case "CURANDERO":
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
-                                i.putExtra("codigo", getCodigoSala());
+                                i.putExtra("codigo", sesion.getNumLobby());
                                 i.putExtra("rol", Rol.CURANDERO);
                                 break;
                             case "DRUIDA":
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
-                                i.putExtra("codigo", getCodigoSala());
+                                i.putExtra("codigo", String.valueOf(sesion.getNumLobby()));
                                 i.putExtra("rol", Rol.DRUIDA);
                                 break;
                             case "CABALLERO":
-                                Caballero caballero = new Caballero(100, 100, 5, 1, 100, 100, new ArrayList<Objeto>());
-                                FirebaseDAO.setCaballero(getCodigoSala(),caballero);
+                                Caballero caballero = new Caballero(100, 100, 5, 1, 100, 100, new ArrayList<>());
+                                FirebaseDAO.setCaballero(String.valueOf(Sesion.getInstance().getNumLobby()),caballero);
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
-                                i.putExtra("codigo", getCodigoSala());
+                                i.putExtra("codigo", sesion.getNumLobby());
                                 i.putExtra("rol", Rol.CABALLERO);
                                 i.putExtra("Caballero",caballero);
                                 break;
                             case "MAESTRO_CUADRAS":
                                 i = new Intent(PantallaEsperaLoginActivity.this, PantallaGestorRolesActivity.class);
-                                i.putExtra("codigo", getCodigoSala());
+                                i.putExtra("codigo", sesion.getNumLobby());
                                 i.putExtra("rol", Rol.MAESTRO_CUADRAS);
                                 break;
                             default:
@@ -123,23 +121,15 @@ public class PantallaEsperaLoginActivity extends AppCompatActivity {
      */
     public void back() {
         Sesion sesion = Sesion.getInstance();
-        FirebaseDAO.deletePlayer(getCodigoSala(), sesion.getUsuario().getRol().ordinal()+1);
+        FirebaseDAO.deletePlayer(sesion.getNumLobby(), sesion.getRol().ordinal()+1);
         Intent intent = new Intent(PantallaEsperaLoginActivity.this, PantallaInicioActivity.class);
         startActivity(intent);
-    }
-
-    public String getCodigoSala() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            return extras.getString("codigo");
-        }
-        return null;
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        partidaReference.child(getCodigoSala()).removeEventListener(listener);
+        partidaReference.child(String.valueOf(Sesion.getInstance().getNumLobby())).removeEventListener(listener);
     }
 
 }

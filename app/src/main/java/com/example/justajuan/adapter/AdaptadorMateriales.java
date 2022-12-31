@@ -1,11 +1,10 @@
-package com.example.justajuan.persistence;
+package com.example.justajuan.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,9 +15,9 @@ import java.util.ArrayList;
 
 
 public class AdaptadorMateriales extends ArrayAdapter {
-    private ArrayList<Material> listaMateriales =new ArrayList<>();
+    private ArrayList<Material> listaMateriales;
 
-    public AdaptadorMateriales(Context context, int textViewResourceId, ArrayList objects){
+    public AdaptadorMateriales(Context context, int textViewResourceId, ArrayList<Material> objects){
         super(context,textViewResourceId,objects);
         listaMateriales=objects;
     }
@@ -30,7 +29,7 @@ public class AdaptadorMateriales extends ArrayAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View v = convertView;
+        View v;
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.activity_gridview_materiales, null);
         TextView textoNombre = (TextView) v.findViewById(R.id.nombreMaterial);
@@ -44,7 +43,7 @@ public class AdaptadorMateriales extends ArrayAdapter {
         return v;
 
     }
-    public void setListaMateriales(ArrayList objects){
+    public void setListaMateriales(ArrayList<Material> objects){
         listaMateriales=objects;
     }
 

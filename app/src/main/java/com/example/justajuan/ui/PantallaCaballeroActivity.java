@@ -1,7 +1,6 @@
 package com.example.justajuan.ui;
 
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -18,15 +17,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 
 import com.example.justajuan.R;
+import com.example.justajuan.adapter.AdaptadorEstadisticas;
+import com.example.justajuan.adapter.AdaptadorInventario;
+import com.example.justajuan.adapter.AdaptadorMateriales;
 import com.example.justajuan.model.Caballero;
 import com.example.justajuan.model.Enemigo;
 import com.example.justajuan.model.Estadistico;
 import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Sesion;
-import com.example.justajuan.persistence.AdaptadorEstadisticas;
-import com.example.justajuan.persistence.AdaptadorInventario;
-import com.example.justajuan.persistence.AdaptadorMateriales;
 import com.example.justajuan.persistence.FirebaseDAO;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,15 +34,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PantallaCaballeroActivity extends AppCompatActivity {
 
-    private AppCompatButton botonDesplAcciones;
-    private AppCompatButton botonDesplTienda;
-    private AppCompatButton botonDesplInventario;
-    private AppCompatButton botonDesplDiario;
     private AppCompatButton botonAtras;
-    private ArrayList<Material> listaMateriales = new ArrayList<>();
+    private ArrayList<Material> listaMateriales;
     private GridView vistaLista;
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference databaseReference;
@@ -54,19 +50,19 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
     private ValueEventListener listenerMateriales;
     private int numRonda;
     private Material moneda;
-    private boolean descansando=false;
+    private boolean descansando = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_pantalla_caballero);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference().child("Materiales").child(String.valueOf(Sesion.getNumLobby()));
+        databaseReference = firebaseDatabase.getReference().child("Materiales").child(String.valueOf(Sesion.getInstance().getNumLobby()));
         partidaReference = firebaseDatabase.getReference().child("Partida");
 
         vistaLista = (GridView) findViewById(R.id.textRecursos);
@@ -74,10 +70,9 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         botonCombate = findViewById(R.id.botonCombate);
 
 
-
         caballero = getCaballero();
         TextView glblTimer = findViewById(R.id.timerTextView);
-        ArrayList<Estadistico> estadisticos= new ArrayList<>();
+        ArrayList<Estadistico> estadisticos = new ArrayList<>();
         AdaptadorEstadisticas adaptadorEstadisticas = new AdaptadorEstadisticas(this, R.layout.gridview_recursos_feudo, estadisticos);
         GridView ui_listaObjetos = (GridView) findViewById(R.id.gridView_EstadisticasCaballero);
 
@@ -94,7 +89,6 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 }
                 timeLeftText += seconds;
                 glblTimer.setText(timeLeftText);
-
 
 
                 estadisticos.clear();
@@ -117,18 +111,21 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
 
         }.start();
 
-        botonDesplAcciones = findViewById(R.id.botonAcciones);
-        botonDesplTienda = findViewById(R.id.botonTienda);
-        botonDesplDiario = findViewById(R.id.botonDiario);
-        botonDesplInventario = findViewById(R.id.botonInventario);
+        AppCompatButton botonDesplAcciones = findViewById(R.id.botonAcciones);
+        AppCompatButton botonDesplTienda = findViewById(R.id.botonTienda);
+        AppCompatButton botonDesplDiario = findViewById(R.id.botonDiario);
+        AppCompatButton botonDesplInventario = findViewById(R.id.botonInventario);
 
-        botonDesplTienda.setText("Bar");
+        botonDesplTienda.setText(R.string.boton_bar);
 
 
-        partidaReference.child(getCodigoSala()).child("1").child("numRonda").addListenerForSingleValueEvent(new ValueEventListener() {
+        partidaReference.child(String.valueOf(Sesion.getInstance().getNumLobby())).child("1").child("numRonda").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                numRonda = snapshot.getValue(Integer.class);
+                Integer tmp = snapshot.getValue(Integer.class);
+                if(tmp !=null){
+                    numRonda = tmp;
+                }
             }
 
             @Override
@@ -138,159 +135,120 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         });
 
 
-        botonDesplAcciones.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog acciones = new Dialog(PantallaCaballeroActivity.this);
-                acciones.setContentView(R.layout.pop_up_acciones_caballero);
-                acciones.setCancelable(true);
-                acciones.show();
+        botonDesplAcciones.setOnClickListener(view -> {
+            final Dialog acciones = new Dialog(PantallaCaballeroActivity.this);
+            acciones.setContentView(R.layout.pop_up_acciones_caballero);
+            acciones.setCancelable(true);
+            acciones.show();
 
-                AppCompatButton botonVida= (AppCompatButton) acciones.findViewById(R.id.botonMejorarVida);
-                AppCompatButton botonAtaque= (AppCompatButton) acciones.findViewById(R.id.botonMejorarAtaque);
-                AppCompatButton botonVelocidadAtaque= (AppCompatButton) acciones.findViewById(R.id.botonMejorarVelocidad);
-                botonVida.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (!descansando && caballero.getEstamina()>=30){
-                            caballero.setSalud_max(caballero.getSalud_max()+50);
-                            caballero.setEstamina(caballero.getEstamina()-30);
-                            botonVida.setText("Salud Aumentada");
-                        }
-                    }
-                });
+            AppCompatButton botonVida = (AppCompatButton) acciones.findViewById(R.id.botonMejorarVida);
+            AppCompatButton botonAtaque = (AppCompatButton) acciones.findViewById(R.id.botonMejorarAtaque);
+            AppCompatButton botonVelocidadAtaque = (AppCompatButton) acciones.findViewById(R.id.botonMejorarVelocidad);
+            botonVida.setOnClickListener(v -> {
+                if (!descansando && caballero.getEstamina() >= 30) {
+                    caballero.setSalud_max(caballero.getSalud_max() + 50);
+                    caballero.setEstamina(caballero.getEstamina() - 30);
+                    botonVida.setText(R.string.salud_aumentada);
+                }
+            });
 
-                botonAtaque.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+            botonAtaque.setOnClickListener(v -> {
 
-                        if (!descansando && caballero.getEstamina()>=25){
-                            caballero.setAtaque(caballero.getAtaque()+5);
-                            caballero.setEstamina(caballero.getEstamina()-25);
-                            botonAtaque.setText("Ataque Aumentado");
-                        }
+                if (!descansando && caballero.getEstamina() >= 25) {
+                    caballero.setAtaque(caballero.getAtaque() + 5);
+                    caballero.setEstamina(caballero.getEstamina() - 25);
+                    botonAtaque.setText(R.string.ataque_aumentado);
+                }
 
-                    }
-                });
-                botonVelocidadAtaque.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (!descansando && caballero.getEstamina()>=25){
-                            caballero.setVelocidadAtaque(caballero.getVelocidadAtaque()+2);
-                            caballero.setEstamina(caballero.getEstamina()-25);
-                            botonVelocidadAtaque.setText("Velocidad Aumentada");
-                        }
-                    }
-                });
+            });
+            botonVelocidadAtaque.setOnClickListener(v -> {
+                if (!descansando && caballero.getEstamina() >= 25) {
+                    caballero.setVelocidadAtaque(caballero.getVelocidadAtaque() + 2);
+                    caballero.setEstamina(caballero.getEstamina() - 25);
+                    botonVelocidadAtaque.setText(R.string.velocidad_aumentada);
+                }
+            });
 
 
+            botonAtras = acciones.findViewById(R.id.botonAtras);
+            botonAtras.setOnClickListener(view13 -> acciones.hide());
+        });
 
-                botonAtras = acciones.findViewById(R.id.botonAtras);
-                botonAtras.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        acciones.hide();
-                    }
-                });
+        botonDesplTienda.setOnClickListener(view -> {
+            if (!descansando && moneda.getCantidad() >= 22) {
+                moneda.setCantidad(moneda.getCantidad() - 22);
+                caballero.setEstamina(Math.min(caballero.getEstamina() + 50, 100));
+                descansando = true;
+            } else if (descansando) {
+                Toast.makeText(PantallaCaballeroActivity.this, "Ya estas descansando en el bar, no puedes realizar mas acciones", Toast.LENGTH_SHORT).show();
             }
         });
 
-        botonDesplTienda.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (!descansando && moneda.getCantidad()>=22){
-                    moneda.setCantidad(moneda.getCantidad()-22);
-                    if (caballero.getEstamina()+50>=100){
-                        caballero.setEstamina(100);
-                    }else {
-                        caballero.setEstamina(caballero.getEstamina() + 50);
-                    }
-                    descansando=true;
-                }else if (descansando){
-                        Toast.makeText(PantallaCaballeroActivity.this, "Ya estas descansando en el bar, no puedes realizar mas acciones", Toast.LENGTH_SHORT).show();
-                    }
-            }
+        botonDesplDiario.setOnClickListener(view -> {
+            final Dialog acciones = new Dialog(PantallaCaballeroActivity.this);
+            acciones.setContentView(R.layout.pop_up_diario);
+            acciones.setCancelable(true);
+            acciones.show();
+
+            firebaseDatabase.getReference().child("Diario").child(String.valueOf(Sesion.getInstance().getNumLobby())).child("Caballero").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                    TextView diarioAcum = (TextView) acciones.findViewById(R.id.infoAcumulada);
+                    diarioAcum.setText(snapshot.child("ResultadosAcumulados").getValue(String.class));
+
+                    botonAtras = acciones.findViewById(R.id.botonAtras);
+                    botonAtras.setOnClickListener(view1 -> acciones.hide());
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+
         });
 
-        botonDesplDiario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog acciones = new Dialog(PantallaCaballeroActivity.this);
-                acciones.setContentView(R.layout.pop_up_diario);
-                acciones.setCancelable(true);
-                acciones.show();
+        botonDesplInventario.setOnClickListener(view -> {
+            final Dialog acciones = new Dialog(PantallaCaballeroActivity.this);
+            acciones.setContentView(R.layout.pop_up_inventario);
+            acciones.setCancelable(true);
+            acciones.show();
+            firebaseDatabase.getReference().child("Inventario").child(String.valueOf(Sesion.getInstance().getNumLobby())).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                firebaseDatabase.getReference().child("Diario").child(getCodigoSala()).child("Caballero").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    ArrayList<Objeto> inventario = new ArrayList<>();
 
-                        TextView diarioAcum = (TextView) acciones.findViewById(R.id.infoAcumulada);
-                        diarioAcum.setText(snapshot.child("ResultadosAcumulados").getValue(String.class));
-
-                        botonAtras = acciones.findViewById(R.id.botonAtras);
-                        botonAtras.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                acciones.hide();
-                            }
-                        });
-
+                    for (DataSnapshot postSnapshot : snapshot.getChildren()) {
+                        Objeto objeto = postSnapshot.getValue(Objeto.class);
+                        inventario.add(objeto);
                     }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-                    }
-                });
+                    GridView ui_listaObjetos1 = (GridView) acciones.findViewById(R.id.gridView_Inventario);
+                    AdaptadorInventario adaptadorInventario = new AdaptadorInventario(acciones.getContext(), R.layout.pop_up_inventario, inventario, caballero);
+                    ui_listaObjetos1.setAdapter(adaptadorInventario);
 
-            }
-        });
+                    botonAtras = acciones.findViewById(R.id.botonAtras);
+                    botonAtras.setOnClickListener(view12 -> acciones.hide());
 
-        botonDesplInventario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog acciones = new Dialog(PantallaCaballeroActivity.this);
-                acciones.setContentView(R.layout.pop_up_inventario);
-                acciones.setCancelable(true);
-                acciones.show();
-                firebaseDatabase.getReference().child("Inventario").child(getCodigoSala()).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                }
 
-                        ArrayList<Objeto> inventario= new ArrayList<>();
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-                        for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                            Objeto objeto = postSnapshot.getValue(Objeto.class);
-                            inventario.add(objeto);
-                        }
+                }
+            });
 
-                        GridView ui_listaObjetos= (GridView) acciones.findViewById(R.id.gridView_Inventario);
-                        AdaptadorInventario adaptadorInventario= new AdaptadorInventario(acciones.getContext(),R.layout.pop_up_inventario,inventario,caballero);
-                        ui_listaObjetos.setAdapter(adaptadorInventario);
-
-                        botonAtras = acciones.findViewById(R.id.botonAtras);
-                        botonAtras.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                acciones.hide();
-                            }
-                        });
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
-
-                    }
-                });
-
-            }
         });
     }
 
     @Override
     protected void onStart() {
         super.onStart();
+        Sesion sesion = Sesion.getInstance();
 
+        listaMateriales = new ArrayList<>();
         AdaptadorMateriales adaptador = new AdaptadorMateriales(this, R.layout.activity_gridview_materiales, listaMateriales);
 
         listenerMateriales = databaseReference.addValueEventListener(new ValueEventListener() {
@@ -299,9 +257,9 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 listaMateriales.clear();
                 for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Material material = postSnapshot.getValue(Material.class);
-                    if (material.getRol().contains("Caballero")) {
+                    if (Objects.requireNonNull(material).getRol().contains("Caballero")) {
                         listaMateriales.add(material);
-                        moneda=material;
+                        moneda = material;
                     }
                 }
                 adaptador.setListaMateriales(listaMateriales);
@@ -314,26 +272,32 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
             }
         });
 
-        listenerCombate = partidaReference.child(getCodigoSala()).addValueEventListener(new ValueEventListener() {
+        listenerCombate = partidaReference.child(String.valueOf(sesion.getNumLobby())).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                int listoCaballero = snapshot.child("1").child("combateListo").getValue(Integer.class);
-                int listoHerrero = snapshot.child("2").child("combateListo").getValue(Integer.class);
-                int listoMaestroCuadras = snapshot.child("3").child("combateListo").getValue(Integer.class);
-                int listoCurandero = snapshot.child("4").child("combateListo").getValue(Integer.class);
-                int listoDruida = snapshot.child("5").child("combateListo").getValue(Integer.class);
-
-                int jugadores = (listoCaballero + listoHerrero + listoMaestroCuadras + listoCurandero + listoDruida);
-
-                if (listoCaballero == 1) {
-                    botonCombate.setText(String.format("COMBATE (%s/5)", jugadores));
+                int cont = 0;
+                boolean boton_press = false;
+                for (int i = 1; i < 6; i++) {
+                    Integer tmp = snapshot.child(String.valueOf(i)).child("combateListo").getValue(Integer.class);
+                    if (tmp != null) {
+                        if (tmp == 1) {
+                            if (i == sesion.getRol().ordinal() + 1) {
+                                boton_press = true;
+                            }
+                            cont++;
+                        }
+                    }
+                }
+                if (boton_press) {
+                    botonCombate.setText(getString(R.string.boton_combate_pressed, cont));
                 }
 
-                if (listoCaballero == 1 && listoHerrero == 1 && listoMaestroCuadras == 1 && listoCurandero == 1 && listoDruida == 1) {
-                    partidaReference.child(getCodigoSala()).child("1").child("combateListo").setValue(0);
+                if (cont == 5) {
+                    partidaReference.child(String.valueOf(sesion.getNumLobby())).child(String.valueOf(sesion.getRol().ordinal() + 1)).child("combateListo").setValue(0);
                     algoritmo(numRonda);
                 }
+
             }
 
             @Override
@@ -349,11 +313,9 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
         new AlertDialog.Builder(this, R.style.AlertDialogTheme)
                 .setMessage("¿Quieres cerrar la app?")
 
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        finishAffinity();
-                        System.exit(0);
-                    }
+                .setPositiveButton("Si", (dialog, which) -> {
+                    finishAffinity();
+                    System.exit(0);
                 })
 
                 .setNegativeButton("No", null)
@@ -368,28 +330,30 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
                 Enemigo enemigo = snapshot.getValue(Enemigo.class);
-                if (caballero.getVelocidadAtaque() > enemigo.getVelocidadAtaque()) {
-                    while (caballero.getSalud() > 0 && enemigo.getSalud() > 0) {
-                        enemigo.setSalud(enemigo.getSalud() - caballero.getAtaque());
-                        if (enemigo.getSalud() <= 0) {
-                            break;
+                if(enemigo!=null) {
+                    if (caballero.getVelocidadAtaque() > enemigo.getVelocidadAtaque()) {
+                        while (caballero.getSalud() > 0 && enemigo.getSalud() > 0) {
+                            enemigo.setSalud(enemigo.getSalud() - caballero.getAtaque());
+                            if (enemigo.getSalud() <= 0) {
+                                break;
+                            }
+                            caballero.setSalud(caballero.getSalud() - enemigo.getAtaque());
                         }
-                        caballero.setSalud(caballero.getSalud() - enemigo.getAtaque());
-                    }
-                } else {
-                    while (caballero.getSalud() > 0 && enemigo.getSalud() > 0) {
+                    } else {
+                        while (caballero.getSalud() > 0 && enemigo.getSalud() > 0) {
 
-                        caballero.setSalud(caballero.getSalud() - enemigo.getAtaque());
-                        if (caballero.getSalud() <= 0) {
-                            break;
+                            caballero.setSalud(caballero.getSalud() - enemigo.getAtaque());
+                            if (caballero.getSalud() <= 0) {
+                                break;
+                            }
+
+                            enemigo.setSalud(enemigo.getSalud() - caballero.getAtaque());
                         }
-
-                        enemigo.setSalud(enemigo.getSalud() - caballero.getAtaque());
                     }
                 }
-                ArrayList<Objeto> nuevoEquipado = new ArrayList<Objeto>();
+                ArrayList<Objeto> nuevoEquipado = new ArrayList<>();
                 for (int i = 0; i < caballero.getEquipado().size(); i++) {
-                    if (caballero.getEquipado().get(i).isEsConsumible() == false) {
+                    if (!caballero.getEquipado().get(i).isEsConsumible()) {
                         nuevoEquipado.add(caballero.getEquipado().get(i));
                     }
                 }
@@ -398,33 +362,30 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                 if (caballero.getSalud() > 0) {
                     if (nRonda < 10) {
 
-                        if(nRonda != 5) {
+                        if (nRonda != 5) {
                             i = new Intent(PantallaCaballeroActivity.this, ResultadosCaballero.class);
-                            i.putExtra("codigo", getCodigoSala());
                             i.putExtra("Caballero", caballero);
                             i.putExtra("nRonda", nRonda + 1);
 
                             for (int j = 0; j < listaMateriales.size(); j++) {
-                                if (listaMateriales.get(j).getName().equals("Moneda")) {
+                                if (listaMateriales.get(j).getName().equals("Moneda") && enemigo != null) {
                                     listaMateriales.get(j).setCantidad(listaMateriales.get(j).getCantidad() + enemigo.getMonedasGanas());
                                 }
                             }
 
-                            FirebaseDAO.setMateriales(String.valueOf(Sesion.getNumLobby()), listaMateriales);
-                            firebaseDatabase.getReference().child("Caballero").child(getCodigoSala()).setValue(caballero);
-                            partidaReference.child(getCodigoSala()).child("1").child("numRonda").setValue(nRonda + 1);
-                            partidaReference.child(getCodigoSala()).child("1").child("justaGanada").setValue(1);
+                            FirebaseDAO.setMateriales(String.valueOf(Sesion.getInstance().getNumLobby()), listaMateriales);
+                            String numlobby = String.valueOf(Sesion.getInstance().getNumLobby());
+                            firebaseDatabase.getReference().child("Caballero").child(numlobby).setValue(caballero);
+                            partidaReference.child(numlobby).child("1").child("numRonda").setValue(nRonda + 1);
+                            partidaReference.child(numlobby).child("1").child("justaGanada").setValue(1);
 
                         } else {
                             i = new Intent(PantallaCaballeroActivity.this, PantallaCuestionario.class);
-                            i.putExtra("codigo", getCodigoSala());
                             i.putExtra("Caballero", caballero);
                             i.putExtra("nRonda", nRonda + 1);
-                            i.putExtra("rol", "1");
-                            i.putExtra("justaGanada",1);
+                            i.putExtra("justaGanada", 1);
+                            i.putExtra("tipo", 0);
                         }
-
-
 
 
                     } else {
@@ -432,11 +393,10 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
                     }
 
                 } else {
-                    partidaReference.child(getCodigoSala()).child("1").child("justaGanada").setValue(2);
+                    partidaReference.child(String.valueOf(Sesion.getInstance().getNumLobby())).child("1").child("justaGanada").setValue(2);
                     i = new Intent(PantallaCaballeroActivity.this, PantallaCuestionario.class);
-                    i.putExtra("codigo", getCodigoSala());
                     i.putExtra("nRonda", nRonda + 1);
-                    i.putExtra("rol", "1");
+                    i.putExtra("tipo", 1);
 
 
                 }
@@ -456,24 +416,18 @@ public class PantallaCaballeroActivity extends AppCompatActivity {
 
 
     public void clickBotonCombate(View view) {
-        partidaReference.child(getCodigoSala()).child("1").child("combateListo").setValue(1);
-        partidaReference.child(getCodigoSala()).child("1").child("resultadosListos").setValue(0);
+        Sesion sesion = Sesion.getInstance();
+        DatabaseReference dr = partidaReference.child(String.valueOf(sesion.getNumLobby())).child(String.valueOf(sesion.getRol().ordinal() + 1));
+        dr.child("combateListo").setValue(1);
+        dr.child("resultadosListos").setValue(0);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
         databaseReference.removeEventListener(listenerMateriales);
-        partidaReference.child(getCodigoSala()).removeEventListener(listenerCombate);
+        partidaReference.child(String.valueOf(Sesion.getInstance().getNumLobby())).removeEventListener(listenerCombate);
 
-    }
-
-    public String getCodigoSala() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            return extras.getString("codigo");
-        }
-        return null;
     }
 
     public Caballero getCaballero() {

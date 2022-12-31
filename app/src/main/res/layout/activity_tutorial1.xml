@@ -21,16 +21,16 @@
         android:layout_margin="20dp"
         android:background="@drawable/rock_button"
         android:text="@string/botonAtras"
-        android:textSize="20dp"/>
+        android:textSize="20sp"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/botonSiguiente"
         android:layout_width="230dp"
         android:layout_height="68dp"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|end"
         android:layout_margin="20dp"
         android:background="@drawable/rock_button"
-        android:text="@string/botonSiguiente"
-        android:textSize="20dp"/>
+        android:text="@string/boton_siguiente"
+        android:textSize="20sp"/>
 
 </FrameLayout>

@@ -58,7 +58,7 @@
             android:layout_marginEnd="20dp"
             android:background="@drawable/rock_button"
             android:onClick="avanzarResultados"
-            android:text="@string/botonSiguiente"
+            android:text="@string/boton_siguiente"
             android:textStyle="bold"
             android:textColor="@color/black"/>
 

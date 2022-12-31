@@ -1,4 +1,4 @@
-package com.example.justajuan.persistence;
+package com.example.justajuan.adapter;
 
 import android.content.Context;
 import android.content.res.ColorStateList;
@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -15,15 +14,14 @@ import android.widget.TextView;
 
 import com.example.justajuan.R;
 import com.example.justajuan.model.Estadistico;
-import com.example.justajuan.model.Material;
 
 import java.util.ArrayList;
 
 
-public class AdaptadorEstadisticas extends ArrayAdapter {
-    private ArrayList<Estadistico> listaEstadisticas = new ArrayList<>();
+public class AdaptadorEstadisticas extends ArrayAdapter<Estadistico> {
+    private ArrayList<Estadistico> listaEstadisticas;
 
-    public AdaptadorEstadisticas(Context context, int textViewResourceId, ArrayList objects) {
+    public AdaptadorEstadisticas(Context context, int textViewResourceId, ArrayList<Estadistico> objects) {
         super(context, textViewResourceId, objects);
         listaEstadisticas = objects;
     }
@@ -36,7 +34,7 @@ public class AdaptadorEstadisticas extends ArrayAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
 
-        View v = convertView;
+        View v;
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         v = inflater.inflate(R.layout.gridview_recursos_feudo, null);
 
@@ -75,7 +73,7 @@ public class AdaptadorEstadisticas extends ArrayAdapter {
 
     }
 
-    public void setListaEstadisticas(ArrayList objects) {
+    public void setListaEstadisticas(ArrayList<Estadistico> objects) {
         listaEstadisticas = objects;
     }
 }

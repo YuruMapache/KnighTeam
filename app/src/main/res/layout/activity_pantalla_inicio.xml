@@ -19,7 +19,7 @@
         android:columnCount="2"
         android:rowCount="1"
         android:layout_gravity="center"
-        android:layout_marginLeft="110dp"
+        android:layout_marginStart="110dp"
         android:layout_marginTop="60dp">
 
         <LinearLayout
@@ -71,6 +71,17 @@
             android:text="@string/botonTutorial"
             android:textSize="17sp"
             android:textColor="@color/black" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/botonDevelop"
+            android:layout_width="120dp"
+            android:layout_height="80dp"
+            android:layout_gravity="center|end"
+            android:layout_marginStart="100dp"
+            android:background="@drawable/rock_button"
+            android:text="DEVELOP"
+            android:textColor="@color/black"
+            android:textSize="17sp" />
 
     </GridLayout>
 

@@ -4,58 +4,58 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center|top"
     android:orientation="vertical">
-
-    <TextView
-        android:id="@+id/pregunta"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:text=""
-        android:textColor="@color/black"
-        android:textStyle="bold" />
-
-    <RadioGroup
-        android:id="@+id/radioPreguntas"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <RadioButton
-            android:id="@+id/muyDesacuerdo"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:text="@string/muy_en_desacuerdo" />
-
-        <RadioButton
-            android:id="@+id/desacuerdo"
-            android:layout_width="wrap_content"
+    <!--
+        <TextView
+            android:id="@+id/pregunta"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/en_desacuerdo"
-            />
+            android:gravity="center"
+            android:text=""
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
-        <RadioButton
-            android:id="@+id/indiferente"
-            android:layout_width="wrap_content"
+        <RadioGroup
+            android:id="@+id/radioPreguntas"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/indiferente"
-            />
+            android:orientation="horizontal">
 
-        <RadioButton
-            android:id="@+id/acuerdo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/de_acuerdo"
-            />
+            <RadioButton
+                android:id="@+id/muyDesacuerdo"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/muy_en_desacuerdo" />
 
-        <RadioButton
-            android:id="@+id/muyacuerdo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/muy_de_acuerdo"
-            />
+            <RadioButton
+                android:id="@+id/desacuerdo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/en_desacuerdo"
+                />
 
-    </RadioGroup>
+            <RadioButton
+                android:id="@+id/indiferente"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/indiferente"
+                />
 
+            <RadioButton
+                android:id="@+id/acuerdo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/de_acuerdo"
+                />
 
+            <RadioButton
+                android:id="@+id/muyacuerdo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/muy_de_acuerdo"
+                />
 
-</LinearLayout>
+        </RadioGroup>
+
+    -->
+
+    </LinearLayout>

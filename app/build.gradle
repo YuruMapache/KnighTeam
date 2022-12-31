@@ -1,7 +1,9 @@
-plugins {
+/*plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
-}
+}*/
+
+apply plugin: 'com.android.application'
 
 android {
     namespace 'com.example.justajuan'
@@ -37,21 +39,33 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.5.1'
     implementation 'com.google.android.material:material:1.7.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'com.google.firebase:firebase-firestore:24.4.1'
     testImplementation 'junit:junit:4.13.2'
 
-    implementation platform('com.google.firebase:firebase-bom:31.0.2')
+    // Import the Firebase BoM
+    implementation platform('com.google.firebase:firebase-bom:31.1.1')
 
+    // Agrega la dependencia de la última versión de la biblioteca de Firebase para Android
+    implementation 'com.google.firebase:firebase-core:21.1.1'
+
+    // Agrega la dependencia de Cloud Firestore
+    implementation 'com.google.firebase:firebase-firestore'
+
+    // Agrega la dependencia de Realtime Database
     implementation 'com.google.firebase:firebase-database'
 
-    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     implementation 'com.google.firebase:firebase-analytics'
 
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.firebaseui:firebase-ui-auth:7.2.0'
 
+    androidTestImplementation 'androidx.test.ext:junit:1.1.4'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+
+    implementation 'com.google.code.gson:gson:2.9.0'
+
     //Para poder usar los fragment :)
-    def fragment_version = "1.5.4"
+    def fragment_version = "1.5.5"
     implementation "androidx.fragment:fragment:$fragment_version"
 }
+
+apply plugin: 'com.google.gms.google-services'

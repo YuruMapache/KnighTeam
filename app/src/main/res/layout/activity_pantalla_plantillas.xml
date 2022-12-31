@@ -116,7 +116,7 @@
         android:layout_gravity="bottom|end"
         android:layout_margin="10dp"
         android:background="@drawable/rock_button"
-        android:text="@string/botonSiguiente"
+        android:text="@string/boton_siguiente"
         android:textSize="17sp"
         android:textColor="?android:textColorPrimary" />
 

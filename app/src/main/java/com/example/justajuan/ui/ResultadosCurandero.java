@@ -1,11 +1,5 @@
 package com.example.justajuan.ui;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,8 +8,14 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+
 import com.example.justajuan.R;
 import com.example.justajuan.model.Objeto;
+import com.example.justajuan.model.Sesion;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,8 +23,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
-public class ResultadosCurandera extends AppCompatActivity {
+public class ResultadosCurandero extends AppCompatActivity {
 
     private FirebaseDatabase firebaseDatabase;
     private DatabaseReference partidaReference;
@@ -38,7 +39,7 @@ public class ResultadosCurandera extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_resultados_curandera);
@@ -55,27 +56,33 @@ public class ResultadosCurandera extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        listenerSiguiente = partidaReference.child(getCodigoSala()).addValueEventListener(new ValueEventListener() {
+        Sesion sesion = Sesion.getInstance();
+        listenerSiguiente = partidaReference.child(String.valueOf(sesion.getNumLobby())).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
-                int listoCaballero = snapshot.child("1").child("resultadosListos").getValue(Integer.class);
-                int listoHerrero = snapshot.child("2").child("resultadosListos").getValue(Integer.class);
-                int listoMaestroCuadras = snapshot.child("3").child("resultadosListos").getValue(Integer.class);
-                int listoCurandero = snapshot.child("4").child("resultadosListos").getValue(Integer.class);
-                int listoDruida = snapshot.child("5").child("resultadosListos").getValue(Integer.class);
-
-                int jugadores = (listoCaballero + listoHerrero + listoMaestroCuadras + listoCurandero + listoDruida);
-
-                if (listoCurandero == 1) {
-                    botonSiguiente.setText(String.format("SIGUIENTE (%s/5)", jugadores));
+                int cont = 0;
+                boolean boton_press = false;
+                for (int i = 1; i < 6; i++) {
+                    Integer tmp = snapshot.child(String.valueOf(i)).child("resultadosListos").getValue(Integer.class);
+                    if (tmp != null) {
+                        if (tmp == 1) {
+                            if (i == sesion.getRol().ordinal() + 1) {
+                                boton_press = true;
+                            }
+                            cont++;
+                        }
+                    }
                 }
 
-                if (listoCaballero == 1 && listoHerrero == 1 && listoMaestroCuadras == 1 && listoCurandero == 1 && listoDruida == 1) {
-                    Intent i = new Intent(ResultadosCurandera.this, PantallaCuranderoActivity.class);
-                    i.putExtra("codigo", getCodigoSala());
-                    i.putExtra("objetosCreandose",getObjetosCreandose());
-                    i.putExtra("listaObjetos",getListaObjetos());
+                if (boton_press) {
+                    botonSiguiente.setText(getString(R.string.boton_siguiente_pressed, cont));
+                }
+
+                if (cont == 5) {
+                    Intent i = new Intent(ResultadosCurandero.this, PantallaCuranderoActivity.class);
+                    i.putExtra("objetosCreandose", getObjetosCreandose());
+                    i.putExtra("listaObjetos", getListaObjetos());
                     startActivity(i);
                 }
             }
@@ -86,7 +93,7 @@ public class ResultadosCurandera extends AppCompatActivity {
             }
         });
 
-        firebaseDatabase.getReference().child("Diario").child(getCodigoSala()).child("Curandero").addListenerForSingleValueEvent(new ValueEventListener() {
+        firebaseDatabase.getReference().child("Diario").child(String.valueOf(sesion.getNumLobby())).child("Curandero").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 resultadosAcumulados = snapshot.child("ResultadosAcumulados").getValue(String.class);
@@ -98,7 +105,7 @@ public class ResultadosCurandera extends AppCompatActivity {
             }
         });
 
-        caballeroReference.child(getCodigoSala()).addListenerForSingleValueEvent(new ValueEventListener() {
+        caballeroReference.child(String.valueOf(sesion.getNumLobby())).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
 
@@ -107,13 +114,13 @@ public class ResultadosCurandera extends AppCompatActivity {
 
                 textoResultadosCurandero.setText(resultados);
 
-                if(getNumRonda() == 2) {
+                if (getNumRonda() == 2) {
                     resultadosAcumulados = resultados;
                 } else {
                     resultadosAcumulados = resultadosAcumulados + resultados;
                 }
 
-                firebaseDatabase.getReference().child("Diario").child(getCodigoSala()).child("Curandero").child("ResultadosAcumulados").setValue(resultadosAcumulados);
+                firebaseDatabase.getReference().child("Diario").child(String.valueOf(sesion.getNumLobby())).child("Curandero").child("ResultadosAcumulados").setValue(resultadosAcumulados);
             }
 
             @Override
@@ -124,14 +131,16 @@ public class ResultadosCurandera extends AppCompatActivity {
     }
 
     public void avanzarResultados(View view) {
-        partidaReference.child(getCodigoSala()).child("4").child("combateListo").setValue(0);
-        partidaReference.child(getCodigoSala()).child("4").child("resultadosListos").setValue(1);
+        Sesion sesion = Sesion.getInstance();
+        DatabaseReference dr = partidaReference.child(String.valueOf(sesion.getNumLobby())).child(String.valueOf(sesion.getRol().ordinal() + 1));
+        dr.child("combateListo").setValue(0);
+        dr.child("resultadosListos").setValue(1);
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        partidaReference.child(getCodigoSala()).removeEventListener(listenerSiguiente);
+        partidaReference.child(String.valueOf(Sesion.getInstance().getNumLobby())).removeEventListener(listenerSiguiente);
     }
 
     @Override
@@ -139,23 +148,13 @@ public class ResultadosCurandera extends AppCompatActivity {
         new AlertDialog.Builder(this, R.style.AlertDialogTheme)
                 .setMessage("¿Quieres cerrar la app?")
 
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        finishAffinity();
-                        System.exit(0);
-                    }
+                .setPositiveButton("Si", (dialog, which) -> {
+                    finishAffinity();
+                    System.exit(0);
                 })
 
                 .setNegativeButton("No", null)
                 .show();
-    }
-
-    public String getCodigoSala() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            return extras.getString("codigo");
-        }
-        return null;
     }
 
     public int getNumRonda() {
@@ -166,7 +165,7 @@ public class ResultadosCurandera extends AppCompatActivity {
         return 0;
     }
 
-    public ArrayList<Objeto> getListaObjetos(){
+    public ArrayList<Objeto> getListaObjetos() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             return (ArrayList<Objeto>) extras.getSerializable("listaObjetos");
@@ -174,7 +173,7 @@ public class ResultadosCurandera extends AppCompatActivity {
         return null;
     }
 
-    public ArrayList<Objeto> getObjetosCreandose(){
+    public ArrayList<Objeto> getObjetosCreandose() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             return (ArrayList<Objeto>) extras.getSerializable("objetosCreandose");

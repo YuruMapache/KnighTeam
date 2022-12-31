@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">KnighTeam</string>
 
     <!--    Views-->
@@ -11,18 +11,17 @@
     <string name="diario_boton">DIARIO</string>
     <string name="inventario_boton">INVENTARIO</string>
     <string name="comprar_boton">TIENDA</string>
-    <string name="bar_boton">BAR</string>
     <string name="reparaciones">Reparaciones</string>
     <string name="progreso">En progreso…</string>
     <string name="tiempoEspada">Quedan X minutos </string>
     <string name="tiempoArmadura">Quedan X minutos </string>
     <string name="recursosFeudo">Recursos del feudo: </string>
+    <string name="boton_bar">BAR</string>
     <string name="botonCrearPartida"> Crear Partida </string>
     <string name="botonUnirsePartida"> Unirse a Partida </string>
     <string name="botonAtras"> ATRÁS</string>
     <string name="botonTerminar"> Terminar</string>
     <string name="botonTutorial"> Tutorial</string>
-    <string name="botonSiguiente"> Siguiente </string>
     <string name="plantillaSencilla"> Plantilla sencilla </string>
     <string name="plantillaDificil"> Plantilla dificil </string>
     <string name="plantillaEmpatia"> Plantilla de empatía </string>
@@ -36,7 +35,10 @@
     <string name="crearUsuario">Crea tu usuario</string>
     <string name="simboloMas">+</string>
     <string name="victoria">¡VICTORIA!</string>
-    <string name="derrota">DERROTA...</string>
+    <string name="derrota">DERROTA…</string>
+    <string name="equipar">Equipar</string>
+    <string name="equipado">Equipado</string>
+    <string name="creando">Creando</string>
     <string name="tutorial1Texto1">Aquí podras ver los materiales disponibles,así como la cantidad que dispones de cada uno de ellos.</string>
 
     <string name="tutorial1Texto2">El personaje te servirá como recordatorio de tu rol y además al final de cada toma de decisiones te dará los resultados.</string>
@@ -45,42 +47,69 @@
     <string name="tutorial3Texto">Desde aquí podrás ver las acciones que ya has comenzado y que están actualmente en progreso, además del tiempo hasta su finalización.</string>
     <string name="tutorial4Texto1">Podrás usar estos cuatros botones a tu antojo durante el tiempo disponible para la toma de decisiones.</string>
     <string name="tutorial4Texto2">El botón Acciones te permitirá ver una lista de actividades disponibles para tu rol</string>
-    <string name="tutorial4Texto3">Desde Diario verás un resumen de los mensajes recibidos hasta el momento de los resultados de cada justa</string>
+    <string name="tutorial4Texto3" tools:ignore="Typos">Desde Diario verás un resumen de los mensajes recibidos hasta el momento de los resultados de cada justa</string>
     <string name="tutorial4Texto4">En Inventario podrás ver todo lo que tienes almacenado y disponible.</string>
     <string name="tutorial4Texto5">Con Comprar podrás acceder a un apartado para intercambiar diversos objetos disponibles para tu rol a cambio de un módico precio, más fácil que craftearlos a mano.</string>
-    <string name="combate_boton">COMBATE </string>
-    <string name="tutorial4Texto">Podrás usar estos cuatros botones a tu antojo durante el tiempo disponible para la toma de decisiones.\n
+
+    <string name="tutorial4Texto" tools:ignore="Typos">Podrás usar estos cuatros botones a tu antojo durante el tiempo disponible para la toma de decisiones.\n
         El botón Acciones te permitirá ver una lista de actividades disponibles para tu rol.\n
         Desde Diario verás un resumen de los mensajes recibidos hasta el momento de los resultados de cada justa\n
         En Inventario podrás ver todo lo que tienes almacenado y disponible.\n
         Con Comprar podrás acceder a un apartado para intercambiar diversos objetos disponibles para tu rol a cambio de un módico precio, más fácil que craftearlos a mano.
     </string>
-    <string name="muy_en_desacuerdo">Muy en desacuerdo</string>
-    <string name="en_desacuerdo">En desacuerdo</string>
-    <string name="indiferente">Indiferente</string>
-    <string name="de_acuerdo">De acuerdo</string>
-    <string name="muy_de_acuerdo">Muy de acuerdo</string>
 
+    <!--Frases caballero-->
+    <string name="salud_aumentada">Salud Aumentada</string>
+    <string name="ataque_aumentado">Ataque Aumentado</string>
+    <string name="velocidad_aumentada">Velocidad Aumentada</string>
 
-    <!--Preguntas 1-->
-    <string name="pregunta1.1">¿Te parece que ha sido posible entenderte con tus compañeros?</string>
-    <string name="pregunta1.2">¿Consideras que tu equipo se aprovecha de las capacidades de cada uno de sus miembros?</string>
-    <string name="pregunta1.3">¿Crees que tanto tú como tus compañeros os sentís animados por la idea de ganar el juego?</string>
-    <string name="pregunta1.4">¿Estimas que colaboras mejor con tus compañeros después de unos turnos?</string>
-    <string name="pregunta1.5">¿Las decisiones que has tenido que tomar hasta ahora te han resultado complejas?</string>
-    <string name="pregunta1.6">¿Estimas que has sido capaz de mantener motivado al equipo cuando las cosas no han ido bien?</string>
-    <string name="pregunta1.7">¿Crees que la comunicación en vuestro equipo ha mejorado después de jugar algunas rondas?</string>
-    <string name="pregunta1.8">¿Te parece que estáis sabiendo enfrentarnos a los problemas de forma adecuada?</string>
+    <!--Boton combate-->
+    <string name="boton_combate">COMBATE </string>
+    <string name="boton_combate_pressed">COMBATE (%d/5)</string>
 
-    <!--Preguntas 2-->
-    <string name="pregunta2.1">¿Consideras que la comunicación ha sido fluida entre los jugadores?</string>
-    <string name="pregunta2.2">¿Crees que ha habido un trabajo en equipo óptimo?</string>
-    <string name="pregunta2.3">¿Consideras que en tu equipo ha habido motivación entre los jugadores?</string>
-    <string name="pregunta2.4">¿Crees que si lo repitieseis, sacaréis mejores resultados como equipo?</string>
-    <string name="pregunta2.5">¿Cómo de difíciles han sido las decisiones que has tenido que tomar?</string>
-    <string name="pregunta2.6">Me he sentido capaz de animar a mis compañeros cuando el juego no ha ido a nuestro favor.</string>
-    <string name="pregunta2.7">El juego ha sido una herramienta útil para favorecer la comunicación.</string>
-    <string name="pregunta2.8">Hemos sabido afrontar juntos los problemas que han ido surgiendo.</string>
+    <!--Boton siguiente-->
+    <string name="boton_siguiente">SIGUIENTE</string>
+    <string name="boton_siguiente_pressed">SIGUIENTE (%d/5)</string>
+
+    <string-array name="valoraciones">
+        <item name="muy_en_desacuerdo">Muy en desacuerdo</item>
+        <item name="en_desacuerdo">En desacuerdo</item>
+        <item name="indiferente">Indiferente</item>
+        <item name="de_acuerdo">De acuerdo</item>
+        <item name="muy_de_acuerdo">Muy de acuerdo</item>
+    </string-array>
+
+    <string-array name="preguntas">
+        <!--Preguntas 1-->
+        <item name="pregunta1_1">¿Te parece que ha sido posible entenderte con tus compañeros?</item>
+        <item name="pregunta1_2">¿Consideras que tu equipo se aprovecha de las capacidades de cada uno de sus miembros?</item>
+        <item name="pregunta1_3">¿Crees que tanto tú como tus compañeros os sentís animados por la idea de ganar el juego?</item>
+        <item name="pregunta1_4">¿Estimas que colaboras mejor con tus compañeros después de unos turnos?</item>
+        <item name="pregunta1_5">¿Las decisiones que has tenido que tomar hasta ahora te han resultado complejas?</item>
+        <item name="pregunta1_6">¿Estimas que has sido capaz de mantener motivado al equipo cuando las cosas no han ido bien?</item>
+        <item name="pregunta1_7">¿Crees que la comunicación en vuestro equipo ha mejorado después de jugar algunas rondas?</item>
+        <item name="pregunta1_8">¿Te parece que estáis sabiendo enfrentarnos a los problemas de forma adecuada?</item>
+
+        <!--Preguntas 2-->
+        <item name="pregunta2_1">¿Consideras que la comunicación ha sido fluida entre los jugadores?</item>
+        <item name="pregunta2_2">¿Crees que ha habido un trabajo en equipo óptimo?</item>
+        <item name="pregunta2_3">¿Consideras que en tu equipo ha habido motivación entre los jugadores?</item>
+        <item name="pregunta2_4">¿Crees que si lo repitieseis, sacaréis mejores resultados como equipo?</item>
+        <item name="pregunta2_5">¿Cómo de difíciles han sido las decisiones que has tenido que tomar?</item>
+        <item name="pregunta2_6">Me he sentido capaz de animar a mis compañeros cuando el juego no ha ido a nuestro favor.</item>
+        <item name="pregunta2_7">El juego ha sido una herramienta útil para favorecer la comunicación.</item>
+        <item name="pregunta2_8">Hemos sabido afrontar juntos los problemas que han ido surgiendo.</item>
+    </string-array>
+
+    <string name="menu_principal">Menú Principal</string>
+    <string name="sala_espera">¡Sala creada! El código es %d</string>
+
+    <!--Textos de la pantalla que indica las funciones de cada rol-->
+    <string name="objetivo_herrero">Durante el transcurso de la partida tu rol será decisivo para aumentar la salud, daño o velocidad del caballero.</string>
+    <string name="objetivo_caballero">El rol que cuenta con los atributos, tu mision es vencer al oponente con la ayuda de tu equipo.</string>
+    <string name="objetivo_maestro_cuadras">Durante el transcurso de la partida tu rol será decisivo para aumentar la velocidad, asi como cuidar al caballo.</string>
+    <string name="objetivo_curandero">Durante el transcurso de la partida tu rol será decisivo para regenerar la vida del caballero y curarle de sus heridas</string>
+    <string name="objetivo_druida">Durante el transcurso de la partida tu rol será decisivo para aumentar la velocidad, salud y ataque maximos.</string>
 
     <string name="estadisticas_caballero">Estadísticas caballero</string>
     <string name="en_progreso">EN PROGRESO</string>

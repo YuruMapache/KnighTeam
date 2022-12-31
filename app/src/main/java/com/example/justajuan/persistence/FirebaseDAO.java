@@ -5,7 +5,6 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 
 import com.example.justajuan.model.Caballero;
-import com.example.justajuan.model.Formulario;
 import com.example.justajuan.model.Material;
 import com.example.justajuan.model.Objeto;
 import com.example.justajuan.model.Rol;
@@ -20,7 +19,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicReference;
 
 public class FirebaseDAO {
 
@@ -32,10 +30,12 @@ public class FirebaseDAO {
     public static void setUser(String id, String name, String email, String password) {
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
         String key = mDatabase.child("user").push().getKey();
-        DatabaseReference mUser = mDatabase.child("user").child(key);
-        mUser.child("name").child(id).setValue(name);
-        mUser.child("email").child(id).setValue(email);
-        mUser.child("password").child(id).setValue(password);
+        if(key!= null) {
+            DatabaseReference mUser = mDatabase.child("user").child(key);
+            mUser.child("name").child(id).setValue(name);
+            mUser.child("email").child(id).setValue(email);
+            mUser.child("password").child(id).setValue(password);
+        }
     }
 
     public static void setMateriales(String nlobby, ArrayList<Material> materiales) {
@@ -45,7 +45,6 @@ public class FirebaseDAO {
         dr.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Sesion sesion = Sesion.getInstance();
 
                 for (int i = 0; i < materiales.size(); i++) {
 
@@ -130,13 +129,21 @@ public class FirebaseDAO {
                 Log.e("firebase", "Error getting data", task.getException());
             } else {
                 DataSnapshot ds = task.getResult();
-                obj.setSalud((Integer) ds.child("Salud").getValue());
-                obj.setAtaque((Integer) ds.child("Ataque").getValue());
-                obj.setVelocidad((Integer) ds.child("Velocidad").getValue());
-                obj.setEstamina((Integer) ds.child("Estamina").getValue());
-                obj.setTiempo((Integer) ds.child("Tiempo").getValue());
+                Integer salud = (Integer) ds.child("Salud").getValue();
+                Integer ataque = (Integer) ds.child("Ataque").getValue();
+                Integer velocidad = (Integer) ds.child("Velocidad").getValue();
+                Integer estamina = (Integer) ds.child("Estamina").getValue();
+                Integer tiempo = (Integer) ds.child("Tiempo").getValue();
+
+                if (salud != null && ataque != null && velocidad != null && estamina != null && tiempo != null) {
+                    obj.setSalud(salud);
+                    obj.setAtaque(ataque);
+                    obj.setVelocidad(velocidad);
+                    obj.setEstamina(estamina);
+                    obj.setTiempo(tiempo);
+                }
                 //Obtener lista de precios
-                Map<String, Integer> costes = new HashMap();
+                Map<String, Integer> costes = new HashMap<>();
                 for (DataSnapshot snapshot : ds.child("Precio").getChildren()) {
                     costes.put(snapshot.getKey(), (Integer) snapshot.getValue());
                 }
@@ -146,7 +153,7 @@ public class FirebaseDAO {
         return obj;
     }
 
-    public static void setForm(int nlobby, int user, Formulario form, String tipo) {
+    /*public static void setForm(int nlobby, int user, Formulario form, String tipo) {
         FirebaseDatabase fd = FirebaseDatabase.getInstance();
         DatabaseReference dr = fd.getReference().child("Cuestionarios").child(String.valueOf(nlobby)).child(String.valueOf(user)).child(tipo);
         Map preguntas = form.getPreguntas();
@@ -154,49 +161,13 @@ public class FirebaseDAO {
                 (key, value)
                         -> dr.child(String.valueOf(key)).setValue(value)
         );
-    }
-
-    public static Map<Integer, Map<Integer, Integer>> getResults(int nlobby) {
-        FirebaseDatabase fd = FirebaseDatabase.getInstance();
-        DatabaseReference dr = fd.getReference().child("Cuestionarios").child(String.valueOf(nlobby));
-        Map<Integer, Map<Integer, Integer>> resultados = new HashMap<>();
-
-        dr.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                for (int j = 1; j < 6; j++) {
-                    for (int i = 0; i < 8; i++) {
-                        resultados.get(i).put((Integer) snapshot.child(String.valueOf(j)).child("Intermedio").child(String.valueOf(i)).getValue(), resultados.get(i).get(snapshot.child(String.valueOf(j)).child("Intermedio").child(String.valueOf(i)).getValue()) + 1);
-                    }
-                }
-                for (int j = 1; j < 6; j++) {
-                    for (int i = 0; i < 8; i++) {
-                        resultados.get(i+8).put((Integer) snapshot.child(String.valueOf(j)).child("Final").child(String.valueOf(i)).getValue(), resultados.get(i).get(snapshot.child(String.valueOf(j)).child("Final").child(String.valueOf(i)).getValue()) + 1);
-                    }
-                }
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-        /*dr.get().addOnCompleteListener(task -> {
-            if (!task.isSuccessful()) {
-                Log.e("firebase", "Error getting data", task.getException());
-            } else {
-                DataSnapshot ds = task.getResult();*/
-
-        return resultados;
-    }
+    }*/
 
 
-    public static void deletePlayer(String nlobby, int id) {
+    public static void deletePlayer(int nlobby, int id) {
         FirebaseDatabase fd = FirebaseDatabase.getInstance();
         DatabaseReference dr = fd.getReference().child("Partida");
-        dr.child(nlobby).child(String.valueOf(id)).removeValue();
+        dr.child(String.valueOf(nlobby)).child(String.valueOf(id)).removeValue();
     }
 
 

@@ -1,11 +1,6 @@
 package com.example.justajuan.ui;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.AppCompatButton;
-
 import android.app.Dialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,35 +9,32 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
+
 import com.example.justajuan.R;
 
-public class Tutorial extends AppCompatActivity {
+import java.util.Objects;
 
-    private AppCompatButton botonDesplAcciones;
-    private AppCompatButton botonDesplTienda;
-    private AppCompatButton botonDesplInventario;
-    private AppCompatButton botonDesplDiario;
-    private LinearLayout layoutTiempo;
-    private LinearLayout layoutItems;
-    private FrameLayout layoutRecursos;
+public class Tutorial extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_tutorial);
 
 
-        botonDesplAcciones = findViewById(R.id.botonAcciones);
-        botonDesplTienda = findViewById(R.id.botonTienda);
-        botonDesplDiario = findViewById(R.id.botonDiario);
-        botonDesplInventario = findViewById(R.id.botonInventario);
-        layoutTiempo = findViewById(R.id.linearLayoutTime);
-        layoutItems = findViewById(R.id.linearLayoutItems);
-        layoutRecursos = findViewById(R.id.frameLayout);
+        AppCompatButton botonDesplAcciones = findViewById(R.id.botonAcciones);
+        AppCompatButton botonDesplTienda = findViewById(R.id.botonTienda);
+        AppCompatButton botonDesplDiario = findViewById(R.id.botonDiario);
+        AppCompatButton botonDesplInventario = findViewById(R.id.botonInventario);
+        LinearLayout layoutTiempo = findViewById(R.id.linearLayoutTime);
+        LinearLayout layoutItems = findViewById(R.id.linearLayoutItems);
+        FrameLayout layoutRecursos = findViewById(R.id.frameLayout);
 
 /*
         layoutTiempo.setOnClickListener(new View.OnClickListener() {
@@ -65,14 +57,11 @@ public class Tutorial extends AppCompatActivity {
             }
         });
 */
-        layoutTiempo.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog acciones = new Dialog(Tutorial.this);
-                acciones.setContentView(R.layout.pop_up_tutorial2);
-                acciones.setCancelable(true);
-                acciones.show();
-            }
+        layoutTiempo.setOnClickListener(view -> {
+            final Dialog acciones = new Dialog(Tutorial.this);
+            acciones.setContentView(R.layout.pop_up_tutorial2);
+            acciones.setCancelable(true);
+            acciones.show();
         });
 
         /*
@@ -98,14 +87,11 @@ public class Tutorial extends AppCompatActivity {
         });
         */
 
-        layoutRecursos.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog acciones = new Dialog(Tutorial.this);
-                acciones.setContentView(R.layout.pop_up_tutorial1);
-                acciones.setCancelable(true);
-                acciones.show();
-            }
+        layoutRecursos.setOnClickListener(view -> {
+            final Dialog acciones = new Dialog(Tutorial.this);
+            acciones.setContentView(R.layout.pop_up_tutorial1);
+            acciones.setCancelable(true);
+            acciones.show();
         });
 
         /*
@@ -130,14 +116,11 @@ public class Tutorial extends AppCompatActivity {
         });
         */
 
-        layoutItems.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog acciones = new Dialog(Tutorial.this);
-                acciones.setContentView(R.layout.pop_up_tutorial3);
-                acciones.setCancelable(true);
-                acciones.show();
-            }
+        layoutItems.setOnClickListener(view -> {
+            final Dialog acciones = new Dialog(Tutorial.this);
+            acciones.setContentView(R.layout.pop_up_tutorial3);
+            acciones.setCancelable(true);
+            acciones.show();
         });
 
         /*
@@ -161,14 +144,11 @@ public class Tutorial extends AppCompatActivity {
         });
         */
 
-        botonDesplAcciones.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog acciones = new Dialog(Tutorial.this);
-                acciones.setContentView(R.layout.pop_up_tutorial4);
-                acciones.setCancelable(true);
-                acciones.show();
-            }
+        botonDesplAcciones.setOnClickListener(view -> {
+            final Dialog acciones = new Dialog(Tutorial.this);
+            acciones.setContentView(R.layout.pop_up_tutorial4);
+            acciones.setCancelable(true);
+            acciones.show();
         });
 
         /*
@@ -193,14 +173,11 @@ public class Tutorial extends AppCompatActivity {
         });
         */
 
-        botonDesplTienda.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog acciones = new Dialog(Tutorial.this);
-                acciones.setContentView(R.layout.pop_up_tutorial4);
-                acciones.setCancelable(true);
-                acciones.show();
-            }
+        botonDesplTienda.setOnClickListener(view -> {
+            final Dialog acciones = new Dialog(Tutorial.this);
+            acciones.setContentView(R.layout.pop_up_tutorial4);
+            acciones.setCancelable(true);
+            acciones.show();
         });
 
         /*
@@ -225,14 +202,11 @@ public class Tutorial extends AppCompatActivity {
         });
         */
 
-        botonDesplDiario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog acciones = new Dialog(Tutorial.this);
-                acciones.setContentView(R.layout.pop_up_tutorial4);
-                acciones.setCancelable(true);
-                acciones.show();
-            }
+        botonDesplDiario.setOnClickListener(view -> {
+            final Dialog acciones = new Dialog(Tutorial.this);
+            acciones.setContentView(R.layout.pop_up_tutorial4);
+            acciones.setCancelable(true);
+            acciones.show();
         });
 
         /*
@@ -256,14 +230,11 @@ public class Tutorial extends AppCompatActivity {
         });
         */
 
-        botonDesplInventario.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final Dialog acciones = new Dialog(Tutorial.this);
-                acciones.setContentView(R.layout.pop_up_tutorial4);
-                acciones.setCancelable(true);
-                acciones.show();
-            }
+        botonDesplInventario.setOnClickListener(view -> {
+            final Dialog acciones = new Dialog(Tutorial.this);
+            acciones.setContentView(R.layout.pop_up_tutorial4);
+            acciones.setCancelable(true);
+            acciones.show();
         });
 
 

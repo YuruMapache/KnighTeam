@@ -1,250 +1,220 @@
 package com.example.justajuan.ui;
 
-import android.content.DialogInterface;
-import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
-import android.provider.ContactsContract;
+import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.GridView;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
+import androidx.core.content.ContextCompat;
 
 import com.example.justajuan.R;
-import com.example.justajuan.model.Caballero;
 import com.example.justajuan.model.Cuestionario;
-import com.example.justajuan.model.Formulario;
-import com.example.justajuan.model.Objeto;
+import com.example.justajuan.model.GestorVistas;
+import com.example.justajuan.model.Pregunta;
 import com.example.justajuan.model.Sesion;
-import com.example.justajuan.persistence.AdaptadorCuestionario;
-import com.example.justajuan.persistence.AdaptadorCuestionarioPreguntas;
-import com.example.justajuan.persistence.FirebaseDAO;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
+import com.example.justajuan.model.User;
+import com.example.justajuan.persistence.CuestionarioDAO;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 
+/**
+ * Clase encargada de modelar la vista de los cuestionarios.
+ */
 public class PantallaCuestionario extends AppCompatActivity {
-
-    private TextView tituloCuestionario;
-    private GridView preguntas;
-    private ArrayList<Cuestionario> preguntasCuestionario;
-    private AppCompatButton botonSiguiente;
-    private DatabaseReference dr;
-    FirebaseDatabase fd;
-
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getSupportActionBar().hide();
+        Objects.requireNonNull(getSupportActionBar()).hide();
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_pantalla_cuestionario);
 
-        fd= FirebaseDatabase.getInstance();
-
-        tituloCuestionario = findViewById(R.id.tituloCuestionario);
-        preguntas = findViewById(R.id.ui_ListaPreguntas);
-        botonSiguiente = findViewById(R.id.botonSiguiente);
-
-        if (getNRonda() == 5) {
-            dr = fd.getReference().child("CuestionariosPreguntas").child("Intermedio");
-            tituloCuestionario.setText("CUESTIONARIO INTERMEDIO");
-
-        } else {
-            dr = fd.getReference().child("CuestionariosPreguntas").child("Final");
-            tituloCuestionario.setText("CUESTIONARIO FINAL");
+        ArrayList<Pregunta> pregarray = new ArrayList<>();
+        String[] preguntas = getResources().getStringArray(R.array.preguntas);
+        for (int i = 0; i < preguntas.length; i++) {
+            pregarray.add(new Pregunta(i, preguntas[i]));
         }
 
-
-        dr.addListenerForSingleValueEvent(new ValueEventListener() {
-
-            ArrayList<Cuestionario> preguntasCuestionario = new ArrayList();
-
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-
-                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
-                    Cuestionario cuestionario = postSnapshot.getValue(Cuestionario.class);
-                    preguntasCuestionario.add(cuestionario);
-                }
-
-                AdaptadorCuestionarioPreguntas adaptadorCuestionarioPreguntas = new AdaptadorCuestionarioPreguntas(PantallaCuestionario.this, R.layout.gridview_preguntas_cuestionario, preguntasCuestionario);
-
-                preguntas.setAdapter(adaptadorCuestionarioPreguntas);
-
-                botonSiguiente.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-
-
-                        boolean respondido = false;
-
-                        for (Cuestionario c : preguntasCuestionario) {
-
-                            if (c.getMuyDesacuerdo() + c.getDesacuerdo() + c.getIndiferente() + c.getDeAcuerdo() + c.getMuyAcuerdo() != 1) {
-                                respondido = true;
-                            }
-
-                        }
-
-                        if (respondido) {
-                            Toast.makeText(PantallaCuestionario.this, "Por favor rellena todos los campos", Toast.LENGTH_SHORT).show();
-                        } else {
-
-                            for (int i = 0; i < preguntasCuestionario.size(); i++) {
-                                dr.child(String.valueOf(i)).setValue(preguntasCuestionario.get(i));
-                            }
-                            Intent i;
-                            if (getNRonda() != 5 && getJustaGanada()==0) {
-                                i = new Intent(PantallaCuestionario.this, PantallaDerrota.class);
-                                startActivity(i);
-
-                            } else if(getNRonda() >= 10) {
-                                i = new Intent(PantallaCuestionario.this, PantallaVictoria.class);
-                                startActivity(i);
-
-                            } else {
-
-                                switch (Integer.parseInt(getRol())) {
-                                    case 1:
-                                        i = new Intent(PantallaCuestionario.this, ResultadosCaballero.class);
-                                        i.putExtra("codigo", getCodigoSala());
-                                        i.putExtra("nRonda", getNRonda() + 1);
-                                        i.putExtra("Caballero", getCaballero());
-                                        break;
-                                    case 2:
-                                        i = new Intent(PantallaCuestionario.this, ResultadosHerrero.class);
-                                        i.putExtra("codigo", getCodigoSala());
-                                        i.putExtra("nRonda", getNRonda() + 1);
-                                        i.putExtra("objetosCreandose",getObjetosCreandose());
-                                        i.putExtra("listaObjetos",getListaObjetos());
-                                        break;
-                                    case 3:
-                                        i = new Intent(PantallaCuestionario.this, ResultadosMaestroCuadras.class);
-                                        i.putExtra("codigo", getCodigoSala());
-                                        i.putExtra("nRonda", getNRonda() + 1);
-                                        i.putExtra("objetosCreandose",getObjetosCreandose());
-                                        i.putExtra("listaObjetos",getListaObjetos());
-                                        break;
-                                    case 4:
-                                        i = new Intent(PantallaCuestionario.this, ResultadosCurandera.class);
-                                        i.putExtra("codigo", getCodigoSala());
-                                        i.putExtra("nRonda", getNRonda() + 1);
-                                        i.putExtra("objetosCreandose",getObjetosCreandose());
-                                        i.putExtra("listaObjetos",getListaObjetos());
-                                        break;
-                                    case 5:
-                                        i = new Intent(PantallaCuestionario.this, ResultadosDruida.class);
-                                        i.putExtra("codigo", getCodigoSala());
-                                        i.putExtra("nRonda", getNRonda() + 1);
-                                        i.putExtra("objetosCreandose",getObjetosCreandose());
-                                        i.putExtra("listaObjetos",getListaObjetos());
-                                        break;
-                                    default:
-                                        i = new Intent(PantallaCuestionario.this, PantallaCuestionario.class);
-                                        break;
-                                }
-                                startActivity(i);
-                            }
-                        }
-                    }
-                });
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-
-    }
-
-    public String getCodigoSala() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            return extras.getString("codigo");
+        ScrollView scroll = findViewById(R.id.scroll_preguntas);
+        switch (getIntent().getIntExtra("tipo", 1)) {
+            case 0:
+                scroll.addView(creaCuestionario(pregarray.subList(0, 8)));
+                break;
+            case 1:
+                scroll.addView(creaCuestionario(pregarray.subList(8, 16)));
+                break;
+            default:
+                break;
         }
-        return null;
-    }
 
-    public Caballero getCaballero() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            return (Caballero) extras.getSerializable("Caballero");
-        }
-        return null;
     }
-
-    public String getRol() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            return extras.getString("rol");
-        }
-        return null;
-    }
-
-    public int getNRonda() {
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            return extras.getInt("nRonda");
-        }
-        return 0;
-    }
-
-    public ArrayList<Objeto> getListaObjetos(){
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            return (ArrayList<Objeto>) extras.getSerializable("listaObjetos");
-        }
-        return null;
-    }
-
-    public ArrayList<Objeto> getObjetosCreandose(){
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            return (ArrayList<Objeto>) extras.getSerializable("objetosCreandose");
-        }
-        return null;
-    }
-    public int getJustaGanada(){
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            return extras.getInt("justaGanada");
-        }
-        return 0;
-    }
-
 
     @Override
     public void onBackPressed() {
         new AlertDialog.Builder(this, R.style.AlertDialogTheme)
                 .setMessage("¿Quieres cerrar la app?")
 
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        finishAffinity();
-                        System.exit(0);
-                    }
+                .setPositiveButton("Si", (dialog, which) -> {
+                    finishAffinity();
+                    System.exit(0);
                 })
 
                 .setNegativeButton("No", null)
                 .show();
     }
 
+    public void enviarRespuestas(View view) {
+        boolean ok = true;
+        RadioGroup rg;
+        LinearLayout block;
+        Cuestionario form = new Cuestionario();
+        int selectedId;
+        ScrollView scroll = findViewById(R.id.scroll_preguntas);
+        LinearLayout llpreguntas = (LinearLayout) scroll.getChildAt(0);
+        for (int i = 0; i < llpreguntas.getChildCount()-1; i++) {
+            block = (LinearLayout) llpreguntas.getChildAt(i);
+            rg = (RadioGroup) block.getChildAt(1);
+            int radioButtonID = rg.getCheckedRadioButtonId();
+            View radioButton = rg.findViewById(radioButtonID);
+            selectedId = rg.indexOfChild(radioButton);
+            if (selectedId == -1) {
+                ok = false;
+                Toast.makeText(this, "Por favor rellena todos los campos", Toast.LENGTH_SHORT).show();
+                break;
+            } else {
+                Pregunta tmp = new Pregunta(block.getId(), selectedId);
+                form.addPregunta(tmp);
+            }
+        }
+        if (ok) {
+            Sesion sesion = Sesion.getInstance();
+            CuestionarioDAO.setForm(sesion.getNumLobby(), sesion.getRol().ordinal() + 1, form);
+            if(getIntent().getIntExtra("tipo", 0)==1){
+                CuestionarioDAO.getResults(sesion.getNumLobby(),this);
+            }else{
+                Bundle bundle = getIntent().getExtras();
+                bundle.remove("tipo");
+                GestorVistas.cambioVista(this,bundle,Sesion.getInstance().getRol());
+            }
 
+        }
+    }
+
+    /**
+     * Crea el bloque del cuestionario a mostrar.
+     *
+     * @param pregarray Array de preguntas a mostrar.
+     * @return LinearLayout del cuestionario.
+     */
+    private LinearLayout creaCuestionario(List<Pregunta> pregarray) {
+        LinearLayout cuestionarioLayout = new LinearLayout(this);
+        cuestionarioLayout.setOrientation(LinearLayout.VERTICAL);
+        cuestionarioLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+        cuestionarioLayout.setGravity(Gravity.CENTER_VERTICAL);
+
+        for (Pregunta pregunta : pregarray) {
+            cuestionarioLayout.addView(creaPregunta(pregunta));
+        }
+        cuestionarioLayout.addView(crearBloqueBotones());
+        return cuestionarioLayout;
+    }
+
+    /**
+     * Crea el bloque final del cuestionario con botones.
+     *
+     * @return LinearLayout de los botones.
+     */
+    private LinearLayout crearBloqueBotones() {
+        // Crea el LinearLayout y establece sus propiedades
+        LinearLayout linearLayout = new LinearLayout(this);
+        linearLayout.setGravity(Gravity.CENTER_HORIZONTAL | Gravity.CENTER_VERTICAL);
+
+        // Crea el AppCompatButton y establece sus propiedades
+        AppCompatButton botonSiguiente = new AppCompatButton(this);
+        botonSiguiente.setId(View.generateViewId());
+        botonSiguiente.setLayoutParams(new LinearLayout.LayoutParams(500, 150));
+        botonSiguiente.setBackgroundResource(R.drawable.rock_button);
+        botonSiguiente.setText(R.string.boton_siguiente);
+        botonSiguiente.setTextColor(ContextCompat.getColor(this, R.color.black));
+        botonSiguiente.setTypeface(null, Typeface.BOLD);
+        botonSiguiente.setOnClickListener(this::enviarRespuestas);
+
+        // Añade el botón al LinearLayout
+        linearLayout.addView(botonSiguiente);
+        linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+
+        return linearLayout;
+    }
+
+
+    /**
+     * Crea un bloque de una pregunta con su texto y opciones.
+     *
+     * @param pregunta Pregunta a crear.
+     * @return Bloque de la pregunta.
+     */
+    private LinearLayout creaPregunta(Pregunta pregunta) {
+        LinearLayout preguntaLayout = new LinearLayout(this);
+        preguntaLayout.setOrientation(LinearLayout.VERTICAL);
+        preguntaLayout.setId(pregunta.getId());
+
+        preguntaLayout.addView(crearTextoPregunta(pregunta.getDescripcion()));
+        preguntaLayout.addView(crearRadioGroupValoraciones());
+
+        return preguntaLayout;
+    }
+
+    /**
+     * Crea el texto de la pregunta.
+     *
+     * @param pregtext Texto de la pregunta.
+     * @return TextView del texto.
+     */
+    private TextView crearTextoPregunta(String pregtext) {
+        TextView textViewPregunta = new TextView(this);
+        textViewPregunta.setText(pregtext);
+        textViewPregunta.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+        textViewPregunta.setGravity(Gravity.CENTER);
+        textViewPregunta.setTextColor(Color.BLACK);
+        textViewPregunta.setTypeface(null, Typeface.BOLD);
+
+        return textViewPregunta;
+    }
+
+    /**
+     * Crea un RadioGroup de las valoraciones al LinearLayout introducido.
+     *
+     * @return RadioGroup de las valoraciones.
+     */
+    private RadioGroup crearRadioGroupValoraciones() {
+        String[] valoraciones = getResources().getStringArray(R.array.valoraciones);
+        RadioGroup radioGroup = new RadioGroup(this);
+        radioGroup.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT));
+        radioGroup.setOrientation(LinearLayout.HORIZONTAL);
+        radioGroup.setGravity(Gravity.CENTER);
+
+        for (String valoracion : valoraciones) {
+            RadioButton rb = new RadioButton(this);
+            rb.setLayoutParams(new RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT, RadioGroup.LayoutParams.WRAP_CONTENT));
+            rb.setPadding(4, 0, 4, 0);
+            rb.setText(valoracion);
+            radioGroup.addView(rb);
+        }
+        return radioGroup;
+    }
 }
