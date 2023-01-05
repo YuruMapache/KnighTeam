@@ -101,7 +101,7 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
                         int numJugadores;
                         if (dataSnapshot.exists()) {
                             numJugadores = (int) dataSnapshot.getChildrenCount();
-                            Intent i;
+                            Intent i= new Intent(PantallaGestorRolesActivity.this, PantallaPartida.class);
                             if (numJugadores == 5) {
                                 switch (Sesion.getInstance().getRol().toString()) {
                                     case "HERRERO":
@@ -110,7 +110,7 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
                                                 temporal.add(listaObjetos.get(j));
                                             }
                                         }
-                                        i = new Intent(PantallaGestorRolesActivity.this, PantallaHerreroActivity.class);
+                                        //i = new Intent(PantallaGestorRolesActivity.this, PantallaHerreroActivity.class);
                                         i.putExtra("codigo", getCodigoSala());
                                         i.putExtra("rol", Rol.HERRERO);
                                         i.putExtra("listaObjetos",temporal);
@@ -122,7 +122,7 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
                                                 temporal.add(listaObjetos.get(j));
                                             }
                                         }
-                                        i = new Intent(PantallaGestorRolesActivity.this, PantallaCuranderoActivity.class);
+                                        //i = new Intent(PantallaGestorRolesActivity.this, PantallaCuranderoActivity.class);
                                         i.putExtra("codigo", getCodigoSala());
                                         i.putExtra("rol", Rol.CURANDERO);
                                         i.putExtra("listaObjetos",temporal);
@@ -134,7 +134,7 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
                                                 temporal.add(listaObjetos.get(j));
                                             }
                                         }
-                                        i = new Intent(PantallaGestorRolesActivity.this, PantallaDruidaActivity.class);
+                                        //i = new Intent(PantallaGestorRolesActivity.this, PantallaDruidaActivity.class);
                                         i.putExtra("codigo", getCodigoSala());
                                         i.putExtra("rol", Rol.DRUIDA);
                                         i.putExtra("listaObjetos",temporal);
@@ -172,7 +172,7 @@ public class PantallaGestorRolesActivity extends AppCompatActivity {
                                                 temporal.add(listaObjetos.get(j));
                                             }
                                         }
-                                        i = new Intent(PantallaGestorRolesActivity.this, PantallaMaestroCuadrasActivity.class);
+                                        //i = new Intent(PantallaGestorRolesActivity.this, PantallaMaestroCuadrasActivity.class);
                                         i.putExtra("codigo", getCodigoSala());
                                         i.putExtra("rol", Rol.MAESTRO_CUADRAS);
                                         i.putExtra("listaObjetos",temporal);

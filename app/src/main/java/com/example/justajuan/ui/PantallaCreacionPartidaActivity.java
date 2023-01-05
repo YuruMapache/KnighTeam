@@ -82,13 +82,13 @@ public class PantallaCreacionPartidaActivity extends AppCompatActivity {
 
                 //Crear el Array de materiales
                 ArrayList<Material> listaMateriales= new ArrayList<>();
-                listaMateriales.add(new Material("Cuero", R.drawable.cuero_ajustado,0,3,"Curandero Maestro_Cuadras"));
-                listaMateriales.add(new Material("Hierro",R.drawable.espada_ajustada,0,3,"Herrero"));
-                listaMateriales.add(new Material("Heno",R.drawable.heno_ajustado,0,2,"Maestro_Cuadras"));
-                listaMateriales.add(new Material("Madera",R.drawable.tronco_ajustado, 0, 1, "Herrero Druida"));
-                listaMateriales.add(new Material("Tela", R.drawable.tela_ajustada, 0, 2, "Curandero"));
-                listaMateriales.add(new Material("Agua bendita", R.drawable.agua_bendita_ajustada, 0, 10, "Druida"));
-                listaMateriales.add(new Material("Moneda", R.drawable.moneda_ajustada, 100, 1, "Caballero"));
+                listaMateriales.add(new Material("Cuero", R.drawable.cuero_ajustado,0,3,"CURANDERO MAESTRO_CUADRAS"));
+                listaMateriales.add(new Material("Hierro",R.drawable.espada_ajustada,0,3,"HERRERO"));
+                listaMateriales.add(new Material("Heno",R.drawable.heno_ajustado,0,2,"MAESTRO_CUADRAS"));
+                listaMateriales.add(new Material("Madera",R.drawable.tronco_ajustado, 0, 1, "HERRERO DRUIDA"));
+                listaMateriales.add(new Material("Tela", R.drawable.tela_ajustada, 0, 2, "CURANDERO"));
+                listaMateriales.add(new Material("Agua bendita", R.drawable.agua_bendita_ajustada, 0, 10, "DRUIDA"));
+                listaMateriales.add(new Material("Moneda", R.drawable.moneda_ajustada, 100, 1, "CABALLERO"));
 
                 FirebaseDAO.setPlayer(tokenSala, user);
                 FirebaseDAO.setMateriales(tokenSala,listaMateriales);

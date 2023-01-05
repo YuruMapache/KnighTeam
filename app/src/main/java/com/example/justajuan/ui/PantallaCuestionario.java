@@ -23,6 +23,7 @@ import com.example.justajuan.model.Caballero;
 import com.example.justajuan.model.Cuestionario;
 import com.example.justajuan.model.Formulario;
 import com.example.justajuan.model.Objeto;
+import com.example.justajuan.model.Rol;
 import com.example.justajuan.model.Sesion;
 import com.example.justajuan.persistence.AdaptadorCuestionario;
 import com.example.justajuan.persistence.AdaptadorCuestionarioPreguntas;
@@ -119,6 +120,9 @@ public class PantallaCuestionario extends AppCompatActivity {
 
                             } else {
 
+                                i= new Intent(PantallaCuestionario.this,Resultados.class);
+
+                                /*
                                 switch (Integer.parseInt(getRol())) {
                                     case 1:
                                         i = new Intent(PantallaCuestionario.this, ResultadosCaballero.class);
@@ -158,6 +162,8 @@ public class PantallaCuestionario extends AppCompatActivity {
                                         i = new Intent(PantallaCuestionario.this, PantallaCuestionario.class);
                                         break;
                                 }
+
+                                 */
                                 startActivity(i);
                             }
                         }
@@ -190,10 +196,10 @@ public class PantallaCuestionario extends AppCompatActivity {
         return null;
     }
 
-    public String getRol() {
+    public Rol getRol() {
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            return extras.getString("rol");
+            return (Rol) extras.getSerializable("rol");
         }
         return null;
     }

@@ -253,6 +253,15 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+        <activity
+            android:name=".ui.PantallaPartida"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.JustaJuan.Fullscreen">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
     </application>
 
     <uses-permission android:name="android.permission.INTERNET" />
