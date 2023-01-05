@@ -49,17 +49,6 @@ public class PantallaInicioActivity extends AppCompatActivity {
             startActivity(new Intent(PantallaInicioActivity.this, Tutorial.class));
         });
 
-        //DESARROLLO
-        final Button botonDevelop = findViewById(R.id.botonDevelop);
-        botonDevelop.setOnClickListener(view -> {
-            //CuestionarioDAO.setPreguntas(getApplicationContext());
-            Sesion.getInstance().setNumLobby(12345);
-            Sesion.getInstance().setUsuario(new User());
-            Sesion.getInstance().setRol(0);
-            Intent i = new Intent(PantallaInicioActivity.this, PantallaCuestionario.class);
-            i.putExtra("tipo", 0);
-            startActivity(i);
-        });
     }
 
     @Override
