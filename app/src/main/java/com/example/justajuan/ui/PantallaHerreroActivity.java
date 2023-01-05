@@ -321,6 +321,7 @@ public class PantallaHerreroActivity extends AppCompatActivity {
                                 i.setContador(null);
                                 FirebaseDatabase.getInstance().getReference().child("Inventario").
                                         child(getCodigoSala()).child(i.getNombre()).setValue(i);
+                                objetosCreandose.remove(i);
                             } else {
                                 i.setTiempoQueFalta(diferenciaTiempo);
                                 i.setContador(null);
@@ -349,7 +350,6 @@ public class PantallaHerreroActivity extends AppCompatActivity {
                         Intent i = new Intent(PantallaHerreroActivity.this, PantallaCuestionario.class);
                         i.putExtra("codigo", getCodigoSala());
                         i.putExtra("listaObjetos", getListaObjetos());
-                        i.putExtra("objetosCreandose", objetosCreandose);
                         i.putExtra("nRonda", numRonda + 1);
                         i.putExtra("rol", "2");
                         startActivity(i);
